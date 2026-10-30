@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Simulasi TKA SD | Platform Latihan</title>
+
+    <meta name="description" content="Platform simulasi Tes Kemampuan Akademik untuk siswa SD dan MI.">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            TKA<span>SD.</span>
+        </div>
+
+        <nav>
+            <a href="#beranda">Beranda</a>
+            <a href="#materi">Mata Pelajaran</a>
+            <a href="#paket">Paket Latihan</a>
+        </nav>
+
+        <button class="btn-login" onclick="alert('Fitur login segera hadir!')">
+            Masuk
+        </button>
+    </header>
+
+    <main>
+
+        <section class="hero" id="beranda">
+            <div class="hero-content">
+                <span class="tag">PLATFORM LATIHAN TKA SD/MI</span>
+
+                <h1>
+                    Persiapkan Diri,
+                    <span>Raih Prestasi.</span>
+                </h1>
+
+                <p>
+                    Belajar dan berlatih menghadapi Tes Kemampuan
+                    Akademik dengan simulasi yang mudah, interaktif,
+                    dan menyenangkan.
+                </p>
+
+                <a href="#materi" class="btn-primary">
+                    Mulai Latihan
+                </a>
+
+                <div class="hero-info">
+                    <span>✓ Latihan terstruktur</span>
+                    <span>✓ Hasil otomatis</span>
+                </div>
+            </div>
+
+            <div class="hero-card">
+                <div class="card-top">
+                    <span>SIMULASI TKA</span>
+                    <span class="status">● ONLINE</span>
+                </div>
+
+                <div class="card-icon">✎</div>
+
+                <h2>Siap Menguji Kemampuanmu?</h2>
+
+                <p>
+                    Pilih mata pelajaran dan mulai latihan hari ini.
+                </p>
+
+                <div class="stat-row">
+                    <div>
+                        <strong>02</strong>
+                        <small>Mata Pelajaran</small>
+                    </div>
+
+                    <div>
+                        <strong>SD/MI</strong>
+                        <small>Jenjang</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="subjects" id="materi">
+            <div class="section-heading">
+                <span class="tag">PILIH MATA PELAJARAN</span>
+                <h2>Mulai Perjalanan Belajarmu</h2>
+                <p>Pilih materi yang ingin kamu latih.</p>
+            </div>
+
+            <div class="subject-grid">
+
+                <article class="subject-card">
+                    <div class="subject-icon math">∑</div>
+                    <h3>Matematika</h3>
+                    <p>
+                        Latihan numerasi, operasi hitung,
+                        pecahan, geometri, dan penalaran.
+                    </p>
+
+                    <button onclick="startSubject('matematika')">
+                        Mulai Latihan →
+                    </button>
+                </article>
+
+                <article class="subject-card">
+                    <div class="subject-icon language">Aa</div>
+                    <h3>Bahasa Indonesia</h3>
+                    <p>
+                        Latihan literasi, pemahaman bacaan,
+                        ide pokok, dan penalaran teks.
+                    </p>
+
+                    <button onclick="startSubject('bahasa')">
+                        Mulai Latihan →
+                    </button>
+                </article>
+     
+<article class="subject-card">
+    <div class="subject-icon science">🌍</div>
+
+    <h3>IPAS</h3>
+
+    <p>
+        Latihan ilmu pengetahuan alam dan sosial,
+        ekosistem, energi, lingkungan, sejarah,
+        dan kehidupan masyarakat.
+    </p>
+
+    <button onclick="startSubject('ipas')">
+        Mulai Latihan →
+    </button>
+</article>
+</div>
+</section>
+
+        <section class="packages" id="paket">
+            <div class="section-heading">
+                <span class="tag">PAKET LATIHAN</span>
+                <h2>Belajar Sesuai Kebutuhanmu</h2>
+            </div>
+
+            <div class="package-grid">
+                <article class="package-card">
+                    <span class="package-label">GRATIS</span>
+                    <h3>Paket Starter</h3>
+                    <p>Mulai berlatih tanpa biaya.</p>
+                    <ul>
+                        <li>✓ Contoh soal pilihan</li>
+                        <li>✓ Simulasi dasar</li>
+                        <li>✓ Hasil latihan</li>
+                    </ul>
+                    <a href="#materi" class="btn-outline">
+                        Coba Gratis
+                    </a>
+                </article>
+
+                <article class="package-card premium">
+                    <span class="package-label">PREMIUM</span>
+                    <h3>Paket Lengkap</h3>
+                    <p>Persiapan lebih menyeluruh.</p>
+                    <ul>
+                        <li>✓ Bank soal lengkap</li>
+                        <li>✓ Simulasi berulang</li>
+                        <li>✓ Pembahasan soal</li>
+                        <li>✓ Riwayat nilai</li>
+                    </ul>
+                    <button onclick="alert('Paket premium segera hadir!')">
+                        Segera Hadir
+                    </button>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <strong>TKA<span>SD.</span></strong>
+        <p>Belajar Lebih Siap, Raih Hasil Terbaik.</p>
+        <small>© 2026 Simulasi TKA SD. All rights reserved.</small>
+    </footer>
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>
