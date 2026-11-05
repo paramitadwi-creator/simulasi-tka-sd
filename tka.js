@@ -69,7 +69,14 @@
             kelasIkon: 'science',
             deskripsi: 'Latihan ilmu pengetahuan alam dan sosial: makhluk hidup, energi, bumi, ' +
                 'lingkungan, sejarah, dan kehidupan masyarakat.',
-            fileData: []
+            fileData: [
+                'mat-gambar.js',
+                'ipas-kompetensi.js',
+                'ipas-soal-1.js',
+                'ipas-soal-2.js',
+                'ipas-soal-3.js',
+                'ipas-soal-4.js'
+            ]
         }
     };
 
