@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Simulasi TKA SD | Latihan</title>
+
+    <meta name="description" content="Simulasi Tes Kemampuan Akademik SD/MI: latihan, penguatan kelemahan, pembahasan, dan riwayat belajar.">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/latihan.css">
+</head>
+
+<body class="halaman-latihan">
+
+    <header class="navbar" id="navbar">
+        <a class="logo" href="index.html">TKA<span>SD.</span></a>
+
+        <nav id="nav-mapel">
+            <a href="index.html">Beranda</a>
+            <a href="latihan.html?mapel=mat#/">Matematika</a>
+            <a href="latihan.html?mapel=bin#/">Bahasa Indonesia</a>
+            <a href="latihan.html?mapel=ipas#/">IPAS</a>
+        </nav>
+
+        <a class="btn-login" id="nav-riwayat" href="#/riwayat">Riwayat</a>
+    </header>
+
+    <main id="app" aria-live="polite">
+        <p class="memuat">Memuat…</p>
+    </main>
+
+    <div id="modal" class="modal" hidden>
+        <div class="modal-kotak" role="dialog" aria-modal="true" aria-labelledby="modal-judul">
+            <div id="modal-isi"></div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast" role="status" hidden></div>
+
+    <footer>
+        <strong>TKA<span>SD.</span></strong>
+        <p>Belajar Lebih Siap, Raih Hasil Terbaik.</p>
+        <small>Soal latihan disusun mandiri mengacu pada kisi-kisi TKA SD/MI; bukan soal resmi.</small>
+    </footer>
+
+    <!-- Inti (dipakai semua mata pelajaran) -->
+    <script src="js/core/tka.js"></script>
+    <script src="js/core/penyimpanan.js"></script>
+    <script src="js/core/penilaian.js"></script>
+    <script src="js/core/analisis.js"></script>
+    <script src="js/core/pemilih-soal.js"></script>
+    <script src="js/core/ujian.js"></script>
+    <script src="js/core/grafik.js"></script>
+    <script src="js/core/tampilan.js"></script>
+    <!-- Bank soal dimuat otomatis sesuai ?mapel= (lihat TKA.MAPEL di js/core/tka.js) -->
+</body>
+</html>
