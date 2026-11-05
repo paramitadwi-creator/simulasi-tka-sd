@@ -35,8 +35,16 @@ Object.values(bank.bacaan).forEach(b => {
     if (!b.jenis || !b.judul) galat.push(`Bacaan ${b.id}: jenis/judul kosong`);
 });
 const kata = Object.values(bank.bacaan).map(b => TKA.util.hitungKata(b.paragraf.join(' ')));
-info.push(`Bacaan: ${kata.length} teks, ${Math.min(...kata)}–${Math.max(...kata)} kata (rata-rata ${Math.round(kata.reduce((a, b) => a + b) / kata.length)})`);
-info.push('Jenis teks: ' + JSON.stringify(hitung(Object.values(bank.bacaan), b => b.jenis.split(' ')[0])));
+if (kata.length) {
+    info.push(`Bacaan: ${kata.length} teks, ${Math.min(...kata)}–${Math.max(...kata)} kata (rata-rata ${Math.round(kata.reduce((a, b) => a + b) / kata.length)})`);
+    info.push('Jenis teks: ' + JSON.stringify(hitung(Object.values(bank.bacaan), b => b.jenis.split(' ')[0])));
+}
+const bergambar = bank.soal.filter(s => s.gambar).length, pembahasanGambar = bank.soal.filter(s => s.gambarPembahasan).length;
+if (bergambar || pembahasanGambar) info.push(`Soal bergambar: ${bergambar}; pembahasan bergambar: ${pembahasanGambar}`);
+bank.soal.forEach(s => {
+    if (s.gambar && !s.gambarPembahasan) galat.push(`${s.id}: punya gambar soal tetapi tanpa gambar pembahasan`);
+    ['gambar', 'gambarPembahasan'].forEach(f => { if (s[f] && !/^<svg[\s\S]*<\/svg>$/.test(s[f])) galat.push(`${s.id}: ${f} bukan SVG utuh`); });
+});
 
 /* ---------- soal ---------- */
 const id = new Set();
@@ -133,8 +141,8 @@ function simulasiSesi2(label, benarFn) {
     if (b.PG !== 25 || b.PGK !== 10) galat.push(`${label}: komposisi bentuk ${JSON.stringify(b)}`);
     if (r2.catatan.length) info.push('   catatan: ' + r2.catatan.join(' | '));
 }
-const lemahUji = new Set(['K05', 'K10', 'K12', 'K13']);
-simulasiSesi2('Sesi 2 (lemah K05,K10,K12,K13)', s => !lemahUji.has(s.kompetensi));
+const lemahUji = new Set([2, 5, 8, 11].map(i => bank.kompetensi[i % bank.kompetensi.length].kode));
+simulasiSesi2('Sesi 2 (lemah ' + Array.from(lemahUji).join(',') + ')', s => !lemahUji.has(s.kompetensi));
 simulasiSesi2('Sesi 2 (semua benar → pengayaan)', () => true);
 simulasiSesi2('Sesi 2 (semua salah)', () => false);
 

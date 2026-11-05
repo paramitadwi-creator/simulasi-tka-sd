@@ -53,7 +53,14 @@
             ikon: '∑',
             kelasIkon: 'math',
             deskripsi: 'Latihan numerasi, operasi hitung, pecahan, geometri, pengukuran, dan data.',
-            fileData: []
+            fileData: [
+                'mat-gambar.js',
+                'mat-kompetensi.js',
+                'mat-soal-1.js',
+                'mat-soal-2.js',
+                'mat-soal-3.js',
+                'mat-soal-4.js'
+            ]
         },
         ipas: {
             kode: 'ipas',
