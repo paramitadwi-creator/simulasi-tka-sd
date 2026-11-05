@@ -7,7 +7,7 @@
 'use strict';
 const path = require('path');
 const kode = process.argv[2] || 'bin';
-const akar = path.join(__dirname, '..');
+const akar = __dirname;
 
 // Lingkungan minimal agar file browser dapat dimuat di Node
 const simpanan = {};
@@ -18,7 +18,7 @@ global.localStorage = {
     removeItem: k => { delete simpanan[k]; }
 };
 ['tka', 'penyimpanan', 'penilaian', 'analisis', 'pemilih-soal', 'ujian']
-    .forEach(f => require(path.join(akar, 'js/core', f + '.js')));
+    .forEach(f => require(path.join(akar, f + '.js')));
 TKA.MAPEL[kode].fileData.forEach(f => require(path.join(akar, f)));
 
 const bank = TKA.ambilBank(kode);

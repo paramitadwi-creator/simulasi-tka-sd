@@ -38,13 +38,13 @@
             deskripsi: 'Latihan literasi membaca: informasi tersurat dan tersirat, ide pokok, ' +
                 'makna kata, hubungan antarbagian teks, fakta dan opini, hingga evaluasi isi bacaan.',
             fileData: [
-                'js/data/bin/kompetensi.js',
-                'js/data/bin/bacaan-1.js',
-                'js/data/bin/bacaan-2.js',
-                'js/data/bin/soal-1.js',
-                'js/data/bin/soal-2.js',
-                'js/data/bin/soal-3.js',
-                'js/data/bin/soal-4.js'
+                'kompetensi.js',
+                'bacaan-1.js',
+                'bacaan-2.js',
+                'soal-1.js',
+                'soal-2.js',
+                'soal-3.js',
+                'soal-4.js'
             ]
         },
         mat: {
