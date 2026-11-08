@@ -96,6 +96,17 @@ let currentSubject = null, currentMode = "practice", currentQuestions = [], curr
 let answers = {}, flagged = new Set(), timerId = null, secondsLeft = 600, hasSubmitted = false;
 let checkedAnswers = new Set();
 
+// Versi aset; samakan dengan ?v= pada index.html setiap kali file JS/CSS berubah
+const VERSI_APLIKASI = "2026.11.08-4";
+
+// Bila index.html lama masih tersimpan di cache browser, data kisi-kisi
+// belum ikut dimuat. Muat sendiri agar Peta Hasil Belajar tetap tersedia.
+if (!window.kisiKisiTKA) {
+  const skripKisi = document.createElement("script");
+  skripKisi.src = "js/kisi-kisi.js?v=" + VERSI_APLIKASI;
+  document.head.appendChild(skripKisi);
+}
+
 // =====================================================================
 // JUMLAH SOAL, DURASI, KOMPOSISI KESULITAN & BENTUK SOAL PER SESI
 // =====================================================================
@@ -1271,8 +1282,17 @@ function hitungPetaHasil(mapel, soal) {
 }
 
 function tampilkanPetaHasil(peta) {
-  const wadah = $("petaHasil");
-  if (!wadah) return;
+  let wadah = $("petaHasil");
+  if (!wadah) {
+    // index.html lama (dari cache) belum punya wadah peta: buat di atas pembahasan
+    wadah = document.createElement("section");
+    wadah.id = "petaHasil";
+    wadah.className = "peta-hasil";
+    wadah.setAttribute("aria-labelledby", "petaJudul");
+    const review = $("resultReview");
+    const judulReview = review.previousElementSibling;
+    review.parentNode.insertBefore(wadah, judulReview && judulReview.tagName === "H3" ? judulReview : review);
+  }
 
   if (!peta.baris.length) {
     wadah.hidden = true;

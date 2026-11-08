@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulasi TKA & TKAD SD/MI</title>
     <meta name="description" content="Platform latihan TKA dan TKAD SD/MI.">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=2026.11.08-4">
 
     <style>
         [hidden] { display: none !important; }
@@ -193,53 +193,6 @@
 
         #resultStats strong { display: block; font-size: 23px; color: var(--navy); }
 
-        /* ---------- Peta Hasil Belajar ---------- */
-        .peta-hasil {
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 22px;
-            margin: 0 0 30px;
-        }
-        .peta-hasil h3 { margin: 0 0 6px; }
-        .peta-pengantar { color: var(--muted); font-size: 13px; margin: 0 0 16px; }
-        .peta-ringkas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
-        .peta-ringkas div { background: var(--light); border-radius: 10px; padding: 12px; text-align: center; font-size: 13px; border-top: 4px solid; }
-        .peta-ringkas strong { display: block; font-size: 22px; color: var(--navy); }
-        .peta-ringkas .status-dikuasai { border-color: var(--green); }
-        .peta-ringkas .status-berkembang { border-color: var(--amber); }
-        .peta-ringkas .status-lemah { border-color: var(--red); }
-        .peta-saran { background: #f3f6ff; border-left: 3px solid var(--blue); border-radius: 6px; padding: 12px 16px; font-size: 14px; margin-bottom: 18px; }
-        .peta-saran ol { margin: 6px 0 0 18px; padding: 0; }
-        .peta-saran li { margin: 3px 0; }
-        .peta-elemen { margin-bottom: 16px; }
-        .peta-elemen h4 { color: var(--navy); font-size: 14px; margin: 0 0 8px; }
-        .peta-elemen h4 small { color: var(--muted); font-weight: 500; margin-left: 6px; }
-        .peta-elemen ul { list-style: none; margin: 0; padding: 0; }
-        .peta-baris {
-            display: grid;
-            grid-template-columns: 30px minmax(0, 1fr) 120px 78px 112px;
-            gap: 10px;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px dashed var(--border);
-            font-size: 13px;
-        }
-        .peta-no {
-            width: 28px; height: 28px; display: grid; place-items: center;
-            border-radius: 8px; background: var(--light); color: var(--navy); font-weight: 700; font-size: 12px;
-        }
-        .peta-nama { line-height: 1.45; }
-        .peta-bar { height: 10px; background: var(--light); border-radius: 99px; overflow: hidden; }
-        .peta-bar i { display: block; height: 100%; border-radius: 99px; }
-        .peta-angka { color: var(--muted); text-align: right; white-space: nowrap; }
-        .peta-status { font-weight: 700; font-size: 12px; text-align: center; padding: 4px 8px; border-radius: 99px; white-space: nowrap; }
-        .status-dikuasai .peta-bar i { background: var(--green); }
-        .status-berkembang .peta-bar i { background: var(--amber); }
-        .status-lemah .peta-bar i { background: var(--red); }
-        .status-dikuasai .peta-status { background: #e8f7f0; color: var(--green); }
-        .status-berkembang .peta-status { background: #fff4e5; color: #9a5c10; }
-        .status-lemah .peta-status { background: #fdecec; color: var(--red); }
-        .peta-catatan { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 10px 0 0; }
 
         .review-item {
             padding: 18px 0;
@@ -250,38 +203,11 @@
         .right { color: #159765; }
         .wrong { color: #c34242; }
 
-        /* ---------- Pembahasan: soal lengkap ---------- */
-        .review-stimulus, .review-bacaan p { white-space: pre-line; background: var(--light); border-radius: 10px; padding: 12px 14px; margin: 10px 0; font-size: 14px; }
-        .review-bacaan { margin: 10px 0; }
-        .review-bacaan summary { cursor: pointer; color: var(--blue); font-weight: 700; font-size: 13px; }
-        .review-gambar { display: block; max-width: 100%; max-height: 300px; margin: 10px 0; }
-        .review-soal { color: var(--navy); font-weight: 600; margin: 10px 0 8px; }
-        .review-opsi { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 6px; }
-        .review-opsi li { display: flex; gap: 8px; align-items: baseline; padding: 6px 10px; border-radius: 8px; border: 1px solid transparent; font-size: 14px; }
-        .review-opsi li span { flex: 1; }
-        .review-opsi li em { font-style: normal; font-size: 12px; font-weight: 700; white-space: nowrap; }
-        .review-opsi li.kunci { background: #e8f7f0; border-color: #bfe8d4; }
-        .review-opsi li.kunci em { color: #159765; }
-        .review-opsi li.salah-pilih { background: #fdecec; border-color: #f4c7c7; }
-        .review-opsi li.salah-pilih em { color: #c34242; }
-        .review-tabel { width: 100%; border-collapse: collapse; font-size: 14px; margin: 4px 0 8px; }
-        .review-tabel th { text-align: left; font-size: 12px; color: var(--muted); border-bottom: 1px solid var(--border); padding: 6px 8px; }
-        .review-tabel td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
-        .review-tabel td:not(:first-child), .review-tabel th:not(:first-child) { white-space: nowrap; width: 1%; }
-        .review-tabel tr.keliru td:nth-child(2) { color: #c34242; font-weight: 700; }
-        .review-tabel tr.tepat td:nth-child(2) { color: #159765; font-weight: 700; }
-        .review-ringkas { font-size: 13px; color: var(--muted); margin: 0; }
-        .review-penjelasan { background: #f3f6ff; border-radius: 8px; padding: 10px 14px; margin: 8px 0 0; font-size: 14px; }
 
         @media(max-width:768px) {
             .subject-grid { grid-template-columns: 1fr; }
             .app-panel { margin: 20px 12px; padding: 20px; }
             #resultStats { grid-template-columns: repeat(2, 1fr); }
-            .peta-hasil { padding: 16px; }
-            .peta-baris { grid-template-columns: 30px minmax(0, 1fr) auto; row-gap: 6px; }
-            .peta-bar { grid-column: 2 / 3; }
-            .peta-angka { grid-column: 3 / 4; }
-            .peta-status { grid-column: 3 / 4; grid-row: 1; }
         }
     </style>
 </head>
@@ -526,18 +452,18 @@
     <small>© 2026 Simulasi TKA & TKAD SD/MI.</small>
 </footer>
 
-<script src="js/profilsiswa.js"></script>
-<script src="js/kisi-kisi.js"></script>
-<script src="js/soal-adaptif-matematika.js"></script>
-<script src="js/soal-adaptif-bahasa.js"></script>
-<script src="js/soal-adaptif-ipas.js"></script>
-<script src="js/soal-penguatan-matematika.js"></script>
-<script src="js/soal-penguatan-bahasa.js"></script>
-<script src="js/soal-penguatan-ipas.js"></script>
-<script src="js/soal-kisi-matematika.js"></script>
-<script src="js/soal-kisi-bahasa.js"></script>
-<script src="js/soal-kisi-ipas.js"></script>
-<script src="js/app.js"></script>
-<script src="js/dashboard.js"></script>
+<script src="js/profilsiswa.js?v=2026.11.08-4"></script>
+<script src="js/kisi-kisi.js?v=2026.11.08-4"></script>
+<script src="js/soal-adaptif-matematika.js?v=2026.11.08-4"></script>
+<script src="js/soal-adaptif-bahasa.js?v=2026.11.08-4"></script>
+<script src="js/soal-adaptif-ipas.js?v=2026.11.08-4"></script>
+<script src="js/soal-penguatan-matematika.js?v=2026.11.08-4"></script>
+<script src="js/soal-penguatan-bahasa.js?v=2026.11.08-4"></script>
+<script src="js/soal-penguatan-ipas.js?v=2026.11.08-4"></script>
+<script src="js/soal-kisi-matematika.js?v=2026.11.08-4"></script>
+<script src="js/soal-kisi-bahasa.js?v=2026.11.08-4"></script>
+<script src="js/soal-kisi-ipas.js?v=2026.11.08-4"></script>
+<script src="js/app.js?v=2026.11.08-4"></script>
+<script src="js/dashboard.js?v=2026.11.08-4"></script>
 </body>
 </html>
