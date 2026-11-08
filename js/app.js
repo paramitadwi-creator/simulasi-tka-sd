@@ -195,6 +195,14 @@ function bankAdaptif(mapel) {
     : [];
 }
 
+// Bank soal per indikator kisi-kisi (dipakai mode Latihan & Simulasi Ujian)
+function bankKisi(mapel) {
+  return mapel === "matematika" ? (window.soalKisiMatematika || [])
+    : mapel === "bahasa" ? (window.soalKisiBahasa || [])
+    : mapel === "ipas" ? (window.soalKisiIPAS || [])
+    : [];
+}
+
 // Pencatat komposisi terpilih terhadap target
 function buatPencatat(target) {
   const hitungSel = {}, hitungTingkat = {}, hitungJenis = { pgk: 0, pgk_kategori: 0 };
@@ -866,8 +874,8 @@ if (currentQuestions.length !== JUMLAH_SOAL_MODE.adaptive) {
 
  
 else {
-  // Gabungan bank biasa + bank adaptif, tanpa duplikat ID
-  const pool = [...bankSoal[currentSubject], ...bankAdaptif(currentSubject)]
+  // Gabungan bank biasa + bank adaptif + bank kisi-kisi, tanpa duplikat ID
+  const pool = [...bankSoal[currentSubject], ...bankAdaptif(currentSubject), ...bankKisi(currentSubject)]
     .filter((q, i, semua) => semua.findIndex(x => x.id === q.id) === i);
 
   currentQuestions = pilihSoalBerimbang(pool, JUMLAH_SOAL_MODE[mode])
