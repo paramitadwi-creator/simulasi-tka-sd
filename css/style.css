@@ -111,6 +111,13 @@ button { cursor: pointer; }
 a { text-decoration: none; color: inherit; }
 img { max-width: 100%; }
 [hidden] { display: none !important; }
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
 
 /* Fokus keyboard yang jelas (WCAG 2.2: garis ≥ 2px, kontras ≥ 3:1) */
 a:focus-visible,
@@ -191,6 +198,10 @@ summary:focus-visible,
 #answerOptions > button:hover:not(:disabled) {
   background: var(--color-primary-strong);
 }
+
+/* Bahaya: tindakan yang menghapus jawaban */
+.btn--danger { background: var(--color-danger-ink); color: var(--color-on-dark); }
+.btn--danger:hover { background: #7f1d1d; }
 
 /* Sekunder: garis biru */
 .btn--secondary,
@@ -652,33 +663,56 @@ html.sesi-aktif .navbar { display: none; }
   background: var(--color-primary-tint);
 }
 .quiz-top {
+  position: sticky;
+  top: 0;
+  z-index: calc(var(--z-menu) - 1);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: var(--space-3) var(--space-5);
   max-width: var(--content-max);
-  margin: 0 auto var(--space-5);
+  margin: calc(-1 * var(--space-5)) auto var(--space-5);
+  padding: var(--space-3) 0;
+  background: var(--color-surface);
+  /* latar & garis bawah selebar layar tanpa menambah lebar halaman */
+  box-shadow: 0 0 0 100vmax var(--color-surface), 0 1px 0 100vmax var(--color-line);
+  clip-path: inset(0 -100vmax -1px);
 }
-.quiz-top-title h2 { font-size: var(--text-2xl); margin: var(--space-1) 0 0; }
+.quiz-top .tag { font-size: var(--text-sm); }
+#questionText, #explanationBox { scroll-margin-top: 112px; }
+.quiz-top-title h2 { font-size: var(--text-2xl); margin: 2px 0 0; line-height: var(--leading-tight); }
 #quizModeLabel { color: var(--color-ink-2); font-size: var(--text-sm); }
 .quiz-top-tools { display: flex; align-items: center; gap: var(--space-3); }
 
-/* Timer: netral (keadaan amber/merah ditambahkan di Fase 4) */
-.timer-chip {
+/* Timer: netral > 10 menit, amber <= 10 menit, merah <= 5 menit (warna + teks status) */
+.timer-box {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  min-height: var(--tap-min);
+  min-height: var(--tap-comfort);
   padding: 0 var(--space-4);
   border: var(--border);
   border-radius: var(--radius-sm);
-  background: var(--color-surface);
+  background: var(--color-primary-tint);
   color: var(--color-ink);
-  font-size: var(--text-xl);
-  font-weight: var(--weight-semibold);
-  font-variant-numeric: tabular-nums;
 }
+.timer-box:has(#timer[hidden]) { display: none; }
+.timer-box .icon { width: 20px; height: 20px; color: var(--color-primary); }
+.timer-label { font-size: var(--text-sm); color: var(--color-ink-2); }
+.timer-chip {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+.timer-box[data-timer-status="peringatan"] { background: var(--color-accent-soft); border-color: var(--color-accent); color: var(--color-accent-on-soft); }
+.timer-box[data-timer-status="peringatan"] .icon,
+.timer-box[data-timer-status="peringatan"] .timer-label { color: var(--color-accent-on-soft); }
+.timer-box[data-timer-status="kritis"] { background: var(--color-danger-soft); border-color: var(--color-danger); color: var(--color-danger-ink); }
+.timer-box[data-timer-status="kritis"] .icon,
+.timer-box[data-timer-status="kritis"] .timer-label { color: var(--color-danger-ink); }
+.timer-box[data-timer-status="kritis"] .timer-label::after { content: " · segera selesaikan"; }
 .quiz-exit { color: var(--color-ink-2); }
 
 .quiz-layout {
@@ -829,7 +863,7 @@ html.sesi-aktif .navbar { display: none; }
 /* ---------- 4.9 Panel nomor soal ---------- */
 .quiz-side {
   position: sticky;
-  top: var(--space-5);
+  top: 124px; /* tinggi header sesi (104px) + jarak */
   display: grid;
   gap: var(--space-4);
   padding: var(--space-5);
@@ -1304,4 +1338,109 @@ footer small { font-size: var(--text-sm); color: var(--color-on-dark-2); }
   .modal-card { padding: var(--space-5); max-height: calc(100dvh - 2 * var(--space-3)); }
   .mode-option { grid-template-columns: auto minmax(0, 1fr); }
   .mode-option-arrow { display: none; }
+}
+
+/* ---------- Fase 4: legenda berjumlah & dialog konfirmasi ---------- */
+.nav-legend b {
+  margin-left: 2px;
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.dialog-card { max-width: 520px; padding: var(--space-6); display: flex; flex-direction: column; overflow: hidden; }
+.dialog-card > * { flex-shrink: 0; }
+.dialog-card > .dialog-detail { flex-shrink: 1; min-height: 0; overflow-y: auto; padding: 4px; margin-left: -4px; margin-right: -4px; }
+.dialog-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary-tint);
+  color: var(--color-primary);
+}
+.dialog-icon .icon { width: 24px; height: 24px; }
+.dialog[data-nada="peringatan"] .dialog-icon { background: var(--color-accent-soft); color: var(--color-accent-on-soft); }
+.dialog[data-nada="bahaya"] .dialog-icon { background: var(--color-danger-soft); color: var(--color-danger-ink); }
+.dialog-card h2 { margin-top: var(--space-4); }
+.dialog-detail { margin-top: var(--space-4); display: grid; align-content: start; gap: var(--space-4); }
+.dialog-detail > div { display: grid; gap: var(--space-4); }
+.dialog-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin: 0;
+}
+.dialog-stats > div {
+  display: grid;
+  gap: 2px;
+  padding: var(--space-3);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+.dialog-stats dd { margin: 0; font-size: var(--text-2xl); font-weight: var(--weight-bold); color: var(--color-ink); font-variant-numeric: tabular-nums; }
+.dialog-stats dt { font-size: var(--text-sm); color: var(--color-ink-2); }
+.dialog-stats .is-kosong { background: var(--color-accent-soft); border-color: var(--color-accent); }
+.dialog-stats .is-kosong dd, .dialog-stats .is-kosong dt { color: var(--color-accent-on-soft); }
+.dialog-stats .is-ragu dd { color: var(--color-accent-ink); }
+.dialog-nomor p { margin: 0 0 var(--space-2); font-size: var(--text-sm); font-weight: var(--weight-semibold); color: var(--color-ink); }
+.dialog-nomor ul { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+.dialog-nomor button {
+  min-width: var(--tap-min);
+  height: var(--tap-min);
+  padding: 0 var(--space-2);
+  border: var(--border-control);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.dialog-nomor button:hover { border-color: var(--color-primary); background: var(--color-primary-tint); }
+.dialog-nomor button:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 2px; }
+.dialog-nomor.is-ragu button { position: relative; }
+.dialog-nomor.is-ragu button::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--color-surface);
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+.dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+.dialog-actions .btn { min-height: var(--tap-comfort); }
+
+@media (max-width: 1023.98px) {
+  .quiz-top { margin-top: calc(-1 * var(--space-4)); }
+  .quiz-side { top: auto; }
+}
+@media (max-width: 559.98px) {
+  .quiz-top { padding: var(--space-2) 0; gap: var(--space-2); }
+  .quiz-top .tag { display: none; }
+  .quiz-top { align-items: center; }
+  .quiz-top-title h2, #quizModeLabel { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .quiz-top-title h2 { font-size: var(--text-lg); }
+  #quizModeLabel { font-size: var(--text-sm); margin: 0; }
+  .timer-box { padding: 0 var(--space-3); gap: 6px; }
+  .timer-label { display: none; }
+  .timer-box[data-timer-status="kritis"] .timer-label::after { content: none; }
+  .timer-chip { font-size: var(--text-lg); }
+  #questionText, #explanationBox { scroll-margin-top: 88px; }
+  .dialog-card { padding: var(--space-5); }
+  .dialog-stats > div { padding: var(--space-3) var(--space-1); }
+  .dialog-stats dt { white-space: nowrap; }
+  .dialog-actions { flex-direction: column-reverse; }
+  .dialog-actions .btn { width: 100%; }
 }

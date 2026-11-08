@@ -97,7 +97,7 @@ let answers = {}, flagged = new Set(), timerId = null, secondsLeft = 600, hasSub
 let checkedAnswers = new Set();
 
 // Versi aset; samakan dengan ?v= pada index.html setiap kali file JS/CSS berubah
-const VERSI_APLIKASI = "2026.11.09-14";
+const VERSI_APLIKASI = "2026.11.09-15";
 
 // Bila index.html lama masih tersimpan di cache browser, data kisi-kisi
 // belum ikut dimuat. Muat sendiri agar Peta Hasil Belajar tetap tersedia.
@@ -401,11 +401,22 @@ $("backHome").addEventListener("click", confirmExitQuiz);
 $("prevButton").addEventListener("click", () => moveQuestion(-1));
 $("nextButton").addEventListener("click", () => moveQuestion(1));
 $("flagButton").addEventListener("click", toggleFlag);
-$("finishButton").addEventListener("click", () => {
-  const unanswered = currentQuestions.length - Object.keys(answers).length;
-  const message = unanswered ? `Masih ada ${unanswered} soal yang belum dijawab. Selesaikan sekarang?` : "Kumpulkan jawaban sekarang?";
-  if (confirm(message)) finishQuiz();
-});
+$("finishButton").addEventListener("click", konfirmasiAkhiriSesi);
+// Tampilan: minta konfirmasi sebelum mengumpulkan jawaban (dialog dari antarmuka.js, cadangan confirm()).
+async function konfirmasiAkhiriSesi() {
+  if (hasSubmitted) return;
+  const kosong = [], ragu = [], belumLengkap = [];
+  currentQuestions.forEach((q, i) => {
+    if (!hasAnswered(q)) kosong.push(i);
+    else if (q.type === "pgk_kategori" && answers[q.id].some(v => v === null || v === undefined)) belumLengkap.push(i);
+    if (flagged.has(q.id)) ragu.push(i);
+  });
+  const message = kosong.length ? `Masih ada ${kosong.length} soal yang belum dijawab. Selesaikan sekarang?` : "Kumpulkan jawaban sekarang?";
+  const setuju = typeof window.konfirmasiSelesai === "function"
+    ? await window.konfirmasiSelesai({ mode: currentMode, total: currentQuestions.length, kosong, ragu, belumLengkap, keSoal: goToQuestion })
+    : confirm(message);
+  if (setuju) finishQuiz();
+}
 $("retryButton").addEventListener("click", () => beginQuiz(currentMode));
 $("homeButton").addEventListener("click", returnHome);
 
@@ -918,10 +929,17 @@ secondsLeft = DURASI_MODE[mode];
 }
 function startTimer() {
   stopTimer(); updateTimer();
+  const batasWaktu = Date.now() + secondsLeft * 1000;
   timerId = setInterval(() => {
-    secondsLeft--; updateTimer();
-    if (secondsLeft <= 0) { stopTimer(); alert("Waktu habis. Jawaban akan dikumpulkan."); finishQuiz(); }
-  }, 1000);
+    const sisa = Math.max(0, Math.ceil((batasWaktu - Date.now()) / 1000));
+    if (sisa !== secondsLeft) { secondsLeft = sisa; updateTimer(); }
+    if (secondsLeft <= 0) {
+      stopTimer();
+      if (typeof window.tutupDialog === "function") window.tutupDialog();
+      if (typeof window.infoWaktuHabis === "function") { finishQuiz(); window.infoWaktuHabis(); }
+      else { alert("Waktu habis. Jawaban akan dikumpulkan."); finishQuiz(); }
+    }
+  }, 250);
 }
 function stopTimer() { if (timerId) { clearInterval(timerId); timerId = null; } }
 function updateTimer() { $("timer").textContent = `${String(Math.floor(secondsLeft / 60)).padStart(2, "0")}:${String(secondsLeft % 60).padStart(2, "0")}`; }
@@ -1246,6 +1264,7 @@ function toggleFlag() {
 }
 function moveQuestion(delta) {
   if (currentMode === "practice" && delta === 1 && currentIndex === currentQuestions.length - 1) { finishQuiz(); return; }
+  if (delta === 1 && currentIndex === currentQuestions.length - 1) { konfirmasiAkhiriSesi(); return; }
   goToQuestion(Math.max(0, Math.min(currentQuestions.length - 1, currentIndex + delta)));
 }
 // Pindah soal: tampilkan soal baru dari atas dan arahkan fokus ke teks soal,
@@ -1558,7 +1577,17 @@ function confirmExitQuiz() {
   const message = answeredCount
     ? `Keluar dari latihan? ${answeredCount} jawaban yang sudah kamu isi akan hilang dan tidak disimpan.`
     : "Keluar dari latihan? Sesi ini tidak akan disimpan.";
-  if (hasSubmitted || confirm(message)) returnHome();
+  if (hasSubmitted) { returnHome(); return; }
+  if (typeof window.tanyaKonfirmasi === "function") {
+    window.tanyaKonfirmasi({
+      judul: currentMode === "practice" ? "Keluar dari latihan?" : "Keluar dari sesi ini?",
+      pesan: message.replace(/^Keluar dari latihan\? /, ""),
+      ok: "Ya, keluar",
+      batal: "Lanjut mengerjakan",
+      nada: "bahaya",
+      ikon: "#i-alert"
+    }).then(setuju => { if (setuju) returnHome(); });
+  } else if (confirm(message)) returnHome();
 }
 function returnHome() {
   stopTimer(); hasSubmitted = false;

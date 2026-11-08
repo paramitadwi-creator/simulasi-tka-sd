@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Lexend; display=swap agar teks langsung tampil dengan font cadangan saat koneksi lambat -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="css/style.css?v=2026.11.09-14">
+    <link rel="stylesheet" href="css/style.css?v=2026.11.09-15">
 </head>
 
 <body>
@@ -33,6 +33,8 @@
     <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.1-6C9.5 14.5 12 13 13 12"/></symbol>
     <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></symbol>
     <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></symbol>
     <symbol id="i-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol>
 </svg>
 
@@ -198,6 +200,20 @@
     </section>
 </main>
 
+<!-- DIALOG KONFIRMASI (diisi js/antarmuka.js) -->
+<div class="modal dialog" id="confirmDialog" hidden>
+    <div class="modal-card dialog-card" role="alertdialog" aria-modal="true" aria-labelledby="confirmTitle" aria-describedby="confirmMessage">
+        <span class="dialog-icon" aria-hidden="true"><svg class="icon"><use href="#i-send"/></svg></span>
+        <h2 id="confirmTitle">Konfirmasi</h2>
+        <p id="confirmMessage"></p>
+        <div class="dialog-detail" id="confirmDetail"></div>
+        <div class="dialog-actions">
+            <button type="button" class="btn btn--secondary" id="confirmCancel">Batal</button>
+            <button type="button" class="btn btn--primary" id="confirmOk">Ya</button>
+        </div>
+    </div>
+</div>
+
 <!-- MODAL PILIH MODE -->
 <div class="modal" id="setupModal" hidden>
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="setupSubjectName" aria-describedby="setupDesc">
@@ -255,7 +271,12 @@
             <p id="quizModeLabel"></p>
         </div>
         <div class="quiz-top-tools">
-            <div id="timer" class="timer-chip" role="timer" aria-label="Sisa waktu" hidden>10:00</div>
+            <div class="timer-box" data-timer-status="normal">
+                <svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>
+                <span class="timer-label">Sisa waktu</span>
+                <div id="timer" class="timer-chip" role="timer" aria-label="Sisa waktu" hidden>10:00</div>
+            </div>
+            <p class="sr-only" id="timerAnnounce" aria-live="polite"></p>
             <button class="btn btn--ghost quiz-exit" id="backHome" type="button">
                 <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
                 <span>Keluar</span>
@@ -313,11 +334,11 @@
                 <span class="progress-bar" aria-hidden="true"><i data-progres-bar style="width:0%"></i></span>
             </div>
             <div id="questionNav" role="navigation" aria-label="Nomor soal"></div>
-            <ul class="nav-legend" aria-hidden="true">
-                <li><i class="legend-current"></i>Sedang dikerjakan</li>
-                <li><i class="legend-answered"></i>Sudah dijawab</li>
-                <li><i class="legend-flagged"></i>Ragu-ragu</li>
-                <li><i></i>Belum dijawab</li>
+            <ul class="nav-legend" aria-label="Keterangan status soal">
+                <li><i class="legend-current" aria-hidden="true"></i>Sedang dikerjakan</li>
+                <li><i class="legend-answered" aria-hidden="true"></i>Sudah dijawab <b data-hitung="terjawab">0</b></li>
+                <li><i class="legend-flagged" aria-hidden="true"></i>Ragu-ragu <b data-hitung="ragu">0</b></li>
+                <li><i aria-hidden="true"></i>Belum dijawab <b data-hitung="kosong">0</b></li>
             </ul>
             <button class="btn btn--secondary quiz-finish" id="finishButton" type="button">Akhiri latihan</button>
         </aside>
@@ -421,27 +442,27 @@
     </div>
 </footer>
 
-<script src="js/profilsiswa.js?v=2026.11.09-14"></script>
-<script src="js/kisi-kisi.js?v=2026.11.09-14"></script>
-<script src="js/soal-adaptif-matematika.js?v=2026.11.09-14"></script>
-<script src="js/soal-adaptif-bahasa.js?v=2026.11.09-14"></script>
-<script src="js/soal-adaptif-ipas.js?v=2026.11.09-14"></script>
-<script src="js/soal-penguatan-matematika.js?v=2026.11.09-14"></script>
-<script src="js/soal-penguatan-bahasa.js?v=2026.11.09-14"></script>
-<script src="js/soal-penguatan-ipas.js?v=2026.11.09-14"></script>
-<script src="js/soal-kisi-matematika.js?v=2026.11.09-14"></script>
-<script src="js/soal-kisi-bahasa.js?v=2026.11.09-14"></script>
-<script src="js/soal-kisi-ipas.js?v=2026.11.09-14"></script>
-<script src="js/soal-tambahan-tka.js?v=2026.11.09-14"></script>
-<script src="js/soal-indikator-tambahan.js?v=2026.11.09-14"></script>
-<script src="js/bacaan-bahasa-1.js?v=2026.11.09-14"></script>
-<script src="js/bacaan-bahasa-2.js?v=2026.11.09-14"></script>
-<script src="js/bacaan-bahasa-3.js?v=2026.11.09-14"></script>
-<script src="js/bacaan-bahasa-4.js?v=2026.11.09-14"></script>
-<script src="js/bacaan-bahasa-5.js?v=2026.11.09-14"></script>
-<script src="js/app.js?v=2026.11.09-14"></script>
-<script src="js/bacaan-bahasa.js?v=2026.11.09-14"></script>
-<script src="js/dashboard.js?v=2026.11.09-14"></script>
-<script src="js/antarmuka.js?v=2026.11.09-14"></script>
+<script src="js/profilsiswa.js?v=2026.11.09-15"></script>
+<script src="js/kisi-kisi.js?v=2026.11.09-15"></script>
+<script src="js/soal-adaptif-matematika.js?v=2026.11.09-15"></script>
+<script src="js/soal-adaptif-bahasa.js?v=2026.11.09-15"></script>
+<script src="js/soal-adaptif-ipas.js?v=2026.11.09-15"></script>
+<script src="js/soal-penguatan-matematika.js?v=2026.11.09-15"></script>
+<script src="js/soal-penguatan-bahasa.js?v=2026.11.09-15"></script>
+<script src="js/soal-penguatan-ipas.js?v=2026.11.09-15"></script>
+<script src="js/soal-kisi-matematika.js?v=2026.11.09-15"></script>
+<script src="js/soal-kisi-bahasa.js?v=2026.11.09-15"></script>
+<script src="js/soal-kisi-ipas.js?v=2026.11.09-15"></script>
+<script src="js/soal-tambahan-tka.js?v=2026.11.09-15"></script>
+<script src="js/soal-indikator-tambahan.js?v=2026.11.09-15"></script>
+<script src="js/bacaan-bahasa-1.js?v=2026.11.09-15"></script>
+<script src="js/bacaan-bahasa-2.js?v=2026.11.09-15"></script>
+<script src="js/bacaan-bahasa-3.js?v=2026.11.09-15"></script>
+<script src="js/bacaan-bahasa-4.js?v=2026.11.09-15"></script>
+<script src="js/bacaan-bahasa-5.js?v=2026.11.09-15"></script>
+<script src="js/app.js?v=2026.11.09-15"></script>
+<script src="js/bacaan-bahasa.js?v=2026.11.09-15"></script>
+<script src="js/dashboard.js?v=2026.11.09-15"></script>
+<script src="js/antarmuka.js?v=2026.11.09-15"></script>
 </body>
 </html>
