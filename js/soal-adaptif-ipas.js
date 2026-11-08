@@ -11,17 +11,17 @@ window.soalAdaptifIPAS = [
         difficulty: "mudah",
         type: "pg",
         topic: "Indera pendengaran",
-        fokus: "Mengenali bagian telinga",
+        fokus: "Bagian telinga luar: saluran telinga",
         stimulus: "",
-        question: "Bagian telinga yang berfungsi menangkap gelombang suara dari luar adalah ...",
+        question: "Bagian telinga berupa lorong yang menghubungkan daun telinga dengan gendang telinga adalah ...",
         options: [
-            "Gendang telinga",
-            "Daun telinga",
+            "Saluran telinga",
             "Rumah siput",
-            "Saluran Eustachius"
+            "Saluran Eustachius",
+            "Tulang pendengaran"
         ],
-        answer: [1],
-        explanation: "Daun telinga menangkap dan mengarahkan gelombang suara ke saluran telinga."
+        answer: [0],
+        explanation: "Saluran telinga adalah lorong dari daun telinga menuju gendang telinga. Bunyi yang ditangkap daun telinga masuk melalui saluran ini. Saluran Eustachius menghubungkan telinga tengah dengan rongga tenggorokan, bukan dengan daun telinga."
     },
 
     {
@@ -49,17 +49,17 @@ window.soalAdaptifIPAS = [
         difficulty: "sedang",
         type: "pg",
         topic: "Indera pendengaran",
-        fokus: "Memahami fungsi rumah siput",
+        fokus: "Manfaat memiliki dua telinga",
         stimulus: "",
-        question: "Bagian telinga yang mengubah getaran menjadi impuls saraf untuk diteruskan ke otak adalah ...",
+        question: "Manusia memiliki dua telinga di sisi kiri dan kanan kepala. Manfaatnya adalah ...",
         options: [
-            "Daun telinga",
-            "Saluran telinga",
-            "Rumah siput",
-            "Gendang telinga"
+            "agar bunyi tidak sampai ke otak",
+            "agar telinga tidak cepat kotor",
+            "agar dapat melihat benda lebih jelas",
+            "agar dapat mengetahui arah datangnya bunyi"
         ],
-        answer: [2],
-        explanation: "Rumah siput atau koklea memiliki sel rambut yang membantu mengubah getaran menjadi sinyal saraf."
+        answer: [3],
+        explanation: "Bunyi dari arah kanan sampai lebih dulu dan lebih keras di telinga kanan, begitu pula sebaliknya. Perbedaan itu membantu otak mengetahui arah datangnya bunyi."
     },
 
     {
@@ -68,17 +68,17 @@ window.soalAdaptifIPAS = [
         difficulty: "sulit",
         type: "pg",
         topic: "Indera pendengaran",
-        fokus: "Menganalisis jalannya bunyi",
-        stimulus: "",
-        question: "Urutan jalannya bunyi yang benar hingga diteruskan menuju otak adalah ...",
+        fokus: "Menalar akibat kerusakan rumah siput",
+        stimulus: "Karena sakit, rumah siput di telinga kanan Pak Hasan rusak, sedangkan daun telinga, gendang telinga, dan tulang pendengarannya masih baik.",
+        question: "Akibat yang paling mungkin dialami Pak Hasan adalah ...",
         options: [
-            "Daun telinga - saluran telinga - gendang telinga - tulang pendengaran - rumah siput",
-            "Rumah siput - daun telinga - gendang telinga - otak",
-            "Gendang telinga - daun telinga - rumah siput - otak",
-            "Saluran Eustachius - rumah siput - daun telinga - otak"
+            "telinga kanannya tetap dapat mendengar dengan jelas karena gendang telinga masih bergetar",
+            "bunyi tidak dapat masuk ke saluran telinga kanannya",
+            "gendang telinga kanannya tidak dapat bergetar lagi",
+            "telinga kanannya sulit mendengar karena getaran tidak dapat diubah menjadi rangsang saraf"
         ],
-        answer: [0],
-        explanation: "Bunyi ditangkap daun telinga, melewati saluran telinga, menggetarkan gendang telinga, diteruskan tulang pendengaran, lalu menuju koklea."
+        answer: [3],
+        explanation: "Gendang telinga dan tulang pendengaran masih meneruskan getaran, tetapi rumah siputlah yang mengubah getaran menjadi rangsang saraf untuk dikirim ke otak. Jika rumah siput rusak, rangsang itu tidak terbentuk sehingga telinga kanan Pak Hasan sulit mendengar."
     },
 
     // =================================
@@ -171,17 +171,17 @@ window.soalAdaptifIPAS = [
         difficulty: "mudah",
         type: "pg",
         topic: "Indera penglihatan",
-        fokus: "Mengenali fungsi pupil",
+        fokus: "Bagian pelindung mata",
         stimulus: "",
-        question: "Bagian mata yang menjadi tempat masuknya cahaya adalah ...",
+        question: "Bagian di tepi kelopak mata yang membantu menahan debu agar tidak masuk ke mata adalah ...",
         options: [
+            "Bulu mata",
+            "Iris",
             "Pupil",
-            "Retina",
-            "Saraf optik",
-            "Kelopak mata"
+            "Retina"
         ],
         answer: [0],
-        explanation: "Cahaya masuk ke mata melalui kornea dan pupil. Besar pupil diatur oleh iris."
+        explanation: "Bulu mata tumbuh di tepi kelopak mata dan membantu menahan debu serta kotoran kecil agar tidak masuk ke mata. Iris, pupil, dan retina adalah bagian dalam bola mata."
     },
 
     {
@@ -190,36 +190,36 @@ window.soalAdaptifIPAS = [
         difficulty: "sedang",
         type: "pg",
         topic: "Indera penglihatan",
-        fokus: "Memahami fungsi retina",
+        fokus: "Menjaga keselamatan mata dari cahaya kuat",
         stimulus: "",
-        question: "Bagian mata yang menjadi tempat terbentuknya bayangan sebelum informasi diteruskan ke otak adalah ...",
+        question: "Kita tidak boleh menatap matahari secara langsung karena ...",
         options: [
-            "Iris",
-            "Retina",
-            "Pupil",
-            "Kornea"
+            "pupil mata akan menjadi sangat besar",
+            "mata akan menjadi berwarna gelap",
+            "cahaya yang sangat kuat dapat merusak bagian dalam mata",
+            "matahari tidak memancarkan cahaya"
         ],
-        answer: [1],
-        explanation: "Bayangan terbentuk pada retina. Sel-sel peka cahaya di retina mengubahnya menjadi sinyal saraf."
+        answer: [2],
+        explanation: "Cahaya matahari sangat kuat. Jika ditatap langsung, cahaya itu dapat merusak bagian dalam mata, terutama retina, sehingga penglihatan bisa terganggu."
     },
 
     {
         id: "ADP-IPAS11",
         kodeKompetensi: "IPAS-IP-03",
-        difficulty: "sulit",
+        difficulty: "sedang",
         type: "pg",
         topic: "Indera penglihatan",
-        fokus: "Menganalisis proses melihat",
-        stimulus: "",
-        question: "Ketika seseorang berpindah dari tempat terang ke tempat gelap, pupil matanya akan ...",
+        fokus: "Gerak refleks kelopak mata",
+        stimulus: "Saat bermain di lapangan, sebuah bola tiba-tiba melayang ke arah wajah Dika. Tanpa berpikir, mata Dika langsung terpejam.",
+        question: "Gerakan mata terpejam secara tiba-tiba tersebut berguna untuk ...",
         options: [
-            "Mengecil agar cahaya berkurang",
-            "Membesar agar lebih banyak cahaya masuk",
-            "Menutup secara permanen",
-            "Berubah menjadi lensa"
+            "melindungi mata dari benda yang dapat melukainya",
+            "memperbesar pupil agar bola terlihat jelas",
+            "membantu otak mengingat warna bola",
+            "membuat bayangan bola jatuh tepat di retina"
         ],
-        answer: [1],
-        explanation: "Di tempat gelap, pupil membesar agar lebih banyak cahaya dapat masuk ke mata."
+        answer: [0],
+        explanation: "Kelopak mata menutup dengan cepat secara refleks ketika ada benda mendekat. Gerakan ini melindungi bola mata dari benturan atau benda yang dapat melukainya."
     },
 
     // =================================
@@ -274,17 +274,17 @@ window.soalAdaptifIPAS = [
         difficulty: "mudah",
         type: "pg",
         topic: "Sifat cahaya",
-        fokus: "Memahami cahaya merambat lurus",
-        stimulus: "",
-        question: "Terbentuknya bayangan pohon di tanah pada siang hari menunjukkan bahwa cahaya ...",
+        fokus: "Pemantulan cahaya oleh permukaan air yang tenang",
+        stimulus: "Pada pagi hari yang cerah, Sinta melihat bayangan pohon di permukaan air kolam yang tenang.",
+        question: "Bayangan pohon dapat terlihat di permukaan air kolam karena cahaya ...",
         options: [
-            "Merambat lurus",
-            "Tidak dapat merambat",
-            "Selalu berbelok",
-            "Tidak dapat dihalangi"
+            "dipantulkan oleh permukaan air",
+            "dibiaskan menjadi warna pelangi",
+            "diserap seluruhnya oleh air",
+            "merambat berbelok mengelilingi pohon"
         ],
         answer: [0],
-        explanation: "Bayangan terbentuk ketika cahaya merambat lurus lalu terhalang oleh benda."
+        explanation: "Permukaan air yang tenang bersifat seperti cermin datar. Cahaya dari pohon dipantulkan oleh permukaan air ke mata Sinta sehingga bayangan pohon terlihat."
     },
 
     {
@@ -371,17 +371,17 @@ window.soalAdaptifIPAS = [
   difficulty: "sedang",
   type: "pg",
   topic: "Indera penglihatan",
-  fokus: "Memahami fungsi retina",
+  fokus: "Manfaat berkedip",
   stimulus: "",
-  question: "Ketika melihat sebuah benda, bayangan benda ditangkap oleh bagian mata yang disebut ...",
+  question: "Kita berkedip berkali-kali setiap menit tanpa disadari. Manfaat berkedip adalah ...",
   options: [
-    "Kornea",
-    "Iris",
-    "Retina",
-    "Pupil"
+    "membuat pupil mengecil",
+    "membuat mata dapat melihat warna",
+    "memindahkan bayangan ke belakang retina",
+    "membasahi dan membersihkan permukaan mata"
   ],
-  answer: [2],
-  explanation: "Retina merupakan lapisan peka cahaya di bagian belakang mata yang menerima bayangan benda."
+  answer: [3],
+  explanation: "Setiap kali berkedip, kelopak mata meratakan air mata ke seluruh permukaan mata. Air mata membasahi mata dan membersihkan debu kecil sehingga mata tidak kering."
 },
 {
   id: "ADP-IPAS20",
@@ -425,17 +425,17 @@ window.soalAdaptifIPAS = [
   difficulty: "mudah",
   type: "pg",
   topic: "Metamorfosis hewan",
-  fokus: "Mengidentifikasi tahapan metamorfosis sempurna",
+  fokus: "Membedakan hewan yang mengalami dan tidak mengalami metamorfosis",
   stimulus: "",
-  question: "Urutan metamorfosis kupu-kupu yang benar adalah ...",
+  question: "Hewan berikut yang tumbuh tanpa mengalami metamorfosis adalah ...",
   options: [
-    "Telur – nimfa – dewasa",
-    "Telur – larva – pupa – dewasa",
-    "Larva – telur – pupa – dewasa",
-    "Telur – pupa – larva – dewasa"
+    "Kucing",
+    "Katak",
+    "Kupu-kupu",
+    "Nyamuk"
   ],
-  answer: [1],
-  explanation: "Kupu-kupu mengalami metamorfosis sempurna dengan empat tahap, yaitu telur, larva (ulat), pupa (kepompong), dan kupu-kupu dewasa."
+  answer: [0],
+  explanation: "Anak kucing sudah mirip induknya sejak lahir dan hanya bertambah besar, jadi kucing tidak mengalami metamorfosis. Katak, kupu-kupu, dan nyamuk mengalami perubahan bentuk tubuh (metamorfosis) sebelum dewasa."
 },
 {
   id: "ADP-IPAS23",
