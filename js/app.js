@@ -397,7 +397,7 @@ setupModal.addEventListener("click", e => { if (e.target === setupModal) setupMo
 $("practiceMode").addEventListener("click", () => beginQuiz("practice"));
 $("examMode").addEventListener("click", () => beginQuiz("exam"));
 $("adaptiveMode").addEventListener("click", () => beginQuiz("adaptive"));
-$("backHome").addEventListener("click", returnHome);
+$("backHome").addEventListener("click", confirmExitQuiz);
 $("prevButton").addEventListener("click", () => moveQuestion(-1));
 $("nextButton").addEventListener("click", () => moveQuestion(1));
 $("flagButton").addEventListener("click", toggleFlag);
@@ -901,6 +901,7 @@ secondsLeft = DURASI_MODE[mode];
   setupModal.hidden = true;
   document.querySelector("main").hidden = true;
   document.querySelector("footer").hidden = true;
+  $("perkembangan").hidden = true; // dashboard tidak tampil selama sesi ujian
   quizShell.hidden = false; resultShell.hidden = true;
   $("quizSubjectTitle").textContent = namaMapel[currentSubject];
  $("quizModeLabel").textContent =
@@ -963,9 +964,13 @@ $("questionText").textContent = q.question;
     : q.type === "pgk"
       ? "Pilih semua jawaban yang benar. Kamu dapat memilih lebih dari satu."
       : "Pilih satu jawaban yang paling tepat.";
-  $("answerOptions").innerHTML = "";
+  // Ingat kontrol jawaban yang sedang difokus sebelum pilihan dibuat ulang,
+  // agar fokus keyboard tidak jatuh ke <body> setelah siswa memilih jawaban.
+  const answerOptions = $("answerOptions");
+  const focusedControls = [...answerOptions.querySelectorAll("input, button")];
+  const focusIndex = focusedControls.indexOf(document.activeElement);
+  const focusIsCheckButton = focusIndex >= 0 && document.activeElement.tagName === "BUTTON";
   // TAMPILAN PILIHAN JAWABAN
-const answerOptions = $("answerOptions");
 answerOptions.innerHTML = "";
 
 if (q.type === "pgk_kategori") {
@@ -1140,7 +1145,19 @@ if (showExp) {
   $("prevButton").disabled = currentIndex === 0;
   $("nextButton").textContent = currentIndex === currentQuestions.length - 1 ? "Lihat hasil →" : "Berikutnya →";
   $("flagButton").classList.toggle("active", flagged.has(q.id));
+  $("flagButton").setAttribute("aria-pressed", flagged.has(q.id) ? "true" : "false");
   renderNavigation();
+
+  // Kembalikan fokus ke kontrol yang sama. Jika kontrol itu kini terkunci
+  // (mode latihan setelah dijawab/diperiksa), arahkan fokus ke pembahasan.
+  if (focusIndex >= 0) {
+    const controls = [...answerOptions.querySelectorAll("input, button")];
+    const target = controls[focusIndex];
+    const sameKind = target && (target.tagName === "BUTTON") === focusIsCheckButton;
+    if (sameKind && !target.disabled) target.focus({ preventScroll: true });
+    else if (!exp.hidden) exp.focus({ preventScroll: true });
+    else $("questionText").focus({ preventScroll: true });
+  }
 }
 function hasAnswered(q) { return Object.prototype.hasOwnProperty.call(answers, q.id); }
 function chooseAnswer(i, checked) {
@@ -1212,7 +1229,13 @@ function renderNavigation() {
     if (i === currentIndex) b.classList.add("current");
     if (hasAnswered(q)) b.classList.add("answered");
     if (flagged.has(q.id)) b.classList.add("flagged");
-    b.addEventListener("click", () => { currentIndex = i; renderQuestion(); });
+    const status = [];
+    if (hasAnswered(q)) status.push("sudah dijawab"); else status.push("belum dijawab");
+    if (flagged.has(q.id)) status.push("ditandai ragu-ragu");
+    b.type = "button";
+    b.setAttribute("aria-label", `Soal ${i + 1}, ${status.join(", ")}`);
+    if (i === currentIndex) b.setAttribute("aria-current", "step");
+    b.addEventListener("click", () => goToQuestion(i));
     nav.appendChild(b);
   });
 }
@@ -1223,8 +1246,15 @@ function toggleFlag() {
 }
 function moveQuestion(delta) {
   if (currentMode === "practice" && delta === 1 && currentIndex === currentQuestions.length - 1) { finishQuiz(); return; }
-  currentIndex = Math.max(0, Math.min(currentQuestions.length - 1, currentIndex + delta));
+  goToQuestion(Math.max(0, Math.min(currentQuestions.length - 1, currentIndex + delta)));
+}
+// Pindah soal: tampilkan soal baru dari atas dan arahkan fokus ke teks soal,
+// supaya siswa (termasuk pengguna keyboard/pembaca layar) mulai membaca dari awal.
+function goToQuestion(index) {
+  currentIndex = index;
   renderQuestion();
+  window.scrollTo({ top: 0, behavior: "auto" });
+  $("questionText").focus({ preventScroll: true });
 }
 // =====================================================================
 // PETA HASIL BELAJAR: penguasaan per indikator kisi-kisi dalam satu sesi
@@ -1520,10 +1550,19 @@ localStorage.setItem("tkaSkillProgress", JSON.stringify(progress));
   tampilkanPetaHasil(petaHasil);
   window.scrollTo(0, 0);
 }
+// Keluar dari sesi yang sedang berjalan menghapus jawaban, jadi minta konfirmasi dulu.
+function confirmExitQuiz() {
+  const answeredCount = Object.keys(answers).length;
+  const message = answeredCount
+    ? `Keluar dari latihan? ${answeredCount} jawaban yang sudah kamu isi akan hilang dan tidak disimpan.`
+    : "Keluar dari latihan? Sesi ini tidak akan disimpan.";
+  if (hasSubmitted || confirm(message)) returnHome();
+}
 function returnHome() {
   stopTimer(); hasSubmitted = false;
   quizShell.hidden = true; resultShell.hidden = true; setupModal.hidden = true;
   document.querySelector("main").hidden = false; document.querySelector("footer").hidden = false;
+  $("perkembangan").hidden = false;
   if (typeof window.tampilkanDashboard === "function") window.tampilkanDashboard();
   window.scrollTo(0, 0);
 }
