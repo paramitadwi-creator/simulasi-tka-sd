@@ -624,7 +624,7 @@ summary:focus-visible,
 /* Kunci gulir halaman di belakang modal */
 html.modal-terbuka, html.modal-terbuka body { overflow: hidden; }
 
-/* ---------- 4.7 Panel aplikasi (soal & hasil) ---------- */
+/* ---------- 4.7 Panel aplikasi (halaman hasil) ---------- */
 .app-panel {
   max-width: 960px;
   margin: var(--space-7) auto;
@@ -633,26 +633,87 @@ html.modal-terbuka, html.modal-terbuka body { overflow: hidden; }
   border: var(--border);
   border-radius: var(--radius-md);
 }
-.quiz-top, .quiz-actions, .quiz-meta {
+#resultShell .quiz-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: var(--space-3);
+  margin-top: var(--space-5);
 }
-.quiz-top h2 { font-size: var(--text-3xl); margin: var(--space-1) 0; }
-#quizModeLabel { color: var(--color-ink-2); }
-#timer {
-  font-size: var(--text-xl);
-  font-weight: var(--weight-bold);
-  font-variant-numeric: tabular-nums;
-  color: var(--color-danger);
-}
-.quiz-meta { margin: var(--space-5) 0; color: var(--color-ink-2); font-size: var(--text-sm); }
 
-/* ---------- 4.8 Soal ---------- */
+/* Selama sesi (soal & hasil) navbar utama disembunyikan agar siswa fokus */
+html.sesi-aktif .navbar { display: none; }
+
+/* ---------- 4.8 Layar soal ---------- */
+.quiz-shell {
+  min-height: 100dvh;
+  padding: var(--space-5) var(--gutter) var(--space-7);
+  background: var(--color-primary-tint);
+}
+.quiz-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+  max-width: var(--content-max);
+  margin: 0 auto var(--space-5);
+}
+.quiz-top-title h2 { font-size: var(--text-2xl); margin: var(--space-1) 0 0; }
+#quizModeLabel { color: var(--color-ink-2); font-size: var(--text-sm); }
+.quiz-top-tools { display: flex; align-items: center; gap: var(--space-3); }
+
+/* Timer: netral (keadaan amber/merah ditambahkan di Fase 4) */
+.timer-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap-min);
+  padding: 0 var(--space-4);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+.quiz-exit { color: var(--color-ink-2); }
+
+.quiz-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  align-items: start;
+  gap: var(--space-5);
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+/* Kartu soal dengan kolom baca yang nyaman (± 70 karakter) */
+.quiz-card {
+  min-width: 0;
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+}
+.quiz-card > *:not(.quiz-actions) { max-width: 72ch; }
+.quiz-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  margin-bottom: var(--space-5);
+  color: var(--color-ink-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+.quiz-badges { display: inline-flex; flex-wrap: wrap; gap: var(--space-2); }
+
 .stimulus-box {
-  margin: var(--space-4) 0 var(--space-5);
+  margin: 0 0 var(--space-5);
   padding: var(--space-5);
   background: var(--color-surface-muted);
   border: var(--border);
@@ -674,22 +735,24 @@ html.modal-terbuka, html.modal-terbuka body { overflow: hidden; }
 }
 #questionText {
   color: var(--color-ink);
-  font-size: var(--text-xl);
+  font-size: clamp(20px, 1.6vw + 12px, 22px);
   font-weight: var(--weight-semibold);
-  line-height: var(--leading-normal);
-  margin-bottom: var(--space-3);
+  line-height: 1.55;
+  text-wrap: pretty;
+  margin-bottom: var(--space-2);
+  scroll-margin-top: var(--space-5);
 }
 #answerInstruction { color: var(--color-ink-2); font-size: var(--text-md); margin-bottom: var(--space-4); }
 #answerOptions { display: grid; gap: var(--space-3); }
 #answerOptions > button { justify-self: start; margin-top: var(--space-2); }
 
-/* Pilihan jawaban */
+/* Pilihan jawaban: seluruh kotak bisa diklik, minimal 52px */
 .option {
   display: flex;
   align-items: center;
   gap: var(--space-3);
   min-height: 52px;
-  padding: var(--space-4);
+  padding: var(--space-3) var(--space-4);
   border: var(--border-control);
   border-radius: var(--radius-sm);
   background: var(--color-surface);
@@ -700,34 +763,91 @@ html.modal-terbuka, html.modal-terbuka body { overflow: hidden; }
               background-color var(--duration-fast) var(--ease-out);
 }
 .option:hover { border-color: var(--color-primary); background: var(--color-primary-tint); }
-.option input { flex-shrink: 0; width: 20px; height: 20px; accent-color: var(--color-primary); }
-.option.selected {
+.option input { flex-shrink: 0; width: 22px; height: 22px; margin: 0; accent-color: var(--color-primary); cursor: pointer; }
+.option.selected,
+.option:has(input:checked) {
   border-color: var(--color-primary);
   background: var(--color-primary-tint);
   box-shadow: inset 0 0 0 1px var(--color-primary);
 }
+.option:has(input:disabled) { cursor: default; }
+.option:has(input:disabled):not(:has(input:checked)):hover { border-color: var(--color-control); background: var(--color-surface); }
 
-/* Kotak pembahasan (mode latihan) */
+/* PGK kategori (Benar/Salah per pernyataan) */
+.category-item {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-muted);
+}
+.category-item > p { font-size: var(--text-lg); line-height: var(--leading-normal); color: var(--color-ink); }
+.category-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--space-2); }
+.category-options .option { min-height: 52px; font-size: var(--text-md); font-weight: var(--weight-semibold); }
+
+/* Kotak pembahasan (mode latihan); antarmuka.js menandai tepat/belum tepat */
 .explanation-box {
   margin-top: var(--space-5);
   padding: var(--space-4) var(--space-5);
+  border-left: 4px solid var(--color-primary);
   border-radius: var(--radius-sm);
-  background: var(--color-success-soft);
+  background: var(--color-primary-tint);
+  font-size: var(--text-md);
   line-height: var(--leading-relaxed);
 }
+.explanation-box > strong:first-child { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-1); font-size: var(--text-lg); }
+.explanation-box > strong:first-child + br { display: none; }
+.explanation-box ol { margin: var(--space-2) 0 var(--space-2) var(--space-5); }
+.explanation-box b { color: var(--color-ink); }
+.explanation-box.is-tepat { border-left-color: var(--color-success); background: var(--color-success-soft); }
+.explanation-box.is-tepat > strong:first-child { color: var(--color-success-ink); }
+.explanation-box.is-belum { border-left-color: var(--color-accent); background: var(--color-accent-soft); }
+.explanation-box.is-belum > strong:first-child { color: var(--color-accent-on-soft); }
+.explanation-box .icon { width: 22px; height: 22px; }
 
-/* Tombol aksi soal */
-.quiz-actions { margin-top: var(--space-5); }
+/* Tombol pindah soal */
+.quiz-actions {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: var(--border);
+}
+.quiz-actions .btn { min-height: var(--tap-comfort); white-space: nowrap; }
+.quiz-next { grid-column: 4; justify-self: end; }
+.quiz-panel-toggle { display: none; }
+.label-short { display: none; }
 #flagButton.active {
   background: var(--color-accent-soft);
   color: var(--color-accent-on-soft);
   border-color: var(--color-accent);
 }
 
-/* ---------- 4.9 Nomor soal & keterangan ---------- */
-#questionNav { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-5); }
+/* ---------- 4.9 Panel nomor soal ---------- */
+.quiz-side {
+  position: sticky;
+  top: var(--space-5);
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+}
+.quiz-side-head { display: flex; justify-content: space-between; align-items: center; }
+.quiz-side-head h3 { font-size: var(--text-lg); }
+.quiz-side .quiz-side-close { position: static; display: none; }
+.quiz-progress { display: grid; gap: var(--space-2); }
+.quiz-progress p { font-size: var(--text-sm); color: var(--color-ink-2); }
+.quiz-progress strong { color: var(--color-ink); font-variant-numeric: tabular-nums; }
+.quiz-finish { width: 100%; }
+
+#questionNav { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--tap-min), 1fr)); gap: var(--space-2); }
 .nav-number {
-  width: var(--tap-min);
+  position: relative;
   height: var(--tap-min);
   border: var(--border-control);
   border-radius: var(--radius-sm);
@@ -735,23 +855,37 @@ html.modal-terbuka, html.modal-terbuka body { overflow: hidden; }
   color: var(--color-ink);
   font-size: var(--text-md);
   font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
   cursor: pointer;
 }
-.nav-number.answered { background: var(--color-success-soft); border: 2px solid var(--color-success); color: var(--color-success-ink); }
-.nav-number.flagged { background: var(--color-accent-soft); border: 2px solid var(--color-accent); color: var(--color-accent-on-soft); box-shadow: inset 0 -3px var(--color-accent); }
+.nav-number:hover { border-color: var(--color-primary); }
+.nav-number.answered { background: var(--color-primary-soft); border: 2px solid var(--color-primary); color: var(--color-primary-strong); }
 .nav-number.current { background: var(--color-primary); border: 2px solid var(--color-primary); color: var(--color-on-dark); }
+/* Ragu-ragu: titik amber di sudut, tetap terlihat walau soal sedang dikerjakan */
+.nav-number.flagged::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 2px solid var(--color-surface);
+}
 
 .nav-legend {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2) var(--space-5);
-  margin-top: var(--space-3);
+  gap: var(--space-2) var(--space-4);
   list-style: none;
   font-size: var(--text-sm);
   color: var(--color-ink-2);
 }
 .nav-legend li { display: flex; align-items: center; gap: var(--space-2); }
 .nav-legend i {
+  position: relative;
+  flex-shrink: 0;
   width: 16px;
   height: 16px;
   border-radius: 4px;
@@ -759,8 +893,19 @@ html.modal-terbuka, html.modal-terbuka body { overflow: hidden; }
   background: var(--color-surface);
 }
 .nav-legend .legend-current { background: var(--color-primary); border-color: var(--color-primary); }
-.nav-legend .legend-answered { background: var(--color-success-soft); border: 2px solid var(--color-success); }
-.nav-legend .legend-flagged { background: var(--color-accent-soft); border: 2px solid var(--color-accent); }
+.nav-legend .legend-answered { background: var(--color-primary-soft); border: 2px solid var(--color-primary); }
+.nav-legend .legend-flagged::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 1.5px solid var(--color-surface);
+}
+.quiz-side-backdrop { display: none; }
 
 /* ---------- 4.10 Hasil ---------- */
 .score-card {
@@ -1046,6 +1191,83 @@ footer small { font-size: var(--text-sm); color: var(--color-on-dark-2); }
   .dashboard-columns { grid-template-columns: 1fr; }
 }
 
+/* Desktop sempit: kurangi jarak tepi & lebar panel agar tombol tidak berdesakan */
+@media (max-width: 1279.98px) {
+  .quiz-shell { padding-left: var(--space-5); padding-right: var(--space-5); }
+  .quiz-layout { grid-template-columns: minmax(0, 1fr) 264px; }
+}
+
+/* Layar soal di bawah 1024px: satu kolom, bilah tombol menempel di bawah, panel nomor soal buka-tutup */
+@media (max-width: 1023.98px) {
+  .quiz-shell { padding: var(--space-4) var(--space-4) calc(96px + env(safe-area-inset-bottom, 0px)); }
+  .quiz-layout { grid-template-columns: 1fr; }
+  .quiz-card { padding: var(--space-5); }
+  .quiz-card > *:not(.quiz-actions) { max-width: none; }
+  .quiz-actions {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: var(--z-menu);
+    grid-template-columns: auto auto auto minmax(0, 1fr);
+    gap: var(--space-2);
+    margin: 0;
+    padding: var(--space-3) var(--space-4) calc(var(--space-3) + env(safe-area-inset-bottom, 0px));
+    background: var(--color-surface);
+    border-top: var(--border);
+  }
+  .quiz-next { grid-column: auto; justify-self: stretch; }
+  .quiz-panel-toggle { display: inline-flex; justify-content: center; }
+  .quiz-side {
+    position: fixed;
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: calc(var(--z-menu) + 2);
+    max-height: 80dvh;
+    overflow-y: auto;
+    padding: var(--space-5) var(--space-5) calc(var(--space-5) + env(safe-area-inset-bottom, 0px));
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    box-shadow: var(--shadow-modal);
+    transform: translateY(105%);
+    visibility: hidden;
+    transition: transform var(--duration-base) var(--ease-out), visibility 0s linear var(--duration-base);
+  }
+  .quiz-shell.panel-terbuka .quiz-side { transform: none; visibility: visible; transition: transform var(--duration-base) var(--ease-out); }
+  .quiz-side .quiz-side-close { display: grid; }
+  .quiz-side-backdrop { display: block; position: fixed; inset: 0; z-index: calc(var(--z-menu) + 1); background: rgba(15, 23, 42, 0.5); }
+  .quiz-side-backdrop[hidden] { display: none; }
+  #questionNav { grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)); }
+  .nav-number { height: 48px; }
+}
+@media (max-width: 559.98px) {
+  .quiz-prev .label-long, .quiz-flag .label-long { display: none; }
+  .quiz-flag .label-short { display: inline; }
+  .quiz-prev, .quiz-flag { padding-left: var(--space-3); padding-right: var(--space-3); }
+  .quiz-top-title h2 { font-size: var(--text-xl); }
+  .quiz-exit span { display: none; }
+  .quiz-exit { padding: 0 var(--space-3); }
+  .quiz-top { flex-wrap: nowrap; align-items: flex-start; }
+  .quiz-top-title { min-width: 0; }
+  .quiz-top-tools { flex-shrink: 0; gap: var(--space-2); }
+  .timer-chip { font-size: var(--text-lg); padding: 0 var(--space-3); }
+  .quiz-actions { gap: 6px; padding-left: var(--space-3); padding-right: var(--space-3); }
+  .quiz-actions .btn { min-width: var(--tap-min); padding-left: 10px; padding-right: 10px; }
+  .quiz-panel-toggle .label-long { display: none; }
+  .quiz-shell { padding-left: var(--space-3); padding-right: var(--space-3); }
+  .quiz-card { padding: var(--space-4); }
+  .stimulus-box { padding: var(--space-4); }
+}
+/* Ponsel kecil: ringkas lagi supaya tombol Berikutnya tetap muat */
+@media (max-width: 399.98px) {
+  .quiz-panel-toggle .icon { display: none; }
+  .quiz-panel-toggle { font-variant-numeric: tabular-nums; }
+}
+@media (max-width: 349.98px) {
+  .quiz-flag .label-short { display: none; }
+}
+
 /* Navigasi: menu ponsel di bawah 900px */
 @media (max-width: 899.98px) {
   .nav-desktop, .navbar > .nav-soon { display: none; }
@@ -1082,5 +1304,4 @@ footer small { font-size: var(--text-sm); color: var(--color-on-dark-2); }
   .modal-card { padding: var(--space-5); max-height: calc(100dvh - 2 * var(--space-3)); }
   .mode-option { grid-template-columns: auto minmax(0, 1fr); }
   .mode-option-arrow { display: none; }
-  .quiz-top h2 { font-size: var(--text-2xl); }
 }

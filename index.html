@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Lexend; display=swap agar teks langsung tampil dengan font cadangan saat koneksi lambat -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="css/style.css?v=2026.11.09-13">
+    <link rel="stylesheet" href="css/style.css?v=2026.11.09-14">
 </head>
 
 <body>
@@ -31,6 +31,8 @@
     <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
     <symbol id="i-calc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></symbol>
     <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.1-6C9.5 14.5 12 13 13 12"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
     <symbol id="i-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol>
 </svg>
 
@@ -244,43 +246,83 @@
     </div>
 </div>
 <!-- HALAMAN SOAL -->
-<section class="app-panel" id="quizShell" hidden>
-    <div class="quiz-top">
-        <div>
-            <span class="tag">SIMULASI TKA & TKAD</span>
+<section class="quiz-shell" id="quizShell" hidden>
+    <!-- Bilah atas sesi: judul, mode, timer, tombol keluar -->
+    <header class="quiz-top">
+        <div class="quiz-top-title">
+            <span class="tag">Simulasi TKA &amp; TKAD</span>
             <h2 id="quizSubjectTitle">Mata Pelajaran</h2>
             <p id="quizModeLabel"></p>
         </div>
-        <div id="timer" hidden>10:00</div>
+        <div class="quiz-top-tools">
+            <div id="timer" class="timer-chip" role="timer" aria-label="Sisa waktu" hidden>10:00</div>
+            <button class="btn btn--ghost quiz-exit" id="backHome" type="button">
+                <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+                <span>Keluar</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="quiz-layout">
+        <!-- Kartu soal -->
+        <article class="quiz-card" aria-labelledby="questionText">
+            <div class="quiz-meta">
+                <span id="questionCounter"></span>
+                <span class="quiz-badges">
+                    <span id="difficultyBadge" class="difficulty-badge"></span>
+                    <span id="typeBadge" class="type-badge"></span>
+                </span>
+            </div>
+
+            <div id="stimulusBox" class="stimulus-box" hidden></div>
+            <h3 id="questionText" tabindex="-1"></h3>
+            <p id="answerInstruction"></p>
+            <div id="answerOptions"></div>
+            <div id="explanationBox" class="explanation-box" tabindex="-1" hidden></div>
+
+            <!-- Tombol pindah soal; di ponsel menjadi bilah bawah yang menempel -->
+            <div class="quiz-actions">
+                <button class="btn btn--secondary quiz-prev" id="prevButton" type="button" aria-label="Soal sebelumnya">
+                    <svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+                    <span class="label-long">Sebelumnya</span>
+                </button>
+                <button class="btn btn--secondary quiz-flag" id="flagButton" type="button" aria-label="Tandai ragu-ragu">
+                    <svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg>
+                    <span class="label-long">Tandai ragu-ragu</span>
+                    <span class="label-short" aria-hidden="true">Ragu</span>
+                </button>
+                <button class="btn btn--secondary quiz-panel-toggle" id="navPanelToggle" type="button" aria-controls="quizSide" aria-expanded="false">
+                    <svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg>
+                    <span class="label-long">Nomor</span>
+                    <span class="quiz-progress-short" data-progres-ringkas>0/0</span>
+                </button>
+                <button class="btn btn--primary quiz-next" id="nextButton" type="button">Berikutnya →</button>
+            </div>
+        </article>
+
+        <!-- Panel nomor soal: kolom samping di desktop, panel buka-tutup di ponsel -->
+        <aside class="quiz-side" id="quizSide" aria-label="Navigasi nomor soal">
+            <div class="quiz-side-head">
+                <h3>Nomor soal</h3>
+                <button class="close-button quiz-side-close" id="navPanelClose" type="button" aria-label="Tutup panel nomor soal">
+                    <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+                </button>
+            </div>
+            <div class="quiz-progress">
+                <p><strong data-progres-terjawab>0</strong> dari <span data-progres-total>0</span> soal terjawab</p>
+                <span class="progress-bar" aria-hidden="true"><i data-progres-bar style="width:0%"></i></span>
+            </div>
+            <div id="questionNav" role="navigation" aria-label="Nomor soal"></div>
+            <ul class="nav-legend" aria-hidden="true">
+                <li><i class="legend-current"></i>Sedang dikerjakan</li>
+                <li><i class="legend-answered"></i>Sudah dijawab</li>
+                <li><i class="legend-flagged"></i>Ragu-ragu</li>
+                <li><i></i>Belum dijawab</li>
+            </ul>
+            <button class="btn btn--secondary quiz-finish" id="finishButton" type="button">Akhiri latihan</button>
+        </aside>
     </div>
-
-    <div class="quiz-meta">
-        <span id="questionCounter"></span>
-        <span id="difficultyBadge" class="difficulty-badge"></span>
-        <span id="typeBadge" class="type-badge"></span>
-    </div>
-
-    <div id="stimulusBox" class="stimulus-box" hidden></div>
-    <h3 id="questionText" tabindex="-1"></h3>
-    <p id="answerInstruction"></p>
-    <div id="answerOptions"></div>
-    <div id="explanationBox" class="explanation-box" tabindex="-1" hidden></div>
-
-    <div id="questionNav" role="navigation" aria-label="Nomor soal"></div>
-    <ul class="nav-legend" aria-hidden="true">
-        <li><i class="legend-current"></i>Sedang dikerjakan</li>
-        <li><i class="legend-answered"></i>Sudah dijawab</li>
-        <li><i class="legend-flagged"></i>Ragu-ragu</li>
-        <li><i></i>Belum dijawab</li>
-    </ul>
-
-    <div class="quiz-actions">
-        <button class="action-button secondary" id="backHome">Kembali</button>
-        <button class="action-button secondary" id="prevButton">← Sebelumnya</button>
-        <button class="action-button secondary" id="flagButton">Tandai ragu-ragu</button>
-        <button class="action-button" id="nextButton">Berikutnya →</button>
-        <button class="action-button" id="finishButton">Akhiri latihan</button>
-    </div>
+    <div class="quiz-side-backdrop" id="navPanelBackdrop" hidden></div>
 </section>
 
 <!-- HALAMAN HASIL -->
@@ -379,27 +421,27 @@
     </div>
 </footer>
 
-<script src="js/profilsiswa.js?v=2026.11.09-13"></script>
-<script src="js/kisi-kisi.js?v=2026.11.09-13"></script>
-<script src="js/soal-adaptif-matematika.js?v=2026.11.09-13"></script>
-<script src="js/soal-adaptif-bahasa.js?v=2026.11.09-13"></script>
-<script src="js/soal-adaptif-ipas.js?v=2026.11.09-13"></script>
-<script src="js/soal-penguatan-matematika.js?v=2026.11.09-13"></script>
-<script src="js/soal-penguatan-bahasa.js?v=2026.11.09-13"></script>
-<script src="js/soal-penguatan-ipas.js?v=2026.11.09-13"></script>
-<script src="js/soal-kisi-matematika.js?v=2026.11.09-13"></script>
-<script src="js/soal-kisi-bahasa.js?v=2026.11.09-13"></script>
-<script src="js/soal-kisi-ipas.js?v=2026.11.09-13"></script>
-<script src="js/soal-tambahan-tka.js?v=2026.11.09-13"></script>
-<script src="js/soal-indikator-tambahan.js?v=2026.11.09-13"></script>
-<script src="js/bacaan-bahasa-1.js?v=2026.11.09-13"></script>
-<script src="js/bacaan-bahasa-2.js?v=2026.11.09-13"></script>
-<script src="js/bacaan-bahasa-3.js?v=2026.11.09-13"></script>
-<script src="js/bacaan-bahasa-4.js?v=2026.11.09-13"></script>
-<script src="js/bacaan-bahasa-5.js?v=2026.11.09-13"></script>
-<script src="js/app.js?v=2026.11.09-13"></script>
-<script src="js/bacaan-bahasa.js?v=2026.11.09-13"></script>
-<script src="js/dashboard.js?v=2026.11.09-13"></script>
-<script src="js/antarmuka.js?v=2026.11.09-13"></script>
+<script src="js/profilsiswa.js?v=2026.11.09-14"></script>
+<script src="js/kisi-kisi.js?v=2026.11.09-14"></script>
+<script src="js/soal-adaptif-matematika.js?v=2026.11.09-14"></script>
+<script src="js/soal-adaptif-bahasa.js?v=2026.11.09-14"></script>
+<script src="js/soal-adaptif-ipas.js?v=2026.11.09-14"></script>
+<script src="js/soal-penguatan-matematika.js?v=2026.11.09-14"></script>
+<script src="js/soal-penguatan-bahasa.js?v=2026.11.09-14"></script>
+<script src="js/soal-penguatan-ipas.js?v=2026.11.09-14"></script>
+<script src="js/soal-kisi-matematika.js?v=2026.11.09-14"></script>
+<script src="js/soal-kisi-bahasa.js?v=2026.11.09-14"></script>
+<script src="js/soal-kisi-ipas.js?v=2026.11.09-14"></script>
+<script src="js/soal-tambahan-tka.js?v=2026.11.09-14"></script>
+<script src="js/soal-indikator-tambahan.js?v=2026.11.09-14"></script>
+<script src="js/bacaan-bahasa-1.js?v=2026.11.09-14"></script>
+<script src="js/bacaan-bahasa-2.js?v=2026.11.09-14"></script>
+<script src="js/bacaan-bahasa-3.js?v=2026.11.09-14"></script>
+<script src="js/bacaan-bahasa-4.js?v=2026.11.09-14"></script>
+<script src="js/bacaan-bahasa-5.js?v=2026.11.09-14"></script>
+<script src="js/app.js?v=2026.11.09-14"></script>
+<script src="js/bacaan-bahasa.js?v=2026.11.09-14"></script>
+<script src="js/dashboard.js?v=2026.11.09-14"></script>
+<script src="js/antarmuka.js?v=2026.11.09-14"></script>
 </body>
 </html>
