@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Lexend; display=swap agar teks langsung tampil dengan font cadangan saat koneksi lambat -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="css/style.css?v=2026.11.09-12">
+    <link rel="stylesheet" href="css/style.css?v=2026.11.09-13">
 </head>
 
 <body>
@@ -29,6 +29,9 @@
     <symbol id="i-trend-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 16 6-6 4 4 6-6"/><path d="M14 8h6v6"/></symbol>
     <symbol id="i-trend-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 8 6 6 4-4 6 6"/><path d="M14 16h6v-6"/></symbol>
     <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.1-6C9.5 14.5 12 13 13 12"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol>
 </svg>
 
 <header class="navbar">
@@ -85,9 +88,9 @@
             </div>
             <h2 id="heroCardJudul">Siap menguji kemampuanmu?</h2>
             <ul class="mode-summary">
-                <li><strong>Latihan</strong><span>15 soal · 45 menit · pembahasan langsung</span></li>
-                <li><strong>Simulasi Ujian</strong><span>30 soal · 90 menit · seperti ujian</span></li>
-                <li><strong>Latihan Adaptif</strong><span>30 soal · 90 menit · fokus kelemahan</span></li>
+                <li><strong>Latihan</strong><span><span data-mode-meta="practice">15 soal · 45 menit</span> · pembahasan langsung</span></li>
+                <li><strong>Simulasi Ujian</strong><span><span data-mode-meta="exam">30 soal · 90 menit</span> · seperti ujian</span></li>
+                <li><strong>Latihan Adaptif</strong><span><span data-mode-meta="adaptive">30 soal · 90 menit</span> · fokus kelemahan</span></li>
             </ul>
             <div class="stat-row">
                 <div><strong>3</strong><small>Mata pelajaran</small></div>
@@ -104,26 +107,48 @@
             <p>Pilih materi yang ingin kamu latih.</p>
         </div>
 
+        <!-- Jumlah soal & indikator dihitung ulang dari bank soal oleh antarmuka.js; angka di sini cadangan -->
         <div class="subject-grid">
-            <article class="subject-card">
-                <div class="subject-icon math">∑</div>
-                <h3>Matematika</h3>
-                <p>Latihan numerasi, operasi hitung, pecahan, geometri, dan penalaran.</p>
-                <button class="subject-button" data-subject="matematika">Mulai Latihan →</button>
+            <article class="subject-card" aria-labelledby="mapelMatematika">
+                <div class="subject-card-head">
+                    <span class="subject-icon math"><svg class="icon" aria-hidden="true"><use href="#i-calc"/></svg></span>
+                    <div>
+                        <h3 id="mapelMatematika">Matematika</h3>
+                        <p class="subject-meta"><span data-jumlah-soal="matematika">323</span> soal · <span data-jumlah-indikator="matematika">30</span> indikator</p>
+                    </div>
+                </div>
+                <p class="subject-desc">Bilangan dan pecahan, persamaan sederhana, bangun datar dan ruang, pengukuran, serta membaca data.</p>
+                <button class="subject-button" data-subject="matematika" aria-label="Mulai latihan Matematika">
+                    Mulai latihan <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+                </button>
             </article>
 
-            <article class="subject-card">
-                <div class="subject-icon language">Aa</div>
-                <h3>Bahasa Indonesia</h3>
-                <p>Latihan literasi, pemahaman bacaan, ide pokok, dan penalaran teks.</p>
-                <button class="subject-button" data-subject="bahasa">Mulai Latihan →</button>
+            <article class="subject-card" aria-labelledby="mapelBahasa">
+                <div class="subject-card-head">
+                    <span class="subject-icon language"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg></span>
+                    <div>
+                        <h3 id="mapelBahasa">Bahasa Indonesia</h3>
+                        <p class="subject-meta"><span data-jumlah-soal="bahasa">293</span> soal · <span data-jumlah-indikator="bahasa">30</span> indikator</p>
+                    </div>
+                </div>
+                <p class="subject-desc">Memahami bacaan, ide pokok, watak tokoh, makna ungkapan, dan menyimpulkan isi teks.</p>
+                <button class="subject-button" data-subject="bahasa" aria-label="Mulai latihan Bahasa Indonesia">
+                    Mulai latihan <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+                </button>
             </article>
 
-            <article class="subject-card">
-                <div class="subject-icon science">🌍</div>
-                <h3>IPAS</h3>
-                <p>Latihan ilmu pengetahuan alam dan sosial, ekosistem, energi, dan lingkungan.</p>
-                <button class="subject-button" data-subject="ipas">Mulai Latihan →</button>
+            <article class="subject-card" aria-labelledby="mapelIpas">
+                <div class="subject-card-head">
+                    <span class="subject-icon science"><svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg></span>
+                    <div>
+                        <h3 id="mapelIpas">IPAS</h3>
+                        <p class="subject-meta"><span data-jumlah-soal="ipas">210</span> soal · <span data-jumlah-indikator="ipas">30</span> indikator</p>
+                    </div>
+                </div>
+                <p class="subject-desc">Tubuh dan indra, makhluk hidup, energi, gaya, bunyi, cahaya, serta bumi dan tata surya.</p>
+                <button class="subject-button" data-subject="ipas" aria-label="Mulai latihan IPAS">
+                    Mulai latihan <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+                </button>
             </article>
         </div>
     </section>
@@ -173,16 +198,49 @@
 
 <!-- MODAL PILIH MODE -->
 <div class="modal" id="setupModal" hidden>
-    <div class="modal-card">
-        <button class="close-button" id="closeSetup" aria-label="Tutup">×</button>
-        <span class="tag">MULAI LATIHAN</span>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="setupSubjectName" aria-describedby="setupDesc">
+        <button class="close-button" id="closeSetup" aria-label="Tutup pilihan mode">
+            <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+        <span class="tag">Mulai latihan</span>
         <h2 id="setupSubjectName">Pilih mata pelajaran</h2>
-        <p>Pilih cara belajar yang kamu inginkan.</p>
+        <p id="setupDesc">Pilih cara belajar yang kamu inginkan.</p>
+
+        <!-- Jumlah soal & durasi diisi dari JUMLAH_SOAL_MODE / DURASI_MODE di app.js -->
         <div class="mode-options">
-            <button class="mode-button" id="practiceMode">Mode Latihan · 15 soal · 45 menit</button>
-            <button class="mode-button secondary" id="examMode">Mode Simulasi Ujian · 30 soal · 90 menit</button>
-            <button class="mode-button" id="adaptiveMode">Latihan Adaptif · 30 soal · 90 menit</button>
+            <button class="mode-option" id="practiceMode">
+                <span class="mode-option-icon"><svg class="icon" aria-hidden="true"><use href="#i-pencil"/></svg></span>
+                <span class="mode-option-body">
+                    <strong>Latihan</strong>
+                    <span class="mode-option-meta" data-mode-meta="practice">15 soal · 45 menit</span>
+                    <span class="mode-option-desc">Pembahasan langsung muncul setelah menjawab. Cocok untuk belajar.</span>
+                </span>
+                <svg class="icon mode-option-arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+            </button>
+            <button class="mode-option" id="examMode">
+                <span class="mode-option-icon"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></span>
+                <span class="mode-option-body">
+                    <strong>Simulasi Ujian</strong>
+                    <span class="mode-option-meta" data-mode-meta="exam">30 soal · 90 menit</span>
+                    <span class="mode-option-desc">Pembahasan muncul setelah selesai, seperti ujian sungguhan.</span>
+                </span>
+                <svg class="icon mode-option-arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+            </button>
+            <button class="mode-option" id="adaptiveMode">
+                <span class="mode-option-icon"><svg class="icon" aria-hidden="true"><use href="#i-target"/></svg></span>
+                <span class="mode-option-body">
+                    <strong>Latihan Adaptif</strong>
+                    <span class="mode-option-meta" data-mode-meta="adaptive">30 soal · 90 menit</span>
+                    <span class="mode-option-desc">Soal difokuskan pada kompetensi yang masih perlu diperkuat.</span>
+                </span>
+                <svg class="icon mode-option-arrow" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+            </button>
         </div>
+
+        <button type="button" class="btn btn--ghost modal-back" id="cancelSetup">
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+            Kembali pilih mata pelajaran
+        </button>
     </div>
 </div>
 <!-- HALAMAN SOAL -->
@@ -321,27 +379,27 @@
     </div>
 </footer>
 
-<script src="js/profilsiswa.js?v=2026.11.09-12"></script>
-<script src="js/kisi-kisi.js?v=2026.11.09-12"></script>
-<script src="js/soal-adaptif-matematika.js?v=2026.11.09-12"></script>
-<script src="js/soal-adaptif-bahasa.js?v=2026.11.09-12"></script>
-<script src="js/soal-adaptif-ipas.js?v=2026.11.09-12"></script>
-<script src="js/soal-penguatan-matematika.js?v=2026.11.09-12"></script>
-<script src="js/soal-penguatan-bahasa.js?v=2026.11.09-12"></script>
-<script src="js/soal-penguatan-ipas.js?v=2026.11.09-12"></script>
-<script src="js/soal-kisi-matematika.js?v=2026.11.09-12"></script>
-<script src="js/soal-kisi-bahasa.js?v=2026.11.09-12"></script>
-<script src="js/soal-kisi-ipas.js?v=2026.11.09-12"></script>
-<script src="js/soal-tambahan-tka.js?v=2026.11.09-12"></script>
-<script src="js/soal-indikator-tambahan.js?v=2026.11.09-12"></script>
-<script src="js/bacaan-bahasa-1.js?v=2026.11.09-12"></script>
-<script src="js/bacaan-bahasa-2.js?v=2026.11.09-12"></script>
-<script src="js/bacaan-bahasa-3.js?v=2026.11.09-12"></script>
-<script src="js/bacaan-bahasa-4.js?v=2026.11.09-12"></script>
-<script src="js/bacaan-bahasa-5.js?v=2026.11.09-12"></script>
-<script src="js/app.js?v=2026.11.09-12"></script>
-<script src="js/bacaan-bahasa.js?v=2026.11.09-12"></script>
-<script src="js/dashboard.js?v=2026.11.09-12"></script>
-<script src="js/antarmuka.js?v=2026.11.09-12"></script>
+<script src="js/profilsiswa.js?v=2026.11.09-13"></script>
+<script src="js/kisi-kisi.js?v=2026.11.09-13"></script>
+<script src="js/soal-adaptif-matematika.js?v=2026.11.09-13"></script>
+<script src="js/soal-adaptif-bahasa.js?v=2026.11.09-13"></script>
+<script src="js/soal-adaptif-ipas.js?v=2026.11.09-13"></script>
+<script src="js/soal-penguatan-matematika.js?v=2026.11.09-13"></script>
+<script src="js/soal-penguatan-bahasa.js?v=2026.11.09-13"></script>
+<script src="js/soal-penguatan-ipas.js?v=2026.11.09-13"></script>
+<script src="js/soal-kisi-matematika.js?v=2026.11.09-13"></script>
+<script src="js/soal-kisi-bahasa.js?v=2026.11.09-13"></script>
+<script src="js/soal-kisi-ipas.js?v=2026.11.09-13"></script>
+<script src="js/soal-tambahan-tka.js?v=2026.11.09-13"></script>
+<script src="js/soal-indikator-tambahan.js?v=2026.11.09-13"></script>
+<script src="js/bacaan-bahasa-1.js?v=2026.11.09-13"></script>
+<script src="js/bacaan-bahasa-2.js?v=2026.11.09-13"></script>
+<script src="js/bacaan-bahasa-3.js?v=2026.11.09-13"></script>
+<script src="js/bacaan-bahasa-4.js?v=2026.11.09-13"></script>
+<script src="js/bacaan-bahasa-5.js?v=2026.11.09-13"></script>
+<script src="js/app.js?v=2026.11.09-13"></script>
+<script src="js/bacaan-bahasa.js?v=2026.11.09-13"></script>
+<script src="js/dashboard.js?v=2026.11.09-13"></script>
+<script src="js/antarmuka.js?v=2026.11.09-13"></script>
 </body>
 </html>
