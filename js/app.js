@@ -97,7 +97,7 @@ let answers = {}, flagged = new Set(), timerId = null, secondsLeft = 600, hasSub
 let checkedAnswers = new Set();
 
 // Versi aset; samakan dengan ?v= pada index.html setiap kali file JS/CSS berubah
-const VERSI_APLIKASI = "2026.11.08-9";
+const VERSI_APLIKASI = "2026.11.08-10";
 
 // Bila index.html lama masih tersimpan di cache browser, data kisi-kisi
 // belum ikut dimuat. Muat sendiri agar Peta Hasil Belajar tetap tersedia.
@@ -1253,7 +1253,9 @@ function moveQuestion(delta) {
 function goToQuestion(index) {
   currentIndex = index;
   renderQuestion();
-  window.scrollTo({ top: 0, behavior: "auto" });
+  // "instant": html memakai scroll-behavior: smooth, dan animasi halus itu
+  // terputus saat soal digambar ulang sehingga halaman tidak sampai ke atas.
+  window.scrollTo({ top: 0, behavior: "instant" });
   $("questionText").focus({ preventScroll: true });
 }
 // =====================================================================
