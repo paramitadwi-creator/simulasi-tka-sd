@@ -1334,6 +1334,56 @@ function tampilkanPetaHasil(peta) {
     </p>`;
 }
 
+// Pembahasan satu soal: teks soal lengkap, jawaban siswa, kunci, dan penjelasan
+function htmlPembahasan(q, i) {
+  const ok = isCorrect(q);
+  const dipilih = answers[q.id] || [];
+  const huruf = n => String.fromCharCode(65 + n);
+  let isi = "";
+
+  // Bacaan/stimulus: bacaan panjang dilipat agar pembahasan tetap ringkas
+  if (q.stimulus) {
+    isi += q.stimulus.length > 280
+      ? `<details class="review-bacaan"><summary>Lihat bacaan</summary><p>${escapeHTML(q.stimulus)}</p></details>`
+      : `<p class="review-stimulus">${escapeHTML(q.stimulus)}</p>`;
+  }
+  if (q.image) {
+    isi += `<img class="review-gambar" src="${escapeHTML(q.image)}" alt="${escapeHTML(q.imageAlt || "Gambar soal")}" loading="lazy">`;
+  }
+  isi += `<p class="review-soal">${escapeHTML(q.question)}</p>`;
+
+  if (q.type === "pgk_kategori") {
+    // Benar/Salah per pernyataan: tulis kategorinya, bukan huruf
+    const baris = q.statements.map((pernyataan, n) => {
+      const jawab = dipilih[n];
+      const tepat = jawab === q.answer[n];
+      return `<tr class="${tepat ? "tepat" : "keliru"}">
+        <td>${n + 1}. ${escapeHTML(pernyataan)}</td>
+        <td>${escapeHTML(q.categories[jawab] ?? "Belum dijawab")} ${tepat ? "✓" : "✗"}</td>
+        <td>${escapeHTML(q.categories[q.answer[n]])}</td>
+      </tr>`;
+    }).join("");
+    isi += `<table class="review-tabel">
+      <thead><tr><th>Pernyataan</th><th>Jawabanmu</th><th>Kunci</th></tr></thead>
+      <tbody>${baris}</tbody></table>`;
+  } else {
+    // PG & PGK pilih-banyak: tandai kunci dan pilihan siswa pada setiap opsi
+    const opsi = q.options.map((teks, n) => {
+      const kunci = q.answer.includes(n), pilih = dipilih.includes(n);
+      const kelas = kunci ? "kunci" : pilih ? "salah-pilih" : "";
+      const tanda = [pilih ? "Jawabanmu" : "", kunci ? "Kunci" : ""].filter(Boolean).join(" · ");
+      return `<li class="${kelas}"><b>${huruf(n)}.</b> <span>${escapeHTML(teks)}</span>${tanda ? `<em>${tanda}</em>` : ""}</li>`;
+    }).join("");
+    isi += `<ul class="review-opsi">${opsi}</ul>`;
+    const teksPilih = dipilih.map(huruf).join(", ") || "Belum dijawab";
+    isi += `<p class="review-ringkas">Jawabanmu: ${escapeHTML(teksPilih)} · Kunci: ${q.answer.map(huruf).join(", ")}</p>`;
+  }
+
+  return `<strong>Soal ${i + 1} · ${escapeHTML(q.topic)} <span class="${ok ? "right" : "wrong"}">${ok ? "Benar" : "Belum tepat"}</span></strong>
+    ${isi}
+    <p class="review-penjelasan"><b>Pembahasan:</b> ${escapeHTML(q.explanation)}</p>`;
+}
+
 function finishQuiz() {
   if (hasSubmitted) return;
   hasSubmitted = true; stopTimer();
@@ -1443,10 +1493,8 @@ localStorage.setItem("tkaSkillProgress", JSON.stringify(progress));
   $("resultStats").innerHTML = `<div><strong>${correct}</strong>Jawaban benar</div><div><strong>${currentQuestions.length - correct}</strong>Belum tepat</div><div><strong>${answered}</strong>Soal terjawab</div><div><strong>${flagged.size}</strong>Ditandai ragu-ragu</div>`;
   $("resultReview").innerHTML = "";
   currentQuestions.forEach((q, i) => {
-    const ok = isCorrect(q), selected = (answers[q.id] || []).map(x => String.fromCharCode(65 + x)).join(", ") || "Belum dijawab";
-    const correctText = q.answer.map(x => String.fromCharCode(65 + x)).join(", ");
     const item = document.createElement("div"); item.className = "review-item";
-    item.innerHTML = `<strong>Soal ${i + 1} · ${escapeHTML(q.topic)} <span class="${ok ? "right" : "wrong"}">${ok ? "Benar" : "Belum tepat"}</span></strong><p>Jawabanmu: ${escapeHTML(selected)} · Kunci: ${correctText}</p><p>${escapeHTML(q.explanation)}</p>`;
+    item.innerHTML = htmlPembahasan(q, i);
     $("resultReview").appendChild(item);
   });
   tampilkanPetaHasil(petaHasil);

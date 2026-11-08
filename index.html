@@ -250,6 +250,29 @@
         .right { color: #159765; }
         .wrong { color: #c34242; }
 
+        /* ---------- Pembahasan: soal lengkap ---------- */
+        .review-stimulus, .review-bacaan p { white-space: pre-line; background: var(--light); border-radius: 10px; padding: 12px 14px; margin: 10px 0; font-size: 14px; }
+        .review-bacaan { margin: 10px 0; }
+        .review-bacaan summary { cursor: pointer; color: var(--blue); font-weight: 700; font-size: 13px; }
+        .review-gambar { display: block; max-width: 100%; max-height: 300px; margin: 10px 0; }
+        .review-soal { color: var(--navy); font-weight: 600; margin: 10px 0 8px; }
+        .review-opsi { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 6px; }
+        .review-opsi li { display: flex; gap: 8px; align-items: baseline; padding: 6px 10px; border-radius: 8px; border: 1px solid transparent; font-size: 14px; }
+        .review-opsi li span { flex: 1; }
+        .review-opsi li em { font-style: normal; font-size: 12px; font-weight: 700; white-space: nowrap; }
+        .review-opsi li.kunci { background: #e8f7f0; border-color: #bfe8d4; }
+        .review-opsi li.kunci em { color: #159765; }
+        .review-opsi li.salah-pilih { background: #fdecec; border-color: #f4c7c7; }
+        .review-opsi li.salah-pilih em { color: #c34242; }
+        .review-tabel { width: 100%; border-collapse: collapse; font-size: 14px; margin: 4px 0 8px; }
+        .review-tabel th { text-align: left; font-size: 12px; color: var(--muted); border-bottom: 1px solid var(--border); padding: 6px 8px; }
+        .review-tabel td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .review-tabel td:not(:first-child), .review-tabel th:not(:first-child) { white-space: nowrap; width: 1%; }
+        .review-tabel tr.keliru td:nth-child(2) { color: #c34242; font-weight: 700; }
+        .review-tabel tr.tepat td:nth-child(2) { color: #159765; font-weight: 700; }
+        .review-ringkas { font-size: 13px; color: var(--muted); margin: 0; }
+        .review-penjelasan { background: #f3f6ff; border-radius: 8px; padding: 10px 14px; margin: 8px 0 0; font-size: 14px; }
+
         @media(max-width:768px) {
             .subject-grid { grid-template-columns: 1fr; }
             .app-panel { margin: 20px 12px; padding: 20px; }
