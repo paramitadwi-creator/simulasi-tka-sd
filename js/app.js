@@ -1215,6 +1215,125 @@ function moveQuestion(delta) {
   currentIndex = Math.max(0, Math.min(currentQuestions.length - 1, currentIndex + delta));
   renderQuestion();
 }
+// =====================================================================
+// PETA HASIL BELAJAR: penguasaan per indikator kisi-kisi dalam satu sesi
+// =====================================================================
+const LABEL_STATUS = { dikuasai: "Dikuasai", berkembang: "Berkembang", lemah: "Perlu penguatan" };
+
+function indikatorSoal(q) {
+  const kisi = window.kisiKisiTKA || {};
+  return q.indikator
+    ?? (kisi.indikatorSoal || {})[q.id]
+    ?? (kisi.indikatorKode || {})[q.kodeKompetensi]
+    ?? null;
+}
+
+function statusPenguasaan(persen) {
+  const kisi = window.kisiKisiTKA || { batasDikuasai: 75, batasBerkembang: 50 };
+  return persen >= kisi.batasDikuasai ? "dikuasai"
+    : persen >= kisi.batasBerkembang ? "berkembang"
+    : "lemah";
+}
+
+function hitungPetaHasil(mapel, soal) {
+  const kisi = (window.kisiKisiTKA || {})[mapel];
+  const perIndikator = new Map();
+  const luar = { benar: 0, total: 0 };
+
+  soal.forEach(q => {
+    const nomor = indikatorSoal(q);
+    const benar = isCorrect(q);
+    if (!nomor || !kisi || !kisi.indikator[nomor]) {
+      luar.total++;
+      if (benar) luar.benar++;
+      return;
+    }
+    if (!perIndikator.has(nomor)) {
+      perIndikator.set(nomor, { nomor, nama: kisi.indikator[nomor], benar: 0, total: 0 });
+    }
+    const data = perIndikator.get(nomor);
+    data.total++;
+    if (benar) data.benar++;
+  });
+
+  const baris = [...perIndikator.values()]
+    .sort((a, b) => a.nomor - b.nomor)
+    .map(data => {
+      const persen = Math.round(data.benar / data.total * 100);
+      return { ...data, persen, status: statusPenguasaan(persen) };
+    });
+
+  const elemen = (kisi ? kisi.elemen : [])
+    .map(e => ({ nama: e.nama, baris: baris.filter(b => e.nomor.includes(b.nomor)) }))
+    .filter(e => e.baris.length);
+
+  return { mapel, baris, elemen, luar, totalIndikator: kisi ? Object.keys(kisi.indikator).length : 0 };
+}
+
+function tampilkanPetaHasil(peta) {
+  const wadah = $("petaHasil");
+  if (!wadah) return;
+
+  if (!peta.baris.length) {
+    wadah.hidden = true;
+    return;
+  }
+  wadah.hidden = false;
+
+  const hitung = { dikuasai: 0, berkembang: 0, lemah: 0 };
+  peta.baris.forEach(b => hitung[b.status]++);
+
+  // Prioritas: indikator belum dikuasai, persentase terendah lebih dulu
+  const prioritas = peta.baris
+    .filter(b => b.status !== "dikuasai")
+    .sort((a, b) => a.persen - b.persen || b.total - a.total || a.nomor - b.nomor)
+    .slice(0, 3);
+
+  const barisHTML = b => `
+    <li class="peta-baris status-${b.status}">
+      <span class="peta-no" aria-label="Indikator ${b.nomor}">${b.nomor}</span>
+      <span class="peta-nama">${escapeHTML(b.nama)}</span>
+      <span class="peta-bar" aria-hidden="true"><i style="width:${b.persen}%"></i></span>
+      <span class="peta-angka">${b.benar}/${b.total} benar</span>
+      <span class="peta-status">${LABEL_STATUS[b.status]}</span>
+    </li>`;
+
+  const elemenHTML = peta.elemen.map(e => {
+    const benar = e.baris.reduce((t, b) => t + b.benar, 0);
+    const total = e.baris.reduce((t, b) => t + b.total, 0);
+    return `
+      <div class="peta-elemen">
+        <h4>${escapeHTML(e.nama)} <small>${benar}/${total} benar · ${Math.round(benar / total * 100)}%</small></h4>
+        <ul>${e.baris.map(barisHTML).join("")}</ul>
+      </div>`;
+  }).join("");
+
+  const kisi = window.kisiKisiTKA || { batasDikuasai: 75, batasBerkembang: 50 };
+
+  wadah.innerHTML = `
+    <h3 id="petaJudul">Peta Hasil Belajar</h3>
+    <p class="peta-pengantar">Penguasaan setiap indikator kisi-kisi TKA yang diuji pada sesi ini
+      (${peta.baris.length} dari ${peta.totalIndikator} indikator).</p>
+    <div class="peta-ringkas">
+      <div class="status-dikuasai"><strong>${hitung.dikuasai}</strong>Dikuasai</div>
+      <div class="status-berkembang"><strong>${hitung.berkembang}</strong>Berkembang</div>
+      <div class="status-lemah"><strong>${hitung.lemah}</strong>Perlu penguatan</div>
+    </div>
+    <div class="peta-saran">
+      ${prioritas.length
+        ? `<strong>Prioritas belajar berikutnya:</strong>
+           <ol>${prioritas.map(b => `<li>Indikator ${b.nomor} · ${escapeHTML(b.nama)} (${b.persen}%)</li>`).join("")}</ol>`
+        : `<strong>Hebat!</strong> Semua indikator yang diuji pada sesi ini sudah dikuasai.`}
+    </div>
+    ${elemenHTML}
+    <p class="peta-catatan">
+      Dikuasai ≥ ${kisi.batasDikuasai}% · Berkembang ${kisi.batasBerkembang}–${kisi.batasDikuasai - 1}% ·
+      Perlu penguatan &lt; ${kisi.batasBerkembang}%. Indikator yang hanya diuji 1–2 soal belum
+      mencerminkan penguasaan penuh; lihat perkembangannya dari beberapa sesi.
+      ${peta.luar.total ? `${peta.luar.total} soal di luar kisi-kisi (${peta.luar.benar} benar) tidak dihitung dalam peta.` : ""}
+    </p>`;
+}
+
 function finishQuiz() {
   if (hasSubmitted) return;
   hasSubmitted = true; stopTimer();
@@ -1269,6 +1388,9 @@ Object.entries(skillResults).forEach(([kode, hasil]) => {
     progress[key].lastUpdated = new Date().toISOString();
 });
 
+// Peta hasil belajar per indikator kisi-kisi
+const petaHasil = hitungPetaHasil(currentSubject, currentQuestions);
+
 // Menyimpan riwayat setiap sesi latihan
 const riwayatLatihan = JSON.parse(
   localStorage.getItem("tkaSessionHistory") || "[]"
@@ -1292,7 +1414,17 @@ const dataSesi = {
         hasil.correct / hasil.attempted * 100
       )
     })
-  )
+  ),
+
+  // Peta hasil belajar sesi ini (per indikator kisi-kisi)
+  petaIndikator: petaHasil.baris.map(b => ({
+    indikator: b.nomor,
+    benar: b.benar,
+    total: b.total,
+    persen: b.persen,
+    status: b.status
+  })),
+  diLuarKisi: petaHasil.luar
 };
 
 riwayatLatihan.unshift(dataSesi);
@@ -1317,6 +1449,7 @@ localStorage.setItem("tkaSkillProgress", JSON.stringify(progress));
     item.innerHTML = `<strong>Soal ${i + 1} · ${escapeHTML(q.topic)} <span class="${ok ? "right" : "wrong"}">${ok ? "Benar" : "Belum tepat"}</span></strong><p>Jawabanmu: ${escapeHTML(selected)} · Kunci: ${correctText}</p><p>${escapeHTML(q.explanation)}</p>`;
     $("resultReview").appendChild(item);
   });
+  tampilkanPetaHasil(petaHasil);
   window.scrollTo(0, 0);
 }
 function returnHome() {
