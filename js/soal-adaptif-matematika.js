@@ -38,10 +38,10 @@ window.soalAdaptifMatematika = [
     options: [
       "Panjang penghapus 5 meter",
       "Tinggi pintu 2 kilometer",
-      "Panjang papan tulis 3 meter",
-      "Jarak Yogyakarta–Solo 60 meter"
+      "Jarak Yogyakarta–Solo 60 meter",
+      "Panjang papan tulis 3 meter"
     ],
-    answer: [2],
+    answer: [3],
     explanation: "Papan tulis dapat memiliki panjang sekitar 3 meter. Meter cocok untuk mengukur benda tersebut. Jarak antarkota seharusnya menggunakan kilometer."
   },
   {
@@ -271,10 +271,10 @@ window.soalAdaptifMatematika = [
   options: [
     "Tinggi pintu lebih pendek daripada lemari",
     "Tinggi pintu sama dengan lemari",
-    "Tinggi pintu lebih tinggi 20 cm daripada lemari",
-    "Tinggi lemari lebih tinggi 20 cm daripada pintu"
+    "Tinggi lemari lebih tinggi 20 cm daripada pintu",
+    "Tinggi pintu lebih tinggi 20 cm daripada lemari"
   ],
-  answer: [2],
+  answer: [3],
   explanation: "2 meter = 200 sentimeter. Selisihnya 200 - 180 = 20 sentimeter. Jadi pintu lebih tinggi 20 cm."
 }
 ,
@@ -323,12 +323,12 @@ window.soalAdaptifMatematika = [
     difficulty: "sulit",
     type: "pg",
     topic: "Persamaan sederhana dan hubungan bilangan",
-    fokus: "Menyelesaikan masalah perbandingan umur",
-    stimulus: "Jumlah umur ayah dan anak adalah 50 tahun. Umur ayah empat kali umur anak.",
-    question: "Berapakah umur anak?",
-    options: ["8 tahun", "10 tahun", "12 tahun", "15 tahun"],
-    answer: [1],
-    explanation: "Misalkan umur anak x dan umur ayah 4x. Jadi 5x = 50, sehingga x = 10 tahun."
+    fokus: "Menyelesaikan masalah selisih dan kelipatan umur",
+    stimulus: "Selisih umur ayah dan umur anak adalah 28 tahun. Umur ayah lima kali umur anak.",
+    question: "Berapakah umur ayah?",
+    options: ["7 tahun", "28 tahun", "30 tahun", "35 tahun"],
+    answer: [3],
+    explanation: "Misalkan umur anak x, maka umur ayah 5x. Selisihnya 5x − x = 4x = 28, sehingga x = 7 tahun. Umur ayah = 5 × 7 = 35 tahun."
 },
 {
     id: "ADP-MT21",
@@ -349,12 +349,12 @@ window.soalAdaptifMatematika = [
     difficulty: "mudah",
     type: "pg",
     topic: "Logika penggunaan satuan panjang",
-    fokus: "Memilih satuan panjang yang sesuai dengan benda",
-    stimulus: "Perhatikan benda-benda di sekitar kita.",
-    question: "Satuan yang paling tepat untuk menyatakan panjang sebuah pensil adalah ...",
-    options: ["Kilometer", "Meter", "Sentimeter", "Kilogram"],
-    answer: [2],
-    explanation: "Panjang pensil biasanya beberapa belas sentimeter. Sentimeter merupakan satuan yang sesuai."
+    fokus: "Memilih satuan panjang untuk tinggi badan",
+    stimulus: "Bu Guru mengukur tinggi badan setiap siswa kelas empat untuk dicatat di buku kesehatan.",
+    question: "Satuan yang paling tepat untuk menyatakan tinggi badan siswa adalah ...",
+    options: ["Milimeter", "Sentimeter", "Kilometer", "Kilogram"],
+    answer: [1],
+    explanation: "Tinggi badan anak biasanya sekitar 120–140 cm, sehingga paling tepat dinyatakan dalam sentimeter. Milimeter terlalu kecil, kilometer terlalu besar, dan kilogram adalah satuan berat."
 },
 {
     id: "ADP-MT23",
@@ -446,12 +446,12 @@ window.soalAdaptifMatematika = [
     difficulty: "sulit",
     type: "pg",
     topic: "Persamaan sederhana dan hubungan bilangan",
-    fokus: "Menyelesaikan masalah perbandingan umur",
-    stimulus: "Jumlah umur ayah dan anak adalah 50 tahun. Umur ayah empat kali umur anak.",
-    question: "Berapakah umur anak?",
-    options: ["8 tahun", "10 tahun", "12 tahun", "15 tahun"],
-    answer: [1],
-    explanation: "Misalkan umur anak x dan umur ayah 4x. Jadi 5x = 50, sehingga x = 10 tahun."
+    fokus: "Menyelesaikan masalah selisih dan kelipatan umur",
+    stimulus: "Selisih umur ayah dan umur anak adalah 28 tahun. Umur ayah lima kali umur anak.",
+    question: "Berapakah umur ayah?",
+    options: ["7 tahun", "28 tahun", "30 tahun", "35 tahun"],
+    answer: [3],
+    explanation: "Misalkan umur anak x, maka umur ayah 5x. Selisihnya 5x − x = 4x = 28, sehingga x = 7 tahun. Umur ayah = 5 × 7 = 35 tahun."
 },
 {
     id: "ADP-MT21",
@@ -472,12 +472,12 @@ window.soalAdaptifMatematika = [
     difficulty: "mudah",
     type: "pg",
     topic: "Logika penggunaan satuan panjang",
-    fokus: "Memilih satuan panjang yang sesuai dengan benda",
-    stimulus: "Perhatikan benda-benda di sekitar kita.",
-    question: "Satuan yang paling tepat untuk menyatakan panjang sebuah pensil adalah ...",
-    options: ["Kilometer", "Meter", "Sentimeter", "Kilogram"],
-    answer: [2],
-    explanation: "Panjang pensil biasanya beberapa belas sentimeter. Sentimeter merupakan satuan yang sesuai."
+    fokus: "Memilih satuan panjang untuk tinggi badan",
+    stimulus: "Bu Guru mengukur tinggi badan setiap siswa kelas empat untuk dicatat di buku kesehatan.",
+    question: "Satuan yang paling tepat untuk menyatakan tinggi badan siswa adalah ...",
+    options: ["Milimeter", "Sentimeter", "Kilometer", "Kilogram"],
+    answer: [1],
+    explanation: "Tinggi badan anak biasanya sekitar 120–140 cm, sehingga paling tepat dinyatakan dalam sentimeter. Milimeter terlalu kecil, kilometer terlalu besar, dan kilogram adalah satuan berat."
 },
 {
     id: "ADP-MT23",
@@ -569,12 +569,12 @@ window.soalAdaptifMatematika = [
     difficulty: "sulit",
     type: "pg",
     topic: "Persamaan sederhana dan hubungan bilangan",
-    fokus: "Menyelesaikan masalah perbandingan umur",
-    stimulus: "Jumlah umur ayah dan anak adalah 50 tahun. Umur ayah empat kali umur anak.",
-    question: "Berapakah umur anak?",
-    options: ["8 tahun", "10 tahun", "12 tahun", "15 tahun"],
-    answer: [1],
-    explanation: "Misalkan umur anak x dan umur ayah 4x. Jadi 5x = 50, sehingga x = 10 tahun."
+    fokus: "Menyelesaikan masalah selisih dan kelipatan umur",
+    stimulus: "Selisih umur ayah dan umur anak adalah 28 tahun. Umur ayah lima kali umur anak.",
+    question: "Berapakah umur ayah?",
+    options: ["7 tahun", "28 tahun", "30 tahun", "35 tahun"],
+    answer: [3],
+    explanation: "Misalkan umur anak x, maka umur ayah 5x. Selisihnya 5x − x = 4x = 28, sehingga x = 7 tahun. Umur ayah = 5 × 7 = 35 tahun."
 },
 {
     id: "ADP-MT21",
@@ -595,136 +595,12 @@ window.soalAdaptifMatematika = [
     difficulty: "mudah",
     type: "pg",
     topic: "Logika penggunaan satuan panjang",
-    fokus: "Memilih satuan panjang yang sesuai dengan benda",
-    stimulus: "Perhatikan benda-benda di sekitar kita.",
-    question: "Satuan yang paling tepat untuk menyatakan panjang sebuah pensil adalah ...",
-    options: ["Kilometer", "Meter", "Sentimeter", "Kilogram"],
-    answer: [2],
-    explanation: "Panjang pensil biasanya beberapa belas sentimeter. Sentimeter merupakan satuan yang sesuai."
-},
-{
-    id: "ADP-MT23",
-    kodeKompetensi: "MT-W02",
-    difficulty: "sedang",
-    type: "pg",
-    topic: "Logika penggunaan satuan panjang",
-    fokus: "Mengubah satuan sentimeter menjadi meter",
-    stimulus: "Panjang sebuah pita adalah 250 sentimeter.",
-    question: "Panjang pita tersebut sama dengan ...",
-    options: ["0,25 meter", "2,5 meter", "25 meter", "250 meter"],
+    fokus: "Memilih satuan panjang untuk tinggi badan",
+    stimulus: "Bu Guru mengukur tinggi badan setiap siswa kelas empat untuk dicatat di buku kesehatan.",
+    question: "Satuan yang paling tepat untuk menyatakan tinggi badan siswa adalah ...",
+    options: ["Milimeter", "Sentimeter", "Kilometer", "Kilogram"],
     answer: [1],
-    explanation: "Karena 100 cm = 1 m, maka 250 cm = 250 ÷ 100 = 2,5 meter."
-},
-{
-    id: "ADP-MT24",
-    kodeKompetensi: "MT-W02",
-    difficulty: "sedang",
-    type: "pg",
-    topic: "Logika penggunaan satuan panjang",
-    fokus: "Membandingkan ukuran panjang dalam satuan berbeda",
-    stimulus: "Tinggi lemari adalah 180 cm. Tinggi sebuah pintu adalah 2 meter.",
-    question: "Pernyataan yang benar adalah ...",
-    options: [
-        "Lemari lebih tinggi 20 cm daripada pintu",
-        "Pintu lebih tinggi 20 cm daripada lemari",
-        "Tinggi keduanya sama",
-        "Pintu lebih pendek 80 cm daripada lemari"
-    ],
-    answer: [1],
-    explanation: "2 meter = 200 cm. Selisihnya 200 - 180 = 20 cm. Jadi pintu lebih tinggi 20 cm."
-},
-{
-    id: "ADP-MT25",
-    kodeKompetensi: "MT-W02",
-    difficulty: "sulit",
-    type: "pg",
-    topic: "Logika penggunaan satuan panjang",
-    fokus: "Mengonversi kilometer menjadi meter dalam masalah sehari-hari",
-    stimulus: "Jarak rumah Rani ke sekolah adalah 3 km. Rani sudah berjalan sejauh 1.200 meter.",
-    question: "Berapa meter lagi jarak yang harus ditempuh Rani?",
-    options: ["1.200 meter", "1.500 meter", "1.800 meter", "2.000 meter"],
-    answer: [2],
-    explanation: "3 km = 3.000 meter. Sisa jarak = 3.000 - 1.200 = 1.800 meter."
-}
-
-,
-{
-    id: "ADP-MT17",
-    kodeKompetensi: "MT-W01",
-    difficulty: "mudah",
-    type: "pg",
-    topic: "Persamaan sederhana dan hubungan bilangan",
-    fokus: "Menentukan nilai yang belum diketahui dalam persamaan perkalian",
-    stimulus: "Sebuah bilangan dikalikan 4, kemudian ditambah 8. Hasilnya adalah 36.",
-    question: "Berapakah bilangan tersebut?",
-    options: ["6", "7", "8", "9"],
-    answer: [1],
-    explanation: "Misalkan bilangannya x. Maka 4 × x + 8 = 36. Jadi 4 × x = 28 dan x = 7."
-},
-{
-    id: "ADP-MT18",
-    kodeKompetensi: "MT-W01",
-    difficulty: "sedang",
-    type: "pg",
-    topic: "Persamaan sederhana dan hubungan bilangan",
-    fokus: "Menyelesaikan persamaan dengan operasi perkalian dan penjumlahan",
-    stimulus: "Tiga kali suatu bilangan ditambah 12 menghasilkan 39.",
-    question: "Berapakah nilai bilangan tersebut?",
-    options: ["7", "8", "9", "10"],
-    answer: [2],
-    explanation: "Misalkan bilangan itu x. 3x + 12 = 39, sehingga 3x = 27 dan x = 9."
-},
-{
-    id: "ADP-MT19",
-    kodeKompetensi: "MT-W01",
-    difficulty: "sedang",
-    type: "pg",
-    topic: "Persamaan sederhana dan hubungan bilangan",
-    fokus: "Menentukan bilangan dari hubungan operasi hitung",
-    stimulus: "Ibu memiliki sejumlah kue. Jumlah kue tersebut lima kali banyak kue yang diberikan kepada tetangga. Setelah dikurangi 7, hasilnya 28.",
-    question: "Berapakah bilangan semula?",
-    options: ["5", "6", "7", "8"],
-    answer: [2],
-    explanation: "Misalkan bilangan semula x. Persamaannya 5x - 7 = 28. Maka 5x = 35 dan x = 7."
-},
-{
-    id: "ADP-MT20",
-    kodeKompetensi: "MT-W01",
-    difficulty: "sulit",
-    type: "pg",
-    topic: "Persamaan sederhana dan hubungan bilangan",
-    fokus: "Menyelesaikan masalah perbandingan umur",
-    stimulus: "Jumlah umur ayah dan anak adalah 50 tahun. Umur ayah empat kali umur anak.",
-    question: "Berapakah umur anak?",
-    options: ["8 tahun", "10 tahun", "12 tahun", "15 tahun"],
-    answer: [1],
-    explanation: "Misalkan umur anak x dan umur ayah 4x. Jadi 5x = 50, sehingga x = 10 tahun."
-},
-{
-    id: "ADP-MT21",
-    kodeKompetensi: "MT-W01",
-    difficulty: "sulit",
-    type: "pg",
-    topic: "Persamaan sederhana dan hubungan bilangan",
-    fokus: "Menentukan nilai bilangan dari persamaan bertahap",
-    stimulus: "Dua kali suatu bilangan ditambah 15 sama dengan 41.",
-    question: "Berapakah bilangan tersebut?",
-    options: ["11", "12", "13", "14"],
-    answer: [2],
-    explanation: "Misalkan bilangannya x. 2x + 15 = 41. Maka 2x = 26 dan x = 13."
-},
-{
-    id: "ADP-MT22",
-    kodeKompetensi: "MT-W02",
-    difficulty: "mudah",
-    type: "pg",
-    topic: "Logika penggunaan satuan panjang",
-    fokus: "Memilih satuan panjang yang sesuai dengan benda",
-    stimulus: "Perhatikan benda-benda di sekitar kita.",
-    question: "Satuan yang paling tepat untuk menyatakan panjang sebuah pensil adalah ...",
-    options: ["Kilometer", "Meter", "Sentimeter", "Kilogram"],
-    answer: [2],
-    explanation: "Panjang pensil biasanya beberapa belas sentimeter. Sentimeter merupakan satuan yang sesuai."
+    explanation: "Tinggi badan anak biasanya sekitar 120–140 cm, sehingga paling tepat dinyatakan dalam sentimeter. Milimeter terlalu kecil, kilometer terlalu besar, dan kilogram adalah satuan berat."
 },
 {
     id: "ADP-MT23",
@@ -817,12 +693,12 @@ window.soalAdaptifMatematika = [
     difficulty: "sulit",
     type: "pg",
     topic: "Persamaan sederhana dan hubungan bilangan",
-    fokus: "Menyelesaikan masalah perbandingan umur",
-    stimulus: "Jumlah umur ayah dan anak adalah 50 tahun. Umur ayah empat kali umur anak.",
-    question: "Berapakah umur anak?",
-    options: ["8 tahun", "10 tahun", "12 tahun", "15 tahun"],
-    answer: [1],
-    explanation: "Misalkan umur anak x dan umur ayah 4x. Jadi 5x = 50, sehingga x = 10 tahun."
+    fokus: "Menyelesaikan masalah selisih dan kelipatan umur",
+    stimulus: "Selisih umur ayah dan umur anak adalah 28 tahun. Umur ayah lima kali umur anak.",
+    question: "Berapakah umur ayah?",
+    options: ["7 tahun", "28 tahun", "30 tahun", "35 tahun"],
+    answer: [3],
+    explanation: "Misalkan umur anak x, maka umur ayah 5x. Selisihnya 5x − x = 4x = 28, sehingga x = 7 tahun. Umur ayah = 5 × 7 = 35 tahun."
 },
 {
     id: "ADP-MT21",
@@ -843,12 +719,136 @@ window.soalAdaptifMatematika = [
     difficulty: "mudah",
     type: "pg",
     topic: "Logika penggunaan satuan panjang",
-    fokus: "Memilih satuan panjang yang sesuai dengan benda",
-    stimulus: "Perhatikan benda-benda di sekitar kita.",
-    question: "Satuan yang paling tepat untuk menyatakan panjang sebuah pensil adalah ...",
-    options: ["Kilometer", "Meter", "Sentimeter", "Kilogram"],
+    fokus: "Memilih satuan panjang untuk tinggi badan",
+    stimulus: "Bu Guru mengukur tinggi badan setiap siswa kelas empat untuk dicatat di buku kesehatan.",
+    question: "Satuan yang paling tepat untuk menyatakan tinggi badan siswa adalah ...",
+    options: ["Milimeter", "Sentimeter", "Kilometer", "Kilogram"],
+    answer: [1],
+    explanation: "Tinggi badan anak biasanya sekitar 120–140 cm, sehingga paling tepat dinyatakan dalam sentimeter. Milimeter terlalu kecil, kilometer terlalu besar, dan kilogram adalah satuan berat."
+},
+{
+    id: "ADP-MT23",
+    kodeKompetensi: "MT-W02",
+    difficulty: "sedang",
+    type: "pg",
+    topic: "Logika penggunaan satuan panjang",
+    fokus: "Mengubah satuan sentimeter menjadi meter",
+    stimulus: "Panjang sebuah pita adalah 250 sentimeter.",
+    question: "Panjang pita tersebut sama dengan ...",
+    options: ["0,25 meter", "2,5 meter", "25 meter", "250 meter"],
+    answer: [1],
+    explanation: "Karena 100 cm = 1 m, maka 250 cm = 250 ÷ 100 = 2,5 meter."
+},
+{
+    id: "ADP-MT24",
+    kodeKompetensi: "MT-W02",
+    difficulty: "sedang",
+    type: "pg",
+    topic: "Logika penggunaan satuan panjang",
+    fokus: "Membandingkan ukuran panjang dalam satuan berbeda",
+    stimulus: "Tinggi lemari adalah 180 cm. Tinggi sebuah pintu adalah 2 meter.",
+    question: "Pernyataan yang benar adalah ...",
+    options: [
+        "Lemari lebih tinggi 20 cm daripada pintu",
+        "Pintu lebih tinggi 20 cm daripada lemari",
+        "Tinggi keduanya sama",
+        "Pintu lebih pendek 80 cm daripada lemari"
+    ],
+    answer: [1],
+    explanation: "2 meter = 200 cm. Selisihnya 200 - 180 = 20 cm. Jadi pintu lebih tinggi 20 cm."
+},
+{
+    id: "ADP-MT25",
+    kodeKompetensi: "MT-W02",
+    difficulty: "sulit",
+    type: "pg",
+    topic: "Logika penggunaan satuan panjang",
+    fokus: "Mengonversi kilometer menjadi meter dalam masalah sehari-hari",
+    stimulus: "Jarak rumah Rani ke sekolah adalah 3 km. Rani sudah berjalan sejauh 1.200 meter.",
+    question: "Berapa meter lagi jarak yang harus ditempuh Rani?",
+    options: ["1.200 meter", "1.500 meter", "1.800 meter", "2.000 meter"],
     answer: [2],
-    explanation: "Panjang pensil biasanya beberapa belas sentimeter. Sentimeter merupakan satuan yang sesuai."
+    explanation: "3 km = 3.000 meter. Sisa jarak = 3.000 - 1.200 = 1.800 meter."
+}
+
+,
+{
+    id: "ADP-MT17",
+    kodeKompetensi: "MT-W01",
+    difficulty: "mudah",
+    type: "pg",
+    topic: "Persamaan sederhana dan hubungan bilangan",
+    fokus: "Menentukan nilai yang belum diketahui dalam persamaan perkalian",
+    stimulus: "Sebuah bilangan dikalikan 4, kemudian ditambah 8. Hasilnya adalah 36.",
+    question: "Berapakah bilangan tersebut?",
+    options: ["6", "7", "8", "9"],
+    answer: [1],
+    explanation: "Misalkan bilangannya x. Maka 4 × x + 8 = 36. Jadi 4 × x = 28 dan x = 7."
+},
+{
+    id: "ADP-MT18",
+    kodeKompetensi: "MT-W01",
+    difficulty: "sedang",
+    type: "pg",
+    topic: "Persamaan sederhana dan hubungan bilangan",
+    fokus: "Menyelesaikan persamaan dengan operasi perkalian dan penjumlahan",
+    stimulus: "Tiga kali suatu bilangan ditambah 12 menghasilkan 39.",
+    question: "Berapakah nilai bilangan tersebut?",
+    options: ["7", "8", "9", "10"],
+    answer: [2],
+    explanation: "Misalkan bilangan itu x. 3x + 12 = 39, sehingga 3x = 27 dan x = 9."
+},
+{
+    id: "ADP-MT19",
+    kodeKompetensi: "MT-W01",
+    difficulty: "sedang",
+    type: "pg",
+    topic: "Persamaan sederhana dan hubungan bilangan",
+    fokus: "Menentukan bilangan dari hubungan operasi hitung",
+    stimulus: "Ibu memiliki sejumlah kue. Jumlah kue tersebut lima kali banyak kue yang diberikan kepada tetangga. Setelah dikurangi 7, hasilnya 28.",
+    question: "Berapakah bilangan semula?",
+    options: ["5", "6", "7", "8"],
+    answer: [2],
+    explanation: "Misalkan bilangan semula x. Persamaannya 5x - 7 = 28. Maka 5x = 35 dan x = 7."
+},
+{
+    id: "ADP-MT20",
+    kodeKompetensi: "MT-W01",
+    difficulty: "sulit",
+    type: "pg",
+    topic: "Persamaan sederhana dan hubungan bilangan",
+    fokus: "Menyelesaikan masalah selisih dan kelipatan umur",
+    stimulus: "Selisih umur ayah dan umur anak adalah 28 tahun. Umur ayah lima kali umur anak.",
+    question: "Berapakah umur ayah?",
+    options: ["7 tahun", "28 tahun", "30 tahun", "35 tahun"],
+    answer: [3],
+    explanation: "Misalkan umur anak x, maka umur ayah 5x. Selisihnya 5x − x = 4x = 28, sehingga x = 7 tahun. Umur ayah = 5 × 7 = 35 tahun."
+},
+{
+    id: "ADP-MT21",
+    kodeKompetensi: "MT-W01",
+    difficulty: "sulit",
+    type: "pg",
+    topic: "Persamaan sederhana dan hubungan bilangan",
+    fokus: "Menentukan nilai bilangan dari persamaan bertahap",
+    stimulus: "Dua kali suatu bilangan ditambah 15 sama dengan 41.",
+    question: "Berapakah bilangan tersebut?",
+    options: ["11", "12", "13", "14"],
+    answer: [2],
+    explanation: "Misalkan bilangannya x. 2x + 15 = 41. Maka 2x = 26 dan x = 13."
+},
+{
+    id: "ADP-MT22",
+    kodeKompetensi: "MT-W02",
+    difficulty: "mudah",
+    type: "pg",
+    topic: "Logika penggunaan satuan panjang",
+    fokus: "Memilih satuan panjang untuk tinggi badan",
+    stimulus: "Bu Guru mengukur tinggi badan setiap siswa kelas empat untuk dicatat di buku kesehatan.",
+    question: "Satuan yang paling tepat untuk menyatakan tinggi badan siswa adalah ...",
+    options: ["Milimeter", "Sentimeter", "Kilometer", "Kilogram"],
+    answer: [1],
+    explanation: "Tinggi badan anak biasanya sekitar 120–140 cm, sehingga paling tepat dinyatakan dalam sentimeter. Milimeter terlalu kecil, kilometer terlalu besar, dan kilogram adalah satuan berat."
 },
 {
     id: "ADP-MT23",
@@ -939,12 +939,12 @@ window.soalAdaptifMatematika = [
     difficulty: "sulit",
     type: "pg",
     topic: "Persamaan sederhana dan hubungan bilangan",
-    fokus: "Menyelesaikan masalah perbandingan umur",
-    stimulus: "Jumlah umur ayah dan anak adalah 50 tahun. Umur ayah empat kali umur anak.",
-    question: "Berapakah umur anak?",
-    options: ["8 tahun", "10 tahun", "12 tahun", "15 tahun"],
-    answer: [1],
-    explanation: "Misalkan umur anak x dan umur ayah 4x. Jadi 5x = 50, sehingga x = 10 tahun."
+    fokus: "Menyelesaikan masalah selisih dan kelipatan umur",
+    stimulus: "Selisih umur ayah dan umur anak adalah 28 tahun. Umur ayah lima kali umur anak.",
+    question: "Berapakah umur ayah?",
+    options: ["7 tahun", "28 tahun", "30 tahun", "35 tahun"],
+    answer: [3],
+    explanation: "Misalkan umur anak x, maka umur ayah 5x. Selisihnya 5x − x = 4x = 28, sehingga x = 7 tahun. Umur ayah = 5 × 7 = 35 tahun."
 },
 {
     id: "ADP-MT21",
@@ -965,12 +965,12 @@ window.soalAdaptifMatematika = [
     difficulty: "mudah",
     type: "pg",
     topic: "Logika penggunaan satuan panjang",
-    fokus: "Memilih satuan panjang yang sesuai dengan benda",
-    stimulus: "Perhatikan benda-benda di sekitar kita.",
-    question: "Satuan yang paling tepat untuk menyatakan panjang sebuah pensil adalah ...",
-    options: ["Kilometer", "Meter", "Sentimeter", "Kilogram"],
-    answer: [2],
-    explanation: "Panjang pensil biasanya beberapa belas sentimeter. Sentimeter merupakan satuan yang sesuai."
+    fokus: "Memilih satuan panjang untuk tinggi badan",
+    stimulus: "Bu Guru mengukur tinggi badan setiap siswa kelas empat untuk dicatat di buku kesehatan.",
+    question: "Satuan yang paling tepat untuk menyatakan tinggi badan siswa adalah ...",
+    options: ["Milimeter", "Sentimeter", "Kilometer", "Kilogram"],
+    answer: [1],
+    explanation: "Tinggi badan anak biasanya sekitar 120–140 cm, sehingga paling tepat dinyatakan dalam sentimeter. Milimeter terlalu kecil, kilometer terlalu besar, dan kilogram adalah satuan berat."
 },
 {
     id: "ADP-MT23",
@@ -1217,12 +1217,12 @@ window.soalAdaptifMatematika = [
   difficulty: "mudah",
   type: "pg",
   topic: "Logika penggunaan satuan panjang",
-  fokus: "Memilih satuan panjang yang sesuai",
-  stimulus: "Seorang siswa mengukur panjang pensil menggunakan penggaris.",
-  question: "Satuan yang paling tepat untuk menyatakan panjang pensil adalah ...",
-  options: ["Kilometer", "Meter", "Sentimeter", "Kilogram"],
-  answer: [2],
-  explanation: "Panjang pensil merupakan ukuran benda kecil sehingga paling tepat dinyatakan dalam sentimeter."
+  fokus: "Memilih satuan panjang untuk benda yang sangat kecil",
+  stimulus: "Dina mengamati seekor semut yang berjalan di atas meja.",
+  question: "Satuan yang paling tepat untuk menyatakan panjang tubuh semut adalah ...",
+  options: ["Milimeter", "Meter", "Kilometer", "Kilogram"],
+  answer: [0],
+  explanation: "Tubuh semut sangat kecil, panjangnya hanya beberapa milimeter, sehingga paling tepat dinyatakan dalam milimeter. Meter dan kilometer terlalu besar, sedangkan kilogram adalah satuan berat."
 },
 {
   id: "ADP-MT43",
@@ -1233,8 +1233,8 @@ window.soalAdaptifMatematika = [
   fokus: "Mengubah sentimeter menjadi meter dan sentimeter",
   stimulus: "Panjang sebuah kain adalah 450 cm.",
   question: "Panjang kain tersebut sama dengan ...",
-  options: ["4 m 5 cm", "4 m 50 cm", "45 m", "5 m 40 cm"],
-  answer: [1],
+  options: ["4 m 50 cm", "4 m 5 cm", "45 m", "5 m 40 cm"],
+  answer: [0],
   explanation: "400 cm = 4 m. Sisa 50 cm, sehingga 450 cm = 4 m 50 cm."
 },
 {
@@ -1259,8 +1259,8 @@ window.soalAdaptifMatematika = [
   fokus: "Mengubah sentimeter menjadi meter",
   stimulus: "Tinggi sebuah pintu adalah 210 cm.",
   question: "Jika dinyatakan dalam meter dan sentimeter, tinggi pintu adalah ...",
-  options: ["2 m 1 cm", "2 m 10 cm", "21 m", "1 m 20 cm"],
-  answer: [1],
+  options: ["2 m 1 cm", "1 m 20 cm", "21 m", "2 m 10 cm"],
+  answer: [3],
   explanation: "200 cm = 2 m. Sisa 10 cm, sehingga 210 cm = 2 m 10 cm."
 },
 {
@@ -1400,12 +1400,12 @@ window.soalAdaptifMatematika = [
   difficulty: "mudah",
   type: "pg",
   topic: "Logika penggunaan satuan panjang",
-  fokus: "Memilih satuan panjang yang sesuai",
-  stimulus: "Seorang siswa mengukur panjang pensil menggunakan penggaris.",
-  question: "Satuan yang paling tepat untuk menyatakan panjang pensil adalah ...",
-  options: ["Kilometer", "Meter", "Sentimeter", "Kilogram"],
-  answer: [2],
-  explanation: "Panjang pensil merupakan ukuran benda kecil sehingga paling tepat dinyatakan dalam sentimeter."
+  fokus: "Memilih satuan panjang untuk benda yang sangat kecil",
+  stimulus: "Dina mengamati seekor semut yang berjalan di atas meja.",
+  question: "Satuan yang paling tepat untuk menyatakan panjang tubuh semut adalah ...",
+  options: ["Milimeter", "Meter", "Kilometer", "Kilogram"],
+  answer: [0],
+  explanation: "Tubuh semut sangat kecil, panjangnya hanya beberapa milimeter, sehingga paling tepat dinyatakan dalam milimeter. Meter dan kilometer terlalu besar, sedangkan kilogram adalah satuan berat."
 },
 {
   id: "ADP-MT43",
@@ -1416,8 +1416,8 @@ window.soalAdaptifMatematika = [
   fokus: "Mengubah sentimeter menjadi meter dan sentimeter",
   stimulus: "Panjang sebuah kain adalah 450 cm.",
   question: "Panjang kain tersebut sama dengan ...",
-  options: ["4 m 5 cm", "4 m 50 cm", "45 m", "5 m 40 cm"],
-  answer: [1],
+  options: ["4 m 50 cm", "4 m 5 cm", "45 m", "5 m 40 cm"],
+  answer: [0],
   explanation: "400 cm = 4 m. Sisa 50 cm, sehingga 450 cm = 4 m 50 cm."
 },
 {
@@ -1442,8 +1442,8 @@ window.soalAdaptifMatematika = [
   fokus: "Mengubah sentimeter menjadi meter",
   stimulus: "Tinggi sebuah pintu adalah 210 cm.",
   question: "Jika dinyatakan dalam meter dan sentimeter, tinggi pintu adalah ...",
-  options: ["2 m 1 cm", "2 m 10 cm", "21 m", "1 m 20 cm"],
-  answer: [1],
+  options: ["2 m 1 cm", "1 m 20 cm", "21 m", "2 m 10 cm"],
+  answer: [3],
   explanation: "200 cm = 2 m. Sisa 10 cm, sehingga 210 cm = 2 m 10 cm."
 },
 {
