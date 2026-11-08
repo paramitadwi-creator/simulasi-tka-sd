@@ -10,54 +10,97 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Lexend; display=swap agar teks langsung tampil dengan font cadangan saat koneksi lambat -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="css/style.css?v=2026.11.09-11">
+    <link rel="stylesheet" href="css/style.css?v=2026.11.09-12">
 </head>
 
 <body>
 
+<!-- Ikon SVG (gaya garis 2px), dipakai lewat <use href="#i-…"> -->
+<svg class="icon-sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-pencil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></symbol>
+    <symbol id="i-trend-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 16 6-6 4 4 6-6"/><path d="M14 8h6v6"/></symbol>
+    <symbol id="i-trend-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 8 6 6 4-4 6 6"/><path d="M14 16h6v-6"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+</svg>
+
 <header class="navbar">
-    <div class="logo">TKA<span>SD.</span></div>
-    <nav>
+    <a href="#beranda" class="logo" aria-label="TKA SD, ke beranda">TKA<span>SD.</span></a>
+
+    <nav class="nav-desktop" aria-label="Navigasi utama">
         <a href="#beranda">Beranda</a>
         <a href="#materi">Mata Pelajaran</a>
         <a href="#paket">Paket Latihan</a>
         <a href="#perkembangan">Perkembangan Belajar</a>
     </nav>
-    <button class="btn-login" onclick="alert('Fitur login segera hadir!')">Masuk</button>
+
+    <!-- Fitur akun belum tersedia: ditampilkan sebagai keterangan, bukan tombol -->
+    <span class="nav-soon">Masuk <small>Segera hadir</small></span>
+
+    <details class="nav-mobile">
+        <summary class="nav-toggle" aria-label="Menu navigasi">
+            <svg class="icon icon-open" aria-hidden="true"><use href="#i-menu"/></svg>
+            <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"/></svg>
+            <span>Menu</span>
+        </summary>
+        <nav class="nav-mobile-panel" aria-label="Navigasi utama">
+            <a href="#beranda">Beranda</a>
+            <a href="#materi">Mata Pelajaran</a>
+            <a href="#paket">Paket Latihan</a>
+            <a href="#perkembangan">Perkembangan Belajar</a>
+            <span class="nav-soon nav-soon--panel">Masuk <small>Segera hadir</small></span>
+        </nav>
+    </details>
 </header>
 
 <main>
     <section class="hero" id="beranda">
         <div class="hero-content">
-            <span class="tag">PLATFORM LATIHAN TKA & TKAD SD/MI</span>
+            <span class="tag">Latihan TKA &amp; TKAD SD/MI</span>
             <h1>Persiapkan Diri, <span>Raih Prestasi.</span></h1>
-            <p>Belajar dan berlatih menghadapi asesmen akademik dengan simulasi yang interaktif dan menyenangkan.</p>
-            <a href="#materi" class="btn-primary">Mulai Latihan</a>
-            <div class="hero-info">
-                <span>✓ Latihan terstruktur</span>
-                <span>✓ Hasil otomatis</span>
-            </div>
+            <p>Latihan soal Matematika, Bahasa Indonesia, dan IPAS dengan simulasi ujian, pembahasan, dan peta hasil belajar.</p>
+            <!-- Ajakan utama: menuju pilihan mata pelajaran dan memindahkan fokus ke sana -->
+            <a href="#pilih-mapel" class="btn btn--primary btn--lg hero-cta">
+                Mulai Latihan
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+            </a>
+            <ul class="hero-info">
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>3 mata pelajaran</li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Pembahasan setiap soal</li>
+                <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Peta hasil per indikator</li>
+            </ul>
         </div>
 
-        <div class="hero-card">
-            <div class="card-top">
-                <span>SIMULASI TKA & TKAD</span>
-                <span class="status">● ONLINE</span>
+        <aside class="hero-card" aria-labelledby="heroCardJudul">
+            <div class="hero-card-head">
+                <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-pencil"/></svg></span>
+                <span class="tag">Tiga cara berlatih</span>
             </div>
-            <div class="card-icon">✎</div>
-            <h2>Siap Menguji Kemampuanmu?</h2>
-            <p>Pilih mata pelajaran dan mulai latihan hari ini.</p>
+            <h2 id="heroCardJudul">Siap menguji kemampuanmu?</h2>
+            <ul class="mode-summary">
+                <li><strong>Latihan</strong><span>15 soal · 45 menit · pembahasan langsung</span></li>
+                <li><strong>Simulasi Ujian</strong><span>30 soal · 90 menit · seperti ujian</span></li>
+                <li><strong>Latihan Adaptif</strong><span>30 soal · 90 menit · fokus kelemahan</span></li>
+            </ul>
             <div class="stat-row">
-                <div><strong>03</strong><small>Mata Pelajaran</small></div>
+                <div><strong>3</strong><small>Mata pelajaran</small></div>
+                <div><strong>30</strong><small>Indikator per mapel</small></div>
                 <div><strong>SD/MI</strong><small>Jenjang</small></div>
             </div>
-        </div>
+        </aside>
     </section>
 
     <section class="subjects" id="materi">
         <div class="section-heading">
             <span class="tag">PILIH MATA PELAJARAN</span>
-            <h2>Mulai Perjalanan Belajarmu</h2>
+            <h2 id="pilih-mapel" tabindex="-1">Mulai Perjalanan Belajarmu</h2>
             <p>Pilih materi yang ingin kamu latih.</p>
         </div>
 
@@ -91,29 +134,38 @@
             <h2>Belajar Sesuai Kebutuhanmu</h2>
         </div>
         <div class="package-grid">
-            <article class="package-card">
-                <span class="package-label">GRATIS</span>
-                <h3>Paket Starter</h3>
+            <article class="package-card" aria-labelledby="paketStarter">
+                <div class="package-head">
+                    <span class="badge badge--success">Gratis</span>
+                </div>
+                <h3 id="paketStarter">Paket Starter</h3>
                 <p>Mulai berlatih tanpa biaya.</p>
-                <ul>
-                    <li>✓ Contoh soal pilihan</li>
-                    <li>✓ Simulasi dasar</li>
-                    <li>✓ Hasil latihan</li>
+                <ul class="check-list">
+                    <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Contoh soal pilihan</li>
+                    <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Simulasi dasar</li>
+                    <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Hasil latihan</li>
                 </ul>
-                <a href="#materi" class="btn-outline">Coba Gratis</a>
+                <a href="#pilih-mapel" class="btn btn--secondary package-cta">Coba Gratis</a>
             </article>
 
-            <article class="package-card premium">
-                <span class="package-label">PREMIUM</span>
-                <h3>Paket Lengkap</h3>
+            <!-- Belum tersedia: tidak ada tombol, hanya label status -->
+            <article class="package-card package-card--soon" aria-labelledby="paketLengkap">
+                <div class="package-head">
+                    <span class="badge badge--neutral">Premium</span>
+                    <span class="badge badge--warning badge--caps">Segera Hadir</span>
+                </div>
+                <h3 id="paketLengkap">Paket Lengkap</h3>
                 <p>Persiapan lebih menyeluruh.</p>
-                <ul>
-                    <li>✓ Bank soal lengkap</li>
-                    <li>✓ Simulasi berulang</li>
-                    <li>✓ Pembahasan soal</li>
-                    <li>✓ Riwayat nilai</li>
+                <ul class="check-list">
+                    <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Bank soal lengkap</li>
+                    <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Simulasi berulang</li>
+                    <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Pembahasan soal</li>
+                    <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Riwayat nilai</li>
                 </ul>
-                <button onclick="alert('Paket premium segera hadir!')">Segera Hadir</button>
+                <p class="package-note">
+                    <svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg>
+                    Paket ini belum tersedia dan belum bisa dipilih.
+                </p>
             </article>
         </div>
     </section>
@@ -197,88 +249,99 @@
 <!-- DASHBOARD PERKEMBANGAN BELAJAR -->
 <section id="perkembangan" class="dashboard-section">
 
-    <div class="dashboard-header">
-        <span class="section-tag">LAPORAN BELAJAR</span>
-        <h2>Perkembangan Belajar</h2>
-        <p>Pantau perkembangan kemampuan dan hasil latihan siswa.</p>
+    <div class="dashboard-inner">
+        <div class="dashboard-top">
+            <div class="dashboard-header">
+                <span class="section-tag">LAPORAN BELAJAR</span>
+                <h2>Perkembangan Belajar</h2>
+                <p>Pantau nilai, kompetensi yang perlu diperkuat, dan riwayat latihan setiap mata pelajaran.</p>
+            </div>
+
+            <div class="dashboard-filter">
+                <label for="pilihMapelDashboard">Pilih Mata Pelajaran</label>
+                <select id="pilihMapelDashboard">
+                    <option value="matematika">Matematika</option>
+                    <option value="bahasa" selected>Bahasa Indonesia</option>
+                    <option value="ipas">IPAS</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <span class="dashboard-card-label"><svg class="icon" aria-hidden="true"><use href="#i-target"/></svg>Nilai Awal Tryout</span>
+                <strong id="nilaiAwal">--</strong>
+                <small id="infoNilaiAwal">Berdasarkan hasil tryout</small>
+            </div>
+
+            <div class="dashboard-card">
+                <span class="dashboard-card-label"><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg>Nilai Latihan Terakhir</span>
+                <strong id="nilaiTerakhir">--</strong>
+                <small id="infoNilaiTerakhir">Hasil sesi latihan terbaru</small>
+                <span id="selisihNilai" class="trend" hidden></span>
+            </div>
+
+            <div class="dashboard-card">
+                <span class="dashboard-card-label"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Total Sesi Latihan</span>
+                <strong id="totalSesi">0</strong>
+                <small>Seluruh sesi tersimpan</small>
+            </div>
+        </div>
+
+        <div class="dashboard-columns">
+            <div class="dashboard-panel">
+                <h3>Kompetensi yang Perlu Diperkuat</h3>
+                <p class="dashboard-panel-intro">Diurutkan dari hasil tryout. Progres terisi setelah kamu berlatih.</p>
+                <div id="daftarPrioritas">
+                    <p>Data kompetensi akan ditampilkan di sini.</p>
+                </div>
+            </div>
+
+            <div class="dashboard-panel">
+                <h3>Riwayat Latihan</h3>
+                <p class="dashboard-panel-intro">10 sesi terakhir untuk mata pelajaran ini.</p>
+                <div id="riwayatDashboard">
+                    <p>Belum ada riwayat latihan.</p>
+                </div>
+            </div>
+        </div>
     </div>
-
-<div class="dashboard-filter">
-    <label for="pilihMapelDashboard">
-        Pilih Mata Pelajaran
-    </label>
-
-    <select id="pilihMapelDashboard">
-        <option value="matematika">Matematika</option>
-        <option value="bahasa" selected>Bahasa Indonesia</option>
-        <option value="ipas">IPAS</option>
-    </select>
-</div>
-
-    <div class="dashboard-grid">
-
-        <div class="dashboard-card">
-            <span>Nilai Awal Tryout</span>
-            <strong id="nilaiAwal">--</strong>
-            <small id="infoNilaiAwal">Berdasarkan hasil tryout</small>
-        </div>
-
-        <div class="dashboard-card">
-            <span>Nilai Latihan Terakhir</span>
-            <strong id="nilaiTerakhir">--</strong>
-            <small id="infoNilaiTerakhir">Hasil sesi latihan terbaru</small>
-        </div>
-
-        <div class="dashboard-card">
-            <span>Total Sesi Latihan</span>
-            <strong id="totalSesi">0</strong>
-            <small>Seluruh sesi tersimpan</small>
-        </div>
-
-    </div>
-
-    <div class="dashboard-panel">
-        <h3>Kompetensi yang Perlu Diperkuat</h3>
-        <div id="daftarPrioritas">
-            <p>Data kompetensi akan ditampilkan di sini.</p>
-        </div>
-    </div>
-
-    <div class="dashboard-panel">
-        <h3>Riwayat Latihan</h3>
-        <div id="riwayatDashboard">
-            <p>Belum ada riwayat latihan.</p>
-        </div>
-    </div>
-
 </section>
 <!-- AKHIR DASHBOARD -->
 <footer>
-    <strong>TKA<span>SD.</span></strong>
-    <p>Belajar Lebih Siap, Raih Hasil Terbaik.</p>
-    <small>© 2026 Simulasi TKA & TKAD SD/MI.</small>
+    <div class="footer-inner">
+        <a href="#beranda" class="footer-logo" aria-label="TKA SD, ke beranda">TKA<span>SD.</span></a>
+        <p>Belajar Lebih Siap, Raih Hasil Terbaik.</p>
+        <nav class="footer-nav" aria-label="Tautan bawah">
+            <a href="#materi">Mata Pelajaran</a>
+            <a href="#paket">Paket Latihan</a>
+            <a href="#perkembangan">Perkembangan Belajar</a>
+        </nav>
+        <small>© 2026 Simulasi TKA &amp; TKAD SD/MI.</small>
+    </div>
 </footer>
 
-<script src="js/profilsiswa.js?v=2026.11.09-11"></script>
-<script src="js/kisi-kisi.js?v=2026.11.09-11"></script>
-<script src="js/soal-adaptif-matematika.js?v=2026.11.09-11"></script>
-<script src="js/soal-adaptif-bahasa.js?v=2026.11.09-11"></script>
-<script src="js/soal-adaptif-ipas.js?v=2026.11.09-11"></script>
-<script src="js/soal-penguatan-matematika.js?v=2026.11.09-11"></script>
-<script src="js/soal-penguatan-bahasa.js?v=2026.11.09-11"></script>
-<script src="js/soal-penguatan-ipas.js?v=2026.11.09-11"></script>
-<script src="js/soal-kisi-matematika.js?v=2026.11.09-11"></script>
-<script src="js/soal-kisi-bahasa.js?v=2026.11.09-11"></script>
-<script src="js/soal-kisi-ipas.js?v=2026.11.09-11"></script>
-<script src="js/soal-tambahan-tka.js?v=2026.11.09-11"></script>
-<script src="js/soal-indikator-tambahan.js?v=2026.11.09-11"></script>
-<script src="js/bacaan-bahasa-1.js?v=2026.11.09-11"></script>
-<script src="js/bacaan-bahasa-2.js?v=2026.11.09-11"></script>
-<script src="js/bacaan-bahasa-3.js?v=2026.11.09-11"></script>
-<script src="js/bacaan-bahasa-4.js?v=2026.11.09-11"></script>
-<script src="js/bacaan-bahasa-5.js?v=2026.11.09-11"></script>
-<script src="js/app.js?v=2026.11.09-11"></script>
-<script src="js/bacaan-bahasa.js?v=2026.11.09-11"></script>
-<script src="js/dashboard.js?v=2026.11.09-11"></script>
+<script src="js/profilsiswa.js?v=2026.11.09-12"></script>
+<script src="js/kisi-kisi.js?v=2026.11.09-12"></script>
+<script src="js/soal-adaptif-matematika.js?v=2026.11.09-12"></script>
+<script src="js/soal-adaptif-bahasa.js?v=2026.11.09-12"></script>
+<script src="js/soal-adaptif-ipas.js?v=2026.11.09-12"></script>
+<script src="js/soal-penguatan-matematika.js?v=2026.11.09-12"></script>
+<script src="js/soal-penguatan-bahasa.js?v=2026.11.09-12"></script>
+<script src="js/soal-penguatan-ipas.js?v=2026.11.09-12"></script>
+<script src="js/soal-kisi-matematika.js?v=2026.11.09-12"></script>
+<script src="js/soal-kisi-bahasa.js?v=2026.11.09-12"></script>
+<script src="js/soal-kisi-ipas.js?v=2026.11.09-12"></script>
+<script src="js/soal-tambahan-tka.js?v=2026.11.09-12"></script>
+<script src="js/soal-indikator-tambahan.js?v=2026.11.09-12"></script>
+<script src="js/bacaan-bahasa-1.js?v=2026.11.09-12"></script>
+<script src="js/bacaan-bahasa-2.js?v=2026.11.09-12"></script>
+<script src="js/bacaan-bahasa-3.js?v=2026.11.09-12"></script>
+<script src="js/bacaan-bahasa-4.js?v=2026.11.09-12"></script>
+<script src="js/bacaan-bahasa-5.js?v=2026.11.09-12"></script>
+<script src="js/app.js?v=2026.11.09-12"></script>
+<script src="js/bacaan-bahasa.js?v=2026.11.09-12"></script>
+<script src="js/dashboard.js?v=2026.11.09-12"></script>
+<script src="js/antarmuka.js?v=2026.11.09-12"></script>
 </body>
 </html>

@@ -63,6 +63,35 @@ document.addEventListener("DOMContentLoaded", function () {
                 ? "Latihan terakhir " + namaMap[subjek]
                 : "Belum ada latihan " + namaMap[subjek];
 
+        // TAMPILAN: selisih nilai terakhir terhadap nilai awal (ikon + teks, bukan warna saja)
+        const elSelisih = document.getElementById("selisihNilai");
+        if (elSelisih) {
+            const adaKeduanya = sesiTerakhir &&
+                typeof sesiTerakhir.nilai === "number" &&
+                typeof nilaiAwal === "number";
+            elSelisih.hidden = !adaKeduanya;
+            if (adaKeduanya) {
+                const selisih = Math.round((sesiTerakhir.nilai - nilaiAwal) * 10) / 10;
+                const naik = selisih > 0, turun = selisih < 0;
+                elSelisih.className = "trend " + (naik ? "trend--up" : turun ? "trend--down" : "trend--flat");
+                elSelisih.innerHTML = "";
+                if (naik || turun) {
+                    const ikon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                    ikon.setAttribute("class", "icon");
+                    ikon.setAttribute("aria-hidden", "true");
+                    const pakai = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                    pakai.setAttribute("href", naik ? "#i-trend-up" : "#i-trend-down");
+                    ikon.appendChild(pakai);
+                    elSelisih.appendChild(ikon);
+                }
+                elSelisih.append(
+                    naik ? "Naik " + formatNilai(selisih) + " poin dari nilai awal"
+                        : turun ? "Turun " + formatNilai(Math.abs(selisih)) + " poin dari nilai awal"
+                            : "Sama dengan nilai awal"
+                );
+            }
+        }
+
         // JUMLAH SESI
         document.getElementById("totalSesi").textContent =
             riwayatMapel.length;
@@ -80,36 +109,64 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Data kompetensi prioritas " +
                 namaMap[subjek] + " belum tersedia.";
         } else {
+            const daftarUl = document.createElement("ol");
+            daftarUl.className = "prioritas-list";
+
             daftarPrioritas.forEach(item => {
                 const key = subjek + "_" + item.kode;
                 const dataProgres = progres[key];
 
-                const kartu = document.createElement("div");
+                const kartu = document.createElement("li");
                 kartu.className = "prioritas-item";
+
+                const kepala = document.createElement("div");
+                kepala.className = "prioritas-head";
 
                 const judul = document.createElement("strong");
                 judul.textContent = item.kompetensi;
 
-                const detail = document.createElement("p");
+                const tingkat = (item.tingkat || "penguatan").toLowerCase();
+                const lencana = document.createElement("span");
+                // tinggi/intensif = paling mendesak, penguatan = sedang, pemantapan = ringan
+                lencana.className = "badge " +
+                    (tingkat === "tinggi" || tingkat === "intensif" ? "badge--danger"
+                        : tingkat === "penguatan" ? "badge--warning"
+                            : "badge--neutral");
+                lencana.textContent = "Prioritas " + tingkat;
+
+                kepala.append(judul, lencana);
 
                 const nilaiLatihan = dataProgres
                     ? dataProgres.accuracy
                     : null;
 
-                detail.textContent =
-                    "Prioritas: " +
-                    (item.tingkat || "penguatan") +
-                    (nilaiLatihan !== null
-                        ? " · Progres latihan: " +
-                          nilaiLatihan + "%"
-                        : " · Belum ada progres latihan");
+                // Bilah progres latihan (angka tetap ditulis sebagai teks)
+                const progresWadah = document.createElement("div");
+                progresWadah.className = "prioritas-progress";
+
+                const bar = document.createElement("span");
+                bar.className = "progress-bar";
+                bar.setAttribute("aria-hidden", "true");
+                const isi = document.createElement("i");
+                isi.style.width = (nilaiLatihan !== null ? Math.max(0, Math.min(100, nilaiLatihan)) : 0) + "%";
+                bar.appendChild(isi);
+
+                const detail = document.createElement("span");
+                detail.className = "prioritas-angka";
+                detail.textContent = nilaiLatihan !== null
+                    ? "Progres latihan " + nilaiLatihan + "%"
+                    : "Belum ada progres latihan";
+
+                progresWadah.append(bar, detail);
 
                 const fokus = document.createElement("small");
                 fokus.textContent = item.fokus || "";
 
-                kartu.append(judul, detail, fokus);
-                daftar.appendChild(kartu);
+                kartu.append(kepala, progresWadah, fokus);
+                daftarUl.appendChild(kartu);
             });
+
+            daftar.appendChild(daftarUl);
         }
 
         // RIWAYAT LATIHAN
@@ -119,12 +176,23 @@ document.addEventListener("DOMContentLoaded", function () {
         wadahRiwayat.innerHTML = "";
 
         if (riwayatMapel.length === 0) {
-            wadahRiwayat.textContent =
-                "Belum ada riwayat latihan " +
-                namaMap[subjek] + ".";
+            // Keadaan kosong yang memberi tahu langkah berikutnya
+            const kosong = document.createElement("div");
+            kosong.className = "empty-state";
+            const teks = document.createElement("p");
+            teks.textContent = "Belum ada riwayat latihan " + namaMap[subjek] + ".";
+            const ajakan = document.createElement("a");
+            ajakan.href = "#pilih-mapel";
+            ajakan.className = "btn btn--secondary";
+            ajakan.textContent = "Mulai latihan pertama";
+            kosong.append(teks, ajakan);
+            wadahRiwayat.appendChild(kosong);
         } else {
+            const daftarRiwayat = document.createElement("ul");
+            daftarRiwayat.className = "riwayat-list";
+
             riwayatMapel.slice(0, 10).forEach(sesi => {
-                const baris = document.createElement("div");
+                const baris = document.createElement("li");
                 baris.className = "riwayat-item";
 
                 const tanggal = new Date(sesi.tanggal);
@@ -132,16 +200,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 const tanggalTampil =
                     isNaN(tanggal.getTime())
                         ? "-"
-                        : tanggal.toLocaleString("id-ID");
+                        : tanggal.toLocaleString("id-ID", { dateStyle: "medium", timeStyle: "short" });
 
-                baris.textContent =
-                    tanggalTampil + " · " +
-                    sesi.benar + "/" +
-                    sesi.totalSoal + " benar · Nilai " +
-                    formatNilai(sesi.nilai);
+                const kiri = document.createElement("div");
+                const waktu = document.createElement("strong");
+                waktu.textContent = tanggalTampil;
+                const ringkas = document.createElement("small");
+                ringkas.textContent = sesi.benar + " dari " + sesi.totalSoal + " soal benar";
+                kiri.append(waktu, ringkas);
 
-                wadahRiwayat.appendChild(baris);
+                const nilai = document.createElement("span");
+                nilai.className = "riwayat-nilai";
+                nilai.textContent = formatNilai(sesi.nilai);
+                nilai.setAttribute("aria-label", "Nilai " + formatNilai(sesi.nilai));
+
+                baris.append(kiri, nilai);
+                daftarRiwayat.appendChild(baris);
             });
+
+            wadahRiwayat.appendChild(daftarRiwayat);
         }
 
         console.log("Dashboard diperbarui:", {
