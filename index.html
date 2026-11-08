@@ -6,253 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulasi TKA & TKAD SD/MI</title>
     <meta name="description" content="Platform latihan TKA dan TKAD SD/MI.">
-    <link rel="stylesheet" href="css/style.css?v=2026.11.08-10">
-
-    <style>
-        [hidden] { display: none !important; }
-
-        .subject-grid { grid-template-columns: repeat(3, 1fr); }
-
-        .subject-button {
-            border: 0;
-            background: var(--blue);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .app-panel {
-            max-width: 950px;
-            margin: 45px auto;
-            padding: 30px;
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            box-shadow: 0 12px 35px rgba(23,43,77,.07);
-        }
-
-        .modal {
-            position: fixed;
-            inset: 0;
-            z-index: 1000;
-            background: rgba(15,28,49,.65);
-            display: grid;
-            place-items: center;
-            padding: 20px;
-        }
-
-        .modal-card {
-            background: white;
-            width: 100%;
-            max-width: 460px;
-            padding: 30px;
-            border-radius: 18px;
-            position: relative;
-        }
-
-        .modal-card h2 { color: var(--navy); margin-bottom: 12px; }
-        .modal-card p { color: var(--muted); line-height: 1.7; }
-
-        .close-button {
-            position: absolute;
-            right: 18px;
-            top: 15px;
-            border: 0;
-            background: transparent;
-            font-size: 25px;
-            cursor: pointer;
-        }
-
-        .mode-button, .action-button {
-            border: 0;
-            border-radius: 9px;
-            padding: 13px 18px;
-            font-weight: 700;
-            cursor: pointer;
-            background: var(--blue);
-            color: white;
-        }
-
-        .mode-button.secondary, .action-button.secondary {
-            background: #edf1ff;
-            color: var(--navy);
-        }
-
-        .mode-options {
-            display: grid;
-            gap: 12px;
-            margin-top: 25px;
-        }
-
-        .quiz-top, .quiz-actions, .quiz-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .quiz-meta { margin: 25px 0; color: var(--muted); font-size: 14px; }
-
-        .difficulty-badge, .type-badge {
-            display: inline-block;
-            padding: 7px 12px;
-            border-radius: 20px;
-            background: #e8f7f0;
-            color: #159765;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .difficulty-badge.medium { background: #fff4e5; color: #b87917; }
-        .difficulty-badge.hard { background: #ffecec; color: #c34242; }
-
-        .stimulus-box {
-            background: var(--light);
-            padding: 20px;
-            border-radius: 12px;
-            line-height: 1.8;
-            white-space: pre-line;
-            margin-bottom: 22px;
-        }
-
-        #questionText { color: var(--navy); line-height: 1.6; margin-bottom: 12px; }
-        #answerInstruction { color: var(--muted); font-size: 15px; margin-bottom: 18px; }
-
-        #answerOptions { display: grid; gap: 12px; }
-
-        .option {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 15px;
-            cursor: pointer;
-            line-height: 1.5;
-        }
-
-        .option.selected { border-color: var(--blue); background: #f1f4ff; }
-
-        .explanation-box {
-            margin-top: 22px;
-            padding: 18px;
-            border-radius: 10px;
-            background: #e8f7f0;
-            line-height: 1.7;
-        }
-
-        .quiz-actions { margin-top: 25px; }
-
-        #questionNav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 25px;
-        }
-
-        .nav-number {
-            width: 44px;
-            height: 44px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: white;
-            cursor: pointer;
-            font-size: 15px;
-        }
-
-        .nav-number.answered { background: #e8f7f0; border: 2px solid #159765; color: #0f6b47; }
-        .nav-number.flagged { background: #fff4e5; border: 2px solid #c98220; color: #8a5300; }
-        .nav-number.current { background: var(--blue); border: 2px solid var(--blue); color: white; }
-
-        /* Keterangan warna nomor soal */
-        .nav-legend {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px 18px;
-            margin-top: 12px;
-            font-size: 14px;
-            color: var(--muted);
-        }
-        .nav-legend li { display: flex; align-items: center; gap: 7px; }
-        .nav-legend i {
-            width: 16px; height: 16px; border-radius: 4px;
-            border: 1px solid var(--border); background: white;
-        }
-        .nav-legend .legend-current { background: var(--blue); border-color: var(--blue); }
-        .nav-legend .legend-answered { background: #e8f7f0; border: 2px solid #159765; }
-        .nav-legend .legend-flagged { background: #fff4e5; border: 2px solid #c98220; }
-
-        /* Indikator fokus keyboard yang jelas (WCAG: ring 2px, kontras >= 3:1) */
-        a:focus-visible, button:focus-visible, select:focus-visible,
-        .option:focus-within:has(input:focus-visible) {
-            outline: 3px solid var(--blue);
-            outline-offset: 2px;
-        }
-        .option input:focus-visible { outline: none; }
-        #questionText:focus, #explanationBox:focus { outline: none; }
-        #questionText:focus-visible, #explanationBox:focus-visible {
-            outline: 2px dashed var(--blue);
-            outline-offset: 4px;
-        }
-
-        /* Teks pilihan jawaban lebih mudah dibaca siswa SD */
-        #answerOptions .option { font-size: 17px; line-height: 1.6; min-height: 52px; }
-        #answerOptions .option input { width: 20px; height: 20px; flex-shrink: 0; }
-        #flagButton.active { background: #fff4e5; color: #8a5300; box-shadow: inset 0 0 0 2px #c98220; }
-
-        @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-            *, *::before, *::after { transition: none !important; animation: none !important; }
-        }
-
-        #timer { font-weight: 800; color: #c34242; font-size: 20px; }
-
-        .score-card {
-            text-align: center;
-            padding: 25px;
-            background: var(--light);
-            border-radius: 14px;
-        }
-
-        #scoreValue { font-size: 54px; color: var(--blue); font-weight: 800; }
-
-        #resultStats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin: 25px 0;
-        }
-
-        #resultStats div {
-            background: var(--light);
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        #resultStats strong { display: block; font-size: 23px; color: var(--navy); }
-
-
-        .review-item {
-            padding: 18px 0;
-            border-bottom: 1px solid var(--border);
-            line-height: 1.7;
-        }
-
-        .right { color: #159765; }
-        .wrong { color: #c34242; }
-
-
-        @media(max-width:768px) {
-            .subject-grid { grid-template-columns: 1fr; }
-            .app-panel { margin: 20px 12px; padding: 20px; }
-            #resultStats { grid-template-columns: repeat(2, 1fr); }
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Lexend; display=swap agar teks langsung tampil dengan font cadangan saat koneksi lambat -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="css/style.css?v=2026.11.09-11">
 </head>
 
 <body>
@@ -501,26 +259,26 @@
     <small>© 2026 Simulasi TKA & TKAD SD/MI.</small>
 </footer>
 
-<script src="js/profilsiswa.js?v=2026.11.08-10"></script>
-<script src="js/kisi-kisi.js?v=2026.11.08-10"></script>
-<script src="js/soal-adaptif-matematika.js?v=2026.11.08-10"></script>
-<script src="js/soal-adaptif-bahasa.js?v=2026.11.08-10"></script>
-<script src="js/soal-adaptif-ipas.js?v=2026.11.08-10"></script>
-<script src="js/soal-penguatan-matematika.js?v=2026.11.08-10"></script>
-<script src="js/soal-penguatan-bahasa.js?v=2026.11.08-10"></script>
-<script src="js/soal-penguatan-ipas.js?v=2026.11.08-10"></script>
-<script src="js/soal-kisi-matematika.js?v=2026.11.08-10"></script>
-<script src="js/soal-kisi-bahasa.js?v=2026.11.08-10"></script>
-<script src="js/soal-kisi-ipas.js?v=2026.11.08-10"></script>
-<script src="js/soal-tambahan-tka.js?v=2026.11.08-10"></script>
-<script src="js/soal-indikator-tambahan.js?v=2026.11.08-10"></script>
-<script src="js/bacaan-bahasa-1.js?v=2026.11.08-10"></script>
-<script src="js/bacaan-bahasa-2.js?v=2026.11.08-10"></script>
-<script src="js/bacaan-bahasa-3.js?v=2026.11.08-10"></script>
-<script src="js/bacaan-bahasa-4.js?v=2026.11.08-10"></script>
-<script src="js/bacaan-bahasa-5.js?v=2026.11.08-10"></script>
-<script src="js/app.js?v=2026.11.08-10"></script>
-<script src="js/bacaan-bahasa.js?v=2026.11.08-10"></script>
-<script src="js/dashboard.js?v=2026.11.08-10"></script>
+<script src="js/profilsiswa.js?v=2026.11.09-11"></script>
+<script src="js/kisi-kisi.js?v=2026.11.09-11"></script>
+<script src="js/soal-adaptif-matematika.js?v=2026.11.09-11"></script>
+<script src="js/soal-adaptif-bahasa.js?v=2026.11.09-11"></script>
+<script src="js/soal-adaptif-ipas.js?v=2026.11.09-11"></script>
+<script src="js/soal-penguatan-matematika.js?v=2026.11.09-11"></script>
+<script src="js/soal-penguatan-bahasa.js?v=2026.11.09-11"></script>
+<script src="js/soal-penguatan-ipas.js?v=2026.11.09-11"></script>
+<script src="js/soal-kisi-matematika.js?v=2026.11.09-11"></script>
+<script src="js/soal-kisi-bahasa.js?v=2026.11.09-11"></script>
+<script src="js/soal-kisi-ipas.js?v=2026.11.09-11"></script>
+<script src="js/soal-tambahan-tka.js?v=2026.11.09-11"></script>
+<script src="js/soal-indikator-tambahan.js?v=2026.11.09-11"></script>
+<script src="js/bacaan-bahasa-1.js?v=2026.11.09-11"></script>
+<script src="js/bacaan-bahasa-2.js?v=2026.11.09-11"></script>
+<script src="js/bacaan-bahasa-3.js?v=2026.11.09-11"></script>
+<script src="js/bacaan-bahasa-4.js?v=2026.11.09-11"></script>
+<script src="js/bacaan-bahasa-5.js?v=2026.11.09-11"></script>
+<script src="js/app.js?v=2026.11.09-11"></script>
+<script src="js/bacaan-bahasa.js?v=2026.11.09-11"></script>
+<script src="js/dashboard.js?v=2026.11.09-11"></script>
 </body>
 </html>
