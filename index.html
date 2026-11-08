@@ -4,187 +4,459 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Simulasi TKA SD | Platform Latihan</title>
-
-    <meta name="description" content="Platform simulasi Tes Kemampuan Akademik untuk siswa SD dan MI.">
-
+    <title>Simulasi TKA & TKAD SD/MI</title>
+    <meta name="description" content="Platform latihan TKA dan TKAD SD/MI.">
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        [hidden] { display: none !important; }
+
+        .subject-grid { grid-template-columns: repeat(3, 1fr); }
+
+        .subject-button {
+            border: 0;
+            background: var(--blue);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .app-panel {
+            max-width: 950px;
+            margin: 45px auto;
+            padding: 30px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: 0 12px 35px rgba(23,43,77,.07);
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(15,28,49,.65);
+            display: grid;
+            place-items: center;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: white;
+            width: 100%;
+            max-width: 460px;
+            padding: 30px;
+            border-radius: 18px;
+            position: relative;
+        }
+
+        .modal-card h2 { color: var(--navy); margin-bottom: 12px; }
+        .modal-card p { color: var(--muted); line-height: 1.7; }
+
+        .close-button {
+            position: absolute;
+            right: 18px;
+            top: 15px;
+            border: 0;
+            background: transparent;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .mode-button, .action-button {
+            border: 0;
+            border-radius: 9px;
+            padding: 13px 18px;
+            font-weight: 700;
+            cursor: pointer;
+            background: var(--blue);
+            color: white;
+        }
+
+        .mode-button.secondary, .action-button.secondary {
+            background: #edf1ff;
+            color: var(--navy);
+        }
+
+        .mode-options {
+            display: grid;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .quiz-top, .quiz-actions, .quiz-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .quiz-meta { margin: 25px 0; color: var(--muted); font-size: 14px; }
+
+        .difficulty-badge, .type-badge {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            background: #e8f7f0;
+            color: #159765;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .difficulty-badge.medium { background: #fff4e5; color: #b87917; }
+        .difficulty-badge.hard { background: #ffecec; color: #c34242; }
+
+        .stimulus-box {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 12px;
+            line-height: 1.8;
+            white-space: pre-line;
+            margin-bottom: 22px;
+        }
+
+        #questionText { color: var(--navy); line-height: 1.6; margin-bottom: 12px; }
+        #answerInstruction { color: var(--muted); font-size: 13px; margin-bottom: 18px; }
+
+        #answerOptions { display: grid; gap: 12px; }
+
+        .option {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            line-height: 1.5;
+        }
+
+        .option.selected { border-color: var(--blue); background: #f1f4ff; }
+
+        .explanation-box {
+            margin-top: 22px;
+            padding: 18px;
+            border-radius: 10px;
+            background: #e8f7f0;
+            line-height: 1.7;
+        }
+
+        .quiz-actions { margin-top: 25px; }
+
+        #questionNav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 25px;
+        }
+
+        .nav-number {
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .nav-number.current { background: var(--blue); color: white; }
+        .nav-number.answered { border-color: #159765; }
+        .nav-number.flagged { outline: 2px solid #e5a32c; }
+
+        #timer { font-weight: 800; color: #c34242; font-size: 20px; }
+
+        .score-card {
+            text-align: center;
+            padding: 25px;
+            background: var(--light);
+            border-radius: 14px;
+        }
+
+        #scoreValue { font-size: 54px; color: var(--blue); font-weight: 800; }
+
+        #resultStats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        #resultStats div {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        #resultStats strong { display: block; font-size: 23px; color: var(--navy); }
+
+        .review-item {
+            padding: 18px 0;
+            border-bottom: 1px solid var(--border);
+            line-height: 1.7;
+        }
+
+        .right { color: #159765; }
+        .wrong { color: #c34242; }
+
+        @media(max-width:768px) {
+            .subject-grid { grid-template-columns: 1fr; }
+            .app-panel { margin: 20px 12px; padding: 20px; }
+            #resultStats { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
 </head>
 
 <body>
 
-    <header class="navbar">
-        <div class="logo">
-            TKA<span>SD.</span>
+<header class="navbar">
+    <div class="logo">TKA<span>SD.</span></div>
+    <nav>
+        <a href="#beranda">Beranda</a>
+        <a href="#materi">Mata Pelajaran</a>
+        <a href="#paket">Paket Latihan</a>
+        <a href="#perkembangan">Perkembangan Belajar</a>
+    </nav>
+    <button class="btn-login" onclick="alert('Fitur login segera hadir!')">Masuk</button>
+</header>
+
+<main>
+    <section class="hero" id="beranda">
+        <div class="hero-content">
+            <span class="tag">PLATFORM LATIHAN TKA & TKAD SD/MI</span>
+            <h1>Persiapkan Diri, <span>Raih Prestasi.</span></h1>
+            <p>Belajar dan berlatih menghadapi asesmen akademik dengan simulasi yang interaktif dan menyenangkan.</p>
+            <a href="#materi" class="btn-primary">Mulai Latihan</a>
+            <div class="hero-info">
+                <span>✓ Latihan terstruktur</span>
+                <span>✓ Hasil otomatis</span>
+            </div>
         </div>
 
-        <nav>
-            <a href="#beranda">Beranda</a>
-            <a href="#materi">Mata Pelajaran</a>
-            <a href="#paket">Paket Latihan</a>
-        </nav>
-
-        <button class="btn-login" onclick="alert('Fitur login segera hadir!')">
-            Masuk
-        </button>
-    </header>
-
-    <main>
-
-        <section class="hero" id="beranda">
-            <div class="hero-content">
-                <span class="tag">PLATFORM LATIHAN TKA SD/MI</span>
-
-                <h1>
-                    Persiapkan Diri,
-                    <span>Raih Prestasi.</span>
-                </h1>
-
-                <p>
-                    Belajar dan berlatih menghadapi Tes Kemampuan
-                    Akademik dengan simulasi yang mudah, interaktif,
-                    dan menyenangkan.
-                </p>
-
-                <a href="#materi" class="btn-primary">
-                    Mulai Latihan
-                </a>
-
-                <div class="hero-info">
-                    <span>✓ Latihan terstruktur</span>
-                    <span>✓ Hasil otomatis</span>
-                </div>
+        <div class="hero-card">
+            <div class="card-top">
+                <span>SIMULASI TKA & TKAD</span>
+                <span class="status">● ONLINE</span>
             </div>
-
-            <div class="hero-card">
-                <div class="card-top">
-                    <span>SIMULASI TKA</span>
-                    <span class="status">● ONLINE</span>
-                </div>
-
-                <div class="card-icon">✎</div>
-
-                <h2>Siap Menguji Kemampuanmu?</h2>
-
-                <p>
-                    Pilih mata pelajaran dan mulai latihan hari ini.
-                </p>
-
-                <div class="stat-row">
-                    <div>
-                        <strong>02</strong>
-                        <small>Mata Pelajaran</small>
-                    </div>
-
-                    <div>
-                        <strong>SD/MI</strong>
-                        <small>Jenjang</small>
-                    </div>
-                </div>
+            <div class="card-icon">✎</div>
+            <h2>Siap Menguji Kemampuanmu?</h2>
+            <p>Pilih mata pelajaran dan mulai latihan hari ini.</p>
+            <div class="stat-row">
+                <div><strong>03</strong><small>Mata Pelajaran</small></div>
+                <div><strong>SD/MI</strong><small>Jenjang</small></div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="subjects" id="materi">
-            <div class="section-heading">
-                <span class="tag">PILIH MATA PELAJARAN</span>
-                <h2>Mulai Perjalanan Belajarmu</h2>
-                <p>Pilih materi yang ingin kamu latih.</p>
-            </div>
+    <section class="subjects" id="materi">
+        <div class="section-heading">
+            <span class="tag">PILIH MATA PELAJARAN</span>
+            <h2>Mulai Perjalanan Belajarmu</h2>
+            <p>Pilih materi yang ingin kamu latih.</p>
+        </div>
 
-            <div class="subject-grid">
+        <div class="subject-grid">
+            <article class="subject-card">
+                <div class="subject-icon math">∑</div>
+                <h3>Matematika</h3>
+                <p>Latihan numerasi, operasi hitung, pecahan, geometri, dan penalaran.</p>
+                <button class="subject-button" data-subject="matematika">Mulai Latihan →</button>
+            </article>
 
-                <article class="subject-card">
-                    <div class="subject-icon math">∑</div>
-                    <h3>Matematika</h3>
-                    <p>
-                        Latihan numerasi, operasi hitung,
-                        pecahan, geometri, dan penalaran.
-                    </p>
+            <article class="subject-card">
+                <div class="subject-icon language">Aa</div>
+                <h3>Bahasa Indonesia</h3>
+                <p>Latihan literasi, pemahaman bacaan, ide pokok, dan penalaran teks.</p>
+                <button class="subject-button" data-subject="bahasa">Mulai Latihan →</button>
+            </article>
 
-                    <button onclick="startSubject('matematika')">
-                        Mulai Latihan →
-                    </button>
-                </article>
+            <article class="subject-card">
+                <div class="subject-icon science">🌍</div>
+                <h3>IPAS</h3>
+                <p>Latihan ilmu pengetahuan alam dan sosial, ekosistem, energi, dan lingkungan.</p>
+                <button class="subject-button" data-subject="ipas">Mulai Latihan →</button>
+            </article>
+        </div>
+    </section>
 
-                <article class="subject-card">
-                    <div class="subject-icon language">Aa</div>
-                    <h3>Bahasa Indonesia</h3>
-                    <p>
-                        Latihan literasi, pemahaman bacaan,
-                        ide pokok, dan penalaran teks.
-                    </p>
+    <section class="packages" id="paket">
+        <div class="section-heading">
+            <span class="tag">PAKET LATIHAN</span>
+            <h2>Belajar Sesuai Kebutuhanmu</h2>
+        </div>
+        <div class="package-grid">
+            <article class="package-card">
+                <span class="package-label">GRATIS</span>
+                <h3>Paket Starter</h3>
+                <p>Mulai berlatih tanpa biaya.</p>
+                <ul>
+                    <li>✓ Contoh soal pilihan</li>
+                    <li>✓ Simulasi dasar</li>
+                    <li>✓ Hasil latihan</li>
+                </ul>
+                <a href="#materi" class="btn-outline">Coba Gratis</a>
+            </article>
 
-                    <button onclick="startSubject('bahasa')">
-                        Mulai Latihan →
-                    </button>
-                </article>
-     
-<article class="subject-card">
-    <div class="subject-icon science">🌍</div>
+            <article class="package-card premium">
+                <span class="package-label">PREMIUM</span>
+                <h3>Paket Lengkap</h3>
+                <p>Persiapan lebih menyeluruh.</p>
+                <ul>
+                    <li>✓ Bank soal lengkap</li>
+                    <li>✓ Simulasi berulang</li>
+                    <li>✓ Pembahasan soal</li>
+                    <li>✓ Riwayat nilai</li>
+                </ul>
+                <button onclick="alert('Paket premium segera hadir!')">Segera Hadir</button>
+            </article>
+        </div>
+    </section>
+</main>
 
-    <h3>IPAS</h3>
-
-    <p>
-        Latihan ilmu pengetahuan alam dan sosial,
-        ekosistem, energi, lingkungan, sejarah,
-        dan kehidupan masyarakat.
-    </p>
-
-    <button onclick="startSubject('ipas')">
-        Mulai Latihan →
-    </button>
-</article>
+<!-- MODAL PILIH MODE -->
+<div class="modal" id="setupModal" hidden>
+    <div class="modal-card">
+        <button class="close-button" id="closeSetup" aria-label="Tutup">×</button>
+        <span class="tag">MULAI LATIHAN</span>
+        <h2 id="setupSubjectName">Pilih mata pelajaran</h2>
+        <p>Pilih cara belajar yang kamu inginkan.</p>
+        <div class="mode-options">
+            <button class="mode-button" id="practiceMode">Mode Latihan · 15 soal · 45 menit</button>
+            <button class="mode-button secondary" id="examMode">Mode Simulasi Ujian · 30 soal · 90 menit</button>
+            <button class="mode-button" id="adaptiveMode">Latihan Adaptif · 30 soal · 90 menit</button>
+        </div>
+    </div>
 </div>
+<!-- HALAMAN SOAL -->
+<section class="app-panel" id="quizShell" hidden>
+    <div class="quiz-top">
+        <div>
+            <span class="tag">SIMULASI TKA & TKAD</span>
+            <h2 id="quizSubjectTitle">Mata Pelajaran</h2>
+            <p id="quizModeLabel"></p>
+        </div>
+        <div id="timer" hidden>10:00</div>
+    </div>
+
+    <div class="quiz-meta">
+        <span id="questionCounter"></span>
+        <span id="difficultyBadge" class="difficulty-badge"></span>
+        <span id="typeBadge" class="type-badge"></span>
+    </div>
+
+    <div id="stimulusBox" class="stimulus-box" hidden></div>
+    <h3 id="questionText"></h3>
+    <p id="answerInstruction"></p>
+    <div id="answerOptions"></div>
+    <div id="explanationBox" class="explanation-box" hidden></div>
+
+    <div id="questionNav"></div>
+
+    <div class="quiz-actions">
+        <button class="action-button secondary" id="backHome">Kembali</button>
+        <button class="action-button secondary" id="prevButton">← Sebelumnya</button>
+        <button class="action-button secondary" id="flagButton">Tandai ragu-ragu</button>
+        <button class="action-button" id="nextButton">Berikutnya →</button>
+        <button class="action-button" id="finishButton">Akhiri latihan</button>
+    </div>
 </section>
 
-        <section class="packages" id="paket">
-            <div class="section-heading">
-                <span class="tag">PAKET LATIHAN</span>
-                <h2>Belajar Sesuai Kebutuhanmu</h2>
-            </div>
+<!-- HALAMAN HASIL -->
+<section class="app-panel" id="resultShell" hidden>
+    <div class="score-card">
+        <span class="tag">HASIL LATIHAN</span>
+        <h2 id="resultTitle">Latihan selesai!</h2>
+        <div id="scoreValue">0</div>
+        <p>Nilai kamu</p>
+        <p id="resultSummary"></p>
+    </div>
 
-            <div class="package-grid">
-                <article class="package-card">
-                    <span class="package-label">GRATIS</span>
-                    <h3>Paket Starter</h3>
-                    <p>Mulai berlatih tanpa biaya.</p>
-                    <ul>
-                        <li>✓ Contoh soal pilihan</li>
-                        <li>✓ Simulasi dasar</li>
-                        <li>✓ Hasil latihan</li>
-                    </ul>
-                    <a href="#materi" class="btn-outline">
-                        Coba Gratis
-                    </a>
-                </article>
+    <div id="resultStats"></div>
+    <h3>Pembahasan dan Evaluasi</h3>
+    <div id="resultReview"></div>
 
-                <article class="package-card premium">
-                    <span class="package-label">PREMIUM</span>
-                    <h3>Paket Lengkap</h3>
-                    <p>Persiapan lebih menyeluruh.</p>
-                    <ul>
-                        <li>✓ Bank soal lengkap</li>
-                        <li>✓ Simulasi berulang</li>
-                        <li>✓ Pembahasan soal</li>
-                        <li>✓ Riwayat nilai</li>
-                    </ul>
-                    <button onclick="alert('Paket premium segera hadir!')">
-                        Segera Hadir
-                    </button>
-                </article>
-            </div>
-        </section>
+    <div class="quiz-actions">
+        <button class="action-button secondary" id="homeButton">Kembali ke Beranda</button>
+        <button class="action-button" id="retryButton">Ulangi Latihan</button>
+    </div>
+</section>
 
-    </main>
+<!-- DASHBOARD PERKEMBANGAN BELAJAR -->
+<section id="perkembangan" class="dashboard-section">
 
-    <footer>
-        <strong>TKA<span>SD.</span></strong>
-        <p>Belajar Lebih Siap, Raih Hasil Terbaik.</p>
-        <small>© 2026 Simulasi TKA SD. All rights reserved.</small>
-    </footer>
+    <div class="dashboard-header">
+        <span class="section-tag">LAPORAN BELAJAR</span>
+        <h2>Perkembangan Belajar</h2>
+        <p>Pantau perkembangan kemampuan dan hasil latihan siswa.</p>
+    </div>
 
-    <script src="js/app.js"></script>
+<div class="dashboard-filter">
+    <label for="pilihMapelDashboard">
+        Pilih Mata Pelajaran
+    </label>
 
+    <select id="pilihMapelDashboard">
+        <option value="matematika">Matematika</option>
+        <option value="bahasa" selected>Bahasa Indonesia</option>
+        <option value="ipas">IPAS</option>
+    </select>
+</div>
+
+    <div class="dashboard-grid">
+
+        <div class="dashboard-card">
+            <span>Nilai Awal Tryout</span>
+            <strong id="nilaiAwal">--</strong>
+            <small id="infoNilaiAwal">Berdasarkan hasil tryout</small>
+        </div>
+
+        <div class="dashboard-card">
+            <span>Nilai Latihan Terakhir</span>
+            <strong id="nilaiTerakhir">--</strong>
+            <small id="infoNilaiTerakhir">Hasil sesi latihan terbaru</small>
+        </div>
+
+        <div class="dashboard-card">
+            <span>Total Sesi Latihan</span>
+            <strong id="totalSesi">0</strong>
+            <small>Seluruh sesi tersimpan</small>
+        </div>
+
+    </div>
+
+    <div class="dashboard-panel">
+        <h3>Kompetensi yang Perlu Diperkuat</h3>
+        <div id="daftarPrioritas">
+            <p>Data kompetensi akan ditampilkan di sini.</p>
+        </div>
+    </div>
+
+    <div class="dashboard-panel">
+        <h3>Riwayat Latihan</h3>
+        <div id="riwayatDashboard">
+            <p>Belum ada riwayat latihan.</p>
+        </div>
+    </div>
+
+</section>
+<!-- AKHIR DASHBOARD -->
+<footer>
+    <strong>TKA<span>SD.</span></strong>
+    <p>Belajar Lebih Siap, Raih Hasil Terbaik.</p>
+    <small>© 2026 Simulasi TKA & TKAD SD/MI.</small>
+</footer>
+
+<script src="js/profilsiswa.js"></script>
+<script src="js/soal-adaptif-matematika.js"></script>
+<script src="js/soal-adaptif-bahasa.js"></script>
+<script src="js/soal-adaptif-ipas.js"></script>
+<script src="js/soal-penguatan-matematika.js"></script>
+<script src="js/soal-penguatan-bahasa.js"></script>
+<script src="js/soal-penguatan-ipas.js"></script>
+<script src="js/app.js"></script>
+<script src="js/dashboard.js"></script>
 </body>
 </html>
