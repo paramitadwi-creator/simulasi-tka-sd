@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Lexend; display=swap agar teks langsung tampil dengan font cadangan saat koneksi lambat -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="css/style.css?v=2026.11.09-18">
+    <link rel="stylesheet" href="css/style.css?v=2026.11.09-19">
 </head>
 
 <body>
@@ -281,7 +281,7 @@
                 <div id="timer" class="timer-chip" role="timer" aria-label="Sisa waktu" hidden>10:00</div>
             </div>
             <p class="sr-only" id="timerAnnounce" aria-live="polite"></p>
-            <button class="btn btn--ghost quiz-exit" id="backHome" type="button">
+            <button class="btn btn--ghost quiz-exit" id="backHome" type="button" aria-label="Keluar dari sesi">
                 <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
                 <span>Keluar</span>
             </button>
@@ -360,11 +360,11 @@
             <p id="resultMeta"></p>
         </div>
         <div class="result-top-tools">
-        <button class="btn btn--ghost result-delete" id="resultDelete" type="button" hidden>
+        <button class="btn btn--ghost result-delete" id="resultDelete" type="button" aria-label="Hapus riwayat ini" hidden>
             <svg class="icon" aria-hidden="true"><use href="#i-trash"/></svg>
             <span>Hapus riwayat</span>
         </button>
-        <button class="btn btn--ghost result-home" id="homeButton" type="button">
+        <button class="btn btn--ghost result-home" id="homeButton" type="button" aria-label="Kembali ke beranda">
             <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
             <span>Beranda</span>
         </button>
@@ -420,15 +420,15 @@
             <div class="review-main">
                 <article class="review-card" id="resultReview" aria-live="polite"></article>
                 <div class="review-nav">
-                    <button class="btn btn--secondary" id="reviewPrev" type="button">
+                    <button class="btn btn--secondary" id="reviewPrev" type="button" aria-label="Soal sebelumnya">
                         <svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>
                         <span class="label-long">Sebelumnya</span>
                     </button>
-                    <button class="btn btn--ghost" id="reviewBack" type="button">
+                    <button class="btn btn--ghost" id="reviewBack" type="button" aria-label="Kembali ke ringkasan hasil">
                         <svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg>
                         <span>Ringkasan</span>
                     </button>
-                    <button class="btn btn--primary" id="reviewNext" type="button">
+                    <button class="btn btn--primary" id="reviewNext" type="button" aria-label="Soal berikutnya">
                         <span class="label-long">Berikutnya</span>
                         <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
                     </button>
@@ -501,7 +501,7 @@
 
             <div class="dashboard-panel">
                 <h3>Riwayat Latihan</h3>
-                <p class="dashboard-panel-intro">10 sesi terakhir untuk mata pelajaran ini. Buka kembali hasil dan pembahasannya.</p>
+                <p class="dashboard-panel-intro">Sesi terbaru untuk mata pelajaran ini. Buka kembali hasil dan pembahasannya.</p>
                 <div id="riwayatDashboard">
                     <p>Belum ada riwayat latihan.</p>
                 </div>
@@ -525,31 +525,31 @@
     </div>
 </footer>
 
-<script src="js/aset-manifest.js?v=2026.11.09-18"></script>
-<script src="js/aset.js?v=2026.11.09-18"></script>
-<script src="js/profilsiswa.js?v=2026.11.09-18"></script>
-<script src="js/kisi-kisi.js?v=2026.11.09-18"></script>
-<script src="js/soal-adaptif-matematika.js?v=2026.11.09-18"></script>
-<script src="js/soal-adaptif-bahasa.js?v=2026.11.09-18"></script>
-<script src="js/soal-adaptif-ipas.js?v=2026.11.09-18"></script>
-<script src="js/soal-penguatan-matematika.js?v=2026.11.09-18"></script>
-<script src="js/soal-penguatan-bahasa.js?v=2026.11.09-18"></script>
-<script src="js/soal-penguatan-ipas.js?v=2026.11.09-18"></script>
-<script src="js/soal-kisi-matematika.js?v=2026.11.09-18"></script>
-<script src="js/soal-kisi-bahasa.js?v=2026.11.09-18"></script>
-<script src="js/soal-kisi-ipas.js?v=2026.11.09-18"></script>
-<script src="js/soal-tambahan-tka.js?v=2026.11.09-18"></script>
-<script src="js/soal-indikator-tambahan.js?v=2026.11.09-18"></script>
-<script src="js/bacaan-bahasa-1.js?v=2026.11.09-18"></script>
-<script src="js/bacaan-bahasa-2.js?v=2026.11.09-18"></script>
-<script src="js/bacaan-bahasa-3.js?v=2026.11.09-18"></script>
-<script src="js/bacaan-bahasa-4.js?v=2026.11.09-18"></script>
-<script src="js/bacaan-bahasa-5.js?v=2026.11.09-18"></script>
-<script src="js/app.js?v=2026.11.09-18"></script>
-<script src="js/bacaan-bahasa.js?v=2026.11.09-18"></script>
-<script src="js/dashboard.js?v=2026.11.09-18"></script>
-<script src="js/riwayat.js?v=2026.11.09-18"></script>
-<script src="js/hasil.js?v=2026.11.09-18"></script>
-<script src="js/antarmuka.js?v=2026.11.09-18"></script>
+<script src="js/aset-manifest.js?v=2026.11.09-19"></script>
+<script src="js/aset.js?v=2026.11.09-19"></script>
+<script src="js/profilsiswa.js?v=2026.11.09-19"></script>
+<script src="js/kisi-kisi.js?v=2026.11.09-19"></script>
+<script src="js/soal-adaptif-matematika.js?v=2026.11.09-19"></script>
+<script src="js/soal-adaptif-bahasa.js?v=2026.11.09-19"></script>
+<script src="js/soal-adaptif-ipas.js?v=2026.11.09-19"></script>
+<script src="js/soal-penguatan-matematika.js?v=2026.11.09-19"></script>
+<script src="js/soal-penguatan-bahasa.js?v=2026.11.09-19"></script>
+<script src="js/soal-penguatan-ipas.js?v=2026.11.09-19"></script>
+<script src="js/soal-kisi-matematika.js?v=2026.11.09-19"></script>
+<script src="js/soal-kisi-bahasa.js?v=2026.11.09-19"></script>
+<script src="js/soal-kisi-ipas.js?v=2026.11.09-19"></script>
+<script src="js/soal-tambahan-tka.js?v=2026.11.09-19"></script>
+<script src="js/soal-indikator-tambahan.js?v=2026.11.09-19"></script>
+<script src="js/bacaan-bahasa-1.js?v=2026.11.09-19"></script>
+<script src="js/bacaan-bahasa-2.js?v=2026.11.09-19"></script>
+<script src="js/bacaan-bahasa-3.js?v=2026.11.09-19"></script>
+<script src="js/bacaan-bahasa-4.js?v=2026.11.09-19"></script>
+<script src="js/bacaan-bahasa-5.js?v=2026.11.09-19"></script>
+<script src="js/app.js?v=2026.11.09-19"></script>
+<script src="js/bacaan-bahasa.js?v=2026.11.09-19"></script>
+<script src="js/dashboard.js?v=2026.11.09-19"></script>
+<script src="js/riwayat.js?v=2026.11.09-19"></script>
+<script src="js/hasil.js?v=2026.11.09-19"></script>
+<script src="js/antarmuka.js?v=2026.11.09-19"></script>
 </body>
 </html>

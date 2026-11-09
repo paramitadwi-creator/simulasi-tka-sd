@@ -38,6 +38,30 @@ function daftarBerkas(dir) {
 }
 const hashIsi = (buf) => crypto.createHash("sha256").update(buf).digest("hex").slice(0, 16);
 
+// Pemeriksaan dasar SVG: browser menolak menampilkan SVG yang XML-nya tidak valid
+// (mis. atribut ganda "Attribute fill redefined"), jadi gambar seperti itu tidak boleh lolos.
+function periksaSvg(teks) {
+  const masalah = [];
+  const bersih = teks.replace(/<!--[\s\S]*?-->/g, "").replace(/<!\[CDATA\[[\s\S]*?\]\]>/g, "").replace(/<\?[\s\S]*?\?>/g, "").replace(/<!DOCTYPE[^>]*>/gi, "");
+  if (!/<svg[\s>]/.test(bersih)) masalah.push("tidak ada elemen <svg>");
+  const tumpukan = [];
+  const reTag = /<(\/?)([a-zA-Z][\w:.-]*)([^>]*?)(\/?)>/g;
+  let m;
+  while ((m = reTag.exec(bersih))) {
+    const [, tutup, nama, atribut, selfClose] = m;
+    if (tutup) {
+      if (tumpukan.pop() !== nama) { masalah.push(`tag penutup </${nama}> tidak cocok`); break; }
+      continue;
+    }
+    const namaAtribut = [...atribut.matchAll(/([\w:.-]+)\s*=\s*("[^"]*"|'[^']*')/g)].map((x) => x[1]);
+    const ganda = namaAtribut.filter((n, i) => namaAtribut.indexOf(n) !== i);
+    if (ganda.length) masalah.push(`atribut ganda "${[...new Set(ganda)].join(", ")}" pada <${nama}>`);
+    if (!selfClose) tumpukan.push(nama);
+  }
+  if (!masalah.length && tumpukan.length) masalah.push(`tag tidak ditutup: <${tumpukan[tumpukan.length - 1]}>`);
+  return masalah;
+}
+
 function bacaManifestLama() {
   try {
     const teks = fs.readFileSync(path.join(AKAR, MANIFEST), "utf8");
@@ -53,6 +77,9 @@ const lama = bacaManifestLama();
 
 for (const rel of sumber) {
   const isi = fs.readFileSync(path.join(AKAR, rel));
+  if (rel.toLowerCase().endsWith(".svg")) {
+    periksaSvg(isi.toString("utf8")).forEach((p) => masalah.push(`SVG tidak valid (${rel}): ${p}`));
+  }
   const hash = hashIsi(isi);
   const ext = path.extname(rel).toLowerCase();
   const versi = `${TUJUAN}/${hash}${ext}`;

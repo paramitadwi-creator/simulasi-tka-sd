@@ -1836,3 +1836,35 @@ footer small { font-size: var(--text-sm); color: var(--color-on-dark-2); }
 @media (max-width: 559.98px) {
   .result-delete span { display: none; }
 }
+
+/* Audit: tombol tampilkan semua riwayat */
+.riwayat-semua { width: 100%; justify-content: center; min-height: var(--tap-min); margin-top: var(--space-2); font-size: var(--text-sm); color: var(--color-primary-strong); }
+
+/* Audit: cegah gulir horizontal di ponsel sangat kecil (≤ 399px) */
+.dashboard-inner > *, .dashboard-grid > *, .dashboard-columns > * { min-width: 0; }
+@media (max-width: 767.98px) {
+  .dashboard-grid, .dashboard-columns { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 399.98px) {
+  .prioritas-head { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+  .prioritas-progress { grid-template-columns: minmax(0, 1fr); }
+  .prioritas-angka { white-space: normal; }
+}
+.result-panel { grid-template-columns: minmax(0, 1fr); }
+.result-panel > *, .review-main > *, .review-layout > * { min-width: 0; }
+@media (max-width: 1023.98px) {
+  .review-layout { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 399.98px) {
+  .result-shell .score-card, .review-card, .mastery-col, .result-reco, .result-shell .peta-hasil { padding: var(--space-4); }
+  .stat-card { padding: var(--space-3); min-height: 96px; }
+  .stat-card strong { font-size: var(--text-2xl); }
+  .review-meta { grid-template-columns: minmax(0, 1fr); }
+  .review-option { padding: var(--space-3) var(--space-2); gap: var(--space-2); }
+}
+.peta-ringkas { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 399.98px) {
+  .peta-ringkas div { padding: var(--space-2) var(--space-1); font-size: var(--text-sm); }
+  .review-nav #reviewBack span { display: none; }
+  .review-nav .btn { padding-left: var(--space-3); padding-right: var(--space-3); }
+}

@@ -97,7 +97,17 @@ let answers = {}, flagged = new Set(), timerId = null, secondsLeft = 600, hasSub
 let checkedAnswers = new Set();
 
 // Versi aset; samakan dengan ?v= pada index.html setiap kali file JS/CSS berubah
-const VERSI_APLIKASI = "2026.11.09-18";
+const VERSI_APLIKASI = "2026.11.09-19";
+// Akses localStorage yang aman: penyimpanan bisa diblokir browser (mis. data situs dimatikan)
+// atau isinya rusak. Bila gagal, aplikasi tetap berjalan; hanya penyimpanannya yang dilewati.
+function bacaPenyimpanan(kunci) { try { return localStorage.getItem(kunci); } catch (e) { return null; } }
+function tulisPenyimpanan(kunci, nilai) { try { localStorage.setItem(kunci, nilai); return true; } catch (e) { return false; } }
+function bacaDaftarTersimpan(kunci) {
+  try { const v = JSON.parse(bacaPenyimpanan(kunci) || "[]"); return Array.isArray(v) ? v : []; } catch (e) { return []; }
+}
+function bacaObjekTersimpan(kunci) {
+  try { const v = JSON.parse(bacaPenyimpanan(kunci) || "{}"); return v && typeof v === "object" && !Array.isArray(v) ? v : {}; } catch (e) { return {}; }
+}
 
 // Bila index.html lama masih tersimpan di cache browser, data kisi-kisi
 // belum ikut dimuat. Muat sendiri agar Peta Hasil Belajar tetap tersedia.
@@ -453,9 +463,7 @@ const dataPrioritas = isMatematika
     return;
   }
 
-  const progres = JSON.parse(
-    localStorage.getItem("tkaSkillProgress") || "{}"
-  );
+  const progres = bacaObjekTersimpan("tkaSkillProgress");
 
   // Simpan kode kompetensi dan persentase awal
  const petaPrioritas = new Map(
@@ -740,16 +748,16 @@ if (currentSubject === "bahasa") {
     if (daftar.length === 0) return [];
 
     const kunci = `tkaRotasiBahasa_${namaKunci}`;
-    const posisi = Number(localStorage.getItem(kunci)) || 0;
+    const posisi = Number(bacaPenyimpanan(kunci)) || 0;
     const terpilih = [];
 
     for (let i = 0; i < Math.min(jumlah, daftar.length); i++) {
       terpilih.push(daftar[(posisi + i) % daftar.length]);
     }
 
-    localStorage.setItem(
+    tulisPenyimpanan(
       kunci,
-      (posisi + terpilih.length) % daftar.length
+      String((posisi + terpilih.length) % daftar.length)
     );
 
     return terpilih;
@@ -1462,9 +1470,7 @@ function finishQuiz() {
   const correct = currentQuestions.filter(isCorrect).length;
   const answered = Object.keys(answers).length;
   const score = Math.round(correct / currentQuestions.length * 100);// SIMPAN HASIL LATIHAN PER KOMPETENSI
-const progress = JSON.parse(
-    localStorage.getItem("tkaSkillProgress") || "{}"
-);
+const progress = bacaObjekTersimpan("tkaSkillProgress");
 
 const skillResults = {};
 
@@ -1514,9 +1520,7 @@ Object.entries(skillResults).forEach(([kode, hasil]) => {
 const petaHasil = hitungPetaHasil(currentSubject, currentQuestions);
 
 // Menyimpan riwayat setiap sesi latihan
-const riwayatLatihan = JSON.parse(
-  localStorage.getItem("tkaSessionHistory") || "[]"
-);
+const riwayatLatihan = bacaDaftarTersimpan("tkaSessionHistory");
 
 const dataSesi = {
   tanggal: new Date().toISOString(),
@@ -1552,12 +1556,12 @@ const dataSesi = {
 riwayatLatihan.unshift(dataSesi);
 
 // Simpan maksimal 100 sesi terakhir
-localStorage.setItem(
+tulisPenyimpanan(
   "tkaSessionHistory",
   JSON.stringify(riwayatLatihan.slice(0, 100))
 );
 
-localStorage.setItem("tkaSkillProgress", JSON.stringify(progress));
+tulisPenyimpanan("tkaSkillProgress", JSON.stringify(progress));
   quizShell.hidden = true; resultShell.hidden = false;
   $("resultTitle").textContent = currentMode === "exam" ? "Simulasi selesai!" : "Latihan selesai!";
   $("scoreValue").textContent = score;

@@ -44,10 +44,18 @@
   } catch (e) {
     penyimpanan = null; // diblokir, mode privat tertentu, atau dinonaktifkan
   }
-  const baca = (k) => { try { return penyimpanan ? penyimpanan.getItem(k) : null; } catch (e) { return null; } };
+  // galatBaca dihitung agar pembersihan TIDAK menghapus apa pun bila ada pembacaan yang gagal
+  // (tanpa ini, data yang tidak terbaca bisa disangka "tidak dirujuk" lalu terhapus).
+  let galatBaca = 0;
+  const baca = (k) => { try { return penyimpanan ? penyimpanan.getItem(k) : null; } catch (e) { galatBaca++; return null; } };
+  let galatTulis = null; // jenis kegagalan terakhir: "penuh" atau "tidak-tersedia"
   const tulis = (k, v) => {
     try { penyimpanan.setItem(k, v); return penyimpanan.getItem(k) === v; }
-    catch (e) { return false; } // termasuk QuotaExceededError
+    catch (e) {
+      const penuh = e && (e.name === "QuotaExceededError" || e.name === "NS_ERROR_DOM_QUOTA_REACHED" || e.code === 22 || e.code === 1014);
+      galatTulis = penuh ? "penuh" : "tidak-tersedia";
+      return false;
+    }
   };
   const hapusKunci = (k) => { try { penyimpanan.removeItem(k); } catch (e) { /* abaikan */ } };
   const bacaJSON = (k) => { const t = baca(k); if (t === null) return null; try { return JSON.parse(t); } catch (e) { return undefined; } };
@@ -117,37 +125,48 @@
     const x = bacaJSON(K_INDEKS);
     if (x && Array.isArray(x.sesi)) return x.sesi.filter(validRingkas);
     if (x === null && !semuaKunci().some((k) => k.startsWith(K_SESI))) return [];
+    const galatAwal = galatBaca;
     const ulang = bangunUlangIndeks();
-    if (!bacaSaja) tulis(K_INDEKS, JSON.stringify({ v: SKEMA, sesi: ulang }));
+    // Tulis indeks hasil susun ulang hanya bila semua sesi benar-benar terbaca
+    if (!bacaSaja && galatBaca === galatAwal) tulis(K_INDEKS, JSON.stringify({ v: SKEMA, sesi: ulang }));
     return ulang;
   }
   const tulisIndeks = (sesi) => tulis(K_INDEKS, JSON.stringify({ v: SKEMA, sesi }));
 
   // ---------- Pembersihan salinan yang tidak dirujuk lagi ----------
+  // Prinsip: lebih baik menyisakan data tak terpakai daripada menghapus data yang masih dirujuk.
+  // Pembersihan dibatalkan seluruhnya bila indeks tidak terbaca utuh atau ada pembacaan yang gagal.
   function bersihkan() {
     if (!penyimpanan || bacaSaja) return;
-    const indeks = bacaIndeks();
-    const idAktif = new Set(indeks.map((s) => s.id));
+    const galatAwal = galatBaca;
+    const x = bacaJSON(K_INDEKS);
+    if (!x || !Array.isArray(x.sesi) || galatBaca !== galatAwal) return;
+    const idAktif = new Set(x.sesi.filter(validRingkas).map((s) => s.id));
     const soalDirujuk = new Set();
     const bacaanDirujuk = new Set();
+    const sesiYatim = [];
+    let rujukanLengkap = true;
     const sekarang = Date.now();
     semuaKunci().forEach((k) => {
       if (!k.startsWith(K_SESI)) return;
       const id = k.slice(K_SESI.length);
-      if (!idAktif.has(id)) {
-        // Sesi yatim (penulisan sebelumnya gagal). Lewati yang sangat baru: mungkin tab lain sedang menulis.
-        const umur = sekarang - Date.parse(id);
-        if (!(umur < 60000)) hapusKunci(k);
-        else { const r = bacaJSON(k); (r && r.soal || []).forEach((s) => soalDirujuk.add(s.k)); }
+      const r = bacaJSON(k);
+      if (!idAktif.has(id) && !(sekarang - Date.parse(id) < 60000)) {
+        // Sesi yatim (penulisan sebelumnya gagal); yang sangat baru dilewati: mungkin tab lain sedang menulis
+        sesiYatim.push(k);
         return;
       }
-      const r = bacaJSON(k);
-      (r && Array.isArray(r.soal) ? r.soal : []).forEach((s) => soalDirujuk.add(s.k));
+      if (!r || !Array.isArray(r.soal)) { rujukanLengkap = false; return; } // tidak terbaca: rujukannya tak diketahui
+      r.soal.forEach((s) => soalDirujuk.add(s.k));
     });
     soalDirujuk.forEach((kunci) => {
       const sn = bacaJSON(K_SOAL + kunci);
+      if (sn === undefined) rujukanLengkap = false;
       if (sn && sn.stim) bacaanDirujuk.add(sn.stim);
     });
+    if (galatBaca !== galatAwal) return; // ada yang gagal dibaca: jangan hapus apa pun
+    sesiYatim.forEach(hapusKunci);
+    if (!rujukanLengkap) return; // salinan soal/bacaan dibiarkan agar tidak ada rujukan yang terputus
     semuaKunci().forEach((k) => {
       if (k.startsWith(K_SOAL) && !soalDirujuk.has(k.slice(K_SOAL.length))) hapusKunci(k);
       if (k.startsWith(K_BACAAN) && !bacaanDirujuk.has(k.slice(K_BACAAN.length))) hapusKunci(k);
@@ -167,6 +186,7 @@
     const id = hasil.tanggal;
     if (!id) return { ok: false, alasan: "data-tidak-lengkap" };
 
+    galatTulis = null;
     const ditulisBaru = []; // untuk dibatalkan bila salah satu langkah gagal
     const batalkan = () => ditulisBaru.forEach(hapusKunci);
     const coba = () => {
@@ -232,7 +252,7 @@
       batalkan(); ditulisBaru.length = 0;
       bersihkan();
       hasilTulis = coba();
-      if (!hasilTulis) { batalkan(); return { ok: false, alasan: "penuh" }; }
+      if (!hasilTulis) { batalkan(); return { ok: false, alasan: galatTulis || "penuh" }; }
     }
     // Sesi baru sudah aman tersimpan; baru sekarang sesi di atas batas 50 dihapus.
     const dihapus = hasilTulis.lebih.map((x) => x.tanggal || x.id);
@@ -256,8 +276,17 @@
 
   function muat(id) {
     if (!penyimpanan) return { galat: "tidak-tersedia" };
+    const galatAwal = galatBaca;
     const mentah = bacaJSON(K_SESI + id);
-    if (mentah === null) return { galat: "tidak-ada" };
+    if (galatBaca !== galatAwal) return { galat: "tidak-tersedia" };
+    if (mentah === null) {
+      // Sesi benar-benar tidak ada (mis. dihapus di tab lain): rapikan indeks agar tidak ditawarkan lagi
+      if (!bacaSaja) {
+        const indeks = bacaIndeks();
+        if (indeks.some((x) => x.id === id)) { tulisIndeks(indeks.filter((x) => x.id !== id)); kabari(); }
+      }
+      return { galat: "tidak-ada" };
+    }
     const r = migrasikan(mentah);
     if (!r || !Array.isArray(r.soal)) return { galat: "rusak" };
     const bank = petaBankKini();

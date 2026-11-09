@@ -24,17 +24,26 @@ document.addEventListener("DOMContentLoaded", function () {
             : "--";
     }
 
+    let tampilSemuaRiwayat = false;
+
     function tampilkanDashboard() {
         const subjek = pilihMapel.value;
 
         // Baca ulang setiap kali agar hasil latihan terbaru langsung tampil
-        const riwayat = JSON.parse(
-            localStorage.getItem("tkaSessionHistory") || "[]"
-        );
+        // Aman bila penyimpanan diblokir browser atau datanya rusak: dashboard tetap tampil
+        const bacaJSON = (kunci, cadangan, cocok) => {
+            try {
+                const nilai = JSON.parse(localStorage.getItem(kunci) || "null");
+                return cocok(nilai) ? nilai : cadangan;
+            } catch (e) {
+                return cadangan;
+            }
+        };
+        const riwayat = bacaJSON("tkaSessionHistory", [], Array.isArray)
+            .filter(sesi => sesi && typeof sesi === "object");
 
-        const progres = JSON.parse(
-            localStorage.getItem("tkaSkillProgress") || "{}"
-        );
+        const progres = bacaJSON("tkaSkillProgress", {},
+            v => v && typeof v === "object" && !Array.isArray(v));
 
         // NILAI AWAL TRYOUT
         const nilaiAwal = profil.hasilTryout?.[subjek];
@@ -194,7 +203,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const namaMode = { practice: "Latihan", exam: "Simulasi Ujian", adaptive: "Latihan Adaptif" };
             const R = window.Riwayat;
 
-            riwayatMapel.slice(0, 10).forEach(sesi => {
+            const BATAS_AWAL = 10;
+            riwayatMapel.slice(0, tampilSemuaRiwayat ? riwayatMapel.length : BATAS_AWAL).forEach(sesi => {
                 const baris = document.createElement("li");
                 baris.className = "riwayat-item";
 
@@ -261,6 +271,24 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             wadahRiwayat.appendChild(daftarRiwayat);
+
+            // TAMPILAN: semua riwayat tetap bisa dibuka, bukan hanya 10 terbaru
+            if (riwayatMapel.length > BATAS_AWAL) {
+                const tombolSemua = document.createElement("button");
+                tombolSemua.type = "button";
+                tombolSemua.className = "btn btn--ghost riwayat-semua";
+                tombolSemua.setAttribute("aria-expanded", tampilSemuaRiwayat ? "true" : "false");
+                tombolSemua.textContent = tampilSemuaRiwayat
+                    ? "Tampilkan " + BATAS_AWAL + " terbaru saja"
+                    : "Tampilkan semua riwayat (" + riwayatMapel.length + ")";
+                tombolSemua.addEventListener("click", () => {
+                    tampilSemuaRiwayat = !tampilSemuaRiwayat;
+                    tampilkanDashboard();
+                    const tombolBaru = document.querySelector("#riwayatDashboard .riwayat-semua");
+                    if (tombolBaru) tombolBaru.focus({ preventScroll: true });
+                });
+                wadahRiwayat.appendChild(tombolSemua);
+            }
         }
 
         tampilkanInfoRiwayat();
@@ -341,7 +369,10 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener("riwayat-berubah", tampilkanDashboard);
 
     // PERUBAHAN PILIHAN MATA PELAJARAN
-    pilihMapel.addEventListener("change", tampilkanDashboard);
+    pilihMapel.addEventListener("change", () => {
+        tampilSemuaRiwayat = false;
+        tampilkanDashboard();
+    });
 
     // Dipanggil app.js saat kembali ke beranda setelah latihan
     window.tampilkanDashboard = tampilkanDashboard;
