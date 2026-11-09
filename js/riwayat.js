@@ -22,14 +22,17 @@
   const K_SESI = AWALAN + "sesi:";
   const K_SOAL = AWALAN + "soal:";
   const K_BACAAN = AWALAN + "bacaan:";
-  const SKEMA = 1;
+  const SKEMA = 2;
   const MAKS_SESI = 50;
   const BATAS_PERINGATAN = 45;
   const ANGGARAN_KARAKTER = 2000000; // batas aman milik riwayat (localStorage umumnya ±5 juta karakter)
 
   // Migrasi skema: migrasi[n] mengubah data skema n menjadi n+1.
-  // (Skema 1 adalah versi pertama; tambahkan langkah di sini bila format berubah.)
-  const migrasiSesi = {};
+  // Skema 1 -> 2: skema 2 mencatat versi gambar (berkas tetap berbasis hash) pada salinan soal.
+  // Sesi skema 1 tidak punya catatan itu, jadi ditandai agar gambarnya diberi pemberitahuan.
+  const migrasiSesi = {
+    1: (r) => ({ ...r, v: 2, asetTanpaVersi: true })
+  };
 
   // ---------- Akses localStorage yang aman ----------
   let penyimpanan = null;
@@ -56,7 +59,14 @@
     for (let i = 0; i < teks.length; i++) { h ^= teks.charCodeAt(i); h = Math.imul(h, 0x01000193); }
     return (h >>> 0).toString(16).padStart(8, "0");
   };
-  const sidikSoal = (q) => fnv(JSON.stringify([q.type, q.question, q.options || null, q.statements || null, q.categories || null, q.answer, q.explanation, q.stimulus || "", q.image || "", q.imageAlt || "", q.topic, q.difficulty]));
+  // sidikIsi: isi teks soal (termasuk jalur gambar sumber). sidikSoal: sidikIsi + versi gambar,
+  // sehingga gambar yang diperbarui (nama berkas sama) menghasilkan salinan soal yang berbeda.
+  const infoAset = (jalur) => (jalur && window.Aset ? window.Aset.info(jalur) : null);
+  const sidikIsi = (q) => fnv(JSON.stringify([q.type, q.question, q.options || null, q.statements || null, q.categories || null, q.answer, q.explanation, q.stimulus || "", q.image || "", q.imageAlt || "", q.topic, q.difficulty]));
+  const sidikSoal = (q) => {
+    const a = infoAset(q.image);
+    return a ? fnv(sidikIsi(q) + "|" + a.hash) : sidikIsi(q);
+  };
 
   // ---------- Skema ----------
   let bacaSaja = false;
@@ -181,6 +191,9 @@
             id: q.id, type: q.type, topic: q.topic, difficulty: q.difficulty,
             question: q.question, options: q.options, statements: q.statements, categories: q.categories,
             answer: q.answer, explanation: q.explanation, image: q.image, imageAlt: q.imageAlt,
+            // Versi gambar yang benar-benar dilihat siswa (berkas tetap, tidak pernah ditimpa)
+            imageVersi: q.image ? (infoAset(q.image) || {}).src || null : null,
+            imageHash: q.image ? (infoAset(q.image) || {}).hash || null : null,
             indikator: s.indikator ?? null, stim
           };
           if (!tulis(ks, JSON.stringify(salinan))) return false;
@@ -252,24 +265,34 @@
       const [qid, sidik] = String(s.k).split("@");
       const salinan = bacaJSON(K_SOAL + s.k);
       const kini = bank.get(qid) || null;
-      let q = null, catatan = null;
+      let q = null, catatan = null, catatanGambar = null;
       if (salinan && salinan.id === qid) {
         const stimulus = salinan.stim ? baca(K_BACAAN + salinan.stim) : "";
         q = { ...salinan, stimulus: stimulus || "" };
         delete q.stim;
         if (salinan.stim && stimulus === null) catatan = "bacaan-hilang";
         if (!kini) catatan = "dihapus-dari-bank";
-        else if (sidikSoal(kini) !== sidik) catatan = catatan || "berubah";
+        else if (sidikIsi(kini) !== sidikIsi(q)) catatan = catatan || "berubah";
+        if (q.image) {
+          if (!q.imageVersi) {
+            // Disimpan sebelum versi gambar dicatat (skema 1) atau gambar belum terdaftar
+            catatanGambar = "gambar-tanpa-versi";
+            q.imageVersi = null;
+          } else if (kini && kini.image === q.image) {
+            const a = infoAset(kini.image);
+            if (a && a.hash !== q.imageHash) catatanGambar = "gambar-berubah";
+          }
+        }
       } else if (kini) {
         // Salinan rusak/hilang: tampilkan versi bank saat ini dengan pemberitahuan
-        q = kini;
+        q = { ...kini, imageVersi: undefined };
         catatan = sidikSoal(kini) === sidik ? null : "salinan-hilang";
       } else {
         catatan = "tidak-tersedia";
       }
       return {
         nomor: i + 1, q, jawaban: s.j === undefined ? null : s.j, benar: s.s === "b", ragu: !!s.r,
-        indikator: q ? (q.indikator ?? null) : null, catatan, idSoal: qid
+        indikator: q ? (q.indikator ?? null) : null, catatan, catatanGambar, idSoal: qid
       };
     });
     return {

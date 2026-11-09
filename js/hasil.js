@@ -246,7 +246,9 @@
     "dihapus-dari-bank": "Soal ini sudah tidak ada di bank soal saat ini. Yang tampil adalah salinan saat kamu mengerjakan. Jawaban dan nilaimu tidak berubah.",
     "bacaan-hilang": "Salinan bacaan untuk soal ini tidak ditemukan di penyimpanan perangkat. Soal, jawaban, dan pembahasan tetap tampil.",
     "salinan-hilang": "Salinan soal saat pengerjaan tidak ditemukan di penyimpanan perangkat. Yang tampil adalah versi bank soal saat ini, yang mungkin berbeda. Status dan nilaimu tetap sesuai saat dikerjakan.",
-    "tidak-tersedia": "Isi soal ini tidak dapat ditampilkan karena salinannya hilang dan soal sudah tidak ada di bank soal. Jawaban dan status tetap sesuai saat dikerjakan."
+    "tidak-tersedia": "Isi soal ini tidak dapat ditampilkan karena salinannya hilang dan soal sudah tidak ada di bank soal. Jawaban dan status tetap sesuai saat dikerjakan.",
+    "gambar-berubah": "Gambar soal ini sudah diperbarui setelah kamu mengerjakannya. Yang tampil adalah gambar versi saat kamu mengerjakan.",
+    "gambar-tanpa-versi": "Versi gambar saat soal ini dikerjakan tidak tercatat (riwayat lama). Gambar yang tampil adalah versi terbaru dan mungkin berbeda dari yang kamu lihat saat itu."
   };
 
   function kartuSoal(s, urutan, jumlah) {
@@ -267,6 +269,7 @@
     kartu.appendChild(kepala);
     if (filterAktif !== "semua") kartu.appendChild(el("p", "review-pos", `${urutan + 1} dari ${jumlah} soal pada saringan “${FILTER.find((f) => f[0] === filterAktif)[1]}”`));
     if (s.catatan && PESAN_CATATAN[s.catatan]) kartu.appendChild(pemberitahuan(PESAN_CATATAN[s.catatan]));
+    if (s.catatanGambar && PESAN_CATATAN[s.catatanGambar]) kartu.appendChild(pemberitahuan(PESAN_CATATAN[s.catatanGambar], s.catatanGambar));
 
     // 2, 3, 4: mapel, materi, indikator, kesulitan, tipe
     const meta = el("dl", "review-meta");
@@ -284,10 +287,19 @@
       const stim = el("div", "stimulus-box review-stimulus-box");
       if (q.stimulus) stim.appendChild(document.createTextNode(q.stimulus));
       if (q.image) {
+        // Riwayat: berkas versi yang tercatat saat dikerjakan. Sesi baru: versi terbaru dari manifest.
+        const src = q.imageVersi || (window.Aset ? window.Aset.src(q.image) : q.image);
         const img = document.createElement("img");
-        img.src = q.image;
+        img.src = src;
         img.alt = q.imageAlt || "Gambar stimulus soal";
         img.loading = "lazy";
+        // Berkas versi tidak ditemukan: beri tahu dengan jelas, JANGAN ganti dengan gambar versi lain
+        img.addEventListener("error", () => {
+          // Pesan "yang tampil adalah versi saat dikerjakan" tidak berlaku lagi: ganti dengan pesan ini
+          const kartuIni = img.closest(".review-card");
+          if (kartuIni) kartuIni.querySelectorAll('.review-version-note[data-jenis="gambar-berubah"]').forEach((n) => n.remove());
+          img.replaceWith(pemberitahuan(`Gambar versi saat soal ini dikerjakan tidak ditemukan (${src}). Gambar versi lain sengaja tidak ditampilkan agar tidak keliru.`, "gambar-hilang"));
+        }, { once: true });
         stim.appendChild(img);
       }
       kartu.appendChild(stim);
@@ -335,9 +347,10 @@
     return kartu;
   }
 
-  function pemberitahuan(teks) {
+  function pemberitahuan(teks, jenis) {
     const p = el("p", "review-version-note");
     p.setAttribute("role", "note");
+    if (jenis) p.dataset.jenis = jenis;
     p.append(ikon("#i-alert"), el("span", null, teks));
     return p;
   }
@@ -526,7 +539,7 @@
       if (typeof tampilkanPetaHasil === "function" && hasil.peta && hasil.peta.baris) tampilkanPetaHasil(hasil.peta);
       else if ($("petaHasil")) $("petaHasil").hidden = true;
       $("resultShell").dataset.tersimpan = "ya";
-      const berubah = hasil.soal.filter((s) => s.catatan).length;
+      const berubah = hasil.soal.filter((s) => s.catatan || s.catatanGambar).length;
       tampilkanCatatan(
         `Riwayat ${fmtTanggal(hasil.tanggal)}. Soal, kunci, pembahasan, jawaban, dan nilai ditampilkan sesuai saat dikerjakan.` +
         (berubah ? ` ${berubah} soal sudah diperbarui di bank soal sejak itu; ada tanda pada soal tersebut.` : ""),
