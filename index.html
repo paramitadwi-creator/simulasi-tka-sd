@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Lexend; display=swap agar teks langsung tampil dengan font cadangan saat koneksi lambat -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="css/style.css?v=2026.11.09-19">
+    <link rel="stylesheet" href="css/style.css?v=2026.11.09-24">
 </head>
 
 <body>
@@ -518,6 +518,91 @@
                 <div class="riwayat-info" id="riwayatInfo"></div>
             </div>
         </div>
+
+        <!-- LAPORAN BELAJAR HARIAN (js/laporan-dashboard.js). Kirim manual lewat WhatsApp. -->
+        <section class="dashboard-panel laporan-harian" id="laporanHarian" aria-labelledby="judulLaporanHarian">
+            <div class="laporan-head">
+                <div>
+                    <h3 id="judulLaporanHarian">Laporan Belajar Harian</h3>
+                    <p class="dashboard-panel-intro">Rekap setiap mata pelajaran untuk orang tua. Jadwal laporan pukul 20.00 WIB; kirim sendiri lewat WhatsApp.</p>
+                </div>
+                <div class="laporan-tanggal">
+                    <label for="laporanTanggal">Tanggal</label>
+                    <select id="laporanTanggal"></select>
+                </div>
+            </div>
+            <p class="laporan-status" id="laporanStatus" aria-live="polite"></p>
+            <p class="laporan-profil-info" id="laporanProfilInfo"></p>
+            <!-- Pengingat harian 20.00 WIB lewat berkas kalender (.ics); tanpa notifikasi dari server -->
+            <div class="laporan-pengingat">
+                <p>Agar tidak lupa, pasang pengingat harian pukul 20.00 WIB di kalender ponsel atau komputer Anda.</p>
+                <button type="button" class="btn btn--secondary" id="laporanPengingat">
+                    <svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> Pasang pengingat 20.00
+                </button>
+                <p class="laporan-pengingat-info" id="laporanPengingatInfo" role="status"></p>
+            </div>
+            <p class="laporan-tanpa-aktivitas" id="laporanTanpaAktivitas" hidden>Belum ada latihan pada tanggal ini. Laporan tetap bisa dikirim sebagai pengingat yang ramah.</p>
+            <div class="laporan-kartu-grid" id="laporanKartu"></div>
+        </section>
+
+        <!-- PROFIL LAPORAN ORANG TUA (js/profil-laporan.js). Data hanya di perangkat ini. -->
+        <section class="dashboard-panel profil-laporan" id="profilLaporan" aria-labelledby="judulProfilLaporan">
+            <div class="profil-head">
+                <span class="profil-icon" aria-hidden="true"><svg class="icon"><use href="#i-lock"/></svg></span>
+                <div>
+                    <h3 id="judulProfilLaporan">Profil Laporan Orang Tua</h3>
+                    <p class="dashboard-panel-intro">Untuk laporan belajar harian setiap mata pelajaran. Disimpan hanya di perangkat dan browser ini.</p>
+                </div>
+            </div>
+
+            <p class="profil-status" id="statusProfilLaporan" role="status" hidden></p>
+
+            <!-- Ringkasan profil tersimpan -->
+            <div class="profil-ringkas" id="ringkasProfilLaporan" hidden>
+                <dl>
+                    <div><dt>Nama anak</dt><dd id="ringkasNamaAnak"></dd></div>
+                    <div><dt>WhatsApp orang tua</dt><dd id="ringkasNomorWa"></dd></div>
+                    <div><dt>Persetujuan</dt><dd id="ringkasPersetujuan"></dd></div>
+                </dl>
+                <div class="profil-aksi">
+                    <button type="button" class="btn btn--secondary" id="ubahProfil">
+                        <svg class="icon" aria-hidden="true"><use href="#i-pencil"/></svg> Ubah profil
+                    </button>
+                    <button type="button" class="btn btn--ghost profil-hapus" id="hapusProfil">
+                        <svg class="icon" aria-hidden="true"><use href="#i-trash"/></svg> Hapus data profil
+                    </button>
+                </div>
+            </div>
+
+            <!-- Formulir profil -->
+            <form class="profil-form" id="formProfilLaporan" novalidate hidden>
+                <div class="profil-field">
+                    <label for="profilNamaAnak">Nama anak</label>
+                    <input type="text" id="profilNamaAnak" name="namaAnak" maxlength="40" autocomplete="off" spellcheck="false"
+                        aria-describedby="bantuNamaAnak galatNamaAnak" required>
+                    <p class="profil-bantu" id="bantuNamaAnak">Nama panggilan sudah cukup, mis. Aisyah.</p>
+                    <p class="profil-galat" id="galatNamaAnak" hidden></p>
+                </div>
+                <div class="profil-field">
+                    <label for="profilNomorWa">Nomor WhatsApp orang tua <span class="profil-opsional">(opsional)</span></label>
+                    <input type="tel" id="profilNomorWa" name="nomorWa" inputmode="tel" maxlength="20" autocomplete="tel"
+                        placeholder="0812 3456 7890" aria-describedby="bantuNomorWa galatNomorWa">
+                    <p class="profil-bantu" id="bantuNomorWa">Nomor ponsel Indonesia (08…, 62…, atau +62…). Bila dikosongkan, WhatsApp akan meminta Anda memilih kontak saat mengirim laporan.</p>
+                    <p class="profil-galat" id="galatNomorWa" hidden></p>
+                </div>
+                <div class="profil-field profil-persetujuan">
+                    <label class="profil-cek">
+                        <input type="checkbox" id="profilSetuju" name="setuju" aria-describedby="galatSetuju">
+                        <span id="teksPersetujuan"></span>
+                    </label>
+                    <p class="profil-galat" id="galatSetuju" hidden></p>
+                </div>
+                <div class="profil-aksi">
+                    <button type="submit" class="btn btn--primary" id="simpanProfil">Simpan profil</button>
+                    <button type="button" class="btn btn--ghost" id="batalProfil" hidden>Batal</button>
+                </div>
+            </form>
+        </section>
     </div>
 </section>
 <!-- AKHIR DASHBOARD -->
@@ -560,6 +645,9 @@
 <script src="js/riwayat.js?v=2026.11.09-19"></script>
 <script src="js/motivasi.js?v=2026.11.09-20"></script>
 <script src="js/hasil.js?v=2026.11.09-20"></script>
+<script src="js/laporan.js?v=2026.11.09-24"></script>
+<script src="js/profil-laporan.js?v=2026.11.09-23"></script>
+<script src="js/laporan-dashboard.js?v=2026.11.09-26"></script>
 <script src="js/antarmuka.js?v=2026.11.09-19"></script>
 </body>
 </html>
