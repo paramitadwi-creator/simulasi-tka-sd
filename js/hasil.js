@@ -84,7 +84,28 @@
       bar.appendChild(i);
     });
     prog.append(kepala, bar);
+    // Motivation Engine
+    const wadahMotivasi = $("resultMotivation");
 
+    if (wadahMotivasi) {
+      wadahMotivasi.replaceChildren();
+
+      const pesanMotivasi = data.motivasi ||
+        (window.Motivasi &&
+         typeof window.Motivasi.buat === "function"
+          ? window.Motivasi.buat(data, null)
+          : null);
+
+      if (pesanMotivasi) {
+        wadahMotivasi.append(
+          el("h3", "result-motivation-title", pesanMotivasi.judul),
+          el("p", "result-motivation-message", pesanMotivasi.pesan)
+        );
+        wadahMotivasi.hidden = false;
+      } else {
+        wadahMotivasi.hidden = true;
+      }
+    }
     // Kartu angka (bisa diklik untuk membuka pembahasan sesuai status)
     const stats = $("resultStats");
     stats.replaceChildren();
@@ -546,11 +567,23 @@
         berubah ? "peringatan" : "info"
       );
       if (tombolHapus) tombolHapus.hidden = !window.Riwayat || window.Riwayat.info().bacaSaja;
+
     } else {
       if (tombolHapus) tombolHapus.hidden = true;
       kembaliKeDaftar = false;
+
+      // Buat pesan motivasi sebelum hasil disimpan
+      if (
+        !hasil.motivasi &&
+        window.Motivasi &&
+        typeof window.Motivasi.buat === "function"
+      ) {
+        hasil.motivasi = window.Motivasi.buat(hasil, null);
+      }
+
       simpanKeRiwayat(hasil);
     }
+
     renderRingkasan();
     renderPembahasan(false);
     pilihTab("ringkasan");

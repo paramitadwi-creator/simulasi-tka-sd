@@ -1868,3 +1868,52 @@ footer small { font-size: var(--text-sm); color: var(--color-on-dark-2); }
   .review-nav #reviewBack span { display: none; }
   .review-nav .btn { padding-left: var(--space-3); padding-right: var(--space-3); }
 }
+
+/* =====================================
+   MOTIVATION ENGINE - KARTU MOTIVASI
+   ===================================== */
+
+.result-motivation {
+  display: block;
+  margin: 24px 0;
+  padding: 24px 28px;
+  background: #eff9f1;
+  border: 1px solid #c9e6d3;
+  border-left: 6px solid #269653;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(30, 100, 55, 0.06);
+}
+
+.result-motivation[hidden] {
+  display: none;
+}
+
+.result-motivation-title {
+  margin: 0 0 10px;
+  color: #176b39;
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.result-motivation-message {
+  margin: 0;
+  color: #315b40;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+@media (max-width: 600px) {
+  .result-motivation {
+    padding: 18px;
+    margin: 18px 0;
+  }
+
+  .result-motivation-title {
+    font-size: 1.05rem;
+  }
+
+  .result-motivation-message {
+    font-size: 0.95rem;
+  }
+}
