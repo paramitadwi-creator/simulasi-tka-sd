@@ -199,9 +199,11 @@
   if (kulitSoal) new MutationObserver(() => perbaruiSesi("soal")).observe(kulitSoal, { attributes: true, attributeFilter: ["hidden"] });
   if (kulitHasil) new MutationObserver(() => perbaruiSesi("hasil")).observe(kulitHasil, { attributes: true, attributeFilter: ["hidden"] });
 
-  // Cegah jawaban hilang karena halaman tertutup/dimuat ulang tanpa sengaja selama sesi berjalan
+  // Cegah jawaban/hasil hilang karena halaman tertutup/dimuat ulang tanpa sengaja
+  // selama sesi berjalan atau saat halaman hasil & pembahasan masih dibuka
   window.addEventListener("beforeunload", (e) => {
-    if (kulitSoal && !kulitSoal.hidden) { e.preventDefault(); e.returnValue = ""; }
+    const aktif = (kulitSoal && !kulitSoal.hidden) || (kulitHasil && !kulitHasil.hidden);
+    if (aktif) { e.preventDefault(); e.returnValue = ""; }
   });
 
   // ---------- Timer: status warna + pengumuman pembaca layar ----------

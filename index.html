@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Lexend; display=swap agar teks langsung tampil dengan font cadangan saat koneksi lambat -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="css/style.css?v=2026.11.09-15">
+    <link rel="stylesheet" href="css/style.css?v=2026.11.09-16">
 </head>
 
 <body>
@@ -35,6 +35,9 @@
     <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
     <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol>
     <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></symbol>
+    <symbol id="i-x-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15 9-6 6M9 9l6 6"/></symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
+    <symbol id="i-minus-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></symbol>
     <symbol id="i-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol>
 </svg>
 
@@ -347,23 +350,93 @@
 </section>
 
 <!-- HALAMAN HASIL -->
-<section class="app-panel" id="resultShell" hidden>
-    <div class="score-card">
-        <span class="tag">HASIL LATIHAN</span>
-        <h2 id="resultTitle">Latihan selesai!</h2>
-        <div id="scoreValue">0</div>
-        <p>Nilai kamu</p>
-        <p id="resultSummary"></p>
+<section class="result-shell" id="resultShell" hidden>
+    <!-- Bilah atas hasil: judul, mapel/mode, tombol beranda -->
+    <header class="result-top">
+        <div class="result-top-title">
+            <span class="tag" id="resultTag">Hasil latihan</span>
+            <h2 id="resultTitle" tabindex="-1">Latihan selesai!</h2>
+            <p id="resultMeta"></p>
+        </div>
+        <button class="btn btn--ghost result-home" id="homeButton" type="button">
+            <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+            <span>Beranda</span>
+        </button>
+    </header>
+
+    <!-- Pindah tampilan: ringkasan / pembahasan (diatur js/hasil.js) -->
+    <div class="result-tabs" role="tablist" aria-label="Tampilan hasil">
+        <button class="result-tab" id="tabRingkasan" type="button" role="tab" aria-selected="true" aria-controls="panelRingkasan">
+            <svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg><span>Ringkasan<span class="tab-extra"> hasil</span></span>
+        </button>
+        <button class="result-tab" id="tabPembahasan" type="button" role="tab" aria-selected="false" aria-controls="panelPembahasan" tabindex="-1">
+            <svg class="icon" aria-hidden="true"><use href="#i-book"/></svg><span>Pembahasan<span class="tab-extra"> soal</span></span>
+        </button>
     </div>
 
-    <div id="resultStats"></div>
-    <section id="petaHasil" class="peta-hasil" aria-labelledby="petaJudul" hidden></section>
-    <h3>Pembahasan dan Evaluasi</h3>
-    <div id="resultReview"></div>
+    <!-- BAGIAN A: RINGKASAN -->
+    <div class="result-panel" id="panelRingkasan" role="tabpanel" aria-labelledby="tabRingkasan">
+        <div class="score-card">
+            <div class="score-main">
+                <p class="score-label">Nilai akhir</p>
+                <div id="scoreValue">0</div>
+                <p class="score-scale">dari 100</p>
+            </div>
+            <div class="score-side">
+                <p id="resultSummary"></p>
+                <div class="score-progress" id="scoreProgress"></div>
+            </div>
+        </div>
 
-    <div class="quiz-actions">
-        <button class="action-button secondary" id="homeButton">Kembali ke Beranda</button>
-        <button class="action-button" id="retryButton">Ulangi Latihan</button>
+        <div id="resultStats"></div>
+        <div class="result-mastery" id="resultMastery"></div>
+        <div class="result-reco" id="resultReco"></div>
+        <section id="petaHasil" class="peta-hasil" aria-labelledby="petaJudul" hidden></section>
+
+        <div class="result-actions">
+            <button class="btn btn--secondary" id="retryButton" type="button">
+                <svg class="icon" aria-hidden="true"><use href="#i-pencil"/></svg>
+                Ulangi dengan soal baru
+            </button>
+            <button class="btn btn--primary" id="openReview" type="button">
+                <svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>
+                Lihat pembahasan soal
+            </button>
+        </div>
+    </div>
+
+    <!-- BAGIAN B & C: PEMBAHASAN SOAL (satu soal per tampilan, dengan filter) -->
+    <div class="result-panel" id="panelPembahasan" role="tabpanel" aria-labelledby="tabPembahasan" hidden>
+        <div class="review-filters" id="reviewFilters" role="group" aria-label="Saring soal"></div>
+        <div class="review-layout">
+            <div class="review-main">
+                <article class="review-card" id="resultReview" aria-live="polite"></article>
+                <div class="review-nav">
+                    <button class="btn btn--secondary" id="reviewPrev" type="button">
+                        <svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+                        <span class="label-long">Sebelumnya</span>
+                    </button>
+                    <button class="btn btn--ghost" id="reviewBack" type="button">
+                        <svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg>
+                        <span>Ringkasan</span>
+                    </button>
+                    <button class="btn btn--primary" id="reviewNext" type="button">
+                        <span class="label-long">Berikutnya</span>
+                        <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+                    </button>
+                </div>
+            </div>
+            <aside class="review-side" aria-labelledby="reviewNumbersTitle">
+                <h3 id="reviewNumbersTitle">Nomor soal</h3>
+                <div class="review-numbers" id="reviewNumbers"></div>
+                <ul class="nav-legend review-legend" aria-label="Keterangan warna">
+                    <li><i class="legend-benar" aria-hidden="true"></i>Benar</li>
+                    <li><i class="legend-salah" aria-hidden="true"></i>Salah</li>
+                    <li><i aria-hidden="true"></i>Belum dijawab</li>
+                    <li><i class="legend-flagged" aria-hidden="true"></i>Ragu-ragu</li>
+                </ul>
+            </aside>
+        </div>
     </div>
 </section>
 
@@ -442,27 +515,28 @@
     </div>
 </footer>
 
-<script src="js/profilsiswa.js?v=2026.11.09-15"></script>
-<script src="js/kisi-kisi.js?v=2026.11.09-15"></script>
-<script src="js/soal-adaptif-matematika.js?v=2026.11.09-15"></script>
-<script src="js/soal-adaptif-bahasa.js?v=2026.11.09-15"></script>
-<script src="js/soal-adaptif-ipas.js?v=2026.11.09-15"></script>
-<script src="js/soal-penguatan-matematika.js?v=2026.11.09-15"></script>
-<script src="js/soal-penguatan-bahasa.js?v=2026.11.09-15"></script>
-<script src="js/soal-penguatan-ipas.js?v=2026.11.09-15"></script>
-<script src="js/soal-kisi-matematika.js?v=2026.11.09-15"></script>
-<script src="js/soal-kisi-bahasa.js?v=2026.11.09-15"></script>
-<script src="js/soal-kisi-ipas.js?v=2026.11.09-15"></script>
-<script src="js/soal-tambahan-tka.js?v=2026.11.09-15"></script>
-<script src="js/soal-indikator-tambahan.js?v=2026.11.09-15"></script>
-<script src="js/bacaan-bahasa-1.js?v=2026.11.09-15"></script>
-<script src="js/bacaan-bahasa-2.js?v=2026.11.09-15"></script>
-<script src="js/bacaan-bahasa-3.js?v=2026.11.09-15"></script>
-<script src="js/bacaan-bahasa-4.js?v=2026.11.09-15"></script>
-<script src="js/bacaan-bahasa-5.js?v=2026.11.09-15"></script>
-<script src="js/app.js?v=2026.11.09-15"></script>
-<script src="js/bacaan-bahasa.js?v=2026.11.09-15"></script>
-<script src="js/dashboard.js?v=2026.11.09-15"></script>
-<script src="js/antarmuka.js?v=2026.11.09-15"></script>
+<script src="js/profilsiswa.js?v=2026.11.09-16"></script>
+<script src="js/kisi-kisi.js?v=2026.11.09-16"></script>
+<script src="js/soal-adaptif-matematika.js?v=2026.11.09-16"></script>
+<script src="js/soal-adaptif-bahasa.js?v=2026.11.09-16"></script>
+<script src="js/soal-adaptif-ipas.js?v=2026.11.09-16"></script>
+<script src="js/soal-penguatan-matematika.js?v=2026.11.09-16"></script>
+<script src="js/soal-penguatan-bahasa.js?v=2026.11.09-16"></script>
+<script src="js/soal-penguatan-ipas.js?v=2026.11.09-16"></script>
+<script src="js/soal-kisi-matematika.js?v=2026.11.09-16"></script>
+<script src="js/soal-kisi-bahasa.js?v=2026.11.09-16"></script>
+<script src="js/soal-kisi-ipas.js?v=2026.11.09-16"></script>
+<script src="js/soal-tambahan-tka.js?v=2026.11.09-16"></script>
+<script src="js/soal-indikator-tambahan.js?v=2026.11.09-16"></script>
+<script src="js/bacaan-bahasa-1.js?v=2026.11.09-16"></script>
+<script src="js/bacaan-bahasa-2.js?v=2026.11.09-16"></script>
+<script src="js/bacaan-bahasa-3.js?v=2026.11.09-16"></script>
+<script src="js/bacaan-bahasa-4.js?v=2026.11.09-16"></script>
+<script src="js/bacaan-bahasa-5.js?v=2026.11.09-16"></script>
+<script src="js/app.js?v=2026.11.09-16"></script>
+<script src="js/bacaan-bahasa.js?v=2026.11.09-16"></script>
+<script src="js/dashboard.js?v=2026.11.09-16"></script>
+<script src="js/hasil.js?v=2026.11.09-16"></script>
+<script src="js/antarmuka.js?v=2026.11.09-16"></script>
 </body>
 </html>

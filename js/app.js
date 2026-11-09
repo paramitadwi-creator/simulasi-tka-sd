@@ -97,7 +97,7 @@ let answers = {}, flagged = new Set(), timerId = null, secondsLeft = 600, hasSub
 let checkedAnswers = new Set();
 
 // Versi aset; samakan dengan ?v= pada index.html setiap kali file JS/CSS berubah
-const VERSI_APLIKASI = "2026.11.09-15";
+const VERSI_APLIKASI = "2026.11.09-16";
 
 // Bila index.html lama masih tersimpan di cache browser, data kisi-kisi
 // belum ikut dimuat. Muat sendiri agar Peta Hasil Belajar tetap tersedia.
@@ -1563,12 +1563,37 @@ localStorage.setItem("tkaSkillProgress", JSON.stringify(progress));
   $("resultSummary").textContent = `Kamu menjawab benar ${correct} dari ${currentQuestions.length} soal. Terus berlatih untuk meningkatkan pemahamanmu.`;
   $("resultStats").innerHTML = `<div><strong>${correct}</strong>Jawaban benar</div><div><strong>${currentQuestions.length - correct}</strong>Belum tepat</div><div><strong>${answered}</strong>Soal terjawab</div><div><strong>${flagged.size}</strong>Ditandai ragu-ragu</div>`;
   $("resultReview").innerHTML = "";
-  currentQuestions.forEach((q, i) => {
-    const item = document.createElement("div"); item.className = "review-item";
-    item.innerHTML = htmlPembahasan(q, i);
-    $("resultReview").appendChild(item);
-  });
   tampilkanPetaHasil(petaHasil);
+  // TAMPILAN HALAMAN HASIL (js/hasil.js). Data dibekukan di sini: soal diambil dari objek
+  // bank yang sama (ID tidak berubah), jawaban disalin, dan status benar memakai isCorrect()
+  // yang sama dengan perhitungan nilai di atas, sehingga ringkasan selalu cocok dengan nilai.
+  if (typeof window.tampilkanHasil === "function") {
+    window.tampilkanHasil({
+      mapel: currentSubject,
+      namaMapel: namaMapel[currentSubject],
+      mode: currentMode,
+      tanggal: dataSesi.tanggal,
+      nilai: score,
+      benar: correct,
+      terjawab: answered,
+      total: currentQuestions.length,
+      peta: petaHasil,
+      soal: currentQuestions.map((q, i) => ({
+        nomor: i + 1,
+        q,
+        jawaban: hasAnswered(q) ? JSON.parse(JSON.stringify(answers[q.id])) : null,
+        benar: isCorrect(q),
+        ragu: flagged.has(q.id),
+        indikator: indikatorSoal(q)
+      }))
+    });
+  } else {
+    currentQuestions.forEach((q, i) => {
+      const item = document.createElement("div"); item.className = "review-item";
+      item.innerHTML = htmlPembahasan(q, i);
+      $("resultReview").appendChild(item);
+    });
+  }
   window.scrollTo(0, 0);
 }
 // Keluar dari sesi yang sedang berjalan menghapus jawaban, jadi minta konfirmasi dulu.
