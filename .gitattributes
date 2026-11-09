@@ -1,0 +1,3 @@
+# Aset gambar disimpan apa adanya (tanpa konversi akhir baris), karena nama berkas
+# di assets/versi/ adalah hash isi berkas (lihat alat/versi-aset.js).
+assets/** -text
