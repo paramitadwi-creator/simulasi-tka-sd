@@ -1757,3 +1757,82 @@ footer small { font-size: var(--text-sm); color: var(--color-on-dark-2); }
   .review-question { font-size: var(--text-xl); }
   .review-explanation p { font-size: var(--text-md); }
 }
+
+/* =====================================================================
+   Riwayat hasil & pembahasan
+   ===================================================================== */
+.result-top-tools { display: flex; align-items: center; gap: var(--space-2); flex-shrink: 0; }
+.result-delete { color: var(--color-danger-ink); }
+.result-delete:hover { background: var(--color-danger-soft); }
+.result-save-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  margin-bottom: 0;
+  padding: var(--space-3) var(--space-4);
+  border: var(--border);
+  border-left-width: 4px;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--color-ink);
+}
+.result-save-note .icon { flex-shrink: 0; width: 20px; height: 20px; margin-top: 1px; }
+.result-save-note.is-ok { border-left-color: var(--color-success); }
+.result-save-note.is-ok .icon { color: var(--color-success); }
+.result-save-note.is-info { border-left-color: var(--color-primary); }
+.result-save-note.is-info .icon { color: var(--color-primary); }
+.result-save-note.is-peringatan { border-left-color: var(--color-accent); background: var(--color-accent-soft); }
+.result-save-note.is-peringatan .icon { color: var(--color-accent-on-soft); }
+.result-save-note.is-galat { border-left-color: var(--color-danger); background: var(--color-danger-soft); }
+.result-save-note.is-galat .icon { color: var(--color-danger-ink); }
+
+.review-version-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-accent-soft);
+  color: var(--color-accent-on-soft);
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+}
+.review-version-note .icon { flex-shrink: 0; width: 20px; height: 20px; margin-top: 3px; }
+
+/* Daftar riwayat di Beranda */
+.riwayat-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; row-gap: var(--space-2); }
+.riwayat-info-sesi { min-width: 0; }
+.riwayat-aksi { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
+.riwayat-buka { min-height: var(--tap-min); padding: 0 var(--space-4); font-size: var(--text-sm); }
+.riwayat-tanpa { font-size: var(--text-sm); color: var(--color-ink-2); font-style: italic; }
+.riwayat-hapus {
+  display: grid;
+  place-items: center;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-ink-2);
+  cursor: pointer;
+}
+.riwayat-hapus:hover { background: var(--color-danger-soft); color: var(--color-danger-ink); }
+.riwayat-hapus:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 2px; }
+.riwayat-hapus .icon { width: 20px; height: 20px; }
+.riwayat-info { display: grid; gap: var(--space-3); margin-top: var(--space-4); padding-top: var(--space-4); border-top: var(--border); }
+.riwayat-privasi { display: flex; align-items: flex-start; gap: var(--space-2); margin: 0; font-size: var(--text-sm); line-height: var(--leading-relaxed); color: var(--color-ink-2); }
+.riwayat-privasi .icon { flex-shrink: 0; width: 18px; height: 18px; margin-top: 2px; color: var(--color-primary); }
+.riwayat-kapasitas { display: grid; gap: var(--space-2); }
+.riwayat-kapasitas p { margin: 0; font-size: var(--text-sm); color: var(--color-ink); }
+.riwayat-kapasitas .progress-bar i { background: var(--color-primary); }
+.riwayat-kapasitas.is-hampir-penuh .progress-bar i { background: var(--color-accent); }
+.riwayat-peringatan { padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm); background: var(--color-accent-soft); color: var(--color-accent-on-soft) !important; line-height: var(--leading-relaxed); }
+.riwayat-hapus-semua { justify-self: start; min-height: var(--tap-min); padding: 0 var(--space-3); color: var(--color-danger-ink); font-size: var(--text-sm); }
+.riwayat-hapus-semua:hover { background: var(--color-danger-soft); }
+
+@media (max-width: 559.98px) {
+  .result-delete span { display: none; }
+}

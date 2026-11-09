@@ -191,6 +191,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const daftarRiwayat = document.createElement("ul");
             daftarRiwayat.className = "riwayat-list";
 
+            const namaMode = { practice: "Latihan", exam: "Simulasi Ujian", adaptive: "Latihan Adaptif" };
+            const R = window.Riwayat;
+
             riwayatMapel.slice(0, 10).forEach(sesi => {
                 const baris = document.createElement("li");
                 baris.className = "riwayat-item";
@@ -203,10 +206,12 @@ document.addEventListener("DOMContentLoaded", function () {
                         : tanggal.toLocaleString("id-ID", { dateStyle: "medium", timeStyle: "short" });
 
                 const kiri = document.createElement("div");
+                kiri.className = "riwayat-info-sesi";
                 const waktu = document.createElement("strong");
                 waktu.textContent = tanggalTampil;
                 const ringkas = document.createElement("small");
-                ringkas.textContent = sesi.benar + " dari " + sesi.totalSoal + " soal benar";
+                ringkas.textContent = (namaMode[sesi.mode] ? namaMode[sesi.mode] + " · " : "") +
+                    sesi.benar + " dari " + sesi.totalSoal + " soal benar";
                 kiri.append(waktu, ringkas);
 
                 const nilai = document.createElement("span");
@@ -214,12 +219,51 @@ document.addEventListener("DOMContentLoaded", function () {
                 nilai.textContent = formatNilai(sesi.nilai);
                 nilai.setAttribute("aria-label", "Nilai " + formatNilai(sesi.nilai));
 
-                baris.append(kiri, nilai);
+                // TAMPILAN: buka kembali pembahasan (bila tersimpan) & hapus riwayat
+                const aksi = document.createElement("div");
+                aksi.className = "riwayat-aksi";
+                if (R && R.ada(sesi.tanggal)) {
+                    const buka = document.createElement("button");
+                    buka.type = "button";
+                    buka.className = "btn btn--secondary riwayat-buka";
+                    buka.textContent = "Lihat pembahasan";
+                    buka.setAttribute("aria-label", "Lihat pembahasan " + (namaMode[sesi.mode] || "sesi") + " " + tanggalTampil);
+                    buka.addEventListener("click", () => window.bukaRiwayat && window.bukaRiwayat(sesi.tanggal));
+                    aksi.appendChild(buka);
+                } else {
+                    const label = document.createElement("span");
+                    label.className = "riwayat-tanpa";
+                    label.textContent = "Ringkasan saja";
+                    label.title = "Sesi ini disimpan sebelum fitur pembahasan riwayat tersedia, atau pembahasannya sudah dihapus otomatis.";
+                    aksi.appendChild(label);
+                }
+                if (R && !R.info().bacaSaja) {
+                    const hapus = document.createElement("button");
+                    hapus.type = "button";
+                    hapus.className = "riwayat-hapus";
+                    hapus.setAttribute("aria-label", "Hapus riwayat " + tanggalTampil);
+                    hapus.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#i-trash"/></svg>';
+                    hapus.addEventListener("click", async () => {
+                        const setuju = typeof window.tanyaKonfirmasi === "function"
+                            ? await window.tanyaKonfirmasi({
+                                judul: "Hapus riwayat ini?",
+                                pesan: "Riwayat " + (namaMode[sesi.mode] || "sesi") + " " + namaMap[subjek] + " (" + tanggalTampil + ") beserta pembahasannya akan dihapus dari perangkat ini. Tindakan ini tidak bisa dibatalkan.",
+                                ok: "Ya, hapus", batal: "Batal", nada: "bahaya", ikon: "#i-alert"
+                            })
+                            : confirm("Hapus riwayat ini? Tindakan ini tidak bisa dibatalkan.");
+                        if (setuju) { R.hapus(sesi.tanggal); tampilkanDashboard(); }
+                    });
+                    aksi.appendChild(hapus);
+                }
+
+                baris.append(kiri, nilai, aksi);
                 daftarRiwayat.appendChild(baris);
             });
 
             wadahRiwayat.appendChild(daftarRiwayat);
         }
+
+        tampilkanInfoRiwayat();
 
         console.log("Dashboard diperbarui:", {
             mataPelajaran: subjek,
@@ -229,8 +273,72 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // TAMPILAN: info penyimpanan riwayat, keterangan privasi, hapus semua
+    function tampilkanInfoRiwayat() {
+        const wadah = document.getElementById("riwayatInfo");
+        if (!wadah) return;
+        wadah.innerHTML = "";
+        const R = window.Riwayat;
+        const info = R ? R.info() : { tersedia: false };
+
+        const privasi = document.createElement("p");
+        privasi.className = "riwayat-privasi";
+        privasi.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg>';
+        privasi.append(info.tersedia
+            ? "Riwayat hanya tersimpan di perangkat dan browser ini, tidak tersinkron ke perangkat lain. Riwayat bisa hilang bila data browser dibersihkan."
+            : "Browser ini tidak mengizinkan penyimpanan, jadi riwayat tidak dapat disimpan.");
+        wadah.appendChild(privasi);
+        if (!info.tersedia) return;
+
+        const kapasitas = document.createElement("div");
+        kapasitas.className = "riwayat-kapasitas" + (info.hampirPenuh ? " is-hampir-penuh" : "");
+        const teks = document.createElement("p");
+        teks.textContent = "Pembahasan tersimpan: " + info.jumlah + " dari " + info.maks + " sesi (semua mata pelajaran) · ±" +
+            Math.max(1, Math.round(info.ukuranKarakter / 1024)) + " KB";
+        const bar = document.createElement("span");
+        bar.className = "progress-bar";
+        bar.setAttribute("aria-hidden", "true");
+        const isi = document.createElement("i");
+        isi.style.width = Math.min(100, info.jumlah / info.maks * 100) + "%";
+        bar.appendChild(isi);
+        kapasitas.append(teks, bar);
+        if (info.hampirPenuh) {
+            const peringatan = document.createElement("p");
+            peringatan.className = "riwayat-peringatan";
+            peringatan.textContent = "Riwayat hampir penuh. Saat mencapai " + info.maks + " sesi, riwayat terlama dihapus otomatis. Hapus riwayat yang tidak diperlukan agar riwayat penting tetap tersimpan.";
+            kapasitas.appendChild(peringatan);
+        }
+        if (info.bacaSaja) {
+            const p = document.createElement("p");
+            p.className = "riwayat-peringatan";
+            p.textContent = info.pesanSkema;
+            kapasitas.appendChild(p);
+        }
+        wadah.appendChild(kapasitas);
+        if (info.bacaSaja) return; // riwayat dari versi lebih baru: jangan tampilkan tombol yang tidak berfungsi
+
+        const hapusSemua = document.createElement("button");
+        hapusSemua.type = "button";
+        hapusSemua.className = "btn btn--ghost riwayat-hapus-semua";
+        hapusSemua.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#i-trash"/></svg> Hapus semua riwayat';
+        hapusSemua.addEventListener("click", async () => {
+            const setuju = typeof window.tanyaKonfirmasi === "function"
+                ? await window.tanyaKonfirmasi({
+                    judul: "Hapus semua riwayat?",
+                    pesan: "Semua riwayat nilai, pembahasan, dan progres latihan untuk ketiga mata pelajaran akan dihapus dari perangkat ini. Nilai awal tryout tidak terpengaruh. Tindakan ini tidak bisa dibatalkan.",
+                    ok: "Ya, hapus semua", batal: "Batal", nada: "bahaya", ikon: "#i-alert"
+                })
+                : confirm("Hapus semua riwayat? Tindakan ini tidak bisa dibatalkan.");
+            if (setuju) { R.hapusSemua(); tampilkanDashboard(); }
+        });
+        wadah.appendChild(hapusSemua);
+    }
+
     // TAMPILKAN DATA AWAL
     tampilkanDashboard();
+
+    // Riwayat berubah (sesi baru, dihapus, atau diubah dari tab lain)
+    window.addEventListener("riwayat-berubah", tampilkanDashboard);
 
     // PERUBAHAN PILIHAN MATA PELAJARAN
     pilihMapel.addEventListener("change", tampilkanDashboard);

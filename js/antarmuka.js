@@ -200,9 +200,10 @@
   if (kulitHasil) new MutationObserver(() => perbaruiSesi("hasil")).observe(kulitHasil, { attributes: true, attributeFilter: ["hidden"] });
 
   // Cegah jawaban/hasil hilang karena halaman tertutup/dimuat ulang tanpa sengaja
-  // selama sesi berjalan atau saat halaman hasil & pembahasan masih dibuka
+  // selama sesi berjalan, atau saat hasil yang BELUM tersimpan di riwayat masih dibuka
   window.addEventListener("beforeunload", (e) => {
-    const aktif = (kulitSoal && !kulitSoal.hidden) || (kulitHasil && !kulitHasil.hidden);
+    const hasilBelumTersimpan = kulitHasil && !kulitHasil.hidden && kulitHasil.dataset.tersimpan !== "ya";
+    const aktif = (kulitSoal && !kulitSoal.hidden) || hasilBelumTersimpan;
     if (aktif) { e.preventDefault(); e.returnValue = ""; }
   });
 

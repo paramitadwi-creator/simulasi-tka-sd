@@ -19,6 +19,7 @@
   let data = null;          // hasil sesi terakhir (tetap ada selama halaman hasil dibuka)
   let filterAktif = "semua";
   let posisi = 0;           // indeks di dalam daftar hasil filter
+  let kembaliKeDaftar = false; // riwayat dibuka dari Beranda: tombol Beranda kembali ke daftar riwayat
 
   const el = (tag, kelas, teks) => {
     const e = document.createElement(tag);
@@ -56,8 +57,10 @@
     const ragu = data.soal.filter((s) => s.ragu).length;
     const persen = total ? Math.round((benar / total) * 100) : 0;
 
-    $("resultTag").textContent = "Hasil " + NAMA_MODE[data.mode].toLowerCase();
-    $("resultTitle").textContent = data.mode === "exam" ? "Simulasi selesai!" : "Latihan selesai!";
+    $("resultTag").textContent = (data.dariRiwayat ? "Riwayat " : "Hasil ") + NAMA_MODE[data.mode].toLowerCase();
+    $("resultTitle").textContent = data.dariRiwayat
+      ? "Hasil " + NAMA_MODE[data.mode]
+      : data.mode === "exam" ? "Simulasi selesai!" : "Latihan selesai!";
     const waktu = new Date(data.tanggal);
     $("resultMeta").textContent = [data.namaMapel, NAMA_MODE[data.mode], isNaN(waktu) ? "" : waktu.toLocaleString("id-ID", { dateStyle: "medium", timeStyle: "short" })]
       .filter(Boolean).join(" · ");
@@ -111,7 +114,7 @@
     }
     const per = new Map();
     data.soal.forEach((s) => {
-      const k = s.q.topic || "Lainnya";
+      const k = (s.q && s.q.topic) || "Lainnya";
       if (!per.has(k)) per.set(k, { nama: k, label: "Materi", benar: 0, total: 0 });
       const d = per.get(k); d.total++; if (s.benar) d.benar++;
     });
@@ -237,10 +240,20 @@
     return c;
   }
 
+  // Pemberitahuan versi soal pada riwayat
+  const PESAN_CATATAN = {
+    "berubah": "Soal ini sudah diperbarui di bank soal setelah kamu mengerjakannya. Yang tampil di bawah adalah versi saat kamu mengerjakan, beserta kunci dan pembahasannya saat itu. Jawaban dan nilaimu tidak berubah.",
+    "dihapus-dari-bank": "Soal ini sudah tidak ada di bank soal saat ini. Yang tampil adalah salinan saat kamu mengerjakan. Jawaban dan nilaimu tidak berubah.",
+    "bacaan-hilang": "Salinan bacaan untuk soal ini tidak ditemukan di penyimpanan perangkat. Soal, jawaban, dan pembahasan tetap tampil.",
+    "salinan-hilang": "Salinan soal saat pengerjaan tidak ditemukan di penyimpanan perangkat. Yang tampil adalah versi bank soal saat ini, yang mungkin berbeda. Status dan nilaimu tetap sesuai saat dikerjakan.",
+    "tidak-tersedia": "Isi soal ini tidak dapat ditampilkan karena salinannya hilang dan soal sudah tidak ada di bank soal. Jawaban dan status tetap sesuai saat dikerjakan."
+  };
+
   function kartuSoal(s, urutan, jumlah) {
     const q = s.q;
     const st = statusSoal(s);
     const kartu = document.createDocumentFragment();
+    if (!q) return kartuTidakTersedia(s, kartu);
 
     // 1, 10: nomor & status
     const kepala = el("div", "review-head");
@@ -253,6 +266,7 @@
     kepala.append(judul, status);
     kartu.appendChild(kepala);
     if (filterAktif !== "semua") kartu.appendChild(el("p", "review-pos", `${urutan + 1} dari ${jumlah} soal pada saringan “${FILTER.find((f) => f[0] === filterAktif)[1]}”`));
+    if (s.catatan && PESAN_CATATAN[s.catatan]) kartu.appendChild(pemberitahuan(PESAN_CATATAN[s.catatan]));
 
     // 2, 3, 4: mapel, materi, indikator, kesulitan, tipe
     const meta = el("dl", "review-meta");
@@ -318,6 +332,32 @@
     hb.append(ikon("#i-book"), document.createTextNode(" Pembahasan"));
     bahas.append(hb, el("p", null, q.explanation));
     kartu.appendChild(bahas);
+    return kartu;
+  }
+
+  function pemberitahuan(teks) {
+    const p = el("p", "review-version-note");
+    p.setAttribute("role", "note");
+    p.append(ikon("#i-alert"), el("span", null, teks));
+    return p;
+  }
+
+  function kartuTidakTersedia(s, kartu) {
+    const st = statusSoal(s);
+    const kepala = el("div", "review-head");
+    const judul = el("h3", "review-title", `Soal ${s.nomor}`);
+    judul.id = "reviewSoalJudul";
+    judul.tabIndex = -1;
+    const status = el("div", "review-status");
+    status.append(chip(LABEL_STATUS[st], "is-" + st, IKON_STATUS[st]));
+    if (s.ragu) status.append(chip("Ragu-ragu", "is-ragu", "#i-flag"));
+    kepala.append(judul, status);
+    kartu.append(kepala, pemberitahuan(PESAN_CATATAN["tidak-tersedia"]));
+    const dl = el("dl", "review-meta");
+    [["ID soal", s.idSoal], ["Jawabanmu", s.jawaban ? JSON.stringify(s.jawaban) : "Belum dijawab"]].forEach(([k, v]) => {
+      const d = el("div"); d.append(el("dt", null, k), el("dd", null, v)); dl.appendChild(d);
+    });
+    kartu.appendChild(dl);
     return kartu;
   }
 
@@ -436,14 +476,123 @@
     $("reviewNext").addEventListener("click", () => { if (posisi < daftarFilter().length - 1) { posisi++; renderPembahasan(true); } });
   });
 
-  // Dipanggil finishQuiz() di app.js
+  // ======================= Riwayat (js/riwayat.js) =======================
+  const fmtTanggal = (iso) => {
+    const t = new Date(iso);
+    return isNaN(t) ? iso : t.toLocaleString("id-ID", { dateStyle: "medium", timeStyle: "short" });
+  };
+
+  // Catatan penyimpanan di bawah judul halaman hasil
+  function tampilkanCatatan(teks, nada) {
+    const p = $("resultSaveNote");
+    if (!p) return;
+    p.replaceChildren();
+    if (!teks) { p.hidden = true; return; }
+    p.className = "result-save-note is-" + nada;
+    p.append(ikon(nada === "ok" ? "#i-check-circle" : nada === "info" ? "#i-lock" : "#i-alert"), el("span", null, teks));
+    p.hidden = false;
+  }
+
+  function simpanKeRiwayat(hasil) {
+    const kulit = $("resultShell");
+    kulit.dataset.tersimpan = "tidak";
+    if (!window.Riwayat) return;
+    const r = window.Riwayat.simpan(hasil);
+    if (r.ok) {
+      kulit.dataset.tersimpan = "ya";
+      const inf = window.Riwayat.info();
+      let teks = `Hasil dan pembahasan tersimpan di riwayat perangkat ini (${r.jumlah} dari ${inf.maks} sesi). Buka kembali kapan saja dari Beranda.`;
+      if (r.dihapus && r.dihapus.length) teks += ` Riwayat terlama (${r.dihapus.map(fmtTanggal).join(", ")}) dihapus otomatis karena batas ${inf.maks} sesi.`;
+      else if (inf.hampirPenuh) teks += ` Riwayat hampir penuh. Saat penuh, riwayat terlama akan dihapus otomatis. Kamu bisa menghapus riwayat lama di Beranda.`;
+      tampilkanCatatan(teks, inf.hampirPenuh || (r.dihapus && r.dihapus.length) ? "peringatan" : "ok");
+    } else {
+      const alasan = {
+        "tidak-tersedia": "Browser ini tidak mengizinkan penyimpanan, jadi pembahasan sesi ini tidak bisa dibuka lagi setelah halaman ini ditutup. Pelajari pembahasannya sekarang.",
+        "baca-saja": "Riwayat dibuat oleh versi aplikasi yang lebih baru, jadi sesi ini tidak disimpan. Pelajari pembahasannya sekarang.",
+        "penuh": "Penyimpanan perangkat penuh, jadi pembahasan sesi ini tidak tersimpan. Riwayat lama tetap aman. Hapus beberapa riwayat di Beranda agar sesi berikutnya bisa tersimpan."
+      }[r.alasan] || "Pembahasan sesi ini tidak tersimpan. Pelajari pembahasannya sekarang.";
+      tampilkanCatatan(alasan, "galat");
+    }
+  }
+
+  // Dipanggil finishQuiz() di app.js (sesi baru) atau bukaRiwayat() (riwayat)
   window.tampilkanHasil = (hasil) => {
     data = hasil;
     filterAktif = "semua";
     posisi = 0;
+    const tombolHapus = $("resultDelete");
+    if (hasil.dariRiwayat) {
+      // Peta hasil belajar disimpan apa adanya saat ujian; tampilkan dengan fungsi yang sama
+      if (typeof tampilkanPetaHasil === "function" && hasil.peta && hasil.peta.baris) tampilkanPetaHasil(hasil.peta);
+      else if ($("petaHasil")) $("petaHasil").hidden = true;
+      $("resultShell").dataset.tersimpan = "ya";
+      const berubah = hasil.soal.filter((s) => s.catatan).length;
+      tampilkanCatatan(
+        `Riwayat ${fmtTanggal(hasil.tanggal)}. Soal, kunci, pembahasan, jawaban, dan nilai ditampilkan sesuai saat dikerjakan.` +
+        (berubah ? ` ${berubah} soal sudah diperbarui di bank soal sejak itu; ada tanda pada soal tersebut.` : ""),
+        berubah ? "peringatan" : "info"
+      );
+      if (tombolHapus) tombolHapus.hidden = !window.Riwayat || window.Riwayat.info().bacaSaja;
+    } else {
+      if (tombolHapus) tombolHapus.hidden = true;
+      kembaliKeDaftar = false;
+      simpanKeRiwayat(hasil);
+    }
     renderRingkasan();
     renderPembahasan(false);
     pilihTab("ringkasan");
     requestAnimationFrame(() => $("resultTitle").focus({ preventScroll: true }));
   };
+
+  // Membuka riwayat dari Beranda
+  window.bukaRiwayat = (id) => {
+    if (!window.Riwayat) return false;
+    const hasil = window.Riwayat.muat(id);
+    if (hasil.galat) {
+      const pesan = { "tidak-ada": "Riwayat ini sudah dihapus (mungkin dari tab lain).", "rusak": "Data riwayat ini rusak dan tidak dapat dibuka. Riwayat lain tidak terpengaruh.", "tidak-tersedia": "Penyimpanan browser tidak tersedia." }[hasil.galat];
+      if (typeof window.tanyaKonfirmasi === "function") window.tanyaKonfirmasi({ judul: "Riwayat tidak dapat dibuka", pesan, ok: "Mengerti", nada: "peringatan", ikon: "#i-alert", tanpaBatal: true });
+      else alert(pesan);
+      if (typeof window.tampilkanDashboard === "function") window.tampilkanDashboard();
+      return false;
+    }
+    // Tampilan sama seperti setelah ujian selesai; mapel & mode dipakai tombol "Ulangi"
+    try { currentSubject = hasil.mapel; currentMode = hasil.mode; } catch (e) { /* */ }
+    document.querySelector("main").hidden = true;
+    const kaki = document.querySelector("footer"); if (kaki) kaki.hidden = true;
+    const dasbor = $("perkembangan"); if (dasbor) dasbor.hidden = true;
+    $("quizShell").hidden = true;
+    $("resultShell").hidden = false;
+    window.tampilkanHasil(hasil);
+    kembaliKeDaftar = true;
+    window.scrollTo({ top: 0, behavior: "instant" });
+    return true;
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const tombolHapus = $("resultDelete");
+    if (tombolHapus) tombolHapus.addEventListener("click", async () => {
+      if (!data || !data.dariRiwayat) return;
+      const setuju = typeof window.tanyaKonfirmasi === "function"
+        ? await window.tanyaKonfirmasi({
+          judul: "Hapus riwayat ini?",
+          pesan: `Hasil dan pembahasan ${NAMA_MODE[data.mode]} ${data.namaMapel} (${fmtTanggal(data.tanggal)}) akan dihapus dari perangkat ini, termasuk barisnya di riwayat nilai. Tindakan ini tidak bisa dibatalkan.`,
+          ok: "Ya, hapus", batal: "Batal", nada: "bahaya", ikon: "#i-alert"
+        })
+        : confirm("Hapus riwayat ini? Tindakan ini tidak bisa dibatalkan.");
+      if (!setuju) return;
+      window.Riwayat.hapus(data.id);
+      data = null;
+      $("homeButton").click();
+    });
+    // Kembali ke Beranda dari riwayat: langsung ke daftar riwayat (setelah returnHome() di app.js)
+    $("homeButton").addEventListener("click", () => {
+      if (!kembaliKeDaftar) return;
+      kembaliKeDaftar = false;
+      setTimeout(() => {
+        const dasbor = $("perkembangan");
+        const panel = $("riwayatDashboard") && $("riwayatDashboard").closest(".dashboard-panel");
+        if (dasbor && !dasbor.hidden) (panel || dasbor).scrollIntoView({ block: "start", behavior: "instant" });
+      }, 0);
+    });
+  });
 })();
