@@ -97,7 +97,17 @@ let answers = {}, flagged = new Set(), timerId = null, secondsLeft = 600, hasSub
 let checkedAnswers = new Set();
 
 // Versi aset; samakan dengan ?v= pada index.html setiap kali file JS/CSS berubah
-const VERSI_APLIKASI = "2026.11.08-10";
+const VERSI_APLIKASI = "2026.11.09-19";
+// Akses localStorage yang aman: penyimpanan bisa diblokir browser (mis. data situs dimatikan)
+// atau isinya rusak. Bila gagal, aplikasi tetap berjalan; hanya penyimpanannya yang dilewati.
+function bacaPenyimpanan(kunci) { try { return localStorage.getItem(kunci); } catch (e) { return null; } }
+function tulisPenyimpanan(kunci, nilai) { try { localStorage.setItem(kunci, nilai); return true; } catch (e) { return false; } }
+function bacaDaftarTersimpan(kunci) {
+  try { const v = JSON.parse(bacaPenyimpanan(kunci) || "[]"); return Array.isArray(v) ? v : []; } catch (e) { return []; }
+}
+function bacaObjekTersimpan(kunci) {
+  try { const v = JSON.parse(bacaPenyimpanan(kunci) || "{}"); return v && typeof v === "object" && !Array.isArray(v) ? v : {}; } catch (e) { return {}; }
+}
 
 // Bila index.html lama masih tersimpan di cache browser, data kisi-kisi
 // belum ikut dimuat. Muat sendiri agar Peta Hasil Belajar tetap tersedia.
@@ -401,11 +411,22 @@ $("backHome").addEventListener("click", confirmExitQuiz);
 $("prevButton").addEventListener("click", () => moveQuestion(-1));
 $("nextButton").addEventListener("click", () => moveQuestion(1));
 $("flagButton").addEventListener("click", toggleFlag);
-$("finishButton").addEventListener("click", () => {
-  const unanswered = currentQuestions.length - Object.keys(answers).length;
-  const message = unanswered ? `Masih ada ${unanswered} soal yang belum dijawab. Selesaikan sekarang?` : "Kumpulkan jawaban sekarang?";
-  if (confirm(message)) finishQuiz();
-});
+$("finishButton").addEventListener("click", konfirmasiAkhiriSesi);
+// Tampilan: minta konfirmasi sebelum mengumpulkan jawaban (dialog dari antarmuka.js, cadangan confirm()).
+async function konfirmasiAkhiriSesi() {
+  if (hasSubmitted) return;
+  const kosong = [], ragu = [], belumLengkap = [];
+  currentQuestions.forEach((q, i) => {
+    if (!hasAnswered(q)) kosong.push(i);
+    else if (q.type === "pgk_kategori" && answers[q.id].some(v => v === null || v === undefined)) belumLengkap.push(i);
+    if (flagged.has(q.id)) ragu.push(i);
+  });
+  const message = kosong.length ? `Masih ada ${kosong.length} soal yang belum dijawab. Selesaikan sekarang?` : "Kumpulkan jawaban sekarang?";
+  const setuju = typeof window.konfirmasiSelesai === "function"
+    ? await window.konfirmasiSelesai({ mode: currentMode, total: currentQuestions.length, kosong, ragu, belumLengkap, keSoal: goToQuestion })
+    : confirm(message);
+  if (setuju) finishQuiz();
+}
 $("retryButton").addEventListener("click", () => beginQuiz(currentMode));
 $("homeButton").addEventListener("click", returnHome);
 
@@ -442,9 +463,7 @@ const dataPrioritas = isMatematika
     return;
   }
 
-  const progres = JSON.parse(
-    localStorage.getItem("tkaSkillProgress") || "{}"
-  );
+  const progres = bacaObjekTersimpan("tkaSkillProgress");
 
   // Simpan kode kompetensi dan persentase awal
  const petaPrioritas = new Map(
@@ -729,16 +748,16 @@ if (currentSubject === "bahasa") {
     if (daftar.length === 0) return [];
 
     const kunci = `tkaRotasiBahasa_${namaKunci}`;
-    const posisi = Number(localStorage.getItem(kunci)) || 0;
+    const posisi = Number(bacaPenyimpanan(kunci)) || 0;
     const terpilih = [];
 
     for (let i = 0; i < Math.min(jumlah, daftar.length); i++) {
       terpilih.push(daftar[(posisi + i) % daftar.length]);
     }
 
-    localStorage.setItem(
+    tulisPenyimpanan(
       kunci,
-      (posisi + terpilih.length) % daftar.length
+      String((posisi + terpilih.length) % daftar.length)
     );
 
     return terpilih;
@@ -918,10 +937,17 @@ secondsLeft = DURASI_MODE[mode];
 }
 function startTimer() {
   stopTimer(); updateTimer();
+  const batasWaktu = Date.now() + secondsLeft * 1000;
   timerId = setInterval(() => {
-    secondsLeft--; updateTimer();
-    if (secondsLeft <= 0) { stopTimer(); alert("Waktu habis. Jawaban akan dikumpulkan."); finishQuiz(); }
-  }, 1000);
+    const sisa = Math.max(0, Math.ceil((batasWaktu - Date.now()) / 1000));
+    if (sisa !== secondsLeft) { secondsLeft = sisa; updateTimer(); }
+    if (secondsLeft <= 0) {
+      stopTimer();
+      if (typeof window.tutupDialog === "function") window.tutupDialog();
+      if (typeof window.infoWaktuHabis === "function") { finishQuiz(); window.infoWaktuHabis(); }
+      else { alert("Waktu habis. Jawaban akan dikumpulkan."); finishQuiz(); }
+    }
+  }, 250);
 }
 function stopTimer() { if (timerId) { clearInterval(timerId); timerId = null; } }
 function updateTimer() { $("timer").textContent = `${String(Math.floor(secondsLeft / 60)).padStart(2, "0")}:${String(secondsLeft % 60).padStart(2, "0")}`; }
@@ -948,7 +974,8 @@ if (q.stimulus) {
 
 if (q.image) {
   const img = document.createElement("img");
-  img.src = q.image;
+  // TAMPILAN: pakai berkas versi tetap dari manifest aset (js/aset.js); bila tidak ada, jalur sumber
+  img.src = window.Aset ? window.Aset.src(q.image) : q.image;
   img.alt = q.imageAlt || "Gambar stimulus soal";
   img.loading = "lazy";
   stimulusBox.appendChild(img);
@@ -1246,6 +1273,7 @@ function toggleFlag() {
 }
 function moveQuestion(delta) {
   if (currentMode === "practice" && delta === 1 && currentIndex === currentQuestions.length - 1) { finishQuiz(); return; }
+  if (delta === 1 && currentIndex === currentQuestions.length - 1) { konfirmasiAkhiriSesi(); return; }
   goToQuestion(Math.max(0, Math.min(currentQuestions.length - 1, currentIndex + delta)));
 }
 // Pindah soal: tampilkan soal baru dari atas dan arahkan fokus ke teks soal,
@@ -1442,9 +1470,7 @@ function finishQuiz() {
   const correct = currentQuestions.filter(isCorrect).length;
   const answered = Object.keys(answers).length;
   const score = Math.round(correct / currentQuestions.length * 100);// SIMPAN HASIL LATIHAN PER KOMPETENSI
-const progress = JSON.parse(
-    localStorage.getItem("tkaSkillProgress") || "{}"
-);
+const progress = bacaObjekTersimpan("tkaSkillProgress");
 
 const skillResults = {};
 
@@ -1494,9 +1520,7 @@ Object.entries(skillResults).forEach(([kode, hasil]) => {
 const petaHasil = hitungPetaHasil(currentSubject, currentQuestions);
 
 // Menyimpan riwayat setiap sesi latihan
-const riwayatLatihan = JSON.parse(
-  localStorage.getItem("tkaSessionHistory") || "[]"
-);
+const riwayatLatihan = bacaDaftarTersimpan("tkaSessionHistory");
 
 const dataSesi = {
   tanggal: new Date().toISOString(),
@@ -1532,24 +1556,49 @@ const dataSesi = {
 riwayatLatihan.unshift(dataSesi);
 
 // Simpan maksimal 100 sesi terakhir
-localStorage.setItem(
+tulisPenyimpanan(
   "tkaSessionHistory",
   JSON.stringify(riwayatLatihan.slice(0, 100))
 );
 
-localStorage.setItem("tkaSkillProgress", JSON.stringify(progress));
+tulisPenyimpanan("tkaSkillProgress", JSON.stringify(progress));
   quizShell.hidden = true; resultShell.hidden = false;
   $("resultTitle").textContent = currentMode === "exam" ? "Simulasi selesai!" : "Latihan selesai!";
   $("scoreValue").textContent = score;
   $("resultSummary").textContent = `Kamu menjawab benar ${correct} dari ${currentQuestions.length} soal. Terus berlatih untuk meningkatkan pemahamanmu.`;
   $("resultStats").innerHTML = `<div><strong>${correct}</strong>Jawaban benar</div><div><strong>${currentQuestions.length - correct}</strong>Belum tepat</div><div><strong>${answered}</strong>Soal terjawab</div><div><strong>${flagged.size}</strong>Ditandai ragu-ragu</div>`;
   $("resultReview").innerHTML = "";
-  currentQuestions.forEach((q, i) => {
-    const item = document.createElement("div"); item.className = "review-item";
-    item.innerHTML = htmlPembahasan(q, i);
-    $("resultReview").appendChild(item);
-  });
   tampilkanPetaHasil(petaHasil);
+  // TAMPILAN HALAMAN HASIL (js/hasil.js). Data dibekukan di sini: soal diambil dari objek
+  // bank yang sama (ID tidak berubah), jawaban disalin, dan status benar memakai isCorrect()
+  // yang sama dengan perhitungan nilai di atas, sehingga ringkasan selalu cocok dengan nilai.
+  if (typeof window.tampilkanHasil === "function") {
+    window.tampilkanHasil({
+      mapel: currentSubject,
+      namaMapel: namaMapel[currentSubject],
+      mode: currentMode,
+      tanggal: dataSesi.tanggal,
+      nilai: score,
+      benar: correct,
+      terjawab: answered,
+      total: currentQuestions.length,
+      peta: petaHasil,
+      soal: currentQuestions.map((q, i) => ({
+        nomor: i + 1,
+        q,
+        jawaban: hasAnswered(q) ? JSON.parse(JSON.stringify(answers[q.id])) : null,
+        benar: isCorrect(q),
+        ragu: flagged.has(q.id),
+        indikator: indikatorSoal(q)
+      }))
+    });
+  } else {
+    currentQuestions.forEach((q, i) => {
+      const item = document.createElement("div"); item.className = "review-item";
+      item.innerHTML = htmlPembahasan(q, i);
+      $("resultReview").appendChild(item);
+    });
+  }
   window.scrollTo(0, 0);
 }
 // Keluar dari sesi yang sedang berjalan menghapus jawaban, jadi minta konfirmasi dulu.
@@ -1558,7 +1607,17 @@ function confirmExitQuiz() {
   const message = answeredCount
     ? `Keluar dari latihan? ${answeredCount} jawaban yang sudah kamu isi akan hilang dan tidak disimpan.`
     : "Keluar dari latihan? Sesi ini tidak akan disimpan.";
-  if (hasSubmitted || confirm(message)) returnHome();
+  if (hasSubmitted) { returnHome(); return; }
+  if (typeof window.tanyaKonfirmasi === "function") {
+    window.tanyaKonfirmasi({
+      judul: currentMode === "practice" ? "Keluar dari latihan?" : "Keluar dari sesi ini?",
+      pesan: message.replace(/^Keluar dari latihan\? /, ""),
+      ok: "Ya, keluar",
+      batal: "Lanjut mengerjakan",
+      nada: "bahaya",
+      ikon: "#i-alert"
+    }).then(setuju => { if (setuju) returnHome(); });
+  } else if (confirm(message)) returnHome();
 }
 function returnHome() {
   stopTimer(); hasSubmitted = false;
