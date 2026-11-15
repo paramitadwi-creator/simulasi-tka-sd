@@ -28,7 +28,7 @@ const AKAR = path.resolve(__dirname, "..");
 const BELUM_DIPORT = [
   "MAT-009", "MAT-010", "MAT-011", "MAT-012", "MAT-013", "MAT-014", "MAT-015", "MAT-016",
   "MAT-032",
-  "MAT-042", "MAT-043", "MAT-044", "MAT-045", "MAT-046", "MAT-047", "MAT-048", "MAT-049",
+  "MAT-042", "MAT-043", "MAT-044", "MAT-045", "MAT-046", "MAT-047", "MAT-048",
   "MAT-050", "MAT-051", "MAT-052", "MAT-053", "MAT-054", "MAT-056", "MAT-057",
   "MAT-069", "MAT-070", "MAT-074", "MAT-081", "MAT-087", "MAT-088", "MAT-090"
 ];
@@ -36,8 +36,9 @@ const BELUM_DIPORT = [
 const PENGECUALIAN = {};
 // Kode kisi Matematika yang sudah dipakai bank utama sebelum port (2026-11-15).
 // KISI-MT-03, -10, -14 belum pernah dipakai: memakainya = membuat kode baru.
-// KISI-MT-31 (indikator 31, persen kontekstual) disetujui pengguna 2026-11-15.
-const KODE_TERDAFTAR = [1, 2, 4, 5, 6, 7, 8, 9, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+// KISI-MT-31 (indikator 31, persen kontekstual) dan KISI-MT-32 (indikator 32, kecepatan)
+// disetujui pengguna 2026-11-15.
+const KODE_TERDAFTAR = [1, 2, 4, 5, 6, 7, 8, 9, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
   .map((n) => `KISI-MT-${String(n).padStart(2, "0")}`);
 
 const galat = [];

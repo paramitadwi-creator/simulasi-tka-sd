@@ -1,6 +1,7 @@
 // =====================================================================
 // KISI-KISI TKA SD/MI — "Indikator Materi Latihan TKA" (30 indikator per mapel)
-// Matematika punya indikator tambahan 31 (persen kontekstual, disetujui 2026-11-15):
+// Matematika punya indikator tambahan 31 (persen kontekstual) dan 32 (kecepatan),
+// keduanya disetujui 2026-11-15:
 // nomor baru selalu DITAMBAH DI AKHIR, jangan menggeser nomor lama (riwayat menyimpan nomor).
 // Dipakai untuk menyusun Peta Hasil Belajar setiap sesi latihan.
 // =====================================================================
@@ -41,11 +42,12 @@ window.kisiKisiTKA = {
       28: "Interpretasi data berdasarkan kategori",
       29: "Masalah penyajian data diagram batang/tabel",
       30: "Interpretasi diagram batang atau tabel",
-      31: "Masalah kontekstual persen dari suatu besaran"
+      31: "Masalah kontekstual persen dari suatu besaran",
+      32: "Hubungan jarak, waktu, dan kecepatan"
     },
     elemen: [
       { nama: "Bilangan", nomor: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 31] },
-      { nama: "Geometri dan Pengukuran", nomor: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25] },
+      { nama: "Geometri dan Pengukuran", nomor: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 32] },
       { nama: "Data", nomor: [26, 27, 28, 29, 30] }
     ]
   },
