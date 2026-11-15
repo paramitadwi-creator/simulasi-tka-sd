@@ -63,7 +63,11 @@
   try {
     ["practice", "exam", "adaptive"].forEach((mode) => {
       const jumlah = JUMLAH_SOAL_MODE[mode];
-      const menit = Math.round(DURASI_MODE[mode] / 60);
+      // Durasi bisa berbeda per mapel: tampilkan rentang, mis. "45–75 menit"
+      const daftarMenit = ["matematika", "bahasa", "ipas"].map((mapel) =>
+        Math.round((typeof durasiSesi === "function" ? durasiSesi(mode, mapel) : DURASI_MODE[mode]) / 60));
+      const terkecil = Math.min(...daftarMenit), terbesar = Math.max(...daftarMenit);
+      const menit = terkecil === terbesar ? terkecil : `${terkecil}–${terbesar}`;
       document.querySelectorAll(`[data-mode-meta="${mode}"]`).forEach((el) => {
         el.textContent = `${jumlah} soal · ${menit} menit`;
       });
