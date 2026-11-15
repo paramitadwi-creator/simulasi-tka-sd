@@ -33,7 +33,11 @@ const BELUM_DIPORT = [
   "MAT-069", "MAT-070", "MAT-074", "MAT-081", "MAT-087", "MAT-088", "MAT-090"
 ];
 // { "MAT-xxx": "<sha256 JSON soal di bank utama>" } — perbedaan isi yang sudah disetujui.
-const PENGECUALIAN = {};
+const PENGECUALIAN = {
+  // 2026-11-15 (disetujui): diagram lingkaran diganti diagram batang berskala persen (data tetap 30/45/25%)
+  // karena diagram lingkaran tidak tercantum di kerangka TKA SD; imageAlt diperbarui.
+  "MAT-031": "db2a04c32bafe2aa34b339d44269f9ed9081a540debb20ec809eb21041cf7e06"
+};
 // Kode kisi Matematika yang sudah dipakai bank utama sebelum port (2026-11-15).
 // KISI-MT-03, -10, -14 belum pernah dipakai: memakainya = membuat kode baru.
 // KISI-MT-31 (indikator 31, persen kontekstual) dan KISI-MT-32 (indikator 32, kecepatan)
