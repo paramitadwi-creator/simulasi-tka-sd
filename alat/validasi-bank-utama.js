@@ -17,7 +17,7 @@ const vm = require("vm");
 
 const AKAR = path.resolve(__dirname, "..");
 const LEWATI = new Set(["js/dashboard.js", "js/riwayat.js", "js/hasil.js", "js/antarmuka.js", "js/aset.js"]);
-const JUMLAH_HARAPAN = 850;
+const JUMLAH_HARAPAN = 851; // 850 + MAT-085 (diporting dari bank lama mat-soal-4.js)
 
 const galat = [];
 const peringatan = [];
@@ -77,7 +77,11 @@ for (const [mapel, daftarBank] of Object.entries(sumber)) {
   const unik = new Map();
   daftarBank.forEach((bank, i) => {
     if (!Array.isArray(bank)) { galat.push(`${mapel}: bank ke-${i + 1} tidak termuat`); return; }
-    bank.forEach((q) => { if (!unik.has(q.id)) unik.set(q.id, q); });
+    bank.forEach((q) => {
+      // ID kembar di bank mana pun dalam satu mapel adalah galat (dulu terlewat diam-diam saat dedup)
+      if (unik.has(q.id)) galat.push(`${q.id}: ID kembar di bank ${mapel}`);
+      else unik.set(q.id, q);
+    });
   });
   perMapel[mapel] = unik.size;
   for (const q of unik.values()) {
