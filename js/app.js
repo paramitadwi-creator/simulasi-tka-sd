@@ -123,6 +123,12 @@ if (!window.kisiKisiTKA) {
 const JUMLAH_SOAL_MODE = { practice: 15, exam: 30, adaptive: 30 };
 // Durasi pengerjaan per sesi (detik)
 const DURASI_MODE = { practice: 45 * 60, exam: 90 * 60, adaptive: 90 * 60 };
+// Durasi khusus per mata pelajaran (detik). Bila ada, berlaku untuk SEMUA sesi
+// (latihan, simulasi ujian, adaptif) dan menggantikan DURASI_MODE.
+const DURASI_MAPEL = { bahasa: 75 * 60, ipas: 75 * 60 };
+function durasiSesi(mode, mapel) {
+  return Object.prototype.hasOwnProperty.call(DURASI_MAPEL, mapel) ? DURASI_MAPEL[mapel] : DURASI_MODE[mode];
+}
 const KOMPOSISI_KESULITAN = { mudah: 0.2, sedang: 0.4, sulit: 0.4 };
 const URUTAN_KESULITAN = ["mudah", "sedang", "sulit"];
 // Bentuk soal campuran: 2/3 PG, 1/3 PGK (30 → 20 PG + 10 PGK, 15 → 10 PG + 5 PGK).
@@ -400,6 +406,11 @@ const setupModal = $("setupModal"), quizShell = $("quizShell"), resultShell = $(
 document.querySelectorAll(".subject-button").forEach(btn => btn.addEventListener("click", () => {
   currentSubject = btn.dataset.subject;
   $("setupSubjectName").textContent = namaMapel[currentSubject];
+  // Tampilkan jumlah soal & durasi sesuai mapel yang dipilih
+  document.querySelectorAll("#setupModal [data-mode-meta]").forEach(el => {
+    const m = el.dataset.modeMeta;
+    el.textContent = `${JUMLAH_SOAL_MODE[m]} soal · ${Math.round(durasiSesi(m, currentSubject) / 60)} menit`;
+  });
   setupModal.hidden = false;
 }));
 $("closeSetup").addEventListener("click", () => setupModal.hidden = true);
@@ -916,7 +927,7 @@ answers = {};
 flagged = new Set();
 checkedAnswers = new Set();
 hasSubmitted = false;
-secondsLeft = DURASI_MODE[mode];
+secondsLeft = durasiSesi(mode, currentSubject);
   setupModal.hidden = true;
   document.querySelector("main").hidden = true;
   document.querySelector("footer").hidden = true;
