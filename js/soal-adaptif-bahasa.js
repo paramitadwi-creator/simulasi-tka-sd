@@ -576,13 +576,13 @@ window.soalAdaptifBahasa = [
   kodeKompetensi: "BIN-TKS-01",
   difficulty: "mudah",
   type: "pg",
-  topic: "Mengidentifikasi objek berdasarkan kosakata dalam teks",
-  fokus: "Mengenali objek dari ciri-cirinya",
-  stimulus: "Hewan ini memiliki leher sangat panjang, kaki jenjang, dan tubuh berbintik. Hewan ini memakan daun dari pohon yang tinggi.",
-  question: "Hewan yang dimaksud dalam teks adalah ...",
-  options: ["Zebra", "Jerapah", "Kuda nil", "Rusa"],
-  answer: [1],
-  explanation: "Leher panjang, kaki jenjang, dan kebiasaan memakan daun dari pohon tinggi merupakan ciri jerapah."
+  topic: "Pernyataan yang sesuai dengan isi teks – fakta dan opini",
+  fokus: "Membedakan fakta dan opini dalam teks berita",
+  stimulus: "Kunjungan ke Kebun Binatang Ragunan\n\nPada hari Kamis, 14 Maret, sebanyak 56 siswa kelas 4 SD Nusa Indah berkunjung ke Kebun Binatang Ragunan, Jakarta. Rombongan berangkat pukul 07.00 dengan dua bus dan tiba pukul 08.30.\n\nDi kebun binatang, siswa dibagi menjadi empat kelompok. Setiap kelompok didampingi seorang guru dan seorang petugas kebun binatang. Kelompok pertama mengamati kandang gajah sumatra. Petugas menjelaskan bahwa seekor gajah dewasa dapat makan lebih dari 100 kilogram rumput dan dedaunan dalam sehari. Gajah tertua di kandang itu bernama Lembang dan berusia 40 tahun.\n\n\"Gajah adalah hewan paling menarik di kebun binatang ini,\" kata Sinta, salah satu siswa, sambil memotret. Temannya, Raka, lebih menyukai orangutan. \"Orangutan lebih lucu karena gerakannya mirip manusia,\" ujarnya.\n\nSiang harinya, siswa menonton film pendek tentang perlindungan satwa di ruang edukasi. Film itu menjelaskan bahwa hutan tempat tinggal orangutan terus berkurang.\n\nRombongan kembali ke sekolah pukul 14.00. Menurut Bu Yanti, wali kelas 4, kunjungan ini adalah cara terbaik untuk belajar tentang hewan.",
+  question: "Pernyataan yang merupakan fakta berdasarkan teks adalah …",
+  options: ["Gajah adalah hewan paling menarik di kebun binatang itu.", "Orangutan lebih lucu daripada hewan-hewan yang lain.", "Kunjungan itu adalah cara terbaik untuk belajar tentang hewan.", "Sebanyak 56 siswa kelas 4 berkunjung ke kebun binatang."],
+  answer: [3],
+  explanation: "Kunci: D.\nKompetensi: membedakan fakta dan opini dalam teks berita.\nBukti: Teks menulis \"sebanyak 56 siswa kelas 4 SD Nusa Indah berkunjung ke Kebun Binatang Ragunan\". Jumlah siswa dapat dihitung dan diperiksa.\nPenalaran: Fakta adalah informasi yang dapat dibuktikan. Jumlah peserta kunjungan bisa dicek dari daftar hadir, jadi pernyataan D adalah fakta.\nPengecoh: A adalah pendapat Sinta (\"paling menarik\"). B adalah pendapat Raka (\"lebih lucu\"). C adalah pendapat Bu Yanti (\"cara terbaik\"). Kata penilaian seperti paling menarik, lebih lucu, dan terbaik bisa berbeda bagi setiap orang.\nStrategi: Tanyakan, \"Dapatkah pernyataan ini dibuktikan dengan menghitung atau melihat langsung?\" Bila jawabannya bergantung pada selera seseorang, pernyataan itu opini."
 },
 {
   id: "ADP-BIN42",
@@ -590,17 +590,12 @@ window.soalAdaptifBahasa = [
   difficulty: "sedang",
   type: "pg",
   topic: "Menyusun kembali informasi dalam bentuk bagan",
-  fokus: "Mengurutkan tahapan kegiatan",
-  stimulus: "Proses membuat teh: menyiapkan gelas dan teh, menuangkan air panas, menambahkan gula, lalu mengaduk hingga rata.",
-  question: "Urutan kegiatan yang tepat setelah menyiapkan gelas dan teh adalah ...",
-  options: [
-    "Mengaduk, menuangkan air, lalu menambahkan gula",
-    "Menuangkan air panas, menambahkan gula, lalu mengaduk",
-    "Menambahkan gula, mengaduk, lalu menyiapkan gelas",
-    "Menuangkan air, mengaduk, lalu menyiapkan teh"
-  ],
-  answer: [1],
-  explanation: "Setelah gelas dan teh disiapkan, air panas dituangkan, gula ditambahkan, kemudian minuman diaduk."
+  fokus: "Menyusun bagan perbandingan dari isi teks",
+  stimulus: "Pinisi dan Jukung, Dua Perahu Nusantara\n\nIndonesia adalah negara kepulauan sehingga sejak dulu masyarakatnya pandai membuat perahu. Dua jenis perahu yang terkenal adalah pinisi dan jukung.\n\nPinisi berasal dari Sulawesi Selatan dan dibuat oleh masyarakat Bugis. Perahu ini berukuran besar dengan dua tiang dan tujuh lembar layar. Dahulu, pinisi dipakai untuk mengangkut barang dagangan antarpulau, bahkan sampai ke negeri lain. Pinisi dapat memuat puluhan ton barang dan dikemudikan oleh belasan pelaut. Pembuatannya bisa memakan waktu berbulan-bulan dan dikerjakan oleh banyak tukang.\n\nJukung banyak dijumpai di Bali dan Kalimantan. Ukurannya kecil dan ramping sehingga mudah melaju di sungai atau perairan dekat pantai. Di kanan dan kiri jukung Bali terdapat bambu panjang yang disebut cadik. Cadik membantu perahu tetap seimbang dan tidak mudah terbalik. Jukung biasanya dipakai nelayan untuk menangkap ikan atau oleh warga untuk menyeberang sungai.\n\nMeskipun berbeda, kedua perahu ini sama-sama dibuat dari kayu dan menunjukkan kecerdasan nenek moyang kita dalam memanfaatkan laut dan sungai.",
+  question: "Bagan perbandingan yang sesuai dengan isi teks adalah …",
+  options: ["Pinisi: kecil, bercadik, untuk menangkap ikan | Jukung: besar, tujuh layar, untuk berdagang", "Pinisi: dari Bali, satu tiang, untuk menyeberang | Jukung: dari Bugis, dua tiang, untuk berdagang", "Pinisi: besar, tujuh layar, untuk berdagang | Jukung: kecil, bercadik, untuk menangkap ikan", "Pinisi: dari kayu, untuk sungai | Jukung: dari bambu, untuk laut lepas antarnegara"],
+  answer: [2],
+  explanation: "Kunci: C.\nKompetensi: menyusun kembali informasi teks dalam bentuk bagan perbandingan.\nBukti: Pinisi \"berukuran besar dengan dua tiang dan tujuh lembar layar\" dan dipakai \"untuk mengangkut barang dagangan antarpulau\". Jukung \"kecil dan ramping\", memiliki \"cadik\", dan \"dipakai nelayan untuk menangkap ikan\".\nPenalaran: Bagan C menempatkan ciri setiap perahu pada kolom yang benar.\nPengecoh: A menukar ciri pinisi dengan ciri jukung, kesalahan yang mudah terjadi bila membaca terburu-buru. B salah menyebut asal dan jumlah tiang. D keliru karena kedua perahu dibuat dari kayu, dan cadik bambu bukan bahan utama jukung.\nStrategi: Buat tabel kecil berisi asal, ukuran, ciri khas, dan kegunaan setiap perahu, lalu cocokkan setiap kolom dengan pilihan jawaban."
 },
 {
   id: "ADP-BIN43",
@@ -701,17 +696,12 @@ window.soalAdaptifBahasa = [
   difficulty: "sedang",
   type: "pg",
   topic: "Menyimpulkan relevansi isi teks – kata tanya mengapa",
-  fokus: "Menghubungkan isi teks dengan alasan suatu tindakan",
-  stimulus: "Warga desa membuat lubang biopori di halaman rumah. Lubang tersebut membantu air hujan meresap ke dalam tanah sehingga mengurangi genangan.",
-  question: "Mengapa pembuatan lubang biopori bermanfaat bagi lingkungan?",
-  options: [
-    "Karena membuat tanah menjadi tertutup",
-    "Karena membantu air hujan meresap dan mengurangi genangan",
-    "Karena membuat sampah semakin banyak",
-    "Karena menghalangi pertumbuhan tanaman"
-  ],
-  answer: [1],
-  explanation: "Biopori membantu penyerapan air hujan ke dalam tanah sehingga genangan dapat berkurang."
+  fokus: "Menghubungkan informasi teks dengan alasan suatu tindakan",
+  stimulus: "Jendela yang Dibiarkan Terbuka\n\nKelas 6B di SD Harapan berada di lantai dua dan menghadap ke jalan raya. Karena takut suara kendaraan mengganggu, jendela kelas selalu ditutup rapat sepanjang hari. Kipas angin di langit-langit pun sudah lama rusak.\n\nMenjelang siang, banyak siswa mulai menguap dan sulit berkonsentrasi. Beberapa anak mengeluh pusing. Pak Hasan, guru IPA, lalu mengajak siswa melakukan pengamatan kecil selama dua minggu.\n\nPada minggu pertama, jendela tetap ditutup. Pada minggu kedua, dua jendela di sisi taman dibuka lebar, sedangkan jendela yang menghadap jalan tetap ditutup. Setiap hari, siswa mencatat berapa teman yang menguap atau mengeluh pusing pada jam pelajaran terakhir.\n\nHasilnya, jumlah siswa yang mengeluh pusing pada minggu kedua turun dari rata-rata delapan anak menjadi dua anak. Pak Hasan menjelaskan bahwa di ruangan tertutup yang berisi banyak orang, udara segar cepat berkurang karena terus dihirup. Udara yang pengap dapat membuat tubuh lesu dan sulit fokus.\n\nSetelah pengamatan itu, kelas 6B membuat aturan baru. Jendela di sisi taman dibuka setiap pagi oleh petugas piket.",
+  question: "Mengapa kelas 6B memilih membuka jendela di sisi taman, bukan jendela yang menghadap jalan?",
+  options: ["Jendela di sisi taman lebih mudah dibuka oleh petugas piket.", "Udara dari taman lebih dingin sehingga kipas tidak perlu diperbaiki.", "Udara segar dapat masuk tanpa membawa suara bising kendaraan.", "Pak Hasan melarang siswa melihat ke arah jalan raya."],
+  answer: [2],
+  explanation: "Kunci: C.\nKompetensi: menghubungkan informasi dalam teks dengan alasan suatu tindakan.\nBukti: Paragraf 1 menyebut jendela ditutup karena \"takut suara kendaraan mengganggu\". Paragraf 4 menjelaskan bahwa di ruangan tertutup \"udara segar cepat berkurang\". Pada pengamatan, jendela di sisi taman dibuka, sedangkan \"jendela yang menghadap jalan tetap ditutup\".\nPenalaran: Kelas membutuhkan udara segar, tetapi tetap ingin menghindari bising jalan raya. Membuka jendela di sisi taman memenuhi kedua kebutuhan itu.\nPengecoh: A tidak disebutkan dalam teks. B menebak tanpa bukti; teks tidak membahas suhu udara taman atau rencana memperbaiki kipas. D tidak ada dalam teks; alasan menutup jendela jalan adalah suara kendaraan.\nStrategi: Untuk soal \"mengapa\", cari masalah yang disebut di awal teks dan pengetahuan yang dijelaskan kemudian, lalu pilih alasan yang menjawab keduanya."
 },
 {
   id: "ADP-BIN50",
@@ -719,17 +709,12 @@ window.soalAdaptifBahasa = [
   difficulty: "sedang",
   type: "pg",
   topic: "Menyimpulkan penyebab peristiwa dalam cerita",
-  fokus: "Menentukan sebab terjadinya peristiwa",
-  stimulus: "Pagi itu, halaman sekolah tampak basah. Semalam hujan turun cukup deras. Beberapa pot bunga bahkan bergeser karena terkena aliran air.",
-  question: "Apa penyebab halaman sekolah menjadi basah?",
-  options: [
-    "Siswa menyiram halaman",
-    "Hujan turun deras pada malam hari",
-    "Petugas membersihkan halaman",
-    "Pot bunga dipindahkan"
-  ],
-  answer: [1],
-  explanation: "Cerita menyebutkan bahwa hujan turun deras pada malam sebelumnya. Itulah penyebab halaman menjadi basah."
+  fokus: "Menyimpulkan sebab peristiwa dari rangkaian kejadian",
+  stimulus: "Setelah Malam Berangin\n\nRabu malam, angin kencang bertiup di Desa Karangsari hingga menjelang subuh. Pak Wardi, penjaga sekolah, mendengar suara ranting berderak di halaman, tetapi ia tidak keluar karena hujan turun sangat deras.\n\nKamis pagi, siswa kelas 6 terkejut melihat kolam ikan di samping perpustakaan. Belasan ikan nila mengapung di permukaan air. Padahal, sehari sebelumnya ikan-ikan itu masih berenang lincah saat diberi makan.\n\nBu Ratna, wali kelas 6, mengajak siswa memeriksa sekitar kolam. Air kolam tidak keruh dan tidak ada bau aneh. Pagar kolam juga masih utuh, sehingga tidak mungkin ada hewan yang masuk. Namun, mesin pompa udara di pinggir kolam diam dan tidak lagi mengeluarkan gelembung.\n\nPak Wardi kemudian bercerita bahwa sebuah dahan besar patah dan menimpa kabel listrik di depan sekolah sekitar pukul sebelas malam. Sejak saat itu, listrik di sekolah padam dan baru menyala kembali pukul tujuh pagi.\n\nBu Ratna menjelaskan bahwa ikan di kolam kecil yang padat membutuhkan gelembung dari pompa udara agar air mendapat cukup oksigen. Setelah kejadian itu, sekolah memasang aki cadangan untuk pompa.",
+  question: "Penyebab paling mungkin ikan-ikan di kolam mati adalah …",
+  options: ["air kolam menjadi keruh karena hujan turun sangat deras", "ada hewan liar yang masuk ke kolam pada malam hari", "ikan tidak diberi makan sejak hari Rabu sore", "pompa udara mati karena listrik padam sepanjang malam"],
+  answer: [3],
+  explanation: "Kunci: D.\nKompetensi: menyimpulkan penyebab peristiwa dengan menghubungkan beberapa informasi.\nBukti: Pompa udara \"diam dan tidak lagi mengeluarkan gelembung\". Dahan menimpa kabel sehingga \"listrik di sekolah padam dan baru menyala kembali pukul tujuh pagi\". Bu Ratna menjelaskan ikan membutuhkan gelembung dari pompa \"agar air mendapat cukup oksigen\".\nPenalaran: Rantai sebabnya adalah angin, dahan patah, listrik padam, pompa berhenti, dan air kekurangan oksigen. Tindakan sekolah memasang aki cadangan untuk pompa menguatkan simpulan ini.\nPengecoh: A dibantah teks karena air kolam \"tidak keruh\". B dibantah karena pagar kolam \"masih utuh\". C tidak didukung; ikan justru masih diberi makan dan berenang lincah sehari sebelumnya.\nStrategi: Coret dulu kemungkinan yang dibantah bukti dalam teks, lalu susun rantai sebab-akibat dari informasi yang tersisa."
 },
 {
   id: "ADP-BIN51",
@@ -750,17 +735,12 @@ window.soalAdaptifBahasa = [
   difficulty: "sedang",
   type: "pg",
   topic: "Menjelaskan ide pokok/fokus utama teks",
-  fokus: "Menentukan gagasan utama paragraf",
-  stimulus: "Lebah memiliki peran penting bagi tumbuhan. Saat mengambil nektar, lebah membantu memindahkan serbuk sari dari satu bunga ke bunga lain. Proses ini membantu terjadinya penyerbukan.",
-  question: "Ide pokok paragraf tersebut adalah ...",
-  options: [
-    "Lebah hanya mencari makanan di bunga",
-    "Lebah berperan membantu proses penyerbukan tumbuhan",
-    "Semua bunga menghasilkan nektar",
-    "Serbuk sari tidak diperlukan tumbuhan"
-  ],
-  answer: [1],
-  explanation: "Seluruh paragraf menjelaskan peran lebah dalam membantu penyerbukan tumbuhan."
+  fokus: "Menentukan ide pokok dengan memadukan isi beberapa paragraf",
+  stimulus: "Sahabat Kecil Para Petani\n\nDi banyak desa, tikus menjadi hama yang merepotkan petani padi. Hewan pengerat ini memakan batang padi muda dan bulir padi yang mulai menguning. Dalam satu malam, sekelompok tikus dapat merusak beberapa petak sawah.\n\nUntuk mengatasinya, sebagian petani memakai racun tikus. Cara ini memang cepat, tetapi racun juga dapat termakan oleh ayam, kucing, atau burung. Sisa racun pun bisa terbawa air ke sungai.\n\nPetani di Desa Tlogoweru memilih cara lain. Mereka membangun rumah-rumah kayu kecil di atas tiang di pinggir sawah. Rumah itu sengaja dibuat untuk burung hantu jenis serak jawa. Burung hantu berburu pada malam hari, tepat ketika tikus keluar mencari makan. Seekor burung hantu dapat memangsa beberapa ekor tikus dalam semalam.\n\nHasilnya terlihat setelah dua musim tanam. Kerusakan padi akibat tikus berkurang jauh, dan petani tidak perlu membeli racun lagi. Kini, desa-desa tetangga datang ke Tlogoweru untuk belajar cara memelihara burung hantu sebagai pemburu tikus.",
+  question: "Ide pokok seluruh teks tersebut adalah …",
+  options: ["Burung hantu dapat membantu petani mengendalikan tikus tanpa racun.", "Tikus memakan batang padi muda dan bulir padi yang mulai menguning.", "Racun tikus berbahaya bagi ayam, kucing, dan burung di desa.", "Rumah burung hantu dibangun di atas tiang di pinggir sawah."],
+  answer: [0],
+  explanation: "Kunci: A.\nKompetensi: menentukan ide pokok seluruh teks dengan memadukan isi beberapa paragraf.\nBukti: Paragraf 1–2 menyajikan masalah tikus dan kelemahan racun. Paragraf 3 menjelaskan bahwa rumah kayu \"sengaja dibuat untuk burung hantu\" yang berburu \"tepat ketika tikus keluar mencari makan\". Paragraf 4 menyatakan petani \"tidak perlu membeli racun lagi\".\nPenalaran: Semua paragraf mengarah pada satu gagasan, yaitu burung hantu sebagai cara mengendalikan tikus tanpa racun. Judul \"Sahabat Kecil Para Petani\" juga merujuk pada burung hantu.\nPengecoh: B, C, dan D benar menurut teks, tetapi masing-masing hanya rincian dari satu paragraf. Ketiganya mendukung ide pokok, bukan ide pokok itu sendiri.\nStrategi: Ide pokok seluruh teks harus mencakup semua paragraf. Uji setiap pilihan dengan bertanya, \"Apakah semua paragraf membahas hal ini?\""
 },
 {
   id: "ADP-BIN53",
@@ -768,17 +748,12 @@ window.soalAdaptifBahasa = [
   difficulty: "sedang",
   type: "pg",
   topic: "Menyimpulkan isi/substansi teks – kata tanya apa",
-  fokus: "Menyimpulkan isi keseluruhan teks",
-  stimulus: "Desa Sukamaju mengolah sampah daun menjadi kompos. Daun dikumpulkan, dicacah, lalu dicampur dengan bahan lain. Setelah beberapa minggu, campuran tersebut berubah menjadi pupuk yang dapat digunakan warga.",
-  question: "Apa isi utama teks tersebut?",
-  options: [
-    "Cara warga menanam pohon",
-    "Proses mengolah daun menjadi kompos",
-    "Cara membersihkan sungai",
-    "Kegiatan menjual tanaman"
-  ],
+  fokus: "Menyimpulkan isi teks dengan menghubungkan beberapa paragraf",
+  stimulus: "Dari Daun Menjadi Pupuk\n\nSetiap pagi, petugas kebersihan SD Sukamaju menyapu daun kering yang berguguran dari pohon ketapang dan mangga di halaman. Dulu, tumpukan daun itu dibakar di belakang sekolah. Asapnya sering masuk ke kelas dan membuat beberapa siswa batuk.\n\nSejak awal tahun, sekolah mencoba cara lain. Daun kering dimasukkan ke dalam tong kompos bersama sisa sayuran dari kantin. Setiap tiga hari, tumpukan itu diaduk oleh siswa piket dan disiram sedikit air agar tetap lembap. Udara yang masuk saat pengadukan membantu makhluk kecil di dalam tumpukan menguraikan daun lebih cepat.\n\nSetelah sekitar enam minggu, isi tong berubah menjadi tanah berwarna gelap yang gembur dan tidak berbau. Kompos itu dipakai untuk memupuk kebun sayur sekolah. Petugas kebun mencatat bahwa sejak memakai kompos, sekolah tidak lagi membeli pupuk dari toko pertanian.\n\nPada bulan ketiga, tong kompos di kelas 5 justru berbau busuk. Setelah diperiksa, siswa kelas itu ternyata lupa mengaduk tumpukan selama dua minggu, sedangkan sisa sayuran terus ditambahkan. Mereka kemudian membuat jadwal piket baru yang ditempel di dinding kelas.",
+  question: "Simpulan yang paling tepat berdasarkan seluruh isi teks adalah …",
+  options: ["Kompos sebaiknya dibuat dari daun yang masih segar dan basah.", "Pengolahan daun menjadi kompos berhasil bila tumpukan dirawat teratur.", "Membakar daun lebih cepat dan mudah daripada mengolahnya menjadi pupuk.", "Kelas 5 gagal karena terlalu banyak memakai daun kering."],
   answer: [1],
-  explanation: "Teks secara keseluruhan menjelaskan tahapan pengolahan sampah daun menjadi kompos."
+  explanation: "Kunci: B.\nKompetensi: menyimpulkan isi teks dengan menghubungkan informasi dari beberapa paragraf.\nBukti: Paragraf 2 menjelaskan tumpukan \"diaduk oleh siswa piket dan disiram sedikit air agar tetap lembap\". Paragraf 3 menunjukkan hasilnya berupa kompos yang \"gembur dan tidak berbau\". Paragraf 4 menceritakan tong kelas 5 berbau busuk karena siswa \"lupa mengaduk tumpukan selama dua minggu\".\nPenalaran: Teks memberi contoh berhasil dan contoh gagal. Perbedaannya terletak pada perawatan tumpukan, sehingga simpulan yang mencakup seluruh teks adalah B.\nPengecoh: A keliru karena teks justru berhasil memakai daun kering. C tidak didukung; teks tidak membandingkan kecepatan, dan pembakaran disebut menimbulkan asap. D salah membaca penyebab; kelas 5 gagal karena tidak mengaduk, bukan karena jumlah daun kering.\nStrategi: Untuk simpulan seluruh teks, cari pola yang menghubungkan contoh berhasil dan contoh gagal, bukan hanya satu rincian."
 },
 {
   id: "ADP-BIN54",
@@ -786,12 +761,12 @@ window.soalAdaptifBahasa = [
   difficulty: "sedang",
   type: "pg",
   topic: "Menyimpulkan perasaan tokoh – kata tanya bagaimana",
-  fokus: "Mengenali perasaan tokoh berdasarkan tindakan",
-  stimulus: "Ketika namanya diumumkan sebagai pemenang lomba membaca puisi, Lila tersenyum lebar. Ia segera menghampiri gurunya dan mengucapkan terima kasih.",
-  question: "Bagaimana perasaan Lila ketika diumumkan sebagai pemenang?",
-  options: ["Kecewa", "Bangga dan gembira", "Takut", "Marah"],
-  answer: [1],
-  explanation: "Senyum lebar dan ucapan terima kasih menunjukkan bahwa Lila merasa gembira atas keberhasilannya."
+  fokus: "Menyimpulkan perubahan perasaan tokoh dari tindakan dan ucapannya",
+  stimulus: "Panggung Puisi\n\nNama Lila dipanggil sebagai peserta keempat lomba membaca puisi tingkat kecamatan. Tangannya dingin. Kertas puisi yang ia pegang bergetar sedikit. Dua minggu lalu, saat gladi bersih di sekolah, ia lupa satu bait dan beberapa teman tertawa.\n\nLila melangkah ke panggung pelan-pelan. Di barisan depan, ia melihat Bu Dewi, guru pembimbingnya, mengangkat ibu jari sambil tersenyum. Lila menarik napas panjang, memejamkan mata sebentar, lalu mulai membaca.\n\nBait pertama terdengar pelan. Namun, ketika sampai di bait tentang ibunya yang menunggu di depan pintu, suara Lila menjadi lantang dan jernih. Ia tidak lagi melihat kertasnya. Ruangan mendadak hening.\n\nKetika puisi selesai, penonton bertepuk tangan cukup lama. Lila membungkuk, lalu berjalan turun dengan langkah lebih cepat daripada saat naik. Ia langsung memeluk Bu Dewi.\n\n\"Tadi aku hampir lari dari panggung, Bu,\" bisiknya. \"Tapi aku ingat Ibu berpesan, bacalah untuk satu orang saja yang kamu sayangi.\"\n\nPengumuman pemenang baru akan dibacakan satu jam lagi, tetapi Lila sudah tidak sabar ingin menelepon ibunya.",
+  question: "Perubahan perasaan Lila dari awal sampai akhir cerita adalah …",
+  options: ["dari gugup dan takut gagal menjadi lega dan bahagia", "dari sedih karena ditertawakan menjadi marah kepada temannya", "dari percaya diri menjadi kecewa karena belum menang", "dari bosan menunggu giliran menjadi senang karena juara"],
+  answer: [0],
+  explanation: "Kunci: A.\nKompetensi: menyimpulkan perasaan tokoh dan perubahannya dari tindakan dan ucapan.\nBukti: Di awal, \"Tangannya dingin\" dan kertas puisinya \"bergetar sedikit\"; Lila juga ingat pernah lupa bait saat gladi bersih. Di akhir, ia berjalan turun \"dengan langkah lebih cepat daripada saat naik\", memeluk Bu Dewi, dan \"sudah tidak sabar ingin menelepon ibunya\".\nPenalaran: Tangan dingin dan kertas bergetar menunjukkan gugup. Langkah cepat, pelukan, dan rasa tidak sabar menelepon ibu menunjukkan lega dan bahagia setelah berhasil membaca puisi.\nPengecoh: B keliru karena Lila tidak menunjukkan marah kepada teman yang dulu tertawa. C bertentangan dengan awal cerita yang menunjukkan Lila gugup, bukan percaya diri. D keliru karena pemenang \"baru akan dibacakan satu jam lagi\", jadi Lila belum tahu apakah ia juara.\nStrategi: Bandingkan petunjuk perasaan di awal dan akhir cerita, lalu periksa apakah setiap bagian pilihan didukung teks. Satu bagian yang salah membuat pilihan itu salah."
 },
 {
   id: "ADP-BIN55",
@@ -799,12 +774,12 @@ window.soalAdaptifBahasa = [
   difficulty: "sedang",
   type: "pg",
   topic: "Menyimpulkan sifat/karakter tokoh",
-  fokus: "Menentukan karakter berdasarkan tindakan",
-  stimulus: "Meskipun hujan turun, Pak Amir tetap mengantarkan pesanan kepada pelanggan. Ia tidak ingin mengecewakan orang yang telah mempercayainya.",
-  question: "Sifat Pak Amir yang paling sesuai adalah ...",
-  options: ["Pemalas", "Bertanggung jawab", "Ceroboh", "Sombong"],
-  answer: [1],
-  explanation: "Pak Amir tetap memenuhi kewajibannya meskipun menghadapi kesulitan. Hal tersebut menunjukkan tanggung jawab."
+  fokus: "Menyimpulkan karakter dari tindakan dan pilihan tokoh",
+  stimulus: "Pengantar Paket di Musim Hujan\n\nSudah tiga hari hujan turun setiap sore di Kota Bogor. Pak Amir, pengantar paket, menyusun kiriman di atas motornya dengan hati-hati. Kardus-kardus dibungkusnya dengan plastik tebal, lalu diikat dengan tali karet.\n\nSore itu tinggal satu paket tersisa, alamatnya di ujung gang sempit yang tergenang air setinggi lutut. Rekannya, Yoga, menelepon. \"Pak, sudahlah. Tulis saja 'penerima tidak ada di rumah'. Besok diantar lagi. Tidak akan ada yang tahu,\" katanya.\n\nPak Amir melihat label paket itu. Di sana tertulis \"OBAT – SEGERA\". Ia memarkir motor di mulut gang, menggulung celananya, lalu berjalan menembus genangan sambil mengangkat paket di atas kepala.\n\nRumah yang dituju ternyata milik seorang nenek yang tinggal sendirian. \"Obat untuk kaki saya habis sejak kemarin,\" kata nenek itu sambil menerima paket.\n\nMalamnya, Pak Amir tiba di gudang paling akhir. Seragamnya basah sampai pinggang. Saat kepala gudang bertanya mengapa ia terlambat, Pak Amir hanya menjawab, \"Ada satu kiriman yang tidak bisa menunggu, Pak.\" Ia tidak menceritakan genangan air di gang itu.",
+  question: "Sifat Pak Amir yang paling kuat ditunjukkan oleh cerita adalah …",
+  options: ["pemberani karena tidak takut pada genangan air yang dalam", "penurut karena mau mengikuti saran rekan kerjanya di gudang", "bertanggung jawab dan rendah hati dalam menjalankan tugas", "teliti karena memeriksa setiap paket sebelum berangkat"],
+  answer: [2],
+  explanation: "Kunci: C.\nKompetensi: menyimpulkan sifat tokoh dari tindakan, pilihan, dan ucapannya.\nBukti: Pak Amir menolak saran Yoga yang berkata \"Tulis saja 'penerima tidak ada di rumah'\", lalu berjalan menembus genangan setelah membaca label \"OBAT – SEGERA\". Kepada kepala gudang ia hanya berkata, \"Ada satu kiriman yang tidak bisa menunggu, Pak,\" dan \"tidak menceritakan genangan air di gang itu\".\nPenalaran: Pak Amir memilih menyelesaikan tugas dengan jujur walaupun sulit (bertanggung jawab), dan tidak membanggakan pengorbanannya (rendah hati). Kedua sifat ini terlihat dari bagian tengah dan akhir cerita.\nPengecoh: A hanya melihat satu tindakan dan melupakan alasannya, yaitu kebutuhan penerima obat. B bertentangan dengan cerita karena Pak Amir justru menolak saran Yoga. D tidak didukung; teks tidak menceritakan Pak Amir memeriksa setiap paket, hanya membungkus kardus agar tidak basah.\nStrategi: Simpulkan sifat dari pilihan tokoh saat menghadapi godaan atau kesulitan, lalu periksa apakah sifat itu muncul di lebih dari satu bagian cerita."
 },
 {
   id: "ADP-BIN56",
@@ -812,17 +787,12 @@ window.soalAdaptifBahasa = [
   difficulty: "sedang",
   type: "pg",
   topic: "Merefleksikan peristiwa dalam teks dengan kehidupan sehari-hari",
-  fokus: "Menerapkan pelajaran cerita dalam kehidupan",
-  stimulus: "Dalam cerita, warga bekerja bersama membersihkan sungai agar tidak terjadi banjir. Mereka membagi tugas dan melakukannya secara rutin.",
-  question: "Tindakan yang sesuai dengan peristiwa dalam teks adalah ...",
-  options: [
-    "Membuang sampah ke selokan",
-    "Ikut menjaga kebersihan lingkungan sekitar rumah",
-    "Membiarkan sampah menumpuk",
-    "Menunggu orang lain membersihkan lingkungan"
-  ],
-  answer: [1],
-  explanation: "Menjaga kebersihan lingkungan merupakan penerapan sikap yang dicontohkan warga dalam cerita."
+  fokus: "Menerapkan ajakan dan alasan penulis dalam kehidupan sehari-hari",
+  stimulus: "Sungai Bersih, Kampung Aman\n\nTahun lalu, Kampung Sukarame dilanda banjir dua kali. Air setinggi lutut masuk ke rumah warga dan merendam buku-buku sekolah. Setelah banjir surut, petugas kelurahan menemukan penyebab utamanya: saluran air di bawah jembatan tersumbat tumpukan kantong plastik, botol, dan kasur bekas.\n\nMelalui tulisan ini, kami, anggota Klub Lingkungan SD Sukarame, mengajak seluruh warga menjaga sungai tetap bersih. Sampah yang dibuang ke sungai tidak hilang. Sampah itu terbawa arus, lalu menumpuk di tempat yang sempit seperti saluran dan pintu air. Ketika hujan deras datang, air tidak dapat mengalir dan akhirnya meluap ke permukiman.\n\nMenjaga sungai tidak harus dengan kegiatan besar. Kita dapat memulai dari kebiasaan di rumah: memilah sampah, menyerahkannya kepada petugas pengangkut, dan menegur dengan sopan bila ada yang membuang sampah ke sungai. Setiap bulan, klub kami juga mengadakan kegiatan memungut sampah di tepi sungai bersama warga.\n\nSungai yang bersih bukan hanya enak dipandang. Sungai yang bersih membuat kampung kita aman dari banjir.\n\nKlub Lingkungan SD Sukarame",
+  question: "Tindakan sehari-hari yang paling sesuai dengan ajakan dan alasan dalam teks adalah …",
+  options: ["menyimpan sampah plastik di rumah sampai diambil petugas pengangkut", "membakar sampah plastik di halaman agar tidak terbawa ke sungai", "membuang sampah ke sungai saat hujan agar cepat terbawa arus", "menunggu kegiatan bulanan klub sebelum ikut memungut sampah di sungai"],
+  answer: [0],
+  explanation: "Kunci: A.\nKompetensi: menghubungkan ajakan dan alasan dalam teks persuasi dengan tindakan sehari-hari.\nBukti: Teks menganjurkan \"memilah sampah, menyerahkannya kepada petugas pengangkut\". Teks juga menjelaskan bahwa sampah \"terbawa arus, lalu menumpuk di tempat yang sempit\".\nPenalaran: Menyimpan sampah sampai diambil petugas membuat sampah tidak masuk ke sungai. Tindakan ini sesuai dengan kebiasaan yang dianjurkan dan dengan alasan penyebab banjir.\nPengecoh: B menjauhkan sampah dari sungai, tetapi membakar sampah tidak pernah dianjurkan teks. C bertentangan dengan penjelasan bahwa sampah yang terbawa arus justru menyumbat saluran. D salah memahami ajakan, karena teks menyebut menjaga sungai bisa dimulai \"dari kebiasaan di rumah\", bukan menunggu kegiatan besar.\nStrategi: Untuk soal refleksi teks persuasi, pilih tindakan yang sejalan dengan ajakan dan tidak bertentangan dengan alasan yang dijelaskan penulis."
 },
 {
   id: "ADP-BIN57",
@@ -830,17 +800,12 @@ window.soalAdaptifBahasa = [
   difficulty: "sedang",
   type: "pg",
   topic: "Merefleksikan pengetahuan baru dalam kehidupan sehari-hari",
-  fokus: "Menerapkan informasi baru",
-  stimulus: "Teks menjelaskan bahwa air bersih perlu dihemat karena persediaannya terbatas. Air bekas mencuci sayuran yang tidak mengandung sabun dapat dimanfaatkan untuk menyiram tanaman.",
-  question: "Tindakan yang sesuai dengan pengetahuan dari teks adalah ...",
-  options: [
-    "Membiarkan keran terbuka",
-    "Memanfaatkan air bekas mencuci sayuran untuk menyiram tanaman",
-    "Menggunakan air bersih sebanyak mungkin",
-    "Membuang semua air bekas tanpa mempertimbangkan manfaatnya"
-  ],
-  answer: [1],
-  explanation: "Memanfaatkan kembali air yang masih layak digunakan merupakan salah satu cara menghemat air."
+  fokus: "Menerapkan informasi baru pada pilihan tindakan",
+  stimulus: "Setiap Tetes Air Berharga\n\nKita sering mengira air hanya terpakai saat mandi, mencuci, atau minum. Padahal, banyak air juga dipakai untuk membuat barang yang kita gunakan setiap hari. Air yang tidak terlihat ini disebut air tersembunyi.\n\nContohnya, untuk menanam kapas yang dijadikan sebuah kaus, dibutuhkan ribuan liter air untuk mengairi kebun kapas. Pembuatan selembar kertas juga memerlukan air untuk mengolah kayu menjadi bubur kertas. Begitu pula sebutir telur atau segelas susu; air dipakai untuk minum hewan ternak dan menanam pakannya.\n\nArtinya, saat kita membuang barang yang masih bisa dipakai, kita juga membuang air yang sudah digunakan untuk membuatnya. Sebaliknya, memakai barang lebih lama berarti ikut menghemat air, meskipun kita tidak sedang memutar keran.\n\nAda beberapa cara sederhana untuk menghemat air tersembunyi. Kita dapat memakai kedua sisi kertas, merawat pakaian agar awet, dan mengambil makanan secukupnya agar tidak ada yang terbuang. Langkah-langkah kecil ini, bila dilakukan banyak orang, dapat mengurangi kebutuhan air dalam jumlah besar.",
+  question: "Tindakan yang paling sesuai dengan pengetahuan baru tentang air tersembunyi adalah …",
+  options: ["mandi lebih singkat agar air di bak mandi tidak cepat habis", "membeli kaus baru setiap bulan agar tampak rapi", "menyiram tanaman pada sore hari supaya airnya tidak menguap", "memakai buku tulis bekas yang halamannya masih kosong"],
+  answer: [3],
+  explanation: "Kunci: D.\nKompetensi: merefleksikan pengetahuan baru dari teks ke dalam tindakan sehari-hari.\nBukti: Teks menjelaskan pembuatan kertas \"memerlukan air\" dan bahwa \"memakai barang lebih lama berarti ikut menghemat air, meskipun kita tidak sedang memutar keran\". Salah satu caranya adalah \"memakai kedua sisi kertas\".\nPenalaran: Memakai halaman kosong buku bekas berarti tidak membuang kertas yang pembuatannya sudah menghabiskan air. Tindakan ini menghemat air tersembunyi, yaitu pengetahuan baru dari teks.\nPengecoh: A dan C memang menghemat air, tetapi air yang terlihat langsung dari keran, bukan air tersembunyi yang menjadi pengetahuan baru dalam teks. B bertentangan dengan anjuran merawat pakaian agar awet.\nStrategi: Bedakan pengetahuan umum yang sudah kamu tahu dengan pengetahuan baru yang dijelaskan teks. Pilih tindakan yang benar-benar memakai pengetahuan baru itu."
 },
 {
   id: "ADP-BIN58",
@@ -848,17 +813,12 @@ window.soalAdaptifBahasa = [
   difficulty: "sedang",
   type: "pg",
   topic: "Merefleksikan pengetahuan baru dalam kehidupan sehari-hari",
-  fokus: "Memilih tindakan berdasarkan informasi dalam teks",
-  stimulus: "Sebuah teks menjelaskan bahwa membaca petunjuk penggunaan obat dengan teliti dapat mencegah kesalahan pemakaian. Obat harus digunakan sesuai aturan dan dengan pendampingan orang dewasa.",
-  question: "Apa tindakan yang tepat setelah membaca informasi tersebut?",
-  options: [
-    "Meminum obat tanpa membaca petunjuk",
-    "Mengikuti aturan penggunaan dan meminta pendampingan orang dewasa",
-    "Menambah dosis agar cepat sembuh",
-    "Menggunakan obat milik orang lain"
-  ],
+  fokus: "Menerapkan informasi teks pada situasi baru",
+  stimulus: "Hati-Hati Menggunakan Obat\n\nObat dapat membantu menyembuhkan penyakit, tetapi juga bisa berbahaya bila dipakai dengan cara yang salah. Karena itu, kita perlu membaca keterangan pada kemasan obat dengan teliti sebelum meminumnya.\n\nPertama, perhatikan aturan pakai. Keterangan \"3 x 1 sehari\" berarti obat diminum tiga kali dalam sehari, masing-masing satu tablet atau satu sendok takar. Jarak minum obat sebaiknya dibagi rata, misalnya setiap delapan jam. Minum dua dosis sekaligus karena lupa justru dapat membahayakan tubuh.\n\nKedua, periksa tanggal kedaluwarsa. Obat yang sudah melewati tanggal itu tidak boleh diminum karena khasiatnya dapat berkurang atau berubah. Obat sirup yang sudah dibuka biasanya hanya boleh dipakai dalam waktu tertentu, sesuai keterangan pada kemasan.\n\nKetiga, perhatikan tanda lingkaran pada kemasan. Lingkaran hijau menandakan obat bebas yang boleh dibeli tanpa resep dokter. Lingkaran biru menandakan obat bebas terbatas yang harus dipakai sesuai peringatan pada kemasan. Lingkaran merah berisi huruf K menandakan obat keras yang hanya boleh dipakai dengan resep dokter.\n\nTerakhir, simpan obat di tempat sejuk dan jauh dari jangkauan anak kecil.",
+  question: "Dita lupa minum obat siang yang aturan pakainya \"3 x 1 sehari\". Saat malam tiba, tindakan yang paling sesuai dengan teks adalah …",
+  options: ["meminum dua tablet sekaligus agar jumlahnya tetap tiga", "meminum satu tablet sesuai jadwal tanpa menggandakannya", "tidak meminum obat lagi sampai keesokan siang", "mengganti tablet dengan obat sirup yang sudah dibuka"],
   answer: [1],
-  explanation: "Informasi dalam teks mengajarkan pentingnya membaca petunjuk dan menggunakan obat sesuai aturan dengan pendampingan orang dewasa."
+  explanation: "Kunci: B.\nKompetensi: menerapkan pengetahuan baru dari teks pada situasi sehari-hari.\nBukti: Teks menjelaskan \"3 x 1 sehari\" berarti tiga kali sehari, masing-masing satu tablet, dan memperingatkan: \"Minum dua dosis sekaligus karena lupa justru dapat membahayakan tubuh.\"\nPenalaran: Dita sudah melewatkan dosis siang. Menurut teks, ia tidak boleh menggantinya dengan menggandakan dosis. Tindakan yang aman adalah tetap minum satu tablet pada jadwal berikutnya.\nPengecoh: A adalah kesalahan yang paling sering terjadi dan justru diperingatkan dalam teks. C keliru karena berhenti minum obat tidak dianjurkan dalam teks. D tidak sesuai karena teks tidak membolehkan mengganti obat sendiri, dan sirup yang sudah dibuka punya batas waktu pakai.\nStrategi: Cari aturan dalam teks yang paling dekat dengan situasi di soal, lalu pilih tindakan yang tidak melanggar aturan tersebut."
 },
 {
   id: "ADP-BIN59",
@@ -884,17 +844,12 @@ window.soalAdaptifBahasa = [
   difficulty: "sulit",
   type: "pg",
   topic: "Menilai kesesuaian judul dengan isi teks",
-  fokus: "Memilih judul yang mewakili isi keseluruhan teks",
-  stimulus: "Setiap Sabtu, warga Desa Melati berkumpul di balai desa. Mereka membahas cara menjaga kebersihan lingkungan, membagi jadwal kerja bakti, dan mengajak seluruh keluarga mengurangi sampah plastik. Kegiatan tersebut membuat lingkungan desa semakin bersih dan nyaman.",
-  question: "Judul yang paling sesuai untuk teks tersebut adalah ...",
-  options: [
-    "Perlombaan Antarwarga",
-    "Kerja Sama Warga Menjaga Kebersihan Desa",
-    "Cara Membuat Balai Desa",
-    "Kegiatan Berbelanja pada Hari Sabtu"
-  ],
+  fokus: "Memilih judul yang mewakili pendapat dan isi teks persuasi",
+  stimulus: "Setiap Sabtu, warga Desa Melati berkumpul di balai desa untuk kerja bakti. Namun, sejak beberapa bulan lalu, ada pemandangan baru di sudut balai: dua rak kayu berisi buku cerita, majalah bekas, dan buku pelajaran yang disumbangkan warga.\n\nRak itu adalah awal dari pojok baca desa. Pengurus karang taruna mengajak warga menyumbangkan buku yang sudah tidak dibaca di rumah. \"Buku yang diam di lemari tidak bermanfaat. Di pojok baca, satu buku bisa dibaca puluhan anak,\" kata Kak Rina, ketua karang taruna.\n\nMenurut catatan pengurus, setiap sore kini ada sekitar lima belas anak yang datang membaca. Beberapa ibu juga meminjam buku resep dan buku tentang bercocok tanam. Sayangnya, jumlah buku masih sedikit. Banyak anak sudah membaca semua buku cerita yang tersedia dan menunggu buku baru.\n\nKarena itu, karang taruna kembali mengajak warga. Sumbangan dapat diantar ke balai desa setiap Sabtu pagi. Buku yang sobek sedikit pun tetap diterima, karena akan diperbaiki bersama oleh anak-anak. Mari jadikan buku di rumah kita bermanfaat bagi lebih banyak orang.",
+  question: "Judul yang paling sesuai untuk teks tersebut adalah …",
+  options: ["Kerja Bakti Setiap Sabtu di Balai Desa Melati", "Sumbangkan Bukumu untuk Pojok Baca Desa", "Lima Belas Anak Membaca Setiap Sore", "Cara Memperbaiki Buku yang Sobek"],
   answer: [1],
-  explanation: "Seluruh isi teks membahas kerja sama warga dalam menjaga kebersihan desa, sehingga judul tersebut paling mewakili isi teks."
+  explanation: "Kunci: B.\nKompetensi: menilai kesesuaian judul dengan isi dan tujuan teks persuasi.\nBukti: Karang taruna \"mengajak warga menyumbangkan buku\", jumlah buku \"masih sedikit\", dan teks ditutup dengan ajakan \"Mari jadikan buku di rumah kita bermanfaat bagi lebih banyak orang.\"\nPenalaran: Teks ini teks ajakan. Isinya menjelaskan pojok baca, manfaatnya, kekurangannya, lalu mengajak menyumbang buku. Judul B memuat pokok bahasan (pojok baca desa) sekaligus ajakannya.\nPengecoh: A hanya cocok untuk kalimat pembuka, karena kerja bakti bukan pokok bahasan. C hanya satu data pendukung di paragraf 3. D hanya rincian kecil; teks tidak menjelaskan cara memperbaiki buku.\nStrategi: Judul yang baik mencakup pokok bahasan dan tujuan seluruh teks. Hindari judul yang hanya cocok untuk satu kalimat atau satu paragraf."
 }
 
 ];

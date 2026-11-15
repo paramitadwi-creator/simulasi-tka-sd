@@ -17,7 +17,7 @@ const vm = require("vm");
 
 const AKAR = path.resolve(__dirname, "..");
 const LEWATI = new Set(["js/dashboard.js", "js/riwayat.js", "js/hasil.js", "js/antarmuka.js", "js/aset.js"]);
-const JUMLAH_HARAPAN = 826;
+const JUMLAH_HARAPAN = 850;
 
 const galat = [];
 const peringatan = [];
