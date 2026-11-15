@@ -59,29 +59,12 @@ Kakek: "Benar, mungkin Kakek tidak sempat menikmatinya. Tapi kamu dan anak-anakm
 
 Bima menengadah memandangi pohon-pohon kelapa itu. Ia baru sadar bahwa air kelapa yang ia minum kemarin berasal dari pohon yang ditanam kakek buyutnya puluhan tahun lalu. Kakek bercerita bahwa kayu jati sangat kuat dan dapat dipakai untuk membangun rumah atau membuat meja. Bima berjanji akan ikut merawat bibit-bibit jati itu setiap kali berlibur ke rumah Kakek.`,
 
-"KBIN-043": `Yohanes dan Ahmad adalah sahabat sejak kelas satu. Rumah mereka bersebelahan, dan mereka sering mengerjakan tugas bersama. Sore itu, mereka sedang membuat poster tentang keragaman budaya Indonesia di teras rumah Ahmad. Ahmad menggambar rumah adat Minangkabau, sedangkan Yohanes mewarnai pakaian adat Papua. Kertas karton, pensil warna, dan lem berserakan di lantai. Mereka begitu asyik sampai tidak menyadari waktu berlalu. Dari masjid di ujung gang, terdengar suara azan.
-
-Yohanes: "Mad, sudah azan Asar. Bukankah kamu mau salat dulu?"
-Ahmad: "Oh iya, terima kasih sudah mengingatkan, Yo. Tunggu sebentar, ya. Nanti kita lanjutkan mengerjakan tugasnya."
-Yohanes: "Santai saja. Aku merapikan gambar kita dulu."
-
-Ahmad masuk ke rumah untuk berwudu dan salat. Sementara itu, Yohanes merapikan pensil warna dan menempelkan potongan gambar yang sudah selesai. Setelah Ahmad kembali, mereka melanjutkan pekerjaan dengan gembira. Hari Minggu sebelumnya, Ahmad juga menunggu Yohanes pulang dari gereja sebelum mereka bermain bersama. Poster mereka akhirnya selesai menjelang magrib. Bu Guru memuji poster itu dan memajangnya di papan kelas sebagai contoh kerja sama yang baik.`,
-
 "KBIN-044": `Fikri dikenal sebagai siswa yang pandai matematika di kelas lima. Nilainya hampir selalu paling tinggi di setiap ulangan. Meskipun demikian, Fikri tidak pernah menyombongkan diri. Setiap Selasa dan Kamis sore, ia mengajak beberapa teman belajar bersama di rumahnya. Sore itu, Rio, Bagus, dan Wati datang membawa buku latihan. Mereka kesulitan memahami cara menghitung luas bangun gabungan. Fikri menjelaskan dengan sabar sambil menggambar bangun-bangun di papan tulis kecil miliknya. Saat beristirahat, Rio bertanya sesuatu yang sudah lama ia pikirkan.
 
 Rio: "Nilaimu selalu paling tinggi, Fik. Tidak takut tersaingi kalau mengajari kami?"
 Fikri: "Tidak, dong. Ilmu itu justru bertambah kalau dibagi. Aku juga jadi makin paham saat menjelaskan kepada kalian."
 
 Rio tersenyum dan mengangguk. Mereka melanjutkan belajar sampai menjelang magrib. Ibu Fikri menyuguhkan pisang goreng dan teh manis hangat. Seminggu kemudian, kelas lima mengadakan ulangan matematika. Rio, Bagus, dan Wati mendapat nilai yang jauh lebih baik daripada sebelumnya. Fikri ikut senang mendengarnya. Sejak itu, kelompok belajar mereka semakin ramai karena teman-teman lain ingin ikut bergabung.`,
-
-"KBIN-045": `Setiap pagi, rumah Gilang selalu ramai. Ayah bersiap berangkat kerja, Ibu menyiapkan sarapan, dan Gilang bersiap ke sekolah. Pagi itu, Gilang menggosok gigi di kamar mandi sambil bersenandung. Keran air dibiarkan terbuka sehingga air terus mengalir ke lantai dan ke saluran pembuangan. Ayah yang sedang lewat di depan kamar mandi mendengar suara air yang mengalir deras. Ayah berhenti dan menengok ke dalam.
-
-Ayah: "Nak, kerannya dimatikan dulu saat menggosok gigi."
-Gilang: "Memangnya kenapa, Yah? Airnya kan banyak."
-Ayah: "Air bersih itu terbatas. Di beberapa daerah, orang harus berjalan jauh untuk mendapat air."
-Gilang: "Oh begitu. Baik, Yah, mulai sekarang Gilang akan memakai air secukupnya."
-
-Saat sarapan, Ayah bercerita tentang pengalamannya ketika bertugas di sebuah desa di Nusa Tenggara. Pada musim kemarau, anak-anak di desa itu harus berjalan beberapa kilometer sambil membawa jeriken untuk mengambil air dari mata air. Gilang mendengarkan dengan serius. Sejak hari itu, Gilang selalu memakai gelas saat berkumur. Ia juga mengingatkan adiknya agar tidak membiarkan keran terbuka saat mencuci tangan.`,
 
 "KBIN-046": `Sepulang sekolah, Arif bersepeda menyusuri jalan kampung menuju rumahnya. Jalan itu sempit dan sore itu cukup ramai karena banyak orang pulang dari pasar. Arif bersepeda di pinggir jalan dengan hati-hati. Tiba-tiba, sebuah sepeda motor yang membawa karung beras melaju dari belakang. Pengendaranya berusaha menghindari lubang di tengah jalan, tetapi stang motornya menyenggol bagian belakang sepeda Arif. Arif kehilangan keseimbangan dan terjatuh ke tanah berumput di pinggir jalan. Pengendara motor itu segera berhenti dan menghampiri Arif dengan wajah cemas.
 

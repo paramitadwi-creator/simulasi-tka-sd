@@ -194,14 +194,6 @@ Ardi: "Sedikit, tetapi aku tetap akan membantu ketua terpilih. Keberhasilan kelo
 
 Keesokan harinya, Ardi menyampaikan idenya kepada Lita tentang cara membuat pupuk kompos dari sisa sayur kantin. Lita senang mendengarnya dan meminta Ardi memimpin bagian pembuatan kompos. Kelompok mereka bekerja dengan kompak. Ada yang menanam bibit, ada yang menyiram, dan ada yang mencatat pertumbuhan tanaman. Dua bulan kemudian, kebun sayur mereka berhasil panen sawi dan kangkung. Hasil panen itu dijual kepada guru-guru, dan uangnya dipakai untuk membeli bibit baru.`,
 
-"ADP-BIN25": `Siang itu Bu Rahma memberikan tugas menulis cerita pengalaman liburan. Tugas itu harus dikumpulkan minggu depan. Bu Rahma menjelaskan aturan penulisannya dengan cepat karena jam pelajaran hampir habis. Aldi mencatat sebagian penjelasan itu, tetapi ia belum paham tentang jumlah paragraf yang harus ditulis. Ketika bel pulang berbunyi, teman-temannya bergegas keluar kelas. Aldi memasukkan buku ke dalam tas, lalu berjalan ke meja guru. Bu Rahma sedang merapikan tumpukan buku tugas.
-
-Aldi: "Permisi, Bu. Bolehkah saya bertanya tentang tugas tadi?"
-Guru: "Tentu, silakan."
-Aldi: "Terima kasih, Bu."
-
-Aldi menanyakan berapa paragraf cerita yang harus ditulis dan apakah boleh menambahkan gambar. Bu Rahma menjelaskan bahwa cerita terdiri atas tiga sampai lima paragraf dan boleh dihiasi gambar. Aldi mencatat penjelasan itu di buku tugasnya. Sebelum pulang, Aldi berpamitan sambil mencium tangan Bu Rahma. Di rumah, Aldi langsung menulis cerita tentang pengalamannya memancing bersama kakek di sungai. Minggu berikutnya, Aldi mengumpulkan tugasnya tepat waktu dengan tulisan yang rapi dan gambar sungai yang berwarna-warni.`,
-
 "ADP-BIN26": `Di depan kelas lima terdapat deretan pot berisi tanaman lidah buaya, kemangi, dan bunga kertas. Tanaman itu dirawat bersama oleh siswa sebagai bagian dari program sekolah hijau. Setiap siswa memiliki jadwal merawat tanaman. Namun, selama libur panjang, tanaman itu tidak disiram. Ketika sekolah dimulai kembali, daun-daun kemangi mulai layu dan rumput liar tumbuh di sela-sela pot. Siska dan Mila berdiri di depan kelas sambil memperhatikan tanaman-tanaman itu.
 
 Siska: "Tanaman kelas kita mulai layu."

@@ -364,16 +364,17 @@ window.soalAdaptifBahasa = [
 },
 {
   id: "ADP-BIN25",
-  kodeKompetensi: "BIN-INF-02",
-  difficulty: "mudah",
+  kodeKompetensi: "BIN-INF-01",
+  indikator: 9,
+  difficulty: "sedang",
   type: "pg",
-  topic: "Menyimpulkan nilai moral dalam percakapan",
-  fokus: "Mengidentifikasi sikap sopan",
-  stimulus: "Aldi: \"Permisi, Bu. Bolehkah saya bertanya tentang tugas tadi?\"\nGuru: \"Tentu, silakan.\"\nAldi: \"Terima kasih, Bu.\"",
-  question: "Sikap Aldi menunjukkan nilai ...",
-  options: ["Kesopanan dan menghormati orang lain", "Kesombongan", "Ketidakpedulian", "Persaingan"],
-  answer: [0],
-  explanation: "Aldi menggunakan kata permisi dan terima kasih saat berbicara kepada guru. Hal tersebut menunjukkan kesopanan."
+  topic: "Membedakan fakta dan opini dalam ulasan",
+  fokus: "Menilai opini yang didukung fakta",
+  stimulus: "Ulasan Buku: Petualangan di Pulau Kabut\noleh Raka, kelas 6A\n\nBuku Petualangan di Pulau Kabut ditulis oleh Sinta Maharani dan diterbitkan pada tahun 2023. Buku setebal 120 halaman ini terdiri atas dua belas bab. Ceritanya tentang Tio dan adiknya, Mira, yang tersesat di sebuah pulau kecil saat berlibur ke rumah paman mereka.\n\nMenurut saya, bagian paling menegangkan ada di bab ketujuh. Pada bab itu, perahu Tio dan Mira terbawa arus ketika kabut tebal turun. Mereka harus menentukan arah hanya dengan mendengarkan suara ombak dan lonceng mercusuar. Saya sampai menahan napas ketika membacanya.\n\nBuku ini juga memuat peta pulau di halaman depan dan gambar berwarna di setiap awal bab. Gambar-gambar itu membantu saya membayangkan tempat-tempat yang didatangi Tio dan Mira.\n\nSayangnya, beberapa bab awal terasa lambat. Tiga bab pertama hanya menceritakan perjalanan menuju rumah paman, sehingga petualangan baru dimulai pada bab keempat.\n\nSecara keseluruhan, buku ini cocok untuk pembaca yang menyukai cerita petualangan. Saya memberi nilai empat dari lima bintang.",
+  question: "Pendapat Raka yang paling jelas didukung oleh fakta dalam ulasannya adalah …",
+  options: ["Gambar di setiap awal bab membuat ceritanya menjadi lebih seru.", "Buku ini lebih menarik daripada buku petualangan yang lain.", "Beberapa bab awal dalam buku ini terasa berjalan lambat.", "Buku setebal 120 halaman ini terdiri atas dua belas bab."],
+  answer: [2],
+  explanation: "Kunci: C.\nKompetensi: membedakan fakta dan opini serta menilai apakah sebuah opini didukung fakta.\nBukti: Raka menulis \"beberapa bab awal terasa lambat\", lalu memberi fakta yang dapat diperiksa: \"Tiga bab pertama hanya menceritakan perjalanan menuju rumah paman\" dan petualangan \"baru dimulai pada bab keempat\".\nPenalaran: \"Terasa lambat\" adalah opini, tetapi Raka langsung menunjukkan isi bab yang dapat dicek pembaca. Karena itu, opini ini paling jelas didukung fakta.\nPengecoh: A memelintir isi ulasan; Raka menulis gambar \"membantu saya membayangkan tempat\", bukan membuat cerita lebih seru. B membandingkan dengan buku lain, padahal ulasan tidak membahas buku lain sama sekali. D adalah fakta, bukan pendapat, sehingga tidak menjawab pertanyaan.\nStrategi: Pastikan dulu pilihan itu opini, lalu cari kalimat di dekatnya yang berisi data atau keterangan yang dapat diperiksa untuk mendukungnya."
 },
 {
   id: "ADP-BIN26",

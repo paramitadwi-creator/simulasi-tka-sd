@@ -14,16 +14,6 @@ Sampah organik adalah sampah yang mudah membusuk, seperti sisa makanan, kulit bu
 
 Setiap kelas mendapat giliran menjadi petugas pengawas tempat sampah. Petugas mengingatkan teman-teman yang salah membuang sampah. Setelah tiga bulan, sekolah kita menjadi lebih bersih dan kebun sekolah pun semakin subur berkat kompos buatan sendiri.`,
 
-"BI02": `Pohon Penjaga Tepi Sungai
-
-Desa Sukaasri dilalui sebuah sungai yang cukup lebar. Beberapa tahun lalu, tepi sungai itu sering longsor ketika musim hujan. Tanah di pinggir sungai terkikis sedikit demi sedikit sehingga sungai menjadi semakin lebar. Beberapa kebun warga bahkan ikut hanyut terbawa arus. Warga merasa khawatir karena rumah-rumah di dekat sungai bisa terancam.
-
-Warga Desa Sukaasri menanam pohon di sepanjang tepi sungai. Akar pohon membantu mengikat tanah. Ketika hujan deras, tanah di tepi sungai menjadi lebih kuat dan tidak mudah terbawa arus.
-
-Kegiatan penanaman itu dilakukan bersama-sama setiap awal musim hujan. Warga memilih pohon yang akarnya kuat dan menyebar, seperti bambu, beringin, dan trembesi. Anak-anak sekolah ikut membantu menyiram bibit pohon yang baru ditanam. Kelompok pemuda desa membuat pagar bambu di sekitar bibit agar tidak dimakan kambing.
-
-Lima tahun kemudian, pohon-pohon itu tumbuh besar dan rindang. Tepi sungai tidak lagi longsor walaupun hujan turun deras berhari-hari. Tempat itu bahkan menjadi tempat bermain dan beristirahat yang sejuk bagi warga. Desa-desa di sekitarnya kemudian datang untuk belajar dari pengalaman warga Desa Sukaasri.`,
-
 "BI03": `Kotak Pensil Biru
 
 Bel pulang sekolah berbunyi. Anak-anak kelas lima segera membereskan buku dan berlari keluar kelas. Hari itu Rani sangat ingin cepat sampai di rumah karena neneknya datang dari desa. Ia membayangkan neneknya sudah menunggu dengan membawa kue onde-onde kesukaannya.
@@ -33,17 +23,6 @@ Rani menemukan sebuah kotak pensil di bawah meja kelas. Ia ingin segera pulang, 
 Kotak pensil itu berwarna biru dan bergambar roket. Di dalamnya ada pensil, penghapus, penggaris, dan beberapa pensil warna. Rani tidak tahu siapa pemiliknya karena tidak ada nama di kotak itu. Ia sempat berpikir untuk meninggalkannya saja di atas meja. Namun, Rani khawatir kotak itu hilang atau diambil orang lain. Rani pun berjalan ke ruang guru dan menyerahkan kotak pensil itu kepada Bu Wati, wali kelasnya.
 
 Keesokan paginya, Bu Wati mengumumkan temuan itu di depan kelas. Ternyata kotak pensil itu milik Bayu. Bayu sangat senang karena kotak pensil itu hadiah ulang tahun dari ayahnya. Ia mengucapkan terima kasih kepada Rani. Siang itu, Rani pulang dengan perasaan lega dan menikmati onde-onde bersama neneknya.`,
-
-"BI04": `Bacalah dua pernyataan berikut.
-
-Teks A: Perpustakaan sekolah dibuka pukul 07.00 sampai 14.00 setiap hari sekolah.
-Teks B: Perpustakaan sekolah adalah tempat paling nyaman dan paling menyenangkan bagi semua siswa.
-
-Kedua pernyataan itu diambil dari dua tulisan yang berbeda. Teks A berasal dari papan pengumuman resmi di pintu perpustakaan. Pengumuman itu juga menyebutkan bahwa setiap siswa boleh meminjam dua buku selama satu minggu, perpustakaan tutup pada hari Minggu dan hari libur nasional, serta siswa wajib menunjukkan kartu anggota saat meminjam buku. Informasi tersebut dapat diperiksa kebenarannya dengan melihat langsung papan pengumuman atau bertanya kepada petugas perpustakaan.
-
-Teks B berasal dari tulisan seorang siswa kelas enam di majalah dinding sekolah. Dalam tulisannya, siswa itu bercerita bahwa ia senang membaca di perpustakaan karena ruangannya sejuk dan tenang. Ia merasa perpustakaan adalah tempat terbaik untuk menghabiskan waktu istirahat. Ia juga yakin teman-temannya pasti merasakan hal yang sama. Tulisan tersebut menggambarkan perasaan dan pendapat penulisnya. Siswa lain mungkin memiliki pendapat yang berbeda, misalnya lebih senang bermain di lapangan atau berbincang di taman sekolah.
-
-Untuk membedakan fakta dan opini, perhatikan apakah sebuah pernyataan dapat dibuktikan kebenarannya atau hanya berupa pendapat seseorang.`,
 
 "BI05": `Satu Botol untuk Bumi
 
