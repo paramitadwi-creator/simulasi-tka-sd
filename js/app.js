@@ -123,11 +123,15 @@ if (!window.kisiKisiTKA) {
 const JUMLAH_SOAL_MODE = { practice: 15, exam: 30, adaptive: 30 };
 // Durasi pengerjaan per sesi (detik)
 const DURASI_MODE = { practice: 45 * 60, exam: 90 * 60, adaptive: 90 * 60 };
-// Durasi khusus per mata pelajaran (detik). Bila ada, berlaku untuk SEMUA sesi
-// (latihan, simulasi ujian, adaptif) dan menggantikan DURASI_MODE.
-const DURASI_MAPEL = { bahasa: 75 * 60, ipas: 75 * 60 };
+// Durasi khusus per mata pelajaran dan sesi (detik). Bila ada, menggantikan
+// DURASI_MODE untuk sesi tersebut; mapel/sesi yang tidak tercantum memakai DURASI_MODE.
+const DURASI_MAPEL = {
+  bahasa: { practice: 30 * 60, exam: 75 * 60, adaptive: 75 * 60 },
+  ipas: { practice: 30 * 60, exam: 75 * 60, adaptive: 75 * 60 }
+};
 function durasiSesi(mode, mapel) {
-  return Object.prototype.hasOwnProperty.call(DURASI_MAPEL, mapel) ? DURASI_MAPEL[mapel] : DURASI_MODE[mode];
+  const khusus = Object.prototype.hasOwnProperty.call(DURASI_MAPEL, mapel) ? DURASI_MAPEL[mapel] : null;
+  return khusus && Object.prototype.hasOwnProperty.call(khusus, mode) ? khusus[mode] : DURASI_MODE[mode];
 }
 const KOMPOSISI_KESULITAN = { mudah: 0.2, sedang: 0.4, sulit: 0.4 };
 const URUTAN_KESULITAN = ["mudah", "sedang", "sulit"];
