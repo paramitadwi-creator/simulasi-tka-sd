@@ -17,7 +17,7 @@ const vm = require("vm");
 
 const AKAR = path.resolve(__dirname, "..");
 const LEWATI = new Set(["js/dashboard.js", "js/riwayat.js", "js/hasil.js", "js/antarmuka.js", "js/aset.js"]);
-const JUMLAH_HARAPAN = 851; // 850 + MAT-085 (diporting dari bank lama mat-soal-4.js)
+const JUMLAH_HARAPAN = 854; // 850 + MAT-085 + MAT-027/030/033 (diporting dari bank lama mat-soal-*.js)
 
 const galat = [];
 const peringatan = [];

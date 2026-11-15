@@ -1,7 +1,7 @@
 // DIBUAT OTOMATIS oleh alat/versi-aset.js — jangan diedit manual.
 // Peta jalur gambar sumber (dipakai bank soal) -> versi tetap berbasis hash di assets/versi/.
 window.ASET_MANIFEST = {
- "dibuat": "2026-11-15T13:11:08.341Z",
+ "dibuat": "2026-11-15T13:30:43.823Z",
  "catatan": "Dibuat otomatis oleh alat/versi-aset.js. Jangan diedit manual.",
  "berkas": {
   "assets/images/ipas/diagram-mata.png": {
@@ -164,13 +164,25 @@ window.ASET_MANIFEST = {
    "src": "assets/versi/949a9e919ccdb755.svg",
    "hash": "949a9e919ccdb755"
   },
+  "assets/images/kisi/MAT-027.svg": {
+   "src": "assets/versi/a676025b7b62e2f0.svg",
+   "hash": "a676025b7b62e2f0"
+  },
   "assets/images/kisi/MAT-029.svg": {
    "src": "assets/versi/dfce01075c4394e9.svg",
    "hash": "dfce01075c4394e9"
   },
+  "assets/images/kisi/MAT-030.svg": {
+   "src": "assets/versi/93cdf5c090946f61.svg",
+   "hash": "93cdf5c090946f61"
+  },
   "assets/images/kisi/MAT-031.svg": {
    "src": "assets/versi/17268097114393f2.svg",
    "hash": "17268097114393f2"
+  },
+  "assets/images/kisi/MAT-033.svg": {
+   "src": "assets/versi/36609c55b861f4dc.svg",
+   "hash": "36609c55b861f4dc"
   },
   "assets/images/kisi/MAT-034.svg": {
    "src": "assets/versi/c7275726f7021042.svg",
