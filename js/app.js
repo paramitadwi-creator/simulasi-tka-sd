@@ -295,7 +295,7 @@ function pilihSoalBerimbang(pool, jumlah) {
 
 // Mode adaptif: penuhi kuota tiap kompetensi sekaligus target kesulitan & bentuk.
 // kelompokSoal: Map kode → daftar soal (sudah diacak); urutan: kode berulang sesuai kuota.
-function pilihSoalAdaptif(kelompokSoal, urutan, jumlah) {
+function pilihSoalAdaptifSekali(kelompokSoal, urutan, jumlah, selAcak) {
   const semua = [...kelompokSoal.values()].flat();
   const target = targetKomposisi(semua, jumlah);
   const catat = buatPencatat(target);
@@ -305,6 +305,27 @@ function pilihSoalAdaptif(kelompokSoal, urutan, jumlah) {
   const kuota = new Map();
   urutan.forEach(kode => kuota.set(kode, (kuota.get(kode) || 0) + 1));
 
+  // Sel acak berbobot kekurangan (dipakai bila selAcak): sel yang masih kurang berpeluang
+  // sebanding kekurangannya; di sel PGK soal dipilih menurut kekurangan jenis PGK.
+  const kurangSel = sel => (target.sel[sel] || 0) - terpilih.filter(q => selSoal(q) === sel).length;
+  const pilihSelAcak = daftar => {
+    const perSel = new Map();
+    daftar.forEach(q => {
+      const s = selSoal(q);
+      if (kurangSel(s) <= 0) return;
+      if (!perSel.has(s)) perSel.set(s, []);
+      perSel.get(s).push(q);
+    });
+    if (!perSel.size) return catat.terbaik(daftar);
+    const dari = (s, qs) => s.endsWith("PGK") ? catat.terbaik(qs) : qs[0];
+    let r = Math.random() * [...perSel.keys()].reduce((t, s) => t + kurangSel(s), 0);
+    for (const [s, qs] of perSel) {
+      r -= kurangSel(s);
+      if (r < 0) return dari(s, qs);
+    }
+    const [s, qs] = [...perSel].pop();
+    return dari(s, qs);
+  };
   const ambil = q => {
     const daftar = sisa.get(q.kodeKompetensi);
     daftar.splice(daftar.indexOf(q), 1);
@@ -324,7 +345,7 @@ function pilihSoalAdaptif(kelompokSoal, urutan, jumlah) {
       for (let i = 0; i < banyak; i++) {
         const daftar = sisa.get(kode) || [];
         if (!daftar.length) break;
-        ambil(catat.terbaik(daftar));
+        ambil(selAcak ? pilihSelAcak(daftar) : catat.terbaik(daftar));
       }
     });
 
@@ -402,6 +423,33 @@ function pilihSoalAdaptif(kelompokSoal, urutan, jumlah) {
   }
 
   return urutkanMenurutKesulitan(terpilih);
+}
+
+// Mode adaptif dengan cakupan merata (opsi.selAcak): langkah 1 memakai sel acak berbobot
+// sehingga setiap soal berpeluang terpilih. Hasil acak hanya diterima bila memenuhi semua
+// syarat sesi (jumlah, tanpa duplikat, komposisi sel tingkat x bentuk, dan kuota tiap
+// kompetensi); bila belum, diacak ulang. Bila tetap gagal, dipakai pemilihan asli (deterministik).
+const PERCOBAAN_SEL_ACAK = 25;
+function pilihSoalAdaptif(kelompokSoal, urutan, jumlah, opsi = {}) {
+  if (!opsi.selAcak) return pilihSoalAdaptifSekali(kelompokSoal, urutan, jumlah, false);
+  const target = targetKomposisi([...kelompokSoal.values()].flat(), jumlah);
+  const kuota = new Map();
+  urutan.forEach(kode => kuota.set(kode, (kuota.get(kode) || 0) + 1));
+  const memenuhi = hasil => {
+    if (hasil.length !== jumlah || new Set(hasil.map(q => q.id)).size !== hasil.length) return false;
+    const sel = {}, perKode = {};
+    hasil.forEach(q => {
+      sel[selSoal(q)] = (sel[selSoal(q)] || 0) + 1;
+      perKode[q.kodeKompetensi] = (perKode[q.kodeKompetensi] || 0) + 1;
+    });
+    if (Object.keys(target.sel).some(s => (sel[s] || 0) !== target.sel[s])) return false;
+    return [...kuota].every(([kode, banyak]) => (perKode[kode] || 0) === banyak);
+  };
+  for (let coba = 0; coba < PERCOBAAN_SEL_ACAK; coba++) {
+    const hasil = pilihSoalAdaptifSekali(kelompokSoal, urutan, jumlah, true);
+    if (memenuhi(hasil)) return hasil;
+  }
+  return pilihSoalAdaptifSekali(kelompokSoal, urutan, jumlah, false);
 }
 
 const $ = id => document.getElementById(id);
@@ -896,10 +944,12 @@ const akurasi = data?.accuracy ??
 
 
   // Ambil soal sesuai kuota kompetensi dan komposisi kesulitan
+  // Matematika: sel acak berbobot agar setiap soal berpeluang terpilih (lihat pilihSoalAdaptif)
   currentQuestions = pilihSoalAdaptif(
     kelompokSoal,
     urutanPengambilan,
-    JUMLAH_SOAL_MODE.adaptive
+    JUMLAH_SOAL_MODE.adaptive,
+    { selAcak: currentSubject === "matematika" }
   );
 
   console.log(
