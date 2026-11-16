@@ -1,7 +1,7 @@
 // DIBUAT OTOMATIS oleh alat/versi-aset.js — jangan diedit manual.
 // Peta jalur gambar sumber (dipakai bank soal) -> versi tetap berbasis hash di assets/versi/.
 window.ASET_MANIFEST = {
- "dibuat": "2026-11-15T14:44:27.913Z",
+ "dibuat": "2026-11-16T01:31:59.555Z",
  "catatan": "Dibuat otomatis oleh alat/versi-aset.js. Jangan diedit manual.",
  "berkas": {
   "assets/images/ipas/diagram-mata.png": {
@@ -623,6 +623,18 @@ window.ASET_MANIFEST = {
   "assets/images/penguatan/KMAT-100.svg": {
    "src": "assets/versi/7ebe6147922602f5.svg",
    "hash": "7ebe6147922602f5"
+  },
+  "assets/images/penguatan/KMAT-112.svg": {
+   "src": "assets/versi/e39820f76e2b40d0.svg",
+   "hash": "e39820f76e2b40d0"
+  },
+  "assets/images/penguatan/KMAT-113.svg": {
+   "src": "assets/versi/753809afaa61dd92.svg",
+   "hash": "753809afaa61dd92"
+  },
+  "assets/images/penguatan/KMAT-114.svg": {
+   "src": "assets/versi/eb0b815a3a85e8c8.svg",
+   "hash": "eb0b815a3a85e8c8"
   },
   "assets/images/tambahan/balok-tiga-kubus.svg": {
    "src": "assets/versi/41e431550fdc6ca1.svg",
