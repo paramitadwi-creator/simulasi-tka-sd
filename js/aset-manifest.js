@@ -1,7 +1,7 @@
 // DIBUAT OTOMATIS oleh alat/versi-aset.js — jangan diedit manual.
 // Peta jalur gambar sumber (dipakai bank soal) -> versi tetap berbasis hash di assets/versi/.
 window.ASET_MANIFEST = {
- "dibuat": "2026-11-16T01:31:59.555Z",
+ "dibuat": "2026-11-16T05:47:39.569Z",
  "catatan": "Dibuat otomatis oleh alat/versi-aset.js. Jangan diedit manual.",
  "berkas": {
   "assets/images/ipas/diagram-mata.png": {
@@ -635,6 +635,42 @@ window.ASET_MANIFEST = {
   "assets/images/penguatan/KMAT-114.svg": {
    "src": "assets/versi/eb0b815a3a85e8c8.svg",
    "hash": "eb0b815a3a85e8c8"
+  },
+  "assets/images/penguatan/KMAT-118.svg": {
+   "src": "assets/versi/50ddbcd5cdae577f.svg",
+   "hash": "50ddbcd5cdae577f"
+  },
+  "assets/images/penguatan/KMAT-119.svg": {
+   "src": "assets/versi/8dd9267b3916bbbb.svg",
+   "hash": "8dd9267b3916bbbb"
+  },
+  "assets/images/penguatan/KMAT-120.svg": {
+   "src": "assets/versi/3da8cdb017b7a8ff.svg",
+   "hash": "3da8cdb017b7a8ff"
+  },
+  "assets/images/penguatan/KMAT-121.svg": {
+   "src": "assets/versi/d4bbcc982d4f7dd2.svg",
+   "hash": "d4bbcc982d4f7dd2"
+  },
+  "assets/images/penguatan/KMAT-122.svg": {
+   "src": "assets/versi/caa9d5d4545df9cf.svg",
+   "hash": "caa9d5d4545df9cf"
+  },
+  "assets/images/penguatan/KMAT-123.svg": {
+   "src": "assets/versi/3da8cdb017b7a8ff.svg",
+   "hash": "3da8cdb017b7a8ff"
+  },
+  "assets/images/penguatan/KMAT-124.svg": {
+   "src": "assets/versi/65853627fa1d7170.svg",
+   "hash": "65853627fa1d7170"
+  },
+  "assets/images/penguatan/KMAT-125.svg": {
+   "src": "assets/versi/9608a7872732d31c.svg",
+   "hash": "9608a7872732d31c"
+  },
+  "assets/images/penguatan/KMAT-126.svg": {
+   "src": "assets/versi/65853627fa1d7170.svg",
+   "hash": "65853627fa1d7170"
   },
   "assets/images/tambahan/balok-tiga-kubus.svg": {
    "src": "assets/versi/41e431550fdc6ca1.svg",
