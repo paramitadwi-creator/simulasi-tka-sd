@@ -295,7 +295,7 @@ function pilihSoalBerimbang(pool, jumlah) {
 
 // Mode adaptif: penuhi kuota tiap kompetensi sekaligus target kesulitan & bentuk.
 // kelompokSoal: Map kode → daftar soal (sudah diacak); urutan: kode berulang sesuai kuota.
-function pilihSoalAdaptifSekali(kelompokSoal, urutan, jumlah, selAcak) {
+function pilihSoalAdaptifSekali(kelompokSoal, urutan, jumlah, selAcak, bobotTerbaru = new Map()) {
   const semua = [...kelompokSoal.values()].flat();
   const target = targetKomposisi(semua, jumlah);
   const catat = buatPencatat(target);
@@ -317,7 +317,13 @@ function pilihSoalAdaptifSekali(kelompokSoal, urutan, jumlah, selAcak) {
       perSel.get(s).push(q);
     });
     if (!perSel.size) return catat.terbaik(daftar);
-    const dari = (s, qs) => s.endsWith("PGK") ? catat.terbaik(qs) : qs[0];
+    // Di dalam sel, utamakan soal yang paling lama tidak muncul (bobot terbaru terkecil)
+    const segar = qs => {
+      const bobot = q => bobotTerbaru.get(q.id) || 0;
+      const terkecil = Math.min(...qs.map(bobot));
+      return qs.filter(q => bobot(q) === terkecil);
+    };
+    const dari = (s, qs) => s.endsWith("PGK") ? catat.terbaik(segar(qs)) : segar(qs)[0];
     let r = Math.random() * [...perSel.keys()].reduce((t, s) => t + kurangSel(s), 0);
     for (const [s, qs] of perSel) {
       r -= kurangSel(s);
@@ -429,7 +435,30 @@ function pilihSoalAdaptifSekali(kelompokSoal, urutan, jumlah, selAcak) {
 // sehingga setiap soal berpeluang terpilih. Hasil acak hanya diterima bila memenuhi semua
 // syarat sesi (jumlah, tanpa duplikat, komposisi sel tingkat x bentuk, dan kuota tiap
 // kompetensi); bila belum, diacak ulang. Bila tetap gagal, dipakai pemilihan asli (deterministik).
+// opsi.bobotTerbaru (Map idSoal -> bobot): dari percobaan yang lolos syarat dipilih yang total
+// bobot soal terbarunya paling kecil, agar soal sesi-sesi terakhir tidak langsung muncul lagi.
 const PERCOBAAN_SEL_ACAK = 25;
+// Bobot soal dari 3 sesi terakhir (mapel & mode sama): sesi terakhir 4, sebelumnya 2, lalu 1.
+const BOBOT_SESI_TERBARU = [4, 2, 1];
+function bobotSoalTerbaru(mapel, mode) {
+  const bobot = new Map();
+  try {
+    if (!window.Riwayat || typeof window.Riwayat.daftar !== "function") return bobot;
+    window.Riwayat.daftar()
+      .filter(sesi => sesi.mapel === mapel && sesi.mode === mode)
+      .slice(0, BOBOT_SESI_TERBARU.length)
+      .forEach((sesi, i) => {
+        const isi = window.Riwayat.muat(sesi.id);
+        if (!isi || !Array.isArray(isi.soal)) return;
+        isi.soal.forEach(s => {
+          if (s.idSoal) bobot.set(s.idSoal, (bobot.get(s.idSoal) || 0) + BOBOT_SESI_TERBARU[i]);
+        });
+      });
+  } catch (e) {
+    // Riwayat tidak terbaca: pilih soal seperti biasa tanpa bobot terbaru
+  }
+  return bobot;
+}
 function pilihSoalAdaptif(kelompokSoal, urutan, jumlah, opsi = {}) {
   if (!opsi.selAcak) return pilihSoalAdaptifSekali(kelompokSoal, urutan, jumlah, false);
   const target = targetKomposisi([...kelompokSoal.values()].flat(), jumlah);
@@ -445,10 +474,17 @@ function pilihSoalAdaptif(kelompokSoal, urutan, jumlah, opsi = {}) {
     if (Object.keys(target.sel).some(s => (sel[s] || 0) !== target.sel[s])) return false;
     return [...kuota].every(([kode, banyak]) => (perKode[kode] || 0) === banyak);
   };
+  const bobotTerbaru = opsi.bobotTerbaru instanceof Map ? opsi.bobotTerbaru : new Map();
+  const totalBobot = hasil => hasil.reduce((t, q) => t + (bobotTerbaru.get(q.id) || 0), 0);
+  let pilihan = null, bobotPilihan = Infinity;
   for (let coba = 0; coba < PERCOBAAN_SEL_ACAK; coba++) {
-    const hasil = pilihSoalAdaptifSekali(kelompokSoal, urutan, jumlah, true);
-    if (memenuhi(hasil)) return hasil;
+    const hasil = pilihSoalAdaptifSekali(kelompokSoal, urutan, jumlah, true, bobotTerbaru);
+    if (!memenuhi(hasil)) continue;
+    const b = totalBobot(hasil);
+    if (b < bobotPilihan) { pilihan = hasil; bobotPilihan = b; }
+    if (b === 0) break;
   }
+  if (pilihan) return pilihan;
   return pilihSoalAdaptifSekali(kelompokSoal, urutan, jumlah, false);
 }
 
@@ -944,12 +980,17 @@ const akurasi = data?.accuracy ??
 
 
   // Ambil soal sesuai kuota kompetensi dan komposisi kesulitan
-  // Matematika: sel acak berbobot agar setiap soal berpeluang terpilih (lihat pilihSoalAdaptif)
+  // Matematika: sel acak berbobot agar setiap soal berpeluang terpilih, dan soal dari
+  // 3 sesi adaptif Matematika terakhir dihindari bila memungkinkan (lihat pilihSoalAdaptif)
+  const adaptifMatematika = currentSubject === "matematika";
   currentQuestions = pilihSoalAdaptif(
     kelompokSoal,
     urutanPengambilan,
     JUMLAH_SOAL_MODE.adaptive,
-    { selAcak: currentSubject === "matematika" }
+    {
+      selAcak: adaptifMatematika,
+      bobotTerbaru: adaptifMatematika ? bobotSoalTerbaru("matematika", "adaptive") : null
+    }
   );
 
   console.log(
