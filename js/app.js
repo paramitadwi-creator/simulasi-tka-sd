@@ -121,6 +121,9 @@ if (!window.kisiKisiTKA) {
 // JUMLAH SOAL, DURASI, KOMPOSISI KESULITAN & BENTUK SOAL PER SESI
 // =====================================================================
 const JUMLAH_SOAL_MODE = { practice: 15, exam: 30, adaptive: 30 };
+// Adaptif Matematika: jumlah jawaban minimal per kompetensi sebelum akurasinya
+// ikut menentukan kuota (mencegah 1–2 jawaban membuat kuota ekstrem)
+const AMBANG_SAMPEL_ADAPTIF_MT = 3;
 // Durasi pengerjaan per sesi (detik)
 const DURASI_MODE = { practice: 45 * 60, exam: 90 * 60, adaptive: 90 * 60 };
 // Durasi khusus per mata pelajaran dan sesi (detik). Bila ada, menggantikan
@@ -662,12 +665,21 @@ if (currentSubject === "matematika") {
       item => item.kode === kode
     );
 
-    const akurasi = data?.accuracy ??
-      itemPrioritas?.persentase ?? 50;
+    // Akurasi baru dipakai setelah minimal AMBANG_SAMPEL_ADAPTIF_MT jawaban pada
+    // kompetensi itu; sebelumnya memakai fallback profil yang sama dengan siswa
+    // tanpa progres (persentase profil, atau 50 = netral). Progres tetap tersimpan.
+    const sampel = Number(data?.attempted) || 0;
+    const cukupSampel = sampel >= AMBANG_SAMPEL_ADAPTIF_MT &&
+      Number.isFinite(data?.accuracy);
+
+    const akurasi = cukupSampel
+      ? data.accuracy
+      : itemPrioritas?.persentase ?? 50;
 
     return {
       kode,
       stok,
+      sampel,
       akurasi,
       bobot: Math.max(10, 100 - akurasi),
       kuota: stok > 0 ? 1 : 0
