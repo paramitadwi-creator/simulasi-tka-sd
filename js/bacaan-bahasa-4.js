@@ -139,11 +139,11 @@ Semut dan Belalang
 
 Di sebuah padang rumput yang luas, tinggallah sekawanan semut dan seekor belalang. Musim kemarau saat itu sangat panjang. Rumput dan biji-bijian tersedia melimpah di mana-mana.
 
-Sepanjang musim kemarau, Semut bekerja keras mengumpulkan makanan. Belalang hanya bernyanyi sambil mengejek, "Untuk apa bekerja keras? Makanan masih banyak!" Ketika musim hujan tiba, makanan sulit dicari. Belalang kelaparan, sedangkan Semut hidup tenang dengan persediaannya.
+Setiap pagi, Semut berjalan berbaris mengangkut biji-bijian ke sarangnya di bawah pohon besar. Ia menyimpan makanan itu di ruang-ruang kecil yang kering dan aman. Sementara itu, Belalang melompat dari satu daun ke daun lain sambil memainkan biolanya.
 
-Setiap pagi, Semut berjalan berbaris mengangkut biji-bijian ke sarangnya di bawah pohon besar. Ia menyimpan makanan itu di ruang-ruang kecil yang kering dan aman. Sementara itu, Belalang melompat dari satu daun ke daun lain sambil memainkan biolanya. Ia menertawakan Semut yang terus berkeringat di bawah terik matahari.
+Suatu siang, Belalang melihat Semut yang terus berkeringat di bawah terik matahari. Ia tertawa dan mengejek, "Untuk apa bekerja keras? Makanan masih banyak!" Semut tidak membalas. Ia terus mengangkut biji-bijian sampai sarangnya penuh.
 
-Ketika hujan turun berhari-hari, padang rumput tergenang air. Biji-bijian hanyut dan dedaunan membusuk. Belalang menggigil kedinginan di bawah sehelai daun. Perutnya keroncongan karena tidak ada lagi makanan yang dapat dimakan. Dari kejauhan, ia melihat sarang Semut yang hangat dan penuh persediaan makanan. Belalang menyesal karena dulu hanya bermain-main dan tidak mempersiapkan diri menghadapi musim hujan.`,
+Beberapa bulan kemudian, musim hujan tiba. Hujan turun berhari-hari sehingga padang rumput tergenang air. Biji-bijian hanyut dan dedaunan membusuk. Belalang menggigil kedinginan di bawah sehelai daun. Perutnya keroncongan karena tidak ada lagi makanan yang dapat dimakan. Dari kejauhan, ia melihat sarang Semut yang hangat. Di dalamnya, Semut dan kawan-kawannya makan dengan tenang dari persediaan mereka.`,
 
 "KBIN-055": `Bacalah cerita berikut.
 
@@ -151,11 +151,11 @@ Kelinci dan Kura-Kura
 
 Di tepi hutan, hiduplah seekor kelinci yang terkenal sebagai pelari tercepat. Kelinci sering membanggakan kecepatannya di depan hewan-hewan lain. Suatu hari, ia melihat Kura-kura berjalan pelan menuju sungai. Kelinci tertawa terbahak-bahak dan mengejek langkah Kura-kura yang lambat.
 
-Kelinci menantang Kura-kura berlomba lari. Karena merasa pasti menang, Kelinci tidur di tengah jalan. Kura-kura terus berjalan perlahan tanpa berhenti. Saat Kelinci bangun, Kura-kura sudah sampai di garis akhir.
+Kelinci lalu menantang Kura-kura berlomba lari. "Siapa yang lebih dulu sampai di pohon beringin di seberang bukit, dialah pemenangnya," katanya. Kura-kura menerima tantangan itu dengan tenang. Lomba itu disaksikan banyak hewan, dan Burung Hantu menjadi jurinya.
 
-Lomba itu disaksikan banyak hewan. Burung hantu menjadi juri dan menentukan garis akhir di bawah pohon beringin besar di seberang bukit. Saat lomba dimulai, Kelinci melesat jauh meninggalkan Kura-kura. Di tengah perjalanan, Kelinci menoleh ke belakang dan tidak melihat Kura-kura sama sekali. "Kura-kura pasti masih jauh. Aku istirahat dulu saja," pikirnya sambil berbaring di bawah pohon yang rindang.
+Saat lomba dimulai, Kelinci melesat jauh meninggalkan Kura-kura. Di tengah perjalanan, Kelinci menoleh ke belakang dan tidak melihat Kura-kura sama sekali. "Kura-kura pasti masih jauh. Aku istirahat dulu saja," pikirnya sambil berbaring di bawah pohon yang rindang. Tidak lama kemudian, Kelinci tertidur pulas.
 
-Kura-kura tidak memedulikan ejekan Kelinci. Ia terus melangkah dengan sabar, selangkah demi selangkah, walaupun kakinya terasa pegal. Ketika Kelinci terbangun, matahari sudah condong ke barat. Ia berlari sekencang-kencangnya, tetapi terlambat. Hewan-hewan bersorak menyambut Kura-kura di garis akhir. Kelinci hanya bisa menunduk malu.`,
+Kura-kura tidak memedulikan ejekan Kelinci. Ia terus melangkah dengan sabar, selangkah demi selangkah, walaupun kakinya terasa pegal. Ia bahkan melewati Kelinci yang masih tertidur. Ketika Kelinci terbangun, matahari sudah condong ke barat. Ia berlari sekencang-kencangnya, tetapi terlambat. Hewan-hewan bersorak menyambut Kura-kura di garis akhir. Kelinci hanya bisa menunduk malu.`,
 
 "KBIN-056": `Bacalah cerita berikut.
 
@@ -163,11 +163,11 @@ Gigi Bagas
 
 Bagas adalah anak kelas tiga yang sangat menyukai makanan manis. Setiap pulang sekolah, ia selalu membeli permen dan cokelat di warung dekat rumahnya. Ibu sering mengingatkan Bagas agar tidak terlalu banyak makan permen dan selalu menggosok gigi sebelum tidur. Namun, Bagas sering pura-pura lupa. Ia lebih suka langsung naik ke tempat tidur setelah menonton televisi.
 
-Bagas malas menggosok gigi sebelum tidur. Ia juga sering makan permen. Suatu malam, giginya sakit sekali sampai ia tidak bisa tidur. Dokter gigi berkata, "Gigimu berlubang karena jarang dibersihkan." Sejak itu Bagas rajin menggosok gigi.
+Suatu malam, gigi Bagas terasa sakit sekali sampai ia tidak bisa tidur. Bagas menangis sambil memegangi pipinya yang bengkak. Ibu mengompres pipinya dengan handuk hangat.
 
-Malam itu, Bagas menangis sambil memegangi pipinya yang bengkak. Ibu mengompres pipinya dengan handuk hangat. Keesokan paginya, Ibu mengantar Bagas ke puskesmas. Dokter gigi memeriksa gigi Bagas dengan cermin kecil dan menunjukkan gigi geraham yang berlubang dan menghitam. Dokter menjelaskan bahwa sisa makanan manis yang menempel di gigi dapat membuat gigi berlubang jika tidak dibersihkan.
+Keesokan paginya, Ibu mengantar Bagas ke puskesmas. Dokter gigi memeriksa gigi Bagas dengan cermin kecil dan menunjukkan gigi geraham yang berlubang dan menghitam. "Gigimu berlubang karena jarang dibersihkan," kata Dokter. Ia menjelaskan bahwa sisa makanan manis yang menempel di gigi dapat membuat gigi berlubang jika tidak dibersihkan.
 
-Dokter mengajari Bagas cara menggosok gigi yang benar, yaitu dengan gerakan memutar selama dua menit. Bagas juga diminta mengurangi permen. Kini, setiap malam Bagas menggosok gigi sebelum tidur. Ia bahkan mengingatkan adiknya untuk melakukan hal yang sama.`,
+Dokter juga mengajari Bagas cara menggosok gigi yang benar, yaitu dengan gerakan memutar selama dua menit. Bagas diminta mengurangi permen. Kini, setiap malam Bagas menggosok gigi sebelum tidur. Ia bahkan mengingatkan adiknya untuk melakukan hal yang sama.`,
 
 "KBIN-057": `Bacalah cerita berikut.
 
@@ -175,9 +175,9 @@ Buku yang Tak Kembali
 
 Wina adalah siswi kelas lima yang ramah dan senang bergaul. Ia sering meminjam buku cerita, buku catatan, dan alat tulis teman-temannya. Teman-temannya selalu bersedia meminjamkan karena Wina pandai membujuk. Akan tetapi, Wina sering lupa mengembalikan barang yang dipinjamnya.
 
-Wina sering meminjam buku teman-temannya, tetapi jarang mengembalikannya tepat waktu. Bahkan, buku Dita pernah hilang. Suatu hari Wina ingin meminjam kamus, tetapi tidak ada teman yang mau meminjamkannya. Wina pun menyesal.
+Suatu hari, Wina meminjam buku dongeng bergambar milik Dita. Buku itu hadiah ulang tahun dari nenek Dita. Berminggu-minggu Wina belum juga mengembalikannya. Ketika Dita menanyakannya, Wina baru sadar bahwa buku itu tidak dapat ditemukan. Dita sangat sedih.
 
-Buku Dita yang hilang adalah buku dongeng bergambar hadiah ulang tahun dari neneknya. Dita sangat sedih ketika Wina mengatakan bahwa buku itu tidak dapat ditemukan. Sejak kejadian itu, teman-teman mulai enggan meminjamkan barang mereka kepada Wina. Hari itu, Bu Guru meminta setiap siswa membawa kamus untuk mengerjakan tugas mencari arti kata. Wina lupa membawa kamus. Ia berkeliling kelas meminta pinjaman, tetapi teman-temannya menggeleng.
+Sejak kejadian itu, teman-teman mulai enggan meminjamkan barang mereka kepada Wina. Beberapa minggu kemudian, Bu Guru meminta setiap siswa membawa kamus untuk mengerjakan tugas mencari arti kata. Wina lupa membawa kamus. Ia berkeliling kelas meminta pinjaman, tetapi teman-temannya menggeleng.
 
 Wina duduk termenung di bangkunya. Ia teringat semua barang pinjaman yang terlambat dikembalikannya. Sepulang sekolah, Wina menemui Dita dan meminta maaf. Ia berjanji akan mengganti buku dongeng itu dengan uang tabungannya. Wina juga mulai mencatat setiap barang yang dipinjamnya agar tidak lupa mengembalikannya.`,
 
@@ -201,9 +201,9 @@ Gagak yang Cerdik
 
 Musim kemarau melanda sebuah hutan. Sungai-sungai mengering, dan genangan air di bawah pepohonan sudah lama hilang. Hewan-hewan berjalan jauh untuk mencari air minum. Seekor burung gagak terbang berkeliling sejak pagi. Sayapnya terasa lelah dan tenggorokannya sangat kering.
 
-Seekor burung gagak sangat haus. Ia menemukan kendi berisi sedikit air, tetapi paruhnya tidak sampai. Gagak tidak menyerah. Ia memasukkan kerikil satu per satu ke dalam kendi sampai permukaan air naik. Akhirnya gagak dapat minum.
+Menjelang siang, gagak melihat sebuah kendi di pinggir ladang. Kendi itu ditinggalkan seorang petani. Gagak segera hinggap di mulut kendi. Di dasarnya ada sedikit air, tetapi paruhnya tidak sampai.
 
-Kendi itu ditinggalkan seorang petani di pinggir ladang. Gagak mula-mula mencoba memiringkan kendi dengan paruhnya, tetapi kendi itu terlalu berat. Ia juga mencoba menjulurkan lehernya sedalam mungkin, tetapi tetap tidak berhasil. Gagak lalu bertengger di atas pagar dan berpikir. Matanya tertuju pada kerikil-kerikil kecil yang berserakan di tanah.
+Gagak mula-mula mencoba memiringkan kendi dengan paruhnya, tetapi kendi itu terlalu berat. Ia juga mencoba menjulurkan lehernya sedalam mungkin, tetapi tetap tidak berhasil. Gagak lalu bertengger di atas pagar dan berpikir. Matanya tertuju pada kerikil-kerikil kecil yang berserakan di tanah.
 
 Dengan sabar, gagak memungut kerikil satu demi satu dan menjatuhkannya ke dalam kendi. Pekerjaan itu memakan waktu lama dan membuatnya semakin lelah. Namun, sedikit demi sedikit, air di dalam kendi naik. Ketika air sudah dekat dengan mulut kendi, gagak minum sepuasnya. Ia merasa segar kembali dan dapat melanjutkan perjalanannya.`,
 
@@ -227,11 +227,11 @@ Ayam Bertelur Emas
 
 Di sebuah desa, tinggallah seorang petani miskin bernama Pak Somad. Ia hanya memiliki sepetak sawah kecil dan beberapa ekor ayam. Suatu pagi, Pak Somad terkejut ketika menemukan telur berwarna kuning berkilau di kandang ayamnya. Telur itu ternyata terbuat dari emas.
 
-Pak Somad memiliki ayam yang setiap hari bertelur satu butir emas. Ia menjualnya dan menjadi kaya. Namun, Pak Somad tidak sabar. "Pasti di dalam perutnya ada banyak emas," pikirnya. Ia pun menyembelih ayam itu. Ternyata perut ayam itu kosong. Kini ia tidak mendapat emas lagi.
+Telur itu berasal dari salah satu ayamnya. Sejak hari itu, ayam tersebut bertelur satu butir emas setiap pagi. Pak Somad menjual telur-telur itu. Dengan uang hasil penjualannya, ia memperbaiki rumah, membeli sawah yang lebih luas, dan membantu tetangga yang kesulitan. Hidupnya menjadi bahagia.
 
-Sebelum menjadi serakah, Pak Somad hidup bahagia. Dengan uang hasil menjual telur emas, ia memperbaiki rumahnya, membeli sawah yang lebih luas, dan membantu tetangga yang kesulitan. Namun, lama-kelamaan ia merasa satu butir telur sehari terlalu sedikit. Ia ingin segera menjadi orang terkaya di desa. Istrinya sudah mengingatkan agar ia bersyukur, tetapi Pak Somad tidak mendengarkan.
+Namun, lama-kelamaan Pak Somad merasa satu butir telur sehari terlalu sedikit. Ia ingin segera menjadi orang terkaya di desa. "Pasti di dalam perutnya ada banyak emas," pikirnya. Istrinya sudah mengingatkan agar ia bersyukur, tetapi Pak Somad tidak mendengarkan. Ia pun menyembelih ayam itu. Ternyata perut ayam itu kosong.
 
-Setelah ayam itu mati, Pak Somad duduk termenung di depan kandang yang kosong. Ia menyesali perbuatannya. Ayam yang selama ini memberinya rezeki setiap hari telah hilang karena keserakahannya sendiri.`,
+Pak Somad duduk termenung di depan kandang yang kosong. Ayam yang selama ini memberinya sebutir emas setiap pagi telah tiada. Esok paginya, dan pagi-pagi berikutnya, tidak ada lagi telur emas di kandang itu.`,
 
 "KBIN-062": `Bacalah cerita berikut.
 
@@ -253,11 +253,11 @@ Beringin dan Rumput
 
 Di tengah sebuah lapangan desa, berdirilah sebatang pohon beringin yang sangat besar. Batangnya kokoh, dahannya lebar, dan daunnya rimbun. Banyak burung bersarang di dahannya, dan anak-anak sering berteduh di bawahnya. Pohon beringin itu merasa dirinya paling hebat. Di sekitar akarnya, tumbuh hamparan rumput hijau yang pendek.
 
-Pohon beringin yang besar sering mengejek rumput. "Kamu lemah, mudah sekali diinjak." Rumput hanya diam. Suatu malam, badai datang. Beringin yang kaku melawan angin hingga tumbang. Rumput yang lentur hanya merunduk mengikuti angin dan esok paginya tegak kembali.
+Setiap hari, beringin menertawakan rumput yang diinjak kaki-kaki anak yang bermain bola. "Kamu lemah, mudah sekali diinjak," katanya dengan angkuh. "Lihat aku, tidak ada yang berani menginjakku." Rumput tidak membalas ejekan itu. Ia tetap tumbuh dengan tenang.
 
-Setiap hari, beringin menertawakan rumput yang diinjak kaki-kaki anak yang bermain bola. "Lihat aku, tidak ada yang berani menginjakku," katanya dengan angkuh. Rumput tidak membalas ejekan itu. Ia tetap tumbuh dengan tenang.
+Suatu malam, badai datang. Angin bertiup sangat kencang disertai hujan lebat. Dahan-dahan beringin berderak keras. Beringin yang kaku berusaha bertahan dengan tegak melawan angin, tetapi akarnya tercabut dari tanah yang basah. Sementara itu, rumput yang lentur hanya merunduk mengikuti arah angin.
 
-Malam itu, angin bertiup sangat kencang disertai hujan lebat. Dahan-dahan beringin berderak keras. Beringin berusaha bertahan dengan tegak, tetapi akarnya tercabut dari tanah yang basah. Pagi harinya, warga desa terkejut melihat beringin besar tergeletak di tengah lapangan. Di sekelilingnya, hamparan rumput tetap hijau dan segar disinari matahari pagi.`,
+Pagi harinya, warga desa terkejut melihat beringin besar tergeletak di tengah lapangan. Di sekelilingnya, hamparan rumput sudah tegak kembali, tetap hijau dan segar disinari matahari pagi.`,
 
 "KBIN-064": `Bacalah cerita berikut.
 
@@ -265,9 +265,11 @@ Laba-Laba di Jendela
 
 Sudah dua minggu Ari belajar naik sepeda. Setiap sore ia berlatih di halaman rumah ditemani kakaknya. Namun, Ari selalu terjatuh setelah mengayuh beberapa kali. Lututnya lecet dan sikunya memar. Ari mulai berpikir bahwa ia tidak akan pernah bisa bersepeda seperti teman-temannya. Sore itu, ia memilih duduk di kamar dan tidak mau berlatih lagi.
 
-Dari jendela, Ari memperhatikan seekor laba-laba membuat sarang. Angin merusak sarangnya tiga kali, tetapi laba-laba itu terus membuatnya lagi sampai jadi. Ari, yang sudah dua minggu gagal belajar naik sepeda dan hampir menyerah, pun bangkit. "Kalau laba-laba saja tidak menyerah, aku juga tidak boleh menyerah," katanya. Seminggu kemudian, Ari sudah lancar bersepeda.
+Dari jendela kamarnya, Ari memperhatikan seekor laba-laba yang sedang membuat sarang di sudut jendela. Tiba-tiba angin bertiup dan merusak sarang itu. Laba-laba kembali ke sudut jendela dan mulai merajut dari awal. Angin merusak sarangnya tiga kali, tetapi laba-laba itu terus membuatnya lagi dengan tenang dan teliti sampai sarangnya jadi.
 
-Ari memperhatikan laba-laba itu cukup lama. Setiap kali benang sarangnya putus, laba-laba itu kembali ke sudut jendela dan mulai merajut dari awal. Gerakannya tetap tenang dan teliti. Ari tersenyum, lalu mengambil sepedanya di garasi. Ia meminta kakaknya memegangi sadel dari belakang. Kali ini, Ari berlatih lebih sabar dan tidak mudah putus asa ketika terjatuh. Hari demi hari, keseimbangannya semakin baik. Ketika akhirnya dapat bersepeda sendiri mengelilingi kompleks, Ari bersorak gembira.`,
+Ari tersenyum. "Kalau laba-laba saja tidak menyerah, aku juga tidak boleh menyerah," katanya. Ia lalu mengambil sepedanya di garasi dan meminta kakaknya memegangi sadel dari belakang. Kali ini, Ari berlatih lebih sabar dan tidak mudah putus asa ketika terjatuh.
+
+Hari demi hari, keseimbangannya semakin baik. Seminggu kemudian, Ari sudah dapat bersepeda sendiri mengelilingi kompleks. Ia bersorak gembira.`,
 
 "KBIN-065": `Bacalah cerita berikut.
 
@@ -275,11 +277,11 @@ Jalan Desa Sukamaju
 
 Jalan utama Desa Sukamaju sudah lama rusak. Aspalnya mengelupas dan banyak lubang besar di sepanjang jalan. Saat hujan, lubang-lubang itu tergenang air sehingga pengendara sepeda motor sering terjatuh. Anak-anak yang berangkat sekolah harus berjalan berhati-hati agar sepatu mereka tidak basah dan kotor.
 
-Warga Desa Sukamaju mengeluh jalan desa rusak. Pak Kades mengundang warga ke balai desa. "Saya ingin mendengar pendapat Bapak dan Ibu," katanya. Ada yang mengusulkan iuran, ada yang mengusulkan kerja bakti. Akhirnya disepakati kerja bakti setiap Minggu dengan bahan dari dana desa. Dua bulan kemudian, jalan desa sudah mulus.
+Warga mengeluhkan keadaan itu kepada Pak Kades. Pak Kades lalu mengundang warga ke balai desa. "Saya ingin mendengar pendapat Bapak dan Ibu," katanya. Pertemuan berlangsung tertib. Pak Kades mencatat setiap usulan di papan tulis dan mempersilakan warga menyampaikan alasannya.
 
-Pertemuan di balai desa berlangsung tertib. Pak Kades mencatat setiap usulan di papan tulis dan mempersilakan warga menyampaikan alasannya. Setelah berdiskusi, warga memilih cara yang paling ringan bagi semua orang. Setiap Minggu pagi, para bapak mengangkut batu dan pasir, sedangkan para pemuda meratakan jalan. Para ibu menyiapkan makanan dan minuman bagi yang bekerja. Anak-anak membantu membagikan air minum.
+Ada yang mengusulkan iuran, ada pula yang mengusulkan kerja bakti. Setelah berdiskusi, warga memilih cara yang paling ringan bagi semua orang, yaitu kerja bakti setiap Minggu dengan bahan dari dana desa. Setiap Minggu pagi, para bapak mengangkut batu dan pasir, sedangkan para pemuda meratakan jalan. Para ibu menyiapkan makanan dan minuman bagi yang bekerja. Anak-anak membantu membagikan air minum.
 
-Ketika jalan selesai diperbaiki, warga mengadakan syukuran kecil. Pak Kades berterima kasih atas kerja sama seluruh warga. Kini anak-anak dapat berangkat sekolah dengan nyaman, dan pedagang lebih mudah membawa hasil panen ke pasar.`,
+Dua bulan kemudian, jalan desa sudah mulus. Warga mengadakan syukuran kecil, dan Pak Kades berterima kasih atas kerja sama seluruh warga. Kini anak-anak dapat berangkat sekolah dengan nyaman, dan pedagang lebih mudah membawa hasil panen ke pasar.`,
 
 "KBIN-066": `Bacalah cerita berikut.
 
@@ -313,9 +315,9 @@ Rahma dan Catatan Teman
 
 Rahma adalah siswi kelas lima yang rajin dan pandai. Ia selalu mendapat nilai bagus dan tidak pernah terlambat mengumpulkan tugas. Namun, Rahma lebih suka belajar sendiri. Ketika teman-temannya bertanya tentang pelajaran, Rahma sering menjawab singkat karena ingin segera melanjutkan pekerjaannya.
 
-Rahma selalu menyelesaikan tugas tepat waktu, tetapi ia jarang membantu teman. Suatu hari Rahma sakit dan tertinggal pelajaran selama seminggu. Ia khawatir tidak ada yang mau membantunya. Ternyata, Dinar dan teman-teman datang membawa catatan dan menjelaskan pelajaran. Rahma terharu. "Mulai sekarang, aku juga ingin membantu teman-teman," katanya.
+Suatu hari, Rahma terkena demam berdarah dan harus beristirahat di rumah selama seminggu. Ia sedih karena minggu itu ada materi baru tentang pecahan dan ulangan IPAS. Rahma khawatir tidak ada yang mau membantunya, sebab selama ini ia sendiri jarang membantu teman.
 
-Rahma terkena demam berdarah dan harus beristirahat di rumah. Ia sedih karena minggu itu ada materi baru tentang pecahan dan ulangan IPAS. Ia berpikir tidak akan ada yang peduli kepadanya. Sore itu, Dinar datang bersama tiga teman lainnya. Mereka membawa buah-buahan, salinan catatan pelajaran, dan kartu ucapan lekas sembuh. Dinar menjelaskan materi pecahan dengan sabar.
+Pada hari ketiga, Dinar datang bersama tiga teman lainnya. Mereka membawa buah-buahan, salinan catatan pelajaran, dan kartu ucapan lekas sembuh. Dinar menjelaskan materi pecahan dengan sabar. Ia juga berjanji akan datang lagi keesokan harinya untuk membahas materi IPAS. Rahma terharu. "Mulai sekarang, aku juga ingin membantu teman-teman," katanya pelan.
 
 Setelah sembuh, Rahma kembali ke sekolah dengan semangat baru. Ia mulai membantu teman-teman yang kesulitan belajar. Ia bahkan membentuk kelompok belajar bersama Dinar setiap Kamis sore.`,
 });
