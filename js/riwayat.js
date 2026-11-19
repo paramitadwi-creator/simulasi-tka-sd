@@ -214,7 +214,9 @@
             // Versi gambar yang benar-benar dilihat siswa (berkas tetap, tidak pernah ditimpa)
             imageVersi: q.image ? (infoAset(q.image) || {}).src || null : null,
             imageHash: q.image ? (infoAset(q.image) || {}).hash || null : null,
-            indikator: s.indikator ?? null, stim
+            indikator: s.indikator ?? null, stim,
+            // Penanda tampilan tabel stimulus (hanya bila ada; tidak ikut sidik soal)
+            ...(q.stimulusTabel === true ? { stimulusTabel: true } : {})
           };
           if (!tulis(ks, JSON.stringify(salinan))) return false;
           ditulisBaru.push(ks);

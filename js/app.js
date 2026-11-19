@@ -1057,6 +1057,56 @@ function startTimer() {
 }
 function stopTimer() { if (timerId) { clearInterval(timerId); timerId = null; } }
 function updateTimer() { $("timer").textContent = `${String(Math.floor(secondsLeft / 60)).padStart(2, "0")}:${String(secondsLeft % 60).padStart(2, "0")}`; }
+// Stimulus bertabel (opt-in): hanya soal dengan stimulusTabel === true. Baris berurutan yang
+// memuat "|" menjadi <table> (baris pertama = judul kolom); baris lain tetap teks. Isi stimulus
+// tidak diubah. Hanya satu blok tabel per stimulus: bila ada lebih dari satu blok (mis. tabel
+// terpotong baris kosong), jumlah kolom tidak seragam, atau tabel tanpa baris data, seluruh
+// stimulus ditampilkan sebagai teks biasa.
+// Dibangun dengan textContent (tanpa innerHTML) sehingga aman. Dipakai juga oleh js/hasil.js.
+function isiStimulus(wadah, q) {
+  const teks = String(q.stimulus || "");
+  if (q.stimulusTabel !== true) { wadah.appendChild(document.createTextNode(teks)); return; }
+  const blok = [];
+  teks.split("\n").forEach(baris => {
+    const tabel = baris.includes("|");
+    const akhir = blok[blok.length - 1];
+    if (akhir && akhir.tabel === tabel) akhir.baris.push(baris);
+    else blok.push({ tabel, baris: [baris] });
+  });
+  const sel = baris => baris.split("|").map(s => s.trim());
+  const sah = blok.filter(b => b.tabel).length <= 1 && blok.every(b => !b.tabel || (b.baris.length >= 2 &&
+    b.baris.every(baris => sel(baris).length === sel(b.baris[0]).length)));
+  if (!sah) { wadah.appendChild(document.createTextNode(teks)); return; }
+  blok.forEach(b => {
+    if (!b.tabel) {
+      const isi = b.baris.join("\n").trim();
+      if (isi) wadah.appendChild(document.createTextNode(isi));
+      return;
+    }
+    const gulir = document.createElement("div");
+    gulir.className = "stimulus-tabel-gulir";
+    const tabel = document.createElement("table");
+    tabel.className = "stimulus-tabel";
+    const kepala = tabel.createTHead().insertRow();
+    sel(b.baris[0]).forEach(isi => {
+      const th = document.createElement("th");
+      th.scope = "col"; th.textContent = isi;
+      kepala.appendChild(th);
+    });
+    const badan = tabel.createTBody();
+    b.baris.slice(1).forEach(baris => {
+      const tr = badan.insertRow();
+      sel(baris).forEach((isi, i) => {
+        const c = document.createElement(i === 0 ? "th" : "td");
+        if (i === 0) c.scope = "row";
+        c.textContent = isi;
+        tr.appendChild(c);
+      });
+    });
+    gulir.appendChild(tabel);
+    wadah.appendChild(gulir);
+  });
+}
 function renderQuestion() {
   const q = currentQuestions[currentIndex], selected = answers[q.id] || [];
   $("questionCounter").textContent = `Soal ${currentIndex + 1} dari ${currentQuestions.length}`;
@@ -1073,9 +1123,7 @@ const stimulusBox = $("stimulusBox");
 stimulusBox.replaceChildren();
 
 if (q.stimulus) {
-  stimulusBox.appendChild(
-    document.createTextNode(q.stimulus)
-  );
+  isiStimulus(stimulusBox, q);
 }
 
 if (q.image) {
@@ -1528,7 +1576,13 @@ function htmlPembahasan(q, i) {
   let isi = "";
 
   // Bacaan/stimulus: bacaan panjang dilipat agar pembahasan tetap ringkas
-  if (q.stimulus) {
+  if (q.stimulus && q.stimulusTabel === true) {
+    // Stimulus bertabel: dibangun dengan isiStimulus (textContent), lalu diambil HTML-nya
+    const wadah = document.createElement("div");
+    wadah.className = "review-stimulus";
+    isiStimulus(wadah, q);
+    isi += wadah.outerHTML;
+  } else if (q.stimulus) {
     isi += q.stimulus.length > 280
       ? `<details class="review-bacaan"><summary>Lihat bacaan</summary><p>${escapeHTML(q.stimulus)}</p></details>`
       : `<p class="review-stimulus">${escapeHTML(q.stimulus)}</p>`;
