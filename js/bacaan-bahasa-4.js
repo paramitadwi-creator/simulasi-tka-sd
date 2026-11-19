@@ -187,9 +187,13 @@ Kursi Dekat Jendela
 
 Ika dan Rara sudah bersahabat sejak kelas satu. Mereka selalu duduk sebangku, berangkat sekolah bersama, dan saling meminjamkan buku cerita. Pada awal semester baru, wali kelas mengatur ulang tempat duduk. Ika dan Rara tetap sebangku, tetapi mereka mendapat meja di dekat jendela. Dari jendela itu, mereka dapat melihat pohon mangga dan burung-burung yang hinggap di dahannya.
 
-Ika dan Rara bertengkar karena berebut tempat duduk di dekat jendela. Selama tiga hari mereka tidak saling bicara. Ika merasa kesepian, begitu pula Rara. Akhirnya Ika berkata, "Ra, maafkan aku. Kita bergantian duduk di dekat jendela, ya." Rara tersenyum dan memeluk Ika.
+Masalahnya, hanya satu kursi yang benar-benar berada di samping jendela. Ika ingin duduk di sana karena senang memandangi burung. Rara juga ingin karena merasa lebih dulu memilih meja itu. Tidak ada yang mau mengalah. Ika dan Rara akhirnya bertengkar karena berebut tempat duduk di dekat jendela.
 
-Selama tiga hari itu, Ika berangkat sekolah sendirian. Rara makan bekal di sudut kelas tanpa teman bercerita. Keduanya sebenarnya ingin berbaikan, tetapi sama-sama malu memulai. Ketika Ika akhirnya meminta maaf, Rara juga mengakui bahwa ia terlalu keras kepala. Mereka sepakat bahwa setiap minggu mereka akan bertukar tempat duduk. Sejak itu, persahabatan mereka semakin erat. Mereka bahkan tertawa ketika mengingat pertengkaran kecil yang sempat membuat mereka berjauhan.`,
+Selama tiga hari, mereka tidak saling bicara. Ika berangkat sekolah sendirian. Rara makan bekal di sudut kelas tanpa teman bercerita. Ika merasa kesepian, begitu pula Rara. Keduanya sebenarnya ingin berbaikan, tetapi sama-sama malu memulai.
+
+Pada hari keempat, Ika memberanikan diri mendekati Rara. "Ra, maafkan aku. Kita bergantian duduk di dekat jendela, ya," katanya pelan. Rara tersenyum dan memeluk Ika. Ia juga mengakui bahwa dirinya terlalu keras kepala. Mereka sepakat untuk bertukar tempat duduk setiap minggu.
+
+Keesokan paginya, Ika dan Rara kembali berangkat sekolah bersama. Sesekali mereka tertawa ketika mengingat tiga hari yang sepi gara-gara sebuah kursi.`,
 
 "KBIN-059": `Bacalah cerita berikut.
 
@@ -209,11 +213,13 @@ Uang Hadiah Yoga
 
 Yoga adalah siswa kelas lima yang pandai menggambar. Bulan lalu, ia mengikuti lomba menggambar tingkat kota dan meraih juara kedua. Selain piala, Yoga mendapat uang hadiah yang cukup banyak. Ibu menyarankan agar uang itu ditabung atau dipakai untuk membeli keperluan sekolah.
 
-Bulan ini Yoga mendapat uang hadiah lomba. Ia langsung membeli mainan robot yang mahal walaupun di rumah sudah banyak mainan. Seminggu kemudian, tas sekolahnya robek dan ia tidak punya uang untuk membeli yang baru. Yoga menyesal.
+Keesokan harinya, Yoga langsung pergi ke toko mainan. Ia pulang membawa sebuah robot yang mahal, padahal di rumah sudah ada banyak mainan. Sebagian besar uang hadiahnya habis untuk robot itu.
 
-Robot itu memang canggih. Robot itu dapat berjalan dan menyalakan lampu di matanya. Yoga memainkannya setiap hari selama beberapa hari pertama. Namun, lama-kelamaan ia bosan dan robot itu hanya diletakkan di rak bersama mainan lainnya. Suatu pagi, tali tas sekolah Yoga putus dan bagian bawahnya robek karena terlalu sering diisi buku yang berat. Buku-bukunya berjatuhan di jalan.
+Robot itu memang canggih. Mainan itu dapat berjalan dan menyalakan lampu di matanya. Yoga memainkannya setiap hari selama beberapa hari pertama. Namun, lama-kelamaan ia bosan, dan robot itu hanya diletakkan di rak bersama mainan lainnya.
 
-Yoga terpaksa membawa bukunya dengan kantong plastik selama beberapa hari. Ia malu dan menyesal karena tidak mengikuti saran Ibu. Ayah lalu mengajak Yoga membuat daftar kebutuhan dan keinginan. Sejak itu, Yoga belajar mendahulukan barang yang benar-benar dibutuhkan sebelum membeli sesuatu yang hanya diinginkan.`,
+Seminggu setelah membeli robot, tali tas sekolah Yoga putus dan bagian bawahnya robek karena terlalu sering diisi buku yang berat. Buku-bukunya berjatuhan di jalan. Yoga ingin segera membeli tas baru, tetapi sisa uang hadiahnya tidak cukup.
+
+Selama beberapa hari, Yoga terpaksa membawa bukunya dengan kantong plastik. Ia malu dan menyesal karena tidak mengikuti saran Ibu. Setiap kali melewati rak mainan, ia memandangi robot yang kini jarang disentuhnya. Suatu malam, Ayah mengajak Yoga membuat dua daftar: barang yang benar-benar dibutuhkan dan barang yang sekadar diinginkan. Di daftar pertama, Yoga menulis "tas sekolah" paling atas.`,
 
 "KBIN-061": `Bacalah cerita berikut.
 
@@ -233,11 +239,13 @@ Tanda Tangan Palsu
 
 Rendi adalah siswa kelas enam. Minggu lalu, ia mendapat nilai rendah pada ulangan bahasa Inggris. Wali kelas meminta setiap siswa membawa pulang lembar nilai dan meminta tanda tangan orang tua. Rendi takut dimarahi Ayah karena nilainya jauh di bawah nilai teman-temannya.
 
-Agar tidak dimarahi, Rendi menandatangani sendiri lembar nilai ulangannya dengan meniru tanda tangan ayahnya. Wali kelas curiga karena tanda tangannya berbeda. Ayah dipanggil ke sekolah. Ayah lebih sedih karena Rendi berbohong daripada karena nilainya rendah. Sejak itu, Ayah selalu memeriksa sendiri semua surat dari sekolah.
+Agar tidak dimarahi, Rendi tidak memperlihatkan lembar nilai itu kepada Ayah. Di kamarnya, ia menandatangani sendiri lembar nilai ulangannya dengan meniru tanda tangan ayahnya. Keesokan harinya, ia mengumpulkan lembar itu seolah-olah tidak terjadi apa-apa.
 
-Di ruang guru, Rendi duduk menunduk di samping Ayah. Wali kelas menunjukkan dua lembar nilai dengan tanda tangan yang sangat berbeda. Rendi tidak dapat mengelak lagi. Dalam perjalanan pulang, Ayah tidak berbicara sepatah kata pun. Sesampainya di rumah, Ayah mengajak Rendi duduk di teras. Ayah berkata bahwa nilai rendah masih bisa diperbaiki dengan belajar, tetapi kepercayaan yang rusak sulit dipulihkan.
+Wali kelas curiga karena tanda tangan itu berbeda dengan tanda tangan Ayah pada surat izin yang pernah dikumpulkan Rendi. Beberapa hari kemudian, Ayah dipanggil ke sekolah. Di ruang guru, Rendi duduk menunduk di samping Ayah. Wali kelas meletakkan kedua lembar itu berdampingan di atas meja. Rendi tidak dapat mengelak lagi.
 
-Rendi menangis dan meminta maaf. Ia berjanji akan selalu berkata jujur. Ayah memeluknya dan mengajaknya membuat jadwal belajar bahasa Inggris setiap malam. Namun, Rendi tahu ia harus berusaha keras untuk mendapatkan kembali kepercayaan Ayah.`,
+Dalam perjalanan pulang, Ayah tidak berbicara sepatah kata pun. Sesampainya di rumah, Ayah mengajak Rendi duduk di teras. "Ayah tidak terlalu sedih karena nilaimu rendah. Nilai masih bisa diperbaiki dengan belajar," kata Ayah pelan. "Yang membuat Ayah sedih adalah kamu berbohong kepada Ayah."
+
+Rendi menangis dan meminta maaf. Ayah memeluknya, lalu mengajaknya membuat jadwal belajar bahasa Inggris setiap malam. Sejak hari itu, Ayah selalu memeriksa sendiri setiap surat dari sekolah. Rendi tidak membantah. Ia tahu butuh waktu lama sampai Ayah kembali percaya sepenuhnya kepadanya.`,
 
 "KBIN-063": `Bacalah cerita berikut.
 
@@ -279,11 +287,11 @@ Pesan Ibu
 
 Musim hujan membuat sungai di belakang kampung Dani dan Eko meluap. Airnya berwarna cokelat dan arusnya sangat deras. Batang-batang kayu dan sampah hanyut terbawa arus. Para orang tua di kampung itu sudah mengingatkan anak-anak agar tidak bermain di dekat sungai selama musim hujan.
 
-"Jangan bermain di tepi sungai, airnya sedang deras," pesan Ibu kepada Dani dan Eko. Namun, mereka tetap pergi ke sana untuk melempar batu. Kaki Eko tergelincir dan ia hampir terseret arus. Untung ada petani yang segera menolongnya. Sejak itu, mereka selalu mengingat pesan Ibu.
+Pagi itu, sebelum Dani dan Eko berangkat sekolah, Ibu kembali berpesan. "Jangan bermain di tepi sungai, airnya sedang deras," kata Ibu sambil merapikan kerah baju Eko. Dani dan Eko mengangguk. Namun, di sekolah mereka terus membicarakan lomba melempar batu yang biasa mereka mainkan di sungai.
 
-Siang itu, Dani dan Eko diam-diam pergi ke sungai setelah makan siang. Mereka berlomba melempar batu sejauh mungkin ke seberang sungai. Tanah di tepi sungai sangat licin karena hujan semalam. Ketika Eko melangkah maju untuk melempar lebih jauh, kakinya terpeleset. Tubuhnya meluncur ke air dan tangannya hanya sempat berpegangan pada akar pohon. Dani berteriak meminta tolong.
+Siang itu, setelah makan siang, Dani dan Eko diam-diam pergi ke sungai tanpa memberi tahu Ibu. Mereka berlomba melempar batu sejauh mungkin ke seberang sungai. Tanah di tepi sungai sangat licin karena hujan semalam. Ketika Eko melangkah maju untuk melempar lebih jauh, kakinya terpeleset. Tubuhnya meluncur ke air dan tangannya hanya sempat berpegangan pada akar pohon. Dani berteriak meminta tolong.
 
-Pak Darmo, petani yang sedang bekerja di sawah, berlari mendekat dan menarik Eko ke tepi. Eko menggigil ketakutan. Sesampainya di rumah, Dani dan Eko meminta maaf kepada Ibu. Mereka berjanji tidak akan bermain di tempat berbahaya lagi.`,
+Pak Darmo, petani yang sedang bekerja di sawah, berlari mendekat dan menarik Eko ke tepi. Eko menggigil ketakutan, bajunya basah kuyup dan penuh lumpur. Sesampainya di rumah, Dani dan Eko meminta maaf kepada Ibu. Ibu memeluk keduanya erat-erat tanpa banyak bicara. Sore harinya, ketika hujan kembali turun, kedua anak itu memilih bermain kartu di ruang tengah.`,
 
 "KBIN-067": `Bacalah cerita berikut.
 
@@ -291,11 +299,13 @@ Kancil dan Gajah
 
 Di sebuah hutan yang lebat, hiduplah berbagai macam hewan. Kancil dikenal sebagai hewan yang kecil tetapi cerdik. Gajah dikenal sebagai hewan yang besar dan kuat. Meskipun berbeda ukuran, keduanya sering bertemu di dekat telaga saat mencari minum.
 
-Kancil terperosok ke dalam lubang. Ia berteriak meminta tolong. Gajah yang lewat menurunkan belalainya dan menarik Kancil keluar. Beberapa hari kemudian, Gajah terjerat jaring pemburu. Kancil menggigit tali jaring itu sampai putus. "Terima kasih, Kancil," kata Gajah. "Kita memang harus saling menolong," jawab Kancil.
+Suatu pagi, Kancil berjalan sendirian menuju telaga. Karena tidak memperhatikan jalan, ia terperosok ke dalam sebuah lubang. Lubang itu cukup dalam dan dindingnya licin. Kancil sudah mencoba melompat berkali-kali, tetapi selalu jatuh kembali. Ia pun berteriak meminta tolong.
 
-Lubang tempat Kancil terperosok cukup dalam dan dindingnya licin. Kancil sudah mencoba melompat berkali-kali, tetapi selalu jatuh kembali. Ketika Gajah datang, Kancil sangat lega. Gajah menurunkan belalainya dengan hati-hati, dan Kancil berpegangan erat sampai tubuhnya terangkat ke atas.
+Gajah yang kebetulan lewat mendengar teriakan itu. Ia menurunkan belalainya dengan hati-hati ke dalam lubang. Kancil berpegangan erat sampai tubuhnya terangkat ke atas. Kancil sangat lega karena bisa keluar dengan selamat.
 
-Beberapa hari kemudian, Kancil mendengar suara Gajah yang mengerang di balik semak. Kaki Gajah terjerat jaring tali yang dipasang pemburu. Semakin Gajah meronta, semakin erat jaring itu membelitnya. Kancil segera menggigiti tali jaring satu per satu dengan giginya yang tajam. Akhirnya Gajah terbebas. Sejak hari itu, Kancil dan Gajah bersahabat dan saling menjaga.`,
+Beberapa hari kemudian, Kancil mendengar suara Gajah yang mengerang di balik semak. Kaki Gajah terjerat jaring tali yang dipasang pemburu. Semakin Gajah meronta, semakin erat jaring itu membelitnya. Tanpa ragu, Kancil menggigiti tali jaring satu per satu dengan giginya yang tajam. Akhirnya, Gajah terbebas.
+
+"Terima kasih, Kancil," kata Gajah. "Kita memang harus saling menolong," jawab Kancil. Sejak hari itu, keduanya sering terlihat berjalan bersama menuju telaga.`,
 
 "KBIN-068": `Bacalah cerita berikut.
 
