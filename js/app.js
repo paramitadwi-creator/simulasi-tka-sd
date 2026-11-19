@@ -124,6 +124,14 @@ const JUMLAH_SOAL_MODE = { practice: 15, exam: 30, adaptive: 30 };
 // Adaptif Matematika: jumlah jawaban minimal per kompetensi sebelum akurasinya
 // ikut menentukan kuota (mencegah 1–2 jawaban membuat kuota ekstrem)
 const AMBANG_SAMPEL_ADAPTIF_MT = 3;
+// Adaptif Bahasa Indonesia & IPAS: akurasi kompetensi baru dipakai setelah minimal
+// 3 jawaban (sama dengan Matematika); null = pakai fallback yang sudah ada
+const AMBANG_SAMPEL_ADAPTIF_BI_IPAS = 3;
+function akurasiBerSampel(data) {
+  const sampel = Number(data?.attempted) || 0;
+  return sampel >= AMBANG_SAMPEL_ADAPTIF_BI_IPAS && Number.isFinite(data?.accuracy)
+    ? data.accuracy : null;
+}
 // Durasi pengerjaan per sesi (detik)
 const DURASI_MODE = { practice: 45 * 60, exam: 90 * 60, adaptive: 90 * 60 };
 // Durasi khusus per mata pelajaran dan sesi (detik). Bila ada, menggantikan
@@ -737,9 +745,8 @@ if (currentSubject === "bahasa") {
         progres[`bahasa_${item.kode}`] ||
         progres[`bahasa_indonesia_${item.kode}`];
 
-      const akurasi = data?.attempted > 0
-        ? data.accuracy
-        : item.persentase ?? akurasiTingkat[item.tingkat] ?? 50;
+      const akurasi = akurasiBerSampel(data) ??
+        item.persentase ?? akurasiTingkat[item.tingkat] ?? 50;
 
       return {
         kode: item.kode,
@@ -801,7 +808,7 @@ if (currentSubject === "bahasa") {
         progres[`bahasa_${kode}`] ||
         progres[`bahasa_indonesia_${kode}`];
 
-      return data?.accuracy ?? 50;
+      return akurasiBerSampel(data) ?? 50;
     });
 
     return nilai.reduce((a, b) => a + b, 0) / nilai.length;
@@ -945,7 +952,7 @@ const itemPrioritas = dataPrioritas.find(
   item => item.kode === kode
 );
 
-const akurasi = data?.accuracy ??
+const akurasi = akurasiBerSampel(data) ??
   itemPrioritas?.persentase ?? 50;
 
     return {
