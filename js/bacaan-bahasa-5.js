@@ -146,26 +146,6 @@ Nia: "Sepatuku memang sederhana, tetapi masih nyaman dipakai."
 
 Beberapa teman yang mendengar percakapan itu terdiam. Mereka merasa tidak enak hati. Bu Guru yang kebetulan lewat juga mendengar ucapan Rita. Saat pelajaran dimulai, Bu Guru bercerita tentang pentingnya menghargai orang lain. Bu Guru mengatakan bahwa harga barang yang kita pakai tidak menentukan baik atau buruknya diri kita. Nia tetap tersenyum dan mengikuti pelajaran dengan tenang. Saat istirahat, ia bermain bersama teman-temannya seperti biasa.`,
 
-"KBIN-082": `Di belakang SD Tunas Bangsa, ada sebuah gudang tua tempat menyimpan meja dan kursi yang rusak. Sejak beberapa hari yang lalu, terdengar suara mengeong lemah dari balik tumpukan kursi di gudang itu. Ternyata, ada seekor anak kucing belang tiga yang tinggal di sana. Tubuhnya kurus dan bulunya kusam.
-
-Wulan adalah siswa kelas empat yang pertama kali menemukan anak kucing itu. Setiap jam istirahat, ia pergi ke belakang sekolah membawa bekal makan siangnya. Hari itu, Ibu membekalinya nasi, sayur bayam, dan sepotong ikan goreng. Dodi, teman sekelasnya, melihat Wulan memisahkan potongan ikan ke atas selembar daun pisang.
-
-Dodi: "Kenapa kamu menyisihkan ikan dari bekalmu, Lan?"
-Wulan: "Untuk anak kucing di belakang sekolah. Induknya hilang, jadi sejak kemarin ia belum makan."
-
-Dodi ikut berjalan bersama Wulan ke belakang sekolah. Anak kucing itu langsung mendekat ketika mencium bau ikan. Ia makan dengan lahap. Wulan juga menuangkan sedikit air ke dalam tutup botol minumnya. Beberapa hari kemudian, Wulan meminta izin kepada orang tuanya untuk membawa anak kucing itu pulang. Kini, anak kucing itu tumbuh sehat dan diberi nama Belang.`,
-
-"KBIN-083": `Sekolah Feri akan mengadakan pentas seni untuk memperingati ulang tahun sekolah. Setiap kelas diminta menampilkan pertunjukan, seperti tari, drama, atau paduan suara. Siswa kelas enam bertugas menyiapkan panggung, menata kursi penonton, dan memasang hiasan di aula.
-
-Pada hari Kamis, ketua kelas enam membagi tugas kepada teman-temannya. Ada yang memasang kain dekorasi, ada yang menggunting hiasan kertas, dan ada yang mengangkat kursi dari ruang kelas. Ketika ketua kelas mendekati Feri, Feri menolak.
-
-Feri: "Aku tidak mau ikut membantu menyiapkan pentas seni. Repot!"
-(Sore harinya, ketika semua sudah pulang, Pak Guru melihat Feri diam-diam menyapu panggung dan merapikan kursi.)
-Pak Guru: "Lho, Feri, katanya tidak mau membantu?"
-Feri: (tersipu) "Kasihan teman-teman kalau besok panggungnya kotor, Pak."
-
-Pak Guru tersenyum, lalu ikut membantu Feri menata kursi. Mereka bekerja sampai matahari hampir terbenam. Keesokan harinya, teman-teman Feri terkejut melihat aula sudah bersih dan kursi-kursi tersusun rapi. Mereka tidak tahu siapa yang merapikannya. Pentas seni berjalan dengan lancar dan meriah. Pak Guru menyimpan cerita tentang Feri dan hanya tersenyum setiap kali melihat Feri di aula.`,
-
 "KBIN-084": `Pada jam olahraga hari Rabu, Pak Guru mengajak siswa kelas lima bermain bola voli di lapangan sekolah. Siswa dibagi menjadi empat kelompok. Karena sekolah hanya memiliki dua bola voli, setiap kelompok harus bergantian memakai bola. Sebelum bermain, seluruh kelas sudah membuat kesepakatan tentang lamanya waktu bermain setiap kelompok.
 
 Pak Guru kemudian dipanggil sebentar ke kantor kepala sekolah. Sebelum pergi, ia meminta Sinta, sang ketua kelas, untuk mengatur jalannya permainan. Kelompok Andre mendapat giliran pertama. Mereka bermain dengan sangat bersemangat. Ketika waktu bermain kelompok Andre sudah habis, Andre masih memegang bola dan tidak mau memberikannya. Rehan, ketua kelompok berikutnya, mendatangi Bu Guru kelas yang sedang lewat.

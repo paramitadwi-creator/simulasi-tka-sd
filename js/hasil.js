@@ -306,7 +306,11 @@
     // 6: bacaan/gambar lengkap (sama seperti saat mengerjakan)
     if (q.stimulus || q.image) {
       const stim = el("div", "stimulus-box review-stimulus-box");
-      if (q.stimulus) stim.appendChild(document.createTextNode(q.stimulus));
+      // Stimulus bertabel (stimulusTabel) memakai isiStimulus dari js/app.js; selain itu teks biasa
+      if (q.stimulus) {
+        if (typeof window.isiStimulus === "function") window.isiStimulus(stim, q);
+        else stim.appendChild(document.createTextNode(q.stimulus));
+      }
       if (q.image) {
         // Riwayat: berkas versi yang tercatat saat dikerjakan. Sesi baru: versi terbaru dari manifest.
         const src = q.imageVersi || (window.Aset ? window.Aset.src(q.image) : q.image);

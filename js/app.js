@@ -1,10 +1,10 @@
 const bankSoal = {
   bahasa: [
     { id: "BI01", difficulty: "mudah", type: "pg", topic: "Teks informasi · informasi tersurat", stimulus: "Perhatikan teks berikut.\n\nDi halaman sekolah terdapat tiga tempat sampah berwarna. Tempat sampah hijau digunakan untuk sampah organik, tempat sampah kuning untuk sampah anorganik, dan tempat sampah merah untuk sampah berbahaya.", question: "Tempat sampah berwarna apakah yang digunakan untuk membuang sampah organik?", options: ["Merah", "Kuning", "Hijau", "Biru"], answer: [2], explanation: "Informasi tersebut tertulis secara langsung pada kalimat kedua. Tempat sampah hijau digunakan untuk sampah organik." },
-    { id: "BI02", difficulty: "sedang", type: "pg", topic: "Teks informasi · sebab-akibat", stimulus: "Warga Desa Sukaasri menanam pohon di sepanjang tepi sungai. Akar pohon membantu mengikat tanah. Ketika hujan deras, tanah di tepi sungai menjadi lebih kuat dan tidak mudah terbawa arus.", question: "Mengapa penanaman pohon dapat mengurangi pengikisan tanah di tepi sungai?", options: ["Daun pohon menghentikan seluruh hujan.", "Batang pohon mengubah tanah menjadi batu.", "Pohon membuat aliran sungai berhenti.", "Akar pohon membantu mengikat tanah."], answer: [3], explanation: "Hubungan sebab-akibatnya adalah akar pohon mengikat tanah sehingga tanah tidak mudah terkikis oleh aliran air." },
-    { id: "BI03", difficulty: "sedang", type: "pg", topic: "Teks fiksi · watak tokoh", stimulus: "Rani menemukan sebuah kotak pensil di bawah meja kelas. Ia ingin segera pulang, tetapi kemudian menyerahkan kotak itu kepada guru agar pemiliknya dapat ditemukan.", question: "Watak Rani yang paling tepat berdasarkan tindakannya adalah ....", options: ["Ceroboh", "Jujur dan bertanggung jawab", "Pemarah", "Tidak peduli"], answer: [1], explanation: "Rani tidak mengambil barang yang bukan miliknya. Ia menyerahkannya kepada guru agar kembali kepada pemiliknya. Tindakan ini menunjukkan kejujuran dan tanggung jawab." },
-    { id: "BI04", difficulty: "sulit", type: "pgk", topic: "Evaluasi teks · fakta dan opini", stimulus: "Bacalah dua pernyataan berikut.\n\nTeks A: Perpustakaan sekolah dibuka pukul 07.00 sampai 14.00 setiap hari sekolah.\nTeks B: Perpustakaan sekolah adalah tempat paling nyaman dan paling menyenangkan bagi semua siswa.", question: "Pilih semua pernyataan yang merupakan fakta berdasarkan kedua teks.", options: ["Perpustakaan dibuka pukul 07.00.", "Perpustakaan merupakan tempat paling nyaman.", "Perpustakaan ditutup pukul 14.00.", "Semua siswa pasti senang berada di perpustakaan."], answer: [0, 2], explanation: "Pernyataan tentang jam buka dan tutup dapat diperiksa kebenarannya dari informasi Teks A. Ungkapan paling nyaman dan semua siswa senang merupakan penilaian atau opini." },
-    { id: "BI05", difficulty: "sulit", type: "pg", topic: "Evaluasi teks · simpulan dan refleksi", stimulus: "Sekolah mengurangi penggunaan gelas sekali pakai. Siswa diminta membawa botol minum sendiri. Dalam satu bulan, jumlah sampah gelas plastik di sekolah berkurang. Namun, beberapa siswa masih lupa membawa botol sehingga kantin tetap menyediakan gelas sekali pakai dalam jumlah terbatas.", question: "Simpulan paling tepat berdasarkan teks tersebut adalah ....", options: ["Program membawa botol minum tidak memberi manfaat.", "Sampah plastik hanya dapat diatasi dengan menutup kantin.", "Kebiasaan membawa botol sendiri membantu mengurangi sampah, tetapi perlu dilakukan secara konsisten.", "Sekolah harus melarang semua siswa membeli minuman."], answer: [2], explanation: "Teks menunjukkan adanya penurunan sampah setelah program berjalan, tetapi hasilnya belum maksimal karena sebagian siswa belum konsisten. Simpulan harus mencakup kedua informasi tersebut." }
+    { id: "BI02", indikator: 11, difficulty: "sulit", type: "pg", topic: "Teks informasi · inferensi sebab-akibat", stimulus: "Pohon Penjaga Tepi Sungai\n\nDesa Sukaasri dilalui sebuah sungai yang cukup lebar. Dahulu, tepi sungai itu ditumbuhi rumpun bambu dan pohon-pohon besar. Ketika kebutuhan lahan meningkat, banyak pohon ditebang dan tepi sungai diubah menjadi kebun jagung.\n\nBeberapa tahun kemudian, warga mulai melihat perubahan. Setiap musim hujan, tanah di tepi sungai runtuh sedikit demi sedikit. Air sungai yang biasanya jernih berubah menjadi cokelat pekat. Di bagian hilir, sungai makin dangkal sehingga perahu nelayan sering tersangkut.\n\nWarga kemudian berdiskusi dengan petugas penyuluh pertanian. Petugas menjelaskan bahwa akar pohon dan bambu bekerja seperti jaring yang mencengkeram butiran tanah. Tanpa akar, tanah yang basah oleh hujan mudah lepas dan terbawa arus. Tanah yang hanyut itu kemudian mengendap di dasar sungai bagian hilir.\n\nSejak itu, warga menanam kembali bambu dan trembesi di sepanjang tepi sungai. Kebun jagung dipindahkan sejauh sepuluh meter dari bibir sungai. Lima tahun kemudian, tepi sungai tidak lagi runtuh walaupun hujan turun berhari-hari. Para nelayan di hilir pun bercerita bahwa perahu mereka kini jarang tersangkut.", question: "Berdasarkan teks, mengapa perahu nelayan di hilir kini jarang tersangkut?", options: ["Kebun jagung tidak lagi menghalangi jalur perahu di bagian hilir.", "Air sungai kembali jernih sehingga dasar sungai terlihat jelas.", "Tanah di tepi sungai tidak hanyut sehingga endapan di hilir berkurang.", "Pohon trembesi menahan arus sehingga air di hilir menjadi lebih tenang."], answer: [2], explanation: "Kunci: C.\nKompetensi: menyimpulkan hubungan sebab-akibat berantai dari beberapa paragraf.\nBukti: Paragraf 2 menyebut sungai di hilir \"makin dangkal sehingga perahu nelayan sering tersangkut\". Paragraf 3 menjelaskan bahwa akar \"mencengkeram butiran tanah\" dan tanah yang hanyut \"mengendap di dasar sungai bagian hilir\".\nPenalaran: Setelah pohon ditanam kembali, tanah tepi sungai tidak lagi runtuh dan hanyut. Endapan di hilir berkurang, sungai tidak makin dangkal, sehingga perahu jarang tersangkut. Jawaban ini menyambungkan paragraf 2, 3, dan 4.\nPengecoh: A keliru karena kebun jagung berada di tepi sungai, bukan di jalur perahu. B mencampur dua akibat; air jernih dan sungai yang tidak dangkal sama-sama akibat tanah yang tidak hanyut, tetapi air jernih tidak membuat perahu lolos. D keliru karena teks menyebut akar menahan tanah, bukan menahan arus.\nStrategi: Untuk soal sebab-akibat, susun rantai peristiwa dari paragraf awal sampai akhir, lalu pilih jawaban yang menghubungkan sebab pertama dengan akibat yang ditanyakan." },
+    { id: "BI03", difficulty: "sedang", type: "pg", topic: "Teks fiksi · watak tokoh", stimulus: "Kotak Pensil Biru\n\nBel pulang sekolah berbunyi. Rani bergegas memasukkan buku ke tas karena ibunya sudah menunggu di gerbang. Mereka harus segera berangkat ke rumah nenek di luar kota.\n\nSaat mendorong kursinya, Rani melihat sebuah kotak pensil biru bergambar roket di bawah meja paling belakang. Isinya lengkap: pensil warna, penghapus berbentuk bintang, dan penggaris kecil. Rani tahu kotak pensil seperti itu cukup mahal. Ia juga ingat, minggu lalu ia ingin sekali memiliki penghapus berbentuk bintang, tetapi uang tabungannya belum cukup.\n\nRani menimang kotak itu sebentar. Kelas sudah sepi. Ponsel di saku Rani bergetar; ibunya menelepon untuk kedua kalinya.\n\nRani berlari ke ruang guru. Bu Wati sedang mengemasi buku. \"Bu, saya menemukan ini di bawah meja belakang. Saya tidak tahu milik siapa,\" katanya terengah-engah. \"Saya harus pergi sekarang. Ibu saya sudah menunggu.\"\n\nKeesokan harinya, Bu Wati mengumumkan temuan itu di depan kelas. Ternyata kotak pensil itu milik Dimas, siswa baru yang pemalu. Dimas mengucapkan terima kasih kepada Bu Wati. Rani hanya tersenyum dari bangkunya dan tidak bercerita bahwa dialah yang menemukannya.", question: "Bagian cerita yang paling menunjukkan kejujuran Rani adalah …", options: ["Rani bergegas memasukkan buku ke tas karena ibunya menunggu.", "Rani tahu kotak pensil seperti itu harganya cukup mahal.", "Rani tersenyum ketika Dimas berterima kasih kepada Bu Wati.", "Rani menyerahkan kotak pensil meskipun sedang terburu-buru."], answer: [3], explanation: "Kunci: D.\nKompetensi: menyimpulkan watak tokoh dan memilih bukti yang paling kuat.\nBukti: Rani menginginkan penghapus berbentuk bintang tetapi \"uang tabungannya belum cukup\", kelas \"sudah sepi\", dan ibunya menelepon \"untuk kedua kalinya\". Meski begitu, Rani berlari ke ruang guru dan berkata, \"Bu, saya menemukan ini di bawah meja belakang.\"\nPenalaran: Kejujuran paling teruji ketika ada godaan dan kesempatan untuk tidak jujur. Rani punya alasan untuk menyimpan kotak itu dan tidak ada yang melihat, tetapi ia tetap menyerahkannya.\nPengecoh: A hanya menunjukkan Rani terburu-buru. B hanya menunjukkan pengetahuan Rani tentang harga, bukan tindakan jujur. C menunjukkan sikap rendah hati, bukan kejujuran.\nStrategi: Untuk soal bukti watak, pilih tindakan tokoh yang paling sulit dilakukan dalam situasinya. Tindakan biasa jarang menjadi bukti terkuat." },
+    { id: "BI04", indikator: 9, difficulty: "sulit", type: "pgk", topic: "Evaluasi teks · fakta dan opini", stimulus: "Pameran Karya Daur Ulang SD Cempaka\n\nPada hari Sabtu, 12 Oktober, SD Cempaka mengadakan pameran karya daur ulang di aula sekolah. Pameran dibuka pukul 08.00 oleh kepala sekolah dan berlangsung sampai pukul 12.00. Sebanyak 64 karya dipamerkan, mulai dari tas bungkus kopi sampai lampu hias dari botol plastik.\n\nKarya yang paling banyak dikunjungi adalah robot setinggi satu meter buatan kelas 6. Robot itu disusun dari 40 kaleng bekas dan kardus. \"Menurut saya, robot ini karya terbaik tahun ini karena paling rumit,\" kata Pak Yusuf, salah satu juri.\n\nTidak semua pengunjung sependapat. Bu Ani, orang tua siswa, lebih menyukai tas anyaman dari bungkus kopi buatan kelompok kelas 4. \"Tas ini lebih berguna karena bisa dipakai setiap hari,\" ujarnya. Tas itu dibuat dalam waktu dua minggu.\n\nPanitia mencatat ada 215 pengunjung yang datang hari itu. Uang hasil penjualan karya sebesar Rp1.350.000 akan dipakai untuk membeli tempat sampah terpilah. Ketua panitia berharap pameran serupa diadakan setiap tahun. Menurutnya, kegiatan ini adalah cara paling menyenangkan untuk belajar menjaga lingkungan.", question: "Pilih semua pernyataan yang merupakan fakta berdasarkan teks.", options: ["Robot buatan kelas 6 menjadi karya yang paling banyak dikunjungi.", "Robot buatan kelas 6 merupakan karya terbaik pada tahun ini.", "Tas anyaman dari bungkus kopi lebih berguna daripada karya lain.", "Panitia mencatat ada 215 pengunjung yang datang ke pameran.", "Pameran adalah cara paling menyenangkan untuk belajar menjaga lingkungan."], answer: [0, 3], explanation: "Kunci: A dan D.\nKompetensi: membedakan fakta dan opini, termasuk opini yang diucapkan tokoh berwenang.\nBukti: \"Karya yang paling banyak dikunjungi adalah robot\" dan \"Panitia mencatat ada 215 pengunjung\" dapat diperiksa dengan menghitung. Sebaliknya, Pak Yusuf berkata \"Menurut saya, robot ini karya terbaik\", Bu Ani menilai tas \"lebih berguna\", dan ketua panitia menyebut pameran \"cara paling menyenangkan\".\nPenalaran: Fakta dapat dibuktikan dengan data atau pengamatan. Opini adalah penilaian yang bisa berbeda antarorang, seperti terlihat pada paragraf 3: \"Tidak semua pengunjung sependapat.\"\nPengecoh: B tetap opini walaupun diucapkan juri; kata \"Menurut saya\" dan \"terbaik\" menunjukkan penilaian. C adalah pendapat Bu Ani. E adalah pendapat ketua panitia. Jangan tertipu kata \"paling\": \"paling banyak dikunjungi\" (A) tetap fakta karena dapat dihitung.\nStrategi: Uji setiap pernyataan dengan pertanyaan \"Dapatkah ini dibuktikan dengan menghitung, mengukur, atau melihat langsung?\" Jangan menilai hanya dari kata tertentu atau dari siapa yang mengucapkannya." },
+    { id: "BI05", difficulty: "sulit", type: "pg", topic: "Evaluasi teks · simpulan argumen", stimulus: "Perlukah Pekerjaan Rumah Dihapus?\n\nDi sebuah forum diskusi kelas 6, siswa membahas usulan menghapus pekerjaan rumah (PR). Dua siswa menyampaikan pendapat mereka.\n\nNadia setuju PR dihapus. Menurutnya, banyak siswa sudah lelah setelah belajar dari pagi hingga siang. \"Sepulang sekolah, aku juga ikut les mengaji dan membantu ibu menjaga warung. Kalau PR banyak, aku baru tidur pukul sepuluh malam,\" katanya. Nadia menambahkan, waktu bermain dan beristirahat juga penting bagi anak.\n\nBima tidak setuju. Ia berpendapat PR membantu siswa mengingat pelajaran. \"Waktu ulangan pecahan, aku bisa menjawab karena sudah berlatih soal di rumah,\" ujarnya. Bima juga mengatakan bahwa tanpa PR, sebagian siswa mungkin tidak membuka buku sama sekali di rumah.\n\nSetelah mendengar keduanya, Bu Sinta, wali kelas, mengajak siswa mencari jalan tengah. Bu Sinta menjelaskan bahwa kedua pendapat memiliki alasan yang masuk akal. Akhirnya, kelas sepakat mencoba aturan baru selama satu bulan: PR hanya diberikan dua kali seminggu, jumlah soalnya paling banyak lima, dan tidak ada PR pada akhir pekan.", question: "Simpulan yang paling tepat tentang hasil diskusi tersebut adalah …", options: ["Pendapat Nadia lebih benar sehingga PR akhirnya dihapus seluruhnya.", "Pendapat Bima lebih kuat sehingga jumlah PR tetap seperti biasa.", "Diskusi gagal karena kedua siswa tidak mau mengubah pendapatnya.", "Kelas mengambil jalan tengah yang mempertimbangkan kedua pendapat."], answer: [3], explanation: "Kunci: D.\nKompetensi: menyimpulkan isi teks argumentasi yang memuat dua pendapat berbeda.\nBukti: Bu Sinta menyatakan \"kedua pendapat memiliki alasan yang masuk akal\". Kelas sepakat bahwa \"PR hanya diberikan dua kali seminggu, jumlah soalnya paling banyak lima, dan tidak ada PR pada akhir pekan\".\nPenalaran: Aturan baru tetap memberi PR (sesuai alasan Bima), tetapi jumlahnya dikurangi dan akhir pekan bebas PR (sesuai alasan Nadia). Jadi hasilnya jalan tengah, bukan kemenangan salah satu pihak.\nPengecoh: A keliru karena PR tidak dihapus seluruhnya. B keliru karena jumlah PR berubah. C keliru karena diskusi menghasilkan kesepakatan.\nStrategi: Pada teks yang memuat dua pendapat, baca bagian akhir untuk melihat keputusan, lalu periksa apakah keputusan itu memihak salah satu pendapat atau menggabungkan keduanya." }
   ],
   matematika: [
     // MUDAH (10 soal)
@@ -121,6 +121,17 @@ if (!window.kisiKisiTKA) {
 // JUMLAH SOAL, DURASI, KOMPOSISI KESULITAN & BENTUK SOAL PER SESI
 // =====================================================================
 const JUMLAH_SOAL_MODE = { practice: 15, exam: 30, adaptive: 30 };
+// Adaptif Matematika: jumlah jawaban minimal per kompetensi sebelum akurasinya
+// ikut menentukan kuota (mencegah 1–2 jawaban membuat kuota ekstrem)
+const AMBANG_SAMPEL_ADAPTIF_MT = 3;
+// Adaptif Bahasa Indonesia & IPAS: akurasi kompetensi baru dipakai setelah minimal
+// 3 jawaban (sama dengan Matematika); null = pakai fallback yang sudah ada
+const AMBANG_SAMPEL_ADAPTIF_BI_IPAS = 3;
+function akurasiBerSampel(data) {
+  const sampel = Number(data?.attempted) || 0;
+  return sampel >= AMBANG_SAMPEL_ADAPTIF_BI_IPAS && Number.isFinite(data?.accuracy)
+    ? data.accuracy : null;
+}
 // Durasi pengerjaan per sesi (detik)
 const DURASI_MODE = { practice: 45 * 60, exam: 90 * 60, adaptive: 90 * 60 };
 // Durasi khusus per mata pelajaran dan sesi (detik). Bila ada, menggantikan
@@ -295,7 +306,7 @@ function pilihSoalBerimbang(pool, jumlah) {
 
 // Mode adaptif: penuhi kuota tiap kompetensi sekaligus target kesulitan & bentuk.
 // kelompokSoal: Map kode → daftar soal (sudah diacak); urutan: kode berulang sesuai kuota.
-function pilihSoalAdaptif(kelompokSoal, urutan, jumlah) {
+function pilihSoalAdaptifSekali(kelompokSoal, urutan, jumlah, selAcak, bobotTerbaru = new Map()) {
   const semua = [...kelompokSoal.values()].flat();
   const target = targetKomposisi(semua, jumlah);
   const catat = buatPencatat(target);
@@ -305,6 +316,33 @@ function pilihSoalAdaptif(kelompokSoal, urutan, jumlah) {
   const kuota = new Map();
   urutan.forEach(kode => kuota.set(kode, (kuota.get(kode) || 0) + 1));
 
+  // Sel acak berbobot kekurangan (dipakai bila selAcak): sel yang masih kurang berpeluang
+  // sebanding kekurangannya; di sel PGK soal dipilih menurut kekurangan jenis PGK.
+  const kurangSel = sel => (target.sel[sel] || 0) - terpilih.filter(q => selSoal(q) === sel).length;
+  const pilihSelAcak = daftar => {
+    const perSel = new Map();
+    daftar.forEach(q => {
+      const s = selSoal(q);
+      if (kurangSel(s) <= 0) return;
+      if (!perSel.has(s)) perSel.set(s, []);
+      perSel.get(s).push(q);
+    });
+    if (!perSel.size) return catat.terbaik(daftar);
+    // Di dalam sel, utamakan soal yang paling lama tidak muncul (bobot terbaru terkecil)
+    const segar = qs => {
+      const bobot = q => bobotTerbaru.get(q.id) || 0;
+      const terkecil = Math.min(...qs.map(bobot));
+      return qs.filter(q => bobot(q) === terkecil);
+    };
+    const dari = (s, qs) => s.endsWith("PGK") ? catat.terbaik(segar(qs)) : segar(qs)[0];
+    let r = Math.random() * [...perSel.keys()].reduce((t, s) => t + kurangSel(s), 0);
+    for (const [s, qs] of perSel) {
+      r -= kurangSel(s);
+      if (r < 0) return dari(s, qs);
+    }
+    const [s, qs] = [...perSel].pop();
+    return dari(s, qs);
+  };
   const ambil = q => {
     const daftar = sisa.get(q.kodeKompetensi);
     daftar.splice(daftar.indexOf(q), 1);
@@ -324,7 +362,7 @@ function pilihSoalAdaptif(kelompokSoal, urutan, jumlah) {
       for (let i = 0; i < banyak; i++) {
         const daftar = sisa.get(kode) || [];
         if (!daftar.length) break;
-        ambil(catat.terbaik(daftar));
+        ambil(selAcak ? pilihSelAcak(daftar) : catat.terbaik(daftar));
       }
     });
 
@@ -402,6 +440,63 @@ function pilihSoalAdaptif(kelompokSoal, urutan, jumlah) {
   }
 
   return urutkanMenurutKesulitan(terpilih);
+}
+
+// Mode adaptif dengan cakupan merata (opsi.selAcak): langkah 1 memakai sel acak berbobot
+// sehingga setiap soal berpeluang terpilih. Hasil acak hanya diterima bila memenuhi semua
+// syarat sesi (jumlah, tanpa duplikat, komposisi sel tingkat x bentuk, dan kuota tiap
+// kompetensi); bila belum, diacak ulang. Bila tetap gagal, dipakai pemilihan asli (deterministik).
+// opsi.bobotTerbaru (Map idSoal -> bobot): dari percobaan yang lolos syarat dipilih yang total
+// bobot soal terbarunya paling kecil, agar soal sesi-sesi terakhir tidak langsung muncul lagi.
+const PERCOBAAN_SEL_ACAK = 25;
+// Bobot soal dari 3 sesi terakhir (mapel & mode sama): sesi terakhir 4, sebelumnya 2, lalu 1.
+const BOBOT_SESI_TERBARU = [4, 2, 1];
+function bobotSoalTerbaru(mapel, mode) {
+  const bobot = new Map();
+  try {
+    if (!window.Riwayat || typeof window.Riwayat.daftar !== "function") return bobot;
+    window.Riwayat.daftar()
+      .filter(sesi => sesi.mapel === mapel && sesi.mode === mode)
+      .slice(0, BOBOT_SESI_TERBARU.length)
+      .forEach((sesi, i) => {
+        const isi = window.Riwayat.muat(sesi.id);
+        if (!isi || !Array.isArray(isi.soal)) return;
+        isi.soal.forEach(s => {
+          if (s.idSoal) bobot.set(s.idSoal, (bobot.get(s.idSoal) || 0) + BOBOT_SESI_TERBARU[i]);
+        });
+      });
+  } catch (e) {
+    // Riwayat tidak terbaca: pilih soal seperti biasa tanpa bobot terbaru
+  }
+  return bobot;
+}
+function pilihSoalAdaptif(kelompokSoal, urutan, jumlah, opsi = {}) {
+  if (!opsi.selAcak) return pilihSoalAdaptifSekali(kelompokSoal, urutan, jumlah, false);
+  const target = targetKomposisi([...kelompokSoal.values()].flat(), jumlah);
+  const kuota = new Map();
+  urutan.forEach(kode => kuota.set(kode, (kuota.get(kode) || 0) + 1));
+  const memenuhi = hasil => {
+    if (hasil.length !== jumlah || new Set(hasil.map(q => q.id)).size !== hasil.length) return false;
+    const sel = {}, perKode = {};
+    hasil.forEach(q => {
+      sel[selSoal(q)] = (sel[selSoal(q)] || 0) + 1;
+      perKode[q.kodeKompetensi] = (perKode[q.kodeKompetensi] || 0) + 1;
+    });
+    if (Object.keys(target.sel).some(s => (sel[s] || 0) !== target.sel[s])) return false;
+    return [...kuota].every(([kode, banyak]) => (perKode[kode] || 0) === banyak);
+  };
+  const bobotTerbaru = opsi.bobotTerbaru instanceof Map ? opsi.bobotTerbaru : new Map();
+  const totalBobot = hasil => hasil.reduce((t, q) => t + (bobotTerbaru.get(q.id) || 0), 0);
+  let pilihan = null, bobotPilihan = Infinity;
+  for (let coba = 0; coba < PERCOBAAN_SEL_ACAK; coba++) {
+    const hasil = pilihSoalAdaptifSekali(kelompokSoal, urutan, jumlah, true, bobotTerbaru);
+    if (!memenuhi(hasil)) continue;
+    const b = totalBobot(hasil);
+    if (b < bobotPilihan) { pilihan = hasil; bobotPilihan = b; }
+    if (b === 0) break;
+  }
+  if (pilihan) return pilihan;
+  return pilihSoalAdaptifSekali(kelompokSoal, urutan, jumlah, false);
 }
 
 const $ = id => document.getElementById(id);
@@ -578,12 +673,21 @@ if (currentSubject === "matematika") {
       item => item.kode === kode
     );
 
-    const akurasi = data?.accuracy ??
-      itemPrioritas?.persentase ?? 50;
+    // Akurasi baru dipakai setelah minimal AMBANG_SAMPEL_ADAPTIF_MT jawaban pada
+    // kompetensi itu; sebelumnya memakai fallback profil yang sama dengan siswa
+    // tanpa progres (persentase profil, atau 50 = netral). Progres tetap tersimpan.
+    const sampel = Number(data?.attempted) || 0;
+    const cukupSampel = sampel >= AMBANG_SAMPEL_ADAPTIF_MT &&
+      Number.isFinite(data?.accuracy);
+
+    const akurasi = cukupSampel
+      ? data.accuracy
+      : itemPrioritas?.persentase ?? 50;
 
     return {
       kode,
       stok,
+      sampel,
       akurasi,
       bobot: Math.max(10, 100 - akurasi),
       kuota: stok > 0 ? 1 : 0
@@ -641,9 +745,8 @@ if (currentSubject === "bahasa") {
         progres[`bahasa_${item.kode}`] ||
         progres[`bahasa_indonesia_${item.kode}`];
 
-      const akurasi = data?.attempted > 0
-        ? data.accuracy
-        : item.persentase ?? akurasiTingkat[item.tingkat] ?? 50;
+      const akurasi = akurasiBerSampel(data) ??
+        item.persentase ?? akurasiTingkat[item.tingkat] ?? 50;
 
       return {
         kode: item.kode,
@@ -705,7 +808,7 @@ if (currentSubject === "bahasa") {
         progres[`bahasa_${kode}`] ||
         progres[`bahasa_indonesia_${kode}`];
 
-      return data?.accuracy ?? 50;
+      return akurasiBerSampel(data) ?? 50;
     });
 
     return nilai.reduce((a, b) => a + b, 0) / nilai.length;
@@ -849,7 +952,7 @@ const itemPrioritas = dataPrioritas.find(
   item => item.kode === kode
 );
 
-const akurasi = data?.accuracy ??
+const akurasi = akurasiBerSampel(data) ??
   itemPrioritas?.persentase ?? 50;
 
     return {
@@ -896,10 +999,17 @@ const akurasi = data?.accuracy ??
 
 
   // Ambil soal sesuai kuota kompetensi dan komposisi kesulitan
+  // Matematika: sel acak berbobot agar setiap soal berpeluang terpilih, dan soal dari
+  // 3 sesi adaptif Matematika terakhir dihindari bila memungkinkan (lihat pilihSoalAdaptif)
+  const adaptifMatematika = currentSubject === "matematika";
   currentQuestions = pilihSoalAdaptif(
     kelompokSoal,
     urutanPengambilan,
-    JUMLAH_SOAL_MODE.adaptive
+    JUMLAH_SOAL_MODE.adaptive,
+    {
+      selAcak: adaptifMatematika,
+      bobotTerbaru: adaptifMatematika ? bobotSoalTerbaru("matematika", "adaptive") : null
+    }
   );
 
   console.log(
@@ -966,6 +1076,56 @@ function startTimer() {
 }
 function stopTimer() { if (timerId) { clearInterval(timerId); timerId = null; } }
 function updateTimer() { $("timer").textContent = `${String(Math.floor(secondsLeft / 60)).padStart(2, "0")}:${String(secondsLeft % 60).padStart(2, "0")}`; }
+// Stimulus bertabel (opt-in): hanya soal dengan stimulusTabel === true. Baris berurutan yang
+// memuat "|" menjadi <table> (baris pertama = judul kolom); baris lain tetap teks. Isi stimulus
+// tidak diubah. Hanya satu blok tabel per stimulus: bila ada lebih dari satu blok (mis. tabel
+// terpotong baris kosong), jumlah kolom tidak seragam, atau tabel tanpa baris data, seluruh
+// stimulus ditampilkan sebagai teks biasa.
+// Dibangun dengan textContent (tanpa innerHTML) sehingga aman. Dipakai juga oleh js/hasil.js.
+function isiStimulus(wadah, q) {
+  const teks = String(q.stimulus || "");
+  if (q.stimulusTabel !== true) { wadah.appendChild(document.createTextNode(teks)); return; }
+  const blok = [];
+  teks.split("\n").forEach(baris => {
+    const tabel = baris.includes("|");
+    const akhir = blok[blok.length - 1];
+    if (akhir && akhir.tabel === tabel) akhir.baris.push(baris);
+    else blok.push({ tabel, baris: [baris] });
+  });
+  const sel = baris => baris.split("|").map(s => s.trim());
+  const sah = blok.filter(b => b.tabel).length <= 1 && blok.every(b => !b.tabel || (b.baris.length >= 2 &&
+    b.baris.every(baris => sel(baris).length === sel(b.baris[0]).length)));
+  if (!sah) { wadah.appendChild(document.createTextNode(teks)); return; }
+  blok.forEach(b => {
+    if (!b.tabel) {
+      const isi = b.baris.join("\n").trim();
+      if (isi) wadah.appendChild(document.createTextNode(isi));
+      return;
+    }
+    const gulir = document.createElement("div");
+    gulir.className = "stimulus-tabel-gulir";
+    const tabel = document.createElement("table");
+    tabel.className = "stimulus-tabel";
+    const kepala = tabel.createTHead().insertRow();
+    sel(b.baris[0]).forEach(isi => {
+      const th = document.createElement("th");
+      th.scope = "col"; th.textContent = isi;
+      kepala.appendChild(th);
+    });
+    const badan = tabel.createTBody();
+    b.baris.slice(1).forEach(baris => {
+      const tr = badan.insertRow();
+      sel(baris).forEach((isi, i) => {
+        const c = document.createElement(i === 0 ? "th" : "td");
+        if (i === 0) c.scope = "row";
+        c.textContent = isi;
+        tr.appendChild(c);
+      });
+    });
+    gulir.appendChild(tabel);
+    wadah.appendChild(gulir);
+  });
+}
 function renderQuestion() {
   const q = currentQuestions[currentIndex], selected = answers[q.id] || [];
   $("questionCounter").textContent = `Soal ${currentIndex + 1} dari ${currentQuestions.length}`;
@@ -982,9 +1142,7 @@ const stimulusBox = $("stimulusBox");
 stimulusBox.replaceChildren();
 
 if (q.stimulus) {
-  stimulusBox.appendChild(
-    document.createTextNode(q.stimulus)
-  );
+  isiStimulus(stimulusBox, q);
 }
 
 if (q.image) {
@@ -1437,7 +1595,13 @@ function htmlPembahasan(q, i) {
   let isi = "";
 
   // Bacaan/stimulus: bacaan panjang dilipat agar pembahasan tetap ringkas
-  if (q.stimulus) {
+  if (q.stimulus && q.stimulusTabel === true) {
+    // Stimulus bertabel: dibangun dengan isiStimulus (textContent), lalu diambil HTML-nya
+    const wadah = document.createElement("div");
+    wadah.className = "review-stimulus";
+    isiStimulus(wadah, q);
+    isi += wadah.outerHTML;
+  } else if (q.stimulus) {
     isi += q.stimulus.length > 280
       ? `<details class="review-bacaan"><summary>Lihat bacaan</summary><p>${escapeHTML(q.stimulus)}</p></details>`
       : `<p class="review-stimulus">${escapeHTML(q.stimulus)}</p>`;

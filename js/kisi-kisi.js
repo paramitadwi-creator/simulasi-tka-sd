@@ -1,5 +1,8 @@
 // =====================================================================
 // KISI-KISI TKA SD/MI — "Indikator Materi Latihan TKA" (30 indikator per mapel)
+// Matematika punya indikator tambahan 31 (persen kontekstual) dan 32 (kecepatan),
+// keduanya disetujui 2026-11-15:
+// nomor baru selalu DITAMBAH DI AKHIR, jangan menggeser nomor lama (riwayat menyimpan nomor).
 // Dipakai untuk menyusun Peta Hasil Belajar setiap sesi latihan.
 // =====================================================================
 window.kisiKisiTKA = {
@@ -38,11 +41,13 @@ window.kisiKisiTKA = {
       27: "Interpretasi diagram atau tabel",
       28: "Interpretasi data berdasarkan kategori",
       29: "Masalah penyajian data diagram batang/tabel",
-      30: "Interpretasi diagram batang atau tabel"
+      30: "Interpretasi diagram batang atau tabel",
+      31: "Masalah kontekstual persen dari suatu besaran",
+      32: "Hubungan jarak, waktu, dan kecepatan"
     },
     elemen: [
-      { nama: "Bilangan", nomor: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
-      { nama: "Geometri dan Pengukuran", nomor: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25] },
+      { nama: "Bilangan", nomor: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 31] },
+      { nama: "Geometri dan Pengukuran", nomor: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 32] },
       { nama: "Data", nomor: [26, 27, 28, 29, 30] }
     ]
   },
@@ -152,6 +157,7 @@ window.kisiKisiTKA = {
     MT25: 18, MT27: 29, MT28: 30, MT29: 12, MT30: 25, MT31: 29, MT32: 12, MT33: 7, MT36: 12,
     MT38: 5, MT39: 23, MT41: 18, MT42: 20, MT45: 27, MT46: 27, MT48: 3, MT49: 23, MT50: 7, MT51: 29,
     MT20: 22, MT23: 18, MT26: 15, MT43: 18, MT44: 15,
+    MT14: 31, MT34: 31,
     BI01: 4, BI02: 3, BI03: 16, BI05: 14,
     IP02: 16, IP03: 23, IP04: 12
   }

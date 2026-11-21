@@ -757,6 +757,31 @@ html.sesi-aktif .navbar { display: none; }
   line-height: var(--leading-relaxed);
   white-space: pre-line;
 }
+/* Stimulus bertabel (soal dengan stimulusTabel: true, dibangun oleh isiStimulus di js/app.js) */
+.stimulus-tabel-gulir { overflow-x: auto; margin: var(--space-3) 0 0; white-space: normal; }
+.stimulus-tabel {
+  border-collapse: collapse;
+  min-width: 100%;
+  background: var(--color-surface);
+  font-size: inherit;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+.stimulus-tabel th,
+.stimulus-tabel td {
+  border: 1px solid var(--color-line);
+  padding: var(--space-2) var(--space-3);
+  text-align: center;
+  white-space: nowrap;
+}
+.stimulus-tabel thead th {
+  background: var(--color-primary-soft);
+  color: var(--color-primary-strong);
+  font-weight: var(--weight-semibold);
+  white-space: normal;
+}
+.stimulus-tabel tbody th { font-weight: var(--weight-semibold); }
+.stimulus-tabel tbody tr:nth-child(even) { background: var(--color-surface-muted); }
 .stimulus-box img {
   display: block;
   max-width: 100%;
@@ -1619,7 +1644,7 @@ footer small { font-size: var(--text-sm); color: var(--color-on-dark-2); }
 /* Tata letak pembahasan */
 .review-layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: var(--space-5); align-items: start; }
 .review-main { display: grid; gap: var(--space-4); min-width: 0; }
-.review-card { display: grid; gap: var(--space-4); padding: var(--space-6); background: var(--color-surface); border: var(--border); border-radius: var(--radius-md); }
+.review-card { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); padding: var(--space-6); background: var(--color-surface); border: var(--border); border-radius: var(--radius-md); }
 .review-card > * { margin: 0; }
 .review-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); }
 .review-title { font-size: var(--text-2xl); }
