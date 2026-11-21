@@ -1,7 +1,7 @@
 // DIBUAT OTOMATIS oleh alat/versi-aset.js — jangan diedit manual.
 // Peta jalur gambar sumber (dipakai bank soal) -> versi tetap berbasis hash di assets/versi/.
 window.ASET_MANIFEST = {
- "dibuat": "2026-11-16T05:47:39.569Z",
+ "dibuat": "2026-11-21T14:53:43.634Z",
  "catatan": "Dibuat otomatis oleh alat/versi-aset.js. Jangan diedit manual.",
  "berkas": {
   "assets/images/ipas/diagram-mata.png": {
@@ -25,8 +25,8 @@ window.ASET_MANIFEST = {
    "hash": "c315389b7b80dd89"
   },
   "assets/images/kisi/IPAS-010.svg": {
-   "src": "assets/versi/8444ff1818256fa2.svg",
-   "hash": "8444ff1818256fa2"
+   "src": "assets/versi/fc38d84dd088e7b2.svg",
+   "hash": "fc38d84dd088e7b2"
   },
   "assets/images/kisi/IPAS-014.svg": {
    "src": "assets/versi/76e33fbe9d70be51.svg",
@@ -93,16 +93,16 @@ window.ASET_MANIFEST = {
    "hash": "784339c6698a2aa8"
   },
   "assets/images/kisi/LMAT-002.svg": {
-   "src": "assets/versi/48501a0c9626229b.svg",
-   "hash": "48501a0c9626229b"
+   "src": "assets/versi/13c7e88ef3be1e93.svg",
+   "hash": "13c7e88ef3be1e93"
   },
   "assets/images/kisi/LMAT-003.svg": {
-   "src": "assets/versi/704a01e8b505f476.svg",
-   "hash": "704a01e8b505f476"
+   "src": "assets/versi/cfc04715fb348c24.svg",
+   "hash": "cfc04715fb348c24"
   },
   "assets/images/kisi/LMAT-004.svg": {
-   "src": "assets/versi/85b7fdc87b446fe6.svg",
-   "hash": "85b7fdc87b446fe6"
+   "src": "assets/versi/0b39c52b6a3ad420.svg",
+   "hash": "0b39c52b6a3ad420"
   },
   "assets/images/kisi/LMAT-011.svg": {
    "src": "assets/versi/0958006c7082e54c.svg",
@@ -157,8 +157,8 @@ window.ASET_MANIFEST = {
    "hash": "3f476e3259239c94"
   },
   "assets/images/kisi/MAT-021.svg": {
-   "src": "assets/versi/e2d730f964733832.svg",
-   "hash": "e2d730f964733832"
+   "src": "assets/versi/f93ed8bed738beb1.svg",
+   "hash": "f93ed8bed738beb1"
   },
   "assets/images/kisi/MAT-024.svg": {
    "src": "assets/versi/949a9e919ccdb755.svg",

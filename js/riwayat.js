@@ -301,6 +301,12 @@
         const stimulus = salinan.stim ? baca(K_BACAAN + salinan.stim) : "";
         q = { ...salinan, stimulus: stimulus || "" };
         delete q.stim;
+        // Salinan lama (sebelum penanda stimulusTabel ada) tidak membawa penanda tabel, dan sidiknya
+        // sama sehingga tidak pernah ditulis ulang. Pulihkan penanda dari bank saat ini hanya bila
+        // teks stimulusnya identik; penyimpanan tidak diubah.
+        if (q.stimulusTabel !== true && kini && kini.stimulusTabel === true && q.stimulus && kini.stimulus === q.stimulus) {
+          q.stimulusTabel = true;
+        }
         if (salinan.stim && stimulus === null) catatan = "bacaan-hilang";
         if (!kini) catatan = "dihapus-dari-bank";
         else if (sidikIsi(kini) !== sidikIsi(q)) catatan = catatan || "berubah";

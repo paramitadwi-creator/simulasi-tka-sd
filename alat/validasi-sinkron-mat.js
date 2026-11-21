@@ -36,7 +36,12 @@ const BELUM_DIPORT = [
 const PENGECUALIAN = {
   // 2026-11-15 (disetujui): diagram lingkaran diganti diagram batang berskala persen (data tetap 30/45/25%)
   // karena diagram lingkaran tidak tercantum di kerangka TKA SD; imageAlt diperbarui.
-  "MAT-031": "db2a04c32bafe2aa34b339d44269f9ed9081a540debb20ec809eb21041cf7e06"
+  "MAT-031": "db2a04c32bafe2aa34b339d44269f9ed9081a540debb20ec809eb21041cf7e06",
+  // 2026-11-21 (disetujui): tata letak SVG diubah dari strip 580×140 menjadi grid 3+2 (420×264)
+  // agar terbaca di HP (huruf efektif 7,3 → 16 px di layar 375 px). Hanya visual: jumlah bangun,
+  // pola arsir (2/4, 3/6, 5/8, 2/3, 1/2), label A–E, opsi, kunci, dan pembahasan tetap.
+  // Versi aset: assets/versi/f93ed8bed738beb1.svg. Bank lama (latihan.html) tetap gambar lama.
+  "MAT-021": "2b0ba78a8c36720ee2baa53717c9ea955614f03da9c12aa08faccd590ba8a63e"
 };
 // Kode kisi Matematika yang sudah dipakai bank utama sebelum port (2026-11-15).
 // KISI-MT-03, -10, -14 belum pernah dipakai: memakainya = membuat kode baru.
