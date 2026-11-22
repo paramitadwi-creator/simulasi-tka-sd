@@ -1185,6 +1185,25 @@ html.sesi-aktif .navbar { display: none; }
 .prioritas-progress { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--space-3); }
 .prioritas-angka { font-size: var(--text-sm); color: var(--color-ink-2); white-space: nowrap; }
 .prioritas-item small { font-size: var(--text-sm); color: var(--color-ink-2); }
+/* Status penguasaan pada kartu prioritas (aturan bersama, sama dengan peta & laporan) */
+.prioritas-status {
+  justify-self: start;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  white-space: nowrap;
+}
+.prioritas-item.status-dikuasai .prioritas-status { background: var(--color-success-soft); color: var(--color-success-ink); }
+.prioritas-item.status-berkembang .prioritas-status { background: var(--color-accent-soft); color: var(--color-accent-on-soft); }
+.prioritas-item.status-lemah .prioritas-status { background: var(--color-danger-soft); color: var(--color-danger-ink); }
+.prioritas-item.status-belum-cukup .prioritas-status { background: var(--color-surface-muted); color: var(--color-ink-2); box-shadow: inset 0 0 0 1px var(--color-line); }
+.prioritas-item.status-dikuasai .progress-bar i { background: var(--color-success); }
+.prioritas-item.status-berkembang .progress-bar i { background: var(--color-accent); }
+.prioritas-item.status-lemah .progress-bar i { background: var(--color-danger); }
+.progress-bar.is-netral { background: var(--color-surface-muted); }
+.prioritas-detail { margin: 0; white-space: normal; line-height: var(--leading-normal); }
+.prioritas-catatan { margin: var(--space-3) 0 0; font-size: var(--text-sm); color: var(--color-ink-2); line-height: var(--leading-normal); }
 
 /* Riwayat latihan (dibuat dashboard.js) */
 .riwayat-list { list-style: none; display: grid; }
