@@ -109,6 +109,35 @@ uji("kisi-kisi: setara dengan L.statusPenguasaan(persen) untuk semua total ≥ 3
   }
 });
 
+uji("kisi-kisi: hitungUlangPeta menghitung ulang baris & elemen[].baris (riwayat lama), objek asal tetap", () => {
+  // Peta riwayat lama: status tersimpan memakai aturan lama (1/1 & 2/2 = dikuasai); elemen berisi salinan terpisah
+  const baris = (nomor, b, t, status) => ({ nomor, nama: "Indikator " + nomor, benar: b, total: t, persen: Math.round((b / t) * 100), status });
+  const lama = {
+    mapel: "matematika", totalIndikator: 32, luar: { benar: 0, total: 0 },
+    baris: [baris(1, 1, 1, "dikuasai"), baris(2, 2, 2, "dikuasai"), baris(3, 1, 3, "lemah"), baris(4, 2, 3, "berkembang"), baris(5, 3, 3, "dikuasai")],
+    elemen: [{ nama: "A", baris: [baris(1, 1, 1, "dikuasai"), baris(2, 2, 2, "dikuasai")] }, { nama: "B", baris: [baris(3, 1, 3, "lemah"), baris(4, 2, 3, "berkembang"), baris(5, 3, 3, "dikuasai")] }]
+  };
+  const asli = JSON.stringify(lama);
+  const baru = kisi.hitungUlangPeta(lama);
+  const harap = ["belum-cukup", "belum-cukup", "lemah", "berkembang", "dikuasai"];
+  assert.deepStrictEqual(baru.baris.map((b) => b.status), harap);
+  assert.deepStrictEqual(baru.elemen.flatMap((e) => e.baris.map((b) => b.status)), harap);
+  assert.deepStrictEqual([baru.mapel, baru.totalIndikator, baru.luar.total, baru.baris[0].nama, baru.baris[0].persen], ["matematika", 32, 0, "Indikator 1", 100]);
+  assert.strictEqual(JSON.stringify(lama), asli); // tidak mengubah objek asal (penyimpanan riwayat)
+  assert.notStrictEqual(baru.baris, lama.baris);
+});
+
+uji("kisi-kisi: hitungUlangPeta aman untuk peta kosong/tidak lengkap", () => {
+  assert.strictEqual(kisi.hitungUlangPeta(null), null);
+  assert.strictEqual(kisi.hitungUlangPeta(undefined), undefined);
+  const tanpaBaris = { mapel: "ipas" };
+  assert.strictEqual(kisi.hitungUlangPeta(tanpaBaris), tanpaBaris);
+  const tanpaElemen = kisi.hitungUlangPeta({ baris: [{ nomor: 1, benar: 3, total: 4 }] });
+  assert.deepStrictEqual([tanpaElemen.baris[0].status, tanpaElemen.elemen], ["dikuasai", undefined]);
+  // Objek dari konteks vm berbeda prototipe: bandingkan isinya lewat JSON
+  assert.strictEqual(JSON.stringify(kisi.hitungUlangPeta({ baris: [], elemen: [] })), JSON.stringify({ baris: [], elemen: [] }));
+});
+
 const rekap = L.rekapHarian(RIWAYAT, { tanggal: "2026-11-09", sekarang: "2026-11-09T13:30:00Z", kisi, potongJam: false }); // uji logika agregasi tanpa batas 20.00 (diuji terpisah)
 const mat = rekap.mapel.matematika, bin = rekap.mapel.bahasa, ipas = rekap.mapel.ipas;
 

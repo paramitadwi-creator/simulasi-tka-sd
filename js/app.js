@@ -1462,7 +1462,11 @@ function goToQuestion(index) {
 // =====================================================================
 // PETA HASIL BELAJAR: penguasaan per indikator kisi-kisi dalam satu sesi
 // =====================================================================
-const LABEL_STATUS = { dikuasai: "Dikuasai", berkembang: "Berkembang", lemah: "Perlu penguatan" };
+// Label status dari kisi-kisi (js/kisi-kisi.js); cadangan untuk berkas kisi-kisi lama di cache
+const LABEL_STATUS = {
+  "belum-cukup": "Belum cukup data", dikuasai: "Dikuasai", berkembang: "Berkembang", lemah: "Perlu penguatan",
+  ...((window.kisiKisiTKA && window.kisiKisiTKA.labelStatus) || {})
+};
 
 function indikatorSoal(q) {
   const kisi = window.kisiKisiTKA || {};
@@ -1472,11 +1476,35 @@ function indikatorSoal(q) {
     ?? null;
 }
 
-function statusPenguasaan(persen) {
-  const kisi = window.kisiKisiTKA || { batasDikuasai: 75, batasBerkembang: 50 };
-  return persen >= kisi.batasDikuasai ? "dikuasai"
-    : persen >= kisi.batasBerkembang ? "berkembang"
+// Status penguasaan untuk data SATU sesi (peta sesi, halaman hasil, riwayat). Memakai aturan bersama
+// kisiKisiTKA.statusPenguasaan(benar, total): < 3 soal = "belum-cukup", lalu 75/50. Status lintas sesi
+// (Tahap B) memakai fungsi terpisah; jangan memakai status ini sebagai bukti penguasaan jangka panjang.
+// Cadangan dengan aturan yang sama dipakai bila kisi-kisi.js lama (tanpa fungsi bersama) masih di cache.
+function statusPetaSesi(benar, total) {
+  const kisi = window.kisiKisiTKA || {};
+  if (typeof kisi.statusPenguasaan === "function") return kisi.statusPenguasaan(benar, total);
+  const b = Number(benar), t = Number(total);
+  if (!Number.isInteger(b) || !Number.isInteger(t) || b < 0 || b > t || t < (kisi.minimalSoal ?? 3)) return "belum-cukup";
+  const persen = Math.round((b / t) * 100);
+  return persen >= (kisi.batasDikuasai ?? 75) ? "dikuasai"
+    : persen >= (kisi.batasBerkembang ?? 50) ? "berkembang"
     : "lemah";
+}
+
+// Salinan peta dengan status setiap baris (baris & elemen[].baris) dihitung ulang dari benar/total,
+// sehingga sesi baru dan riwayat lama tampil dengan aturan yang sama. Penyimpanan tidak diubah.
+function hitungUlangPetaSesi(peta) {
+  const kisi = window.kisiKisiTKA || {};
+  if (typeof kisi.hitungUlangPeta === "function") return kisi.hitungUlangPeta(peta);
+  if (!peta || typeof peta !== "object" || !Array.isArray(peta.baris)) return peta;
+  const ulang = b => (b && typeof b === "object" ? { ...b, status: statusPetaSesi(b.benar, b.total) } : b);
+  return {
+    ...peta,
+    baris: peta.baris.map(ulang),
+    elemen: Array.isArray(peta.elemen)
+      ? peta.elemen.map(e => (e && Array.isArray(e.baris) ? { ...e, baris: e.baris.map(ulang) } : e))
+      : peta.elemen
+  };
 }
 
 function hitungPetaHasil(mapel, soal) {
@@ -1504,7 +1532,7 @@ function hitungPetaHasil(mapel, soal) {
     .sort((a, b) => a.nomor - b.nomor)
     .map(data => {
       const persen = Math.round(data.benar / data.total * 100);
-      return { ...data, persen, status: statusPenguasaan(persen) };
+      return { ...data, persen, status: statusPetaSesi(data.benar, data.total) };
     });
 
   const elemen = (kisi ? kisi.elemen : [])
@@ -1527,26 +1555,31 @@ function tampilkanPetaHasil(peta) {
     review.parentNode.insertBefore(wadah, judulReview && judulReview.tagName === "H3" ? judulReview : review);
   }
 
-  if (!peta.baris.length) {
+  // Status selalu dihitung ulang dari benar/total (riwayat lama menyimpan status aturan lama)
+  peta = hitungUlangPetaSesi(peta);
+  if (!peta || !Array.isArray(peta.baris) || !peta.baris.length) {
     wadah.hidden = true;
     return;
   }
   wadah.hidden = false;
 
-  const hitung = { dikuasai: 0, berkembang: 0, lemah: 0 };
-  peta.baris.forEach(b => hitung[b.status]++);
+  const hitung = { "belum-cukup": 0, dikuasai: 0, berkembang: 0, lemah: 0 };
+  peta.baris.forEach(b => { if (b.status in hitung) hitung[b.status]++; });
 
-  // Prioritas: indikator belum dikuasai, persentase terendah lebih dulu
+  // Prioritas: indikator yang sudah cukup data tetapi belum dikuasai, persentase terendah lebih dulu.
+  // Indikator "belum cukup data" tidak dimasukkan agar siswa tidak dinilai dari 1–2 soal.
   const prioritas = peta.baris
-    .filter(b => b.status !== "dikuasai")
+    .filter(b => b.status === "berkembang" || b.status === "lemah")
     .sort((a, b) => a.persen - b.persen || b.total - a.total || a.nomor - b.nomor)
     .slice(0, 3);
+  const semuaDikuasai = peta.baris.every(b => b.status === "dikuasai");
+  const minimalSoal = (window.kisiKisiTKA && window.kisiKisiTKA.minimalSoal) || 3;
 
   const barisHTML = b => `
     <li class="peta-baris status-${b.status}">
       <span class="peta-no" aria-label="Indikator ${b.nomor}">${b.nomor}</span>
       <span class="peta-nama">${escapeHTML(b.nama)}</span>
-      <span class="peta-bar" aria-hidden="true"><i style="width:${b.persen}%"></i></span>
+      <span class="peta-bar" aria-hidden="true"><i style="width:${b.status === "belum-cukup" ? 0 : b.persen}%"></i></span>
       <span class="peta-angka">${b.benar}/${b.total} benar</span>
       <span class="peta-status">${LABEL_STATUS[b.status]}</span>
     </li>`;
@@ -1572,17 +1605,24 @@ function tampilkanPetaHasil(peta) {
       <div class="status-berkembang"><strong>${hitung.berkembang}</strong>Berkembang</div>
       <div class="status-lemah"><strong>${hitung.lemah}</strong>Perlu penguatan</div>
     </div>
+    ${hitung["belum-cukup"]
+      ? `<p class="peta-belum-cukup">${hitung["belum-cukup"]} indikator baru diuji kurang dari ${minimalSoal} soal pada sesi ini — belum cukup data untuk menentukan penguasaannya.</p>`
+      : ""}
     <div class="peta-saran">
       ${prioritas.length
         ? `<strong>Prioritas belajar berikutnya:</strong>
            <ol>${prioritas.map(b => `<li>Indikator ${b.nomor} · ${escapeHTML(b.nama)} (${b.persen}%)</li>`).join("")}</ol>`
-        : `<strong>Hebat!</strong> Semua indikator yang diuji pada sesi ini sudah dikuasai.`}
+        : semuaDikuasai
+          ? `<strong>Hebat!</strong> Semua indikator yang diuji pada sesi ini sudah dikuasai.`
+          : hitung.dikuasai
+            ? `<strong>Bagus!</strong> Indikator yang soalnya cukup sudah dikuasai pada sesi ini. Kerjakan latihan lagi agar penguasaan indikator lainnya terlihat.`
+            : `<strong>Ayo lanjutkan!</strong> Kerjakan latihan lagi agar penguasaan setiap indikator terlihat.`}
     </div>
     ${elemenHTML}
     <p class="peta-catatan">
       Dikuasai ≥ ${kisi.batasDikuasai}% · Berkembang ${kisi.batasBerkembang}–${kisi.batasDikuasai - 1}% ·
-      Perlu penguatan &lt; ${kisi.batasBerkembang}%. Indikator yang hanya diuji 1–2 soal belum
-      mencerminkan penguasaan penuh; lihat perkembangannya dari beberapa sesi.
+      Perlu penguatan &lt; ${kisi.batasBerkembang}% · Belum cukup data: indikator diuji kurang dari
+      ${minimalSoal} soal pada sesi ini. Status ini hanya untuk sesi ini; lihat perkembangannya dari beberapa sesi.
       ${peta.luar.total ? `${peta.luar.total} soal di luar kisi-kisi (${peta.luar.benar} benar) tidak dihitung dalam peta.` : ""}
     </p>`;
 }

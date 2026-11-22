@@ -191,4 +191,20 @@ window.kisiKisiTKA = {
     const persen = Math.round((b / t) * 100);
     return persen >= DIKUASAI ? "dikuasai" : persen >= BERKEMBANG ? "berkembang" : "lemah";
   };
+  // Peta hasil SATU sesi ({ baris, elemen: [{ baris }] }, bentuk dari hitungPetaHasil di js/app.js):
+  // salinan dengan status setiap baris dihitung ulang dari benar/total memakai aturan di atas.
+  // Dipakai untuk sesi baru maupun riwayat lama (status yang tersimpan diabaikan, penyimpanan
+  // tidak diubah). elemen[].baris ikut dihitung karena riwayat menyimpannya sebagai salinan terpisah.
+  // Masukan tanpa daftar baris dikembalikan apa adanya.
+  kisi.hitungUlangPeta = function (peta) {
+    if (!peta || typeof peta !== "object" || !Array.isArray(peta.baris)) return peta;
+    const ulang = (b) => (b && typeof b === "object" ? { ...b, status: kisi.statusPenguasaan(b.benar, b.total) } : b);
+    return {
+      ...peta,
+      baris: peta.baris.map(ulang),
+      elemen: Array.isArray(peta.elemen)
+        ? peta.elemen.map((e) => (e && Array.isArray(e.baris) ? { ...e, baris: e.baris.map(ulang) } : e))
+        : peta.elemen
+    };
+  };
 })(window.kisiKisiTKA);
