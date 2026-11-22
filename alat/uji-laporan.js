@@ -74,6 +74,41 @@ uji("Batas penguasaan: ≥75 dikuasai, 50–74 berkembang, <50 perlu penguatan",
   assert.strictEqual(L.statusPenguasaan(49), "lemah");
 });
 
+uji("kisi-kisi: statusPenguasaan(benar, total) bersama, minimal 3 soal", () => {
+  const s = kisi.statusPenguasaan;
+  assert.strictEqual(kisi.minimalSoal, 3);
+  const kasus = [
+    [0, 0, "belum-cukup"], [1, 1, "belum-cukup"], [0, 1, "belum-cukup"], [2, 2, "belum-cukup"],
+    [1, 3, "lemah"], [2, 3, "berkembang"], [3, 3, "dikuasai"], [3, 4, "dikuasai"], [4, 5, "dikuasai"], [6, 8, "dikuasai"]
+  ];
+  kasus.forEach(([b, t, harap]) => assert.strictEqual(s(b, t), harap, `${b}/${t}`));
+  assert.deepStrictEqual(Object.keys(kisi.labelStatus).sort(), ["belum-cukup", "berkembang", "dikuasai", "lemah"]);
+  assert.strictEqual(kisi.labelStatus["belum-cukup"], "Belum cukup data");
+});
+
+uji("kisi-kisi: statusPenguasaan aman untuk masukan tidak sah & pembulatan sama dengan aturan lama", () => {
+  const s = kisi.statusPenguasaan;
+  [[3, 2], [-1, 3], [1.5, 3], [NaN, 3], [null, null], [undefined, undefined], ["a", 3]]
+    .forEach(([b, t]) => assert.strictEqual(s(b, t), "belum-cukup", `${b}/${t}`));
+  assert.strictEqual(s("3", "3"), "dikuasai");
+  assert.strictEqual(s(149, 200), "dikuasai"); // 74,5% dibulatkan 75%, sama dengan perilaku lama
+  assert.strictEqual(s(99, 200), "berkembang"); // 49,5% -> 50%
+});
+
+uji("kisi-kisi: statusPenguasaan tidak bergantung pada `this` (dipanggil lepas)", () => {
+  const lepas = kisi.statusPenguasaan;
+  assert.strictEqual(lepas.call(undefined, 2, 3), "berkembang");
+  assert.strictEqual(lepas.call({}, 1, 1), "belum-cukup");
+});
+
+uji("kisi-kisi: setara dengan L.statusPenguasaan(persen) untuk semua total ≥ 3", () => {
+  for (let t = kisi.minimalSoal; t <= 40; t++) {
+    for (let b = 0; b <= t; b++) {
+      assert.strictEqual(kisi.statusPenguasaan(b, t), L.statusPenguasaan(Math.round((b / t) * 100)), `${b}/${t}`);
+    }
+  }
+});
+
 const rekap = L.rekapHarian(RIWAYAT, { tanggal: "2026-11-09", sekarang: "2026-11-09T13:30:00Z", kisi, potongJam: false }); // uji logika agregasi tanpa batas 20.00 (diuji terpisah)
 const mat = rekap.mapel.matematika, bin = rekap.mapel.bahasa, ipas = rekap.mapel.ipas;
 

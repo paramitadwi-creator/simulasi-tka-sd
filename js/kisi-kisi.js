@@ -9,6 +9,14 @@ window.kisiKisiTKA = {
   // Batas penguasaan, sama dengan Peta Belajar sekolah
   batasDikuasai: 75,
   batasBerkembang: 50,
+  // Minimal banyak soal sebelum status penguasaan diberikan (lihat statusPenguasaan di akhir berkas)
+  minimalSoal: 3,
+  labelStatus: {
+    "belum-cukup": "Belum cukup data",
+    dikuasai: "Dikuasai",
+    berkembang: "Berkembang",
+    lemah: "Perlu penguatan"
+  },
 
   matematika: {
     indikator: {
@@ -162,3 +170,25 @@ window.kisiKisiTKA = {
     IP02: 16, IP03: 23, IP04: 12
   }
 };
+
+// =====================================================================
+// STATUS PENGUASAAN BERSAMA: satu aturan untuk peta sesi, hasil, laporan, dan dashboard.
+//   total < minimalSoal       -> "belum-cukup" (Belum cukup data)
+//   persen >= batasDikuasai   -> "dikuasai"
+//   persen >= batasBerkembang -> "berkembang"
+//   lainnya                   -> "lemah" (Perlu penguatan)
+// Persen dibulatkan dulu (Math.round), sama dengan perhitungan sebelumnya.
+// Masukan: benar & total untuk data SATU sesi yang sudah unik per ID soal; jawaban kosong
+// dihitung belum benar. Data kumulatif lintas sesi BELUM menjamin soal berbeda.
+// Masukan tidak sah (bukan bilangan bulat, negatif, benar > total) -> "belum-cukup".
+// Tidak memakai `this`, sehingga aman dipanggil lepas (mis. const f = kisi.statusPenguasaan).
+// =====================================================================
+(function (kisi) {
+  const MINIMAL = kisi.minimalSoal, DIKUASAI = kisi.batasDikuasai, BERKEMBANG = kisi.batasBerkembang;
+  kisi.statusPenguasaan = function (benar, total) {
+    const b = Number(benar), t = Number(total);
+    if (!Number.isInteger(b) || !Number.isInteger(t) || b < 0 || b > t || t < MINIMAL) return "belum-cukup";
+    const persen = Math.round((b / t) * 100);
+    return persen >= DIKUASAI ? "dikuasai" : persen >= BERKEMBANG ? "berkembang" : "lemah";
+  };
+})(window.kisiKisiTKA);
