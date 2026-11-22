@@ -1444,8 +1444,18 @@ function toggleFlag() {
   flagged.has(id) ? flagged.delete(id) : flagged.add(id);
   renderQuestion();
 }
+// Ada soal yang belum dijawab, atau soal kategori yang pernyataannya belum lengkap?
+function adaSoalBelumLengkap() {
+  return currentQuestions.some(q => !hasAnswered(q) ||
+    (q.type === "pgk_kategori" && answers[q.id].some(v => v === null || v === undefined)));
+}
 function moveQuestion(delta) {
-  if (currentMode === "practice" && delta === 1 && currentIndex === currentQuestions.length - 1) { finishQuiz(); return; }
+  // Latihan, soal terakhir ("Lihat hasil →"): langsung ke hasil hanya bila semua soal lengkap;
+  // bila masih ada soal kosong/belum lengkap, tampilkan konfirmasi yang sama dengan "Akhiri latihan".
+  if (currentMode === "practice" && delta === 1 && currentIndex === currentQuestions.length - 1) {
+    if (adaSoalBelumLengkap()) konfirmasiAkhiriSesi(); else finishQuiz();
+    return;
+  }
   if (delta === 1 && currentIndex === currentQuestions.length - 1) { konfirmasiAkhiriSesi(); return; }
   goToQuestion(Math.max(0, Math.min(currentQuestions.length - 1, currentIndex + delta)));
 }
