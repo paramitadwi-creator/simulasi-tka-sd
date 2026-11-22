@@ -757,6 +757,31 @@ html.sesi-aktif .navbar { display: none; }
   line-height: var(--leading-relaxed);
   white-space: pre-line;
 }
+/* Stimulus bertabel (soal dengan stimulusTabel: true, dibangun oleh isiStimulus di js/app.js) */
+.stimulus-tabel-gulir { overflow-x: auto; margin: var(--space-3) 0 0; white-space: normal; }
+.stimulus-tabel {
+  border-collapse: collapse;
+  min-width: 100%;
+  background: var(--color-surface);
+  font-size: inherit;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+.stimulus-tabel th,
+.stimulus-tabel td {
+  border: 1px solid var(--color-line);
+  padding: var(--space-2) var(--space-3);
+  text-align: center;
+  white-space: nowrap;
+}
+.stimulus-tabel thead th {
+  background: var(--color-primary-soft);
+  color: var(--color-primary-strong);
+  font-weight: var(--weight-semibold);
+  white-space: normal;
+}
+.stimulus-tabel tbody th { font-weight: var(--weight-semibold); }
+.stimulus-tabel tbody tr:nth-child(even) { background: var(--color-surface-muted); }
 .stimulus-box img {
   display: block;
   max-width: 100%;
@@ -1010,7 +1035,7 @@ html.sesi-aktif .navbar { display: none; }
 .peta-elemen ul { list-style: none; margin: 0; padding: 0; }
 .peta-baris {
   display: grid;
-  grid-template-columns: 32px minmax(0, 1fr) 120px 80px 128px;
+  grid-template-columns: 32px minmax(0, 1fr) 120px 80px 152px;
   gap: var(--space-3);
   align-items: center;
   padding: var(--space-2) 0;
@@ -1046,6 +1071,9 @@ html.sesi-aktif .navbar { display: none; }
 .status-dikuasai .peta-status { background: var(--color-success-soft); color: var(--color-success-ink); }
 .status-berkembang .peta-status { background: var(--color-accent-soft); color: var(--color-accent-on-soft); }
 .status-lemah .peta-status { background: var(--color-danger-soft); color: var(--color-danger-ink); }
+/* Belum cukup data (< 3 soal pada sesi ini): netral, bukan tanda gagal */
+.status-belum-cukup .peta-status { background: var(--color-surface-muted); color: var(--color-ink-2); box-shadow: inset 0 0 0 1px var(--color-line); white-space: normal; line-height: 1.3; }
+.peta-belum-cukup { margin: 0 0 var(--space-4); color: var(--color-ink-2); font-size: var(--text-sm); line-height: var(--leading-normal); }
 .peta-catatan { color: var(--color-ink-2); font-size: var(--text-sm); line-height: var(--leading-normal); margin: var(--space-3) 0 0; }
 
 /* Pembahasan */
@@ -1157,6 +1185,25 @@ html.sesi-aktif .navbar { display: none; }
 .prioritas-progress { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--space-3); }
 .prioritas-angka { font-size: var(--text-sm); color: var(--color-ink-2); white-space: nowrap; }
 .prioritas-item small { font-size: var(--text-sm); color: var(--color-ink-2); }
+/* Status penguasaan pada kartu prioritas (aturan bersama, sama dengan peta & laporan) */
+.prioritas-status {
+  justify-self: start;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  white-space: nowrap;
+}
+.prioritas-item.status-dikuasai .prioritas-status { background: var(--color-success-soft); color: var(--color-success-ink); }
+.prioritas-item.status-berkembang .prioritas-status { background: var(--color-accent-soft); color: var(--color-accent-on-soft); }
+.prioritas-item.status-lemah .prioritas-status { background: var(--color-danger-soft); color: var(--color-danger-ink); }
+.prioritas-item.status-belum-cukup .prioritas-status { background: var(--color-surface-muted); color: var(--color-ink-2); box-shadow: inset 0 0 0 1px var(--color-line); }
+.prioritas-item.status-dikuasai .progress-bar i { background: var(--color-success); }
+.prioritas-item.status-berkembang .progress-bar i { background: var(--color-accent); }
+.prioritas-item.status-lemah .progress-bar i { background: var(--color-danger); }
+.progress-bar.is-netral { background: var(--color-surface-muted); }
+.prioritas-detail { margin: 0; white-space: normal; line-height: var(--leading-normal); }
+.prioritas-catatan { margin: var(--space-3) 0 0; font-size: var(--text-sm); color: var(--color-ink-2); line-height: var(--leading-normal); }
 
 /* Riwayat latihan (dibuat dashboard.js) */
 .riwayat-list { list-style: none; display: grid; }
@@ -1581,6 +1628,12 @@ footer small { font-size: var(--text-sm); color: var(--color-on-dark-2); }
 .is-dikuasai .mastery-pct { color: var(--color-success-ink); }
 .is-perlu .mastery-pct { color: var(--color-accent-on-soft); }
 .mastery-empty { margin: 0; color: var(--color-ink-2); line-height: var(--leading-relaxed); }
+/* Bagian "Belum cukup data": selebar penuh di bawah dua kolom, warna netral */
+.mastery-col.is-belum-cukup { grid-column: 1 / -1; background: var(--color-surface-muted); }
+.mastery-col.is-belum-cukup h3 .icon { color: var(--color-ink-2); }
+.mastery-col.is-belum-cukup .mastery-count { background: var(--color-surface); color: var(--color-ink-2); }
+.mastery-col.is-belum-cukup li { background: var(--color-surface); }
+.mastery-intro { margin: 0 0 var(--space-3); color: var(--color-ink-2); font-size: var(--text-sm); line-height: var(--leading-normal); }
 
 /* Rekomendasi */
 .result-reco { padding: var(--space-5); background: var(--color-surface); border: var(--border); border-left: 4px solid var(--color-primary); border-radius: var(--radius-md); }
@@ -1619,7 +1672,7 @@ footer small { font-size: var(--text-sm); color: var(--color-on-dark-2); }
 /* Tata letak pembahasan */
 .review-layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: var(--space-5); align-items: start; }
 .review-main { display: grid; gap: var(--space-4); min-width: 0; }
-.review-card { display: grid; gap: var(--space-4); padding: var(--space-6); background: var(--color-surface); border: var(--border); border-radius: var(--radius-md); }
+.review-card { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); padding: var(--space-6); background: var(--color-surface); border: var(--border); border-radius: var(--radius-md); }
 .review-card > * { margin: 0; }
 .review-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); }
 .review-title { font-size: var(--text-2xl); }
@@ -2047,6 +2100,10 @@ footer small { font-size: var(--text-sm); color: var(--color-on-dark-2); }
 .laporan-materi.is-dikuasai { border-left-color: var(--color-success); }
 .laporan-materi.is-berkembang { border-left-color: var(--color-accent); }
 .laporan-materi.is-lemah { border-left-color: var(--color-danger); }
+/* Belum cukup data (< 3 soal): netral, tanpa warna penilaian */
+.laporan-materi.is-belum-cukup { border-left-color: var(--color-line); border-left-style: dashed; }
+.laporan-materi.is-belum-cukup .laporan-materi-persen { font-weight: var(--weight-medium); color: var(--color-ink-2); }
+.laporan-keterangan { margin: 0 0 var(--space-1); font-size: var(--text-sm); color: var(--color-ink-2); line-height: var(--leading-normal); }
 
 .laporan-kosong-pesan { color: var(--color-ink); line-height: var(--leading-relaxed); }
 .laporan-terakhir { font-size: var(--text-sm); color: var(--color-ink-2); }

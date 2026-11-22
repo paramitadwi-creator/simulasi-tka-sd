@@ -128,10 +128,17 @@
 
   // Materi dikuasai / perlu diperkuat: dari peta hasil (indikator kisi-kisi);
   // bila soal tidak memiliki indikator, dikelompokkan menurut materi (topic).
+  // Status SATU sesi memakai aturan bersama (statusPetaSesi di js/app.js -> kisiKisiTKA.statusPenguasaan):
+  // < 3 soal = "belum-cukup". Status yang tersimpan di riwayat lama diabaikan dan dihitung ulang dari benar/total.
+  function statusSesi(benar, total) {
+    if (typeof statusPetaSesi === "function") return statusPetaSesi(benar, total);
+    const kisi = window.kisiKisiTKA;
+    return kisi && typeof kisi.statusPenguasaan === "function" ? kisi.statusPenguasaan(benar, total) : "belum-cukup";
+  }
   function kelompokMateri() {
     const baris = (data.peta && data.peta.baris) || [];
     if (baris.length) {
-      return baris.map((b) => ({ nama: b.nama, label: "Indikator " + b.nomor, benar: b.benar, total: b.total, persen: b.persen, status: b.status }));
+      return baris.map((b) => ({ nama: b.nama, label: "Indikator " + b.nomor, benar: b.benar, total: b.total, persen: b.persen, status: statusSesi(b.benar, b.total) }));
     }
     const per = new Map();
     data.soal.forEach((s) => {
@@ -139,42 +146,55 @@
       if (!per.has(k)) per.set(k, { nama: k, label: "Materi", benar: 0, total: 0 });
       const d = per.get(k); d.total++; if (s.benar) d.benar++;
     });
-    const batas = window.kisiKisiTKA || { batasDikuasai: 75, batasBerkembang: 50 };
     return [...per.values()].map((d) => {
       const persen = Math.round((d.benar / d.total) * 100);
-      return { ...d, persen, status: persen >= batas.batasDikuasai ? "dikuasai" : persen >= batas.batasBerkembang ? "berkembang" : "lemah" };
+      return { ...d, persen, status: statusSesi(d.benar, d.total) };
     });
   }
+  const perluDiperkuat = (m) => m.status === "berkembang" || m.status === "lemah";
 
   function renderPenguasaan() {
     const wadah = $("resultMastery");
     wadah.replaceChildren();
     const semua = kelompokMateri();
     const dikuasai = semua.filter((m) => m.status === "dikuasai").sort((a, b) => b.persen - a.persen || b.total - a.total);
-    const perlu = semua.filter((m) => m.status !== "dikuasai").sort((a, b) => a.persen - b.persen || b.total - a.total);
+    const perlu = semua.filter(perluDiperkuat).sort((a, b) => a.persen - b.persen || b.total - a.total);
+    const belumCukup = semua.filter((m) => m.status === "belum-cukup").sort((a, b) => b.total - a.total);
+    const minimalSoal = (window.kisiKisiTKA && window.kisiKisiTKA.minimalSoal) || 3;
 
-    const kolom = (judul, idIkon, kelas, daftar, kosongTeks) => {
+    // opsi.tanpaPersen: untuk "belum cukup data" persentase tidak ditonjolkan (hanya b/t benar)
+    const kolom = (judul, idIkon, kelas, daftar, kosongTeks, opsi = {}) => {
       const sec = el("section", "mastery-col " + kelas);
       const h = el("h3");
       h.append(ikon(idIkon), document.createTextNode(` ${judul} `), el("span", "mastery-count", daftar.length));
       sec.appendChild(h);
+      if (opsi.pengantar) sec.appendChild(el("p", "mastery-intro", opsi.pengantar));
       if (!daftar.length) { sec.appendChild(el("p", "mastery-empty", kosongTeks)); return sec; }
       const ul = el("ul");
       daftar.forEach((m) => {
         const li = el("li");
         const teks = el("div", "mastery-text");
         teks.append(el("span", "mastery-name", m.nama), el("small", null, `${m.label} · ${m.benar}/${m.total} benar`));
-        const angka = el("span", "mastery-pct", m.persen + "%");
-        li.append(teks, angka);
+        li.appendChild(teks);
+        if (!opsi.tanpaPersen) li.appendChild(el("span", "mastery-pct", m.persen + "%"));
         ul.appendChild(li);
       });
       sec.appendChild(ul);
       return sec;
     };
+    const kosongPerlu = !semua.length || dikuasai.length === semua.length
+      ? "Hebat! Semua materi yang diuji sudah dikuasai."
+      : "Belum ada materi yang perlu diperkuat dari soal yang cukup pada sesi ini.";
     wadah.append(
       kolom("Materi yang sudah dikuasai", "#i-check-circle", "is-dikuasai", dikuasai, "Belum ada materi yang mencapai batas dikuasai pada sesi ini. Tetap semangat!"),
-      kolom("Materi yang perlu diperkuat", "#i-target", "is-perlu", perlu, "Hebat! Semua materi yang diuji sudah dikuasai.")
+      kolom("Materi yang perlu diperkuat", "#i-target", "is-perlu", perlu, kosongPerlu)
     );
+    if (belumCukup.length) {
+      wadah.appendChild(kolom("Belum cukup data", "#i-clock", "is-belum-cukup", belumCukup, "", {
+        tanpaPersen: true,
+        pengantar: `Materi ini baru diuji kurang dari ${minimalSoal} soal pada sesi ini. Kerjakan latihan lagi agar penguasaanmu terlihat.`
+      }));
+    }
   }
 
   function renderRekomendasi({ salah, kosong, ragu }) {
@@ -185,7 +205,7 @@
     wadah.appendChild(h);
 
     const ol = el("ol", "reco-list");
-    const perlu = kelompokMateri().filter((m) => m.status !== "dikuasai").sort((a, b) => a.persen - b.persen || b.total - a.total).slice(0, 3);
+    const perlu = kelompokMateri().filter(perluDiperkuat).sort((a, b) => a.persen - b.persen || b.total - a.total).slice(0, 3);
     if (perlu.length) {
       const li = el("li");
       li.append(el("strong", null, "Perkuat materi ini lebih dulu:"));
@@ -306,7 +326,11 @@
     // 6: bacaan/gambar lengkap (sama seperti saat mengerjakan)
     if (q.stimulus || q.image) {
       const stim = el("div", "stimulus-box review-stimulus-box");
-      if (q.stimulus) stim.appendChild(document.createTextNode(q.stimulus));
+      // Stimulus bertabel (stimulusTabel) memakai isiStimulus dari js/app.js; selain itu teks biasa
+      if (q.stimulus) {
+        if (typeof window.isiStimulus === "function") window.isiStimulus(stim, q);
+        else stim.appendChild(document.createTextNode(q.stimulus));
+      }
       if (q.image) {
         // Riwayat: berkas versi yang tercatat saat dikerjakan. Sesi baru: versi terbaru dari manifest.
         const src = q.imageVersi || (window.Aset ? window.Aset.src(q.image) : q.image);

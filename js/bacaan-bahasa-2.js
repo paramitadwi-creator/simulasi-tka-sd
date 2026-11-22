@@ -82,24 +82,6 @@ Alya: "Aku akan mengajak mereka memahami bahwa setiap orang berhak memiliki tema
 
 Ibu memeluk Alya dan berkata bahwa ia bangga. Keesokan harinya, Alya kembali mengajak Putri bermain. Kali ini, teman-teman lain mulai mengenal Putri lebih dekat. Mereka baru tahu bahwa Putri sangat pandai bermain congklak dan bercerita lucu. Lama-kelamaan, Putri tidak pernah lagi duduk sendirian. Teman-teman juga berhenti menertawakan logatnya dan justru senang belajar kata-kata baru dari bahasa daerahnya.`,
 
-"ADP-BIN41": `Tebak-Tebakan dari Kebun Binatang
-
-Saat karyawisata ke kebun binatang, pemandu memberi tebakan kepada siswa kelas empat. Ia membacakan ciri-ciri seekor hewan, lalu meminta siswa menebak namanya. Siapa yang menjawab dengan benar boleh memberi makan hewan tersebut. Berikut ciri-ciri hewan yang dibacakan pemandu.
-
-Hewan ini memiliki leher sangat panjang, kaki jenjang, dan tubuh berbintik. Hewan ini memakan daun dari pohon yang tinggi.
-
-Pemandu menambahkan beberapa petunjuk lagi. Hewan ini merupakan hewan tertinggi di dunia. Tingginya bisa melebihi lima meter, lebih tinggi daripada atap rumah. Lidahnya panjang dan berwarna gelap sehingga dapat menjangkau daun akasia yang berduri. Meskipun berleher panjang, hewan ini hanya memiliki tujuh ruas tulang leher, sama seperti manusia. Saat minum, hewan ini harus melebarkan kaki depannya agar kepalanya dapat mencapai permukaan air. Hewan ini hidup berkelompok di padang rumput yang luas di Afrika. Bintik-bintik di tubuhnya membantu hewan ini menyamar di antara bayangan pepohonan.
-
-Anak-anak berebut mengangkat tangan. Pemandu tersenyum dan mengajak mereka ke kandang yang tinggi di ujung jalan. Siswa yang menjawab benar diberi seikat daun untuk diberikan kepada hewan itu dari atas panggung kayu.`,
-
-"ADP-BIN42": `Membuat Teh Manis Hangat
-
-Teh manis hangat adalah minuman yang disukai banyak orang, terutama saat cuaca dingin. Membuatnya cukup mudah dan dapat dilakukan oleh anak-anak dengan pengawasan orang dewasa, karena kegiatan ini menggunakan air panas. Berikut ringkasan cara membuatnya.
-
-Proses membuat teh: menyiapkan gelas dan teh, menuangkan air panas, menambahkan gula, lalu mengaduk hingga rata.
-
-Berikut penjelasan setiap langkahnya. Pertama, siapkan gelas yang bersih dan sebuah kantong teh atau satu sendok teh daun teh kering. Masukkan teh ke dalam gelas. Kedua, tuangkan air panas ke dalam gelas secara perlahan sampai kira-kira tiga perempat gelas. Mintalah bantuan orang dewasa saat menuangkan air panas agar tidak tersiram. Biarkan teh terendam selama dua sampai tiga menit sampai airnya berwarna cokelat kemerahan. Ketiga, tambahkan satu atau dua sendok gula pasir sesuai selera. Jangan terlalu banyak karena gula berlebihan tidak baik bagi kesehatan gigi. Terakhir, aduk dengan sendok sampai gula larut dan rasanya merata. Jika memakai kantong teh, angkat kantongnya setelah diaduk. Teh manis hangat siap dinikmati bersama keluarga, misalnya bersama sepiring kue atau roti di sore hari.`,
-
 "ADP-BIN43": `Jumat Tanpa Gelas Plastik
 
 Sekolah Dasar Tunas Bangsa memiliki banyak program untuk menjaga lingkungan. Salah satu program yang paling dikenal adalah Jumat Tanpa Gelas Plastik. Program ini dimulai oleh siswa kelas enam setelah mereka melihat tumpukan gelas plastik di tempat sampah kantin setiap hari.
@@ -160,26 +142,6 @@ Naya menyanyikan lagu daerah "Ampar-Ampar Pisang" dengan suara yang merdu. Rafi 
 
 Di akhir acara, kepala sekolah memberikan penghargaan kepada kelas lima sebagai penampil terbaik. Para siswa berfoto bersama di atas panggung. Orang tua yang hadir merasa bangga melihat bakat anak-anak mereka.`,
 
-"ADP-BIN49": `Lubang Kecil, Manfaat Besar
-
-Desa Sumber Rejeki terletak di dataran rendah. Setiap musim hujan, halaman rumah warga sering tergenang air selama berhari-hari. Genangan itu membuat jalan licin dan menjadi tempat nyamuk bertelur. Kepala desa kemudian mengundang petugas dari dinas lingkungan hidup untuk memberikan penyuluhan tentang cara mengatasi genangan air.
-
-Warga desa membuat lubang biopori di halaman rumah. Lubang tersebut membantu air hujan meresap ke dalam tanah sehingga mengurangi genangan.
-
-Lubang biopori adalah lubang kecil berbentuk silinder dengan diameter sekitar sepuluh sentimeter dan kedalaman kurang lebih satu meter. Lubang itu dibuat dengan alat bor tanah sederhana. Setelah dibuat, lubang diisi dengan sampah organik seperti daun kering dan sisa sayuran. Sampah itu akan menarik cacing dan hewan tanah lainnya. Hewan-hewan tersebut membuat pori-pori di dalam tanah sehingga air lebih mudah masuk.
-
-Selain mengurangi genangan, sampah organik di dalam lubang biopori lama-kelamaan berubah menjadi kompos. Warga dapat memanen kompos itu untuk menyuburkan tanaman. Dalam satu tahun, genangan air di desa itu jauh berkurang. Desa Sumber Rejeki bahkan dijadikan contoh oleh desa-desa lain di sekitarnya.`,
-
-"ADP-BIN50": `Setelah Malam Berangin
-
-Malam itu angin bertiup kencang dan petir menyambar beberapa kali. Penjaga sekolah, Pak Udin, menutup semua jendela kelas sebelum pulang ke rumahnya yang berada di belakang sekolah. Ia sempat memindahkan beberapa kursi dari teras agar tidak terbawa angin.
-
-Pagi itu, halaman sekolah tampak basah. Semalam hujan turun cukup deras. Beberapa pot bunga bahkan bergeser karena terkena aliran air.
-
-Siswa yang datang pagi harus berjalan hati-hati karena lantai teras licin. Daun-daun pohon ketapang berserakan di halaman. Genangan kecil terlihat di dekat tiang bendera. Pak Udin sudah mulai menyapu air yang menggenang dengan sapu lidi. Beberapa siswa kelas enam yang datang lebih awal ikut membantu mengembalikan pot-pot bunga ke tempatnya semula.
-
-Kepala sekolah memutuskan upacara bendera dipindahkan ke aula karena lapangan masih becek. Siswa berbaris di aula dengan tertib. Setelah upacara, kepala sekolah mengingatkan siswa untuk berhati-hati saat berjalan di lantai yang basah. Ia juga mengucapkan terima kasih kepada Pak Udin dan siswa kelas enam yang telah membantu merapikan halaman sejak pagi. Menjelang siang, matahari bersinar terang dan halaman sekolah mulai kering kembali.`,
-
 "ADP-BIN51": `Waktu Istirahat Riko
 
 Riko adalah siswa kelas lima yang sangat gemar membaca. Ia tidak terlalu suka bermain bola seperti teman-temannya. Menurut Riko, buku dapat membawanya berpetualang ke tempat-tempat yang jauh tanpa harus bepergian. Karena itu, setiap jam istirahat, Riko selalu menghabiskan waktunya di tempat yang sama.
@@ -190,76 +152,6 @@ Ruang baca sekolah itu tenang dan sejuk. Kipas angin berputar pelan di langit-la
 
 Siang itu, Riko membaca kisah tentang anak-anak yang mencari harta karun di sebuah pulau. Ia begitu asyik sampai tidak sadar bahwa waktu istirahat hampir habis. Petugas ruang baca menepuk pundaknya pelan. Riko tersenyum, lalu mencatat nomor halaman terakhir yang dibacanya. Ia meminjam buku itu agar dapat melanjutkan membacanya di rumah.`,
 
-"ADP-BIN52": `Sahabat Kecil Para Petani
-
-Lebah sering ditakuti karena sengatannya. Padahal, lebah adalah hewan yang sangat berguna bagi kehidupan manusia dan lingkungan. Lebah tidak hanya menghasilkan madu yang manis dan bergizi.
-
-Lebah memiliki peran penting bagi tumbuhan. Saat mengambil nektar, lebah membantu memindahkan serbuk sari dari satu bunga ke bunga lain. Proses ini membantu terjadinya penyerbukan.
-
-Penyerbukan terjadi ketika serbuk sari menempel pada putik bunga. Tanpa penyerbukan, banyak tumbuhan tidak dapat menghasilkan buah dan biji. Ketika lebah hinggap di sebuah bunga untuk mengisap nektar, serbuk sari menempel pada rambut-rambut halus di tubuhnya. Lalu, saat lebah hinggap di bunga lain, sebagian serbuk sari itu jatuh dan menempel pada putik bunga tersebut. Dengan cara inilah lebah membantu tumbuhan berkembang biak.
-
-Banyak tanaman pangan bergantung pada penyerbukan oleh lebah, misalnya mentimun, semangka, tomat, dan kopi. Para petani buah bahkan sengaja memelihara lebah di sekitar kebun mereka agar hasil panen meningkat. Karena perannya yang besar, kita perlu menjaga kelestarian lebah. Salah satu caranya adalah dengan menanam bunga di sekitar rumah dan tidak menggunakan pestisida secara berlebihan.`,
-
-"ADP-BIN53": `Dari Daun Menjadi Pupuk
-
-Desa Sukamaju dikelilingi kebun dan pepohonan rindang. Setiap hari, daun-daun kering berguguran di halaman rumah, jalan desa, dan pinggir sawah. Dulu, warga membakar tumpukan daun itu. Asapnya membuat udara kotor dan mengganggu pernapasan, terutama bagi anak-anak dan orang tua.
-
-Desa Sukamaju mengolah sampah daun menjadi kompos. Daun dikumpulkan, dicacah, lalu dicampur dengan bahan lain. Setelah beberapa minggu, campuran tersebut berubah menjadi pupuk yang dapat digunakan warga.
-
-Setiap Sabtu, warga mengumpulkan daun kering dan membawanya ke rumah kompos di dekat balai desa. Daun dicacah dengan mesin pencacah agar ukurannya kecil dan cepat membusuk. Cacahan daun lalu dicampur dengan kotoran ternak dan sedikit air. Campuran itu ditutup dengan terpal dan dibalik seminggu sekali agar udara masuk merata. Setelah empat sampai enam minggu, campuran berubah warna menjadi cokelat kehitaman, gembur, dan tidak berbau.
-
-Kompos yang sudah jadi dibagikan kepada warga untuk menyuburkan sawah dan kebun. Sebagian kompos dikemas dan dijual ke desa tetangga. Hasil penjualannya digunakan untuk memperbaiki jalan desa. Kini tidak ada lagi warga yang membakar daun, dan udara desa terasa lebih bersih.`,
-
-"ADP-BIN54": `Panggung Puisi
-
-Lomba membaca puisi tingkat kecamatan diadakan di gedung serbaguna pada hari Sabtu. Ada dua puluh peserta dari berbagai sekolah. Lila mewakili sekolahnya. Selama dua minggu, ia berlatih setiap hari bersama Bu Nur, guru bahasa Indonesianya. Lila membawakan puisi berjudul "Ibu" dengan suara yang jernih dan penuh penghayatan. Setelah semua peserta tampil, para juri berunding cukup lama. Lila duduk di kursi penonton sambil menggenggam tangan Bu Nur. Hatinya berdebar-debar menunggu pengumuman.
-
-Ketika namanya diumumkan sebagai pemenang lomba membaca puisi, Lila tersenyum lebar. Ia segera menghampiri gurunya dan mengucapkan terima kasih.
-
-Bu Nur memeluk Lila dan mengucapkan selamat. Lila lalu naik ke panggung untuk menerima piala dan piagam penghargaan. Para penonton bertepuk tangan meriah. Dari atas panggung, Lila melambaikan tangan kepada orang tuanya yang duduk di barisan belakang. Ibunya terlihat mengusap air mata haru.
-
-Sepulang dari lomba, Lila membawa pialanya ke sekolah. Kepala sekolah memajang piala itu di lemari kaca dekat ruang guru. Teman-teman sekelasnya memberi selamat dan meminta Lila membacakan puisinya sekali lagi di depan kelas.`,
-
-"ADP-BIN55": `Pengantar Paket di Musim Hujan
-
-Pak Amir bekerja sebagai pengantar paket di sebuah perusahaan jasa pengiriman. Setiap hari ia mengendarai sepeda motor dengan kotak besar di bagian belakang. Dalam sehari, ia dapat mengantar lebih dari empat puluh paket ke rumah-rumah pelanggan. Pekerjaannya cukup berat, apalagi pada musim hujan.
-
-Meskipun hujan turun, Pak Amir tetap mengantarkan pesanan kepada pelanggan. Ia tidak ingin mengecewakan orang yang telah mempercayainya.
-
-Sebelum berangkat, Pak Amir membungkus setiap paket dengan plastik agar tidak basah. Ia memakai jas hujan dan sepatu bot. Ia juga mengendarai motornya dengan pelan dan hati-hati karena jalan licin. Suatu sore, Pak Amir harus mengantar sebuah paket berisi obat untuk seorang nenek di ujung kampung. Hujan sangat deras dan jalan menuju rumah nenek itu tergenang. Pak Amir menuntun motornya melewati genangan dan akhirnya tiba di rumah nenek tersebut.
-
-Nenek itu sangat berterima kasih karena obatnya harus segera diminum. Beberapa hari kemudian, nenek itu mengirim surat kepada perusahaan untuk memuji Pak Amir. Perusahaan lalu memberi Pak Amir penghargaan sebagai pengantar paket teladan bulan itu.`,
-
-"ADP-BIN56": `Sungai Bersih, Kampung Aman
-
-Kampung Tepian berada di pinggir sebuah sungai kecil. Beberapa tahun lalu, kampung itu sering dilanda banjir. Sungai penuh sampah plastik dan ranting kayu sehingga airnya meluap ketika hujan deras. Rumah-rumah di pinggir sungai terendam dan warga harus mengungsi ke balai desa.
-
-Dalam cerita, warga bekerja bersama membersihkan sungai agar tidak terjadi banjir. Mereka membagi tugas dan melakukannya secara rutin.
-
-Setiap dua minggu sekali, warga berkumpul di tepi sungai pada pagi hari. Para bapak masuk ke sungai untuk mengangkat sampah dan ranting yang tersangkut. Para ibu memilah sampah plastik di tepi sungai. Remaja membersihkan saluran air yang menuju sungai, sedangkan anak-anak menanam bibit pohon di sepanjang tepi sungai agar tanah tidak longsor. Ketua RT membuat jadwal piket agar setiap keluarga mendapat giliran.
-
-Warga juga sepakat tidak membuang sampah ke sungai. Mereka memasang papan peringatan dan tempat sampah di beberapa titik. Setelah satu tahun, sungai di Kampung Tepian menjadi bersih. Airnya mengalir lancar dan ikan-ikan kecil mulai terlihat kembali. Ketika musim hujan tiba, kampung itu tidak lagi kebanjiran. Warga merasa lebih aman dan nyaman tinggal di sana.`,
-
-"ADP-BIN57": `Setiap Tetes Air Berharga
-
-Air bersih sangat penting bagi kehidupan. Kita membutuhkannya untuk minum, memasak, mandi, dan mencuci. Namun, tidak semua daerah mudah mendapatkan air bersih. Di beberapa tempat, warga harus berjalan jauh atau membeli air karena sumur mereka kering pada musim kemarau.
-
-Teks menjelaskan bahwa air bersih perlu dihemat karena persediaannya terbatas. Air bekas mencuci sayuran yang tidak mengandung sabun dapat dimanfaatkan untuk menyiram tanaman.
-
-Banyak cara sederhana untuk menghemat air di rumah. Tutuplah keran saat menggosok gigi dan menyabuni tangan. Gunakan gayung atau gelas, bukan air mengalir terus-menerus. Segera laporkan kepada orang tua jika ada keran atau pipa yang bocor. Saat mencuci sayuran atau beras, tampunglah airnya di dalam baskom. Air bekas cucian itu tidak mengandung sabun sehingga aman untuk menyiram tanaman di pot atau kebun. Air bekas cucian beras bahkan mengandung zat yang baik untuk menyuburkan tanaman.
-
-Jika setiap keluarga menghemat air, persediaan air bersih akan cukup lebih lama, terutama pada musim kemarau. Menghemat air juga berarti menghemat biaya. Mari biasakan menggunakan air secukupnya mulai dari hal kecil di rumah.`,
-
-"ADP-BIN58": `Hati-Hati Menggunakan Obat
-
-Ketika sakit, kita mungkin perlu minum obat agar lekas sembuh. Obat dapat membantu tubuh melawan penyakit. Akan tetapi, obat juga bisa berbahaya jika digunakan dengan cara yang salah. Karena itu, kita harus memahami cara menggunakan obat dengan benar.
-
-Sebuah teks menjelaskan bahwa membaca petunjuk penggunaan obat dengan teliti dapat mencegah kesalahan pemakaian. Obat harus digunakan sesuai aturan dan dengan pendampingan orang dewasa.
-
-Pada kemasan obat biasanya tertulis aturan pakai, misalnya tiga kali sehari satu tablet setelah makan. Ada juga tanggal kedaluwarsa yang menunjukkan batas waktu obat aman digunakan. Obat yang sudah kedaluwarsa tidak boleh diminum. Anak-anak tidak boleh menentukan sendiri jumlah obat yang diminum. Minum obat terlalu banyak tidak membuat cepat sembuh, malah dapat menimbulkan keracunan. Kita juga tidak boleh meminum obat milik orang lain karena penyakit dan takaran setiap orang berbeda.
-
-Simpanlah obat di tempat yang sejuk, kering, dan jauh dari jangkauan adik yang masih kecil. Jika setelah minum obat badan terasa gatal, pusing, atau mual, segera beri tahu orang tua atau guru. Dengan menggunakan obat secara tepat, kita dapat lekas sembuh dengan aman.`,
-
 "ADP-BIN59": `Pagi itu Reno datang ke sekolah lebih awal untuk menyiram tanaman di taman depan kelas. Ketika melewati bangku taman, ia melihat sebuah buku catatan bersampul biru tergeletak di bawahnya. Buku itu agak lembap terkena embun. Di halaman pertama tertulis nama Laras, kelas enam. Isinya catatan pelajaran yang rapi dan penuh warna. Reno membayangkan betapa bingungnya Laras jika buku itu hilang menjelang ujian. Taman masih sepi dan tidak ada orang yang melihatnya. Reno membawa buku itu ke ruang guru dan menyerahkannya kepada wali kelas enam. Siangnya, wali kelas Reno memanggilnya karena mendengar cerita tersebut.
 
 Guru: "Mengapa kamu mengembalikan buku yang ditemukan di taman?"
@@ -269,11 +161,4 @@ Reno: "Saya tetap akan mengembalikannya karena itu bukan milik saya."
 
 Wali kelas tersenyum mendengar jawaban Reno. Ia menceritakan bahwa Laras sudah mencari buku itu sejak kemarin sore sambil menangis. Buku itu berisi rangkuman materi yang dibuat Laras selama satu semester. Saat jam pulang, Laras menemui Reno di depan kelasnya dan mengucapkan terima kasih berkali-kali.`,
 
-"ADP-BIN60": `Setiap Sabtu, warga Desa Melati berkumpul di balai desa. Mereka membahas cara menjaga kebersihan lingkungan, membagi jadwal kerja bakti, dan mengajak seluruh keluarga mengurangi sampah plastik. Kegiatan tersebut membuat lingkungan desa semakin bersih dan nyaman.
-
-Pertemuan itu dipimpin oleh kepala desa dan dihadiri perwakilan setiap RT. Dalam pertemuan, warga saling berbagi ide. Ada yang mengusulkan pembuatan bank sampah, ada pula yang mengusulkan penanaman pohon di sepanjang jalan desa. Semua usulan dicatat dan dilaksanakan bersama. Setiap RT mendapat jadwal kerja bakti secara bergiliran, sehingga semua bagian desa terawat dengan baik.
-
-Warga juga sepakat membawa tas belanja sendiri ketika pergi ke pasar. Para ibu menjahit tas dari kain perca dan membagikannya kepada tetangga. Anak-anak ikut membantu dengan memungut sampah di sekitar rumah dan memilahnya sebelum dibuang. Para pemuda membuat papan petunjuk tempat sampah organik dan anorganik di setiap sudut desa.
-
-Hasil kerja sama itu terlihat jelas. Selokan tidak lagi tersumbat, jalan desa bersih, dan udara terasa segar. Desa Melati bahkan menjadi juara lomba desa bersih tingkat kabupaten tahun ini.`,
 });

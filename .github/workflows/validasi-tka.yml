@@ -1,0 +1,56 @@
+name: Validasi Simulasi TKA SD
+
+# Menjalankan empat validator bank soal & aset serta dua uji laporan orang tua pada
+# setiap push ke branch fitur dan setiap Pull Request menuju main. Semuanya hanya memakai
+# modul bawaan Node.js (fs, path, vm, crypto, assert), jadi tidak ada dependency yang perlu dipasang.
+on:
+  push:
+    branches:
+      - fitur/durasi-mapel-75-menit
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validasi-tka-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validasi:
+    name: Validasi bank soal dan aset
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Ambil kode
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Siapkan Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "26"
+
+      # Setiap langkah berhenti dan menggagalkan workflow bila validatornya keluar dengan kode ≠ 0.
+      - name: Validasi bank soal utama
+        run: node alat/validasi-bank-utama.js
+
+      - name: Validasi sinkron soal MAT
+        run: node alat/validasi-sinkron-mat.js
+
+      - name: Validasi bank soal latihan
+        run: node validasi-bank.js
+
+      - name: Periksa versi aset gambar
+        run: node alat/versi-aset.js --periksa
+
+      # Uji fungsi murni laporan orang tua (rekap, status penguasaan, teks & tautan WhatsApp)
+      - name: Uji laporan orang tua
+        run: node alat/uji-laporan.js
+
+      - name: Uji profil laporan orang tua
+        run: node alat/uji-profil-laporan.js

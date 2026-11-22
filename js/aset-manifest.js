@@ -1,7 +1,7 @@
 // DIBUAT OTOMATIS oleh alat/versi-aset.js — jangan diedit manual.
 // Peta jalur gambar sumber (dipakai bank soal) -> versi tetap berbasis hash di assets/versi/.
 window.ASET_MANIFEST = {
- "dibuat": "2026-11-09T04:16:40.890Z",
+ "dibuat": "2026-11-21T14:53:43.634Z",
  "catatan": "Dibuat otomatis oleh alat/versi-aset.js. Jangan diedit manual.",
  "berkas": {
   "assets/images/ipas/diagram-mata.png": {
@@ -25,8 +25,8 @@ window.ASET_MANIFEST = {
    "hash": "c315389b7b80dd89"
   },
   "assets/images/kisi/IPAS-010.svg": {
-   "src": "assets/versi/8444ff1818256fa2.svg",
-   "hash": "8444ff1818256fa2"
+   "src": "assets/versi/fc38d84dd088e7b2.svg",
+   "hash": "fc38d84dd088e7b2"
   },
   "assets/images/kisi/IPAS-014.svg": {
    "src": "assets/versi/76e33fbe9d70be51.svg",
@@ -93,16 +93,16 @@ window.ASET_MANIFEST = {
    "hash": "784339c6698a2aa8"
   },
   "assets/images/kisi/LMAT-002.svg": {
-   "src": "assets/versi/48501a0c9626229b.svg",
-   "hash": "48501a0c9626229b"
+   "src": "assets/versi/13c7e88ef3be1e93.svg",
+   "hash": "13c7e88ef3be1e93"
   },
   "assets/images/kisi/LMAT-003.svg": {
-   "src": "assets/versi/704a01e8b505f476.svg",
-   "hash": "704a01e8b505f476"
+   "src": "assets/versi/cfc04715fb348c24.svg",
+   "hash": "cfc04715fb348c24"
   },
   "assets/images/kisi/LMAT-004.svg": {
-   "src": "assets/versi/85b7fdc87b446fe6.svg",
-   "hash": "85b7fdc87b446fe6"
+   "src": "assets/versi/0b39c52b6a3ad420.svg",
+   "hash": "0b39c52b6a3ad420"
   },
   "assets/images/kisi/LMAT-011.svg": {
    "src": "assets/versi/0958006c7082e54c.svg",
@@ -157,20 +157,32 @@ window.ASET_MANIFEST = {
    "hash": "3f476e3259239c94"
   },
   "assets/images/kisi/MAT-021.svg": {
-   "src": "assets/versi/e2d730f964733832.svg",
-   "hash": "e2d730f964733832"
+   "src": "assets/versi/f93ed8bed738beb1.svg",
+   "hash": "f93ed8bed738beb1"
   },
   "assets/images/kisi/MAT-024.svg": {
    "src": "assets/versi/949a9e919ccdb755.svg",
    "hash": "949a9e919ccdb755"
   },
+  "assets/images/kisi/MAT-027.svg": {
+   "src": "assets/versi/a676025b7b62e2f0.svg",
+   "hash": "a676025b7b62e2f0"
+  },
   "assets/images/kisi/MAT-029.svg": {
    "src": "assets/versi/dfce01075c4394e9.svg",
    "hash": "dfce01075c4394e9"
   },
+  "assets/images/kisi/MAT-030.svg": {
+   "src": "assets/versi/93cdf5c090946f61.svg",
+   "hash": "93cdf5c090946f61"
+  },
   "assets/images/kisi/MAT-031.svg": {
-   "src": "assets/versi/17268097114393f2.svg",
-   "hash": "17268097114393f2"
+   "src": "assets/versi/d5da3d24481b510e.svg",
+   "hash": "d5da3d24481b510e"
+  },
+  "assets/images/kisi/MAT-033.svg": {
+   "src": "assets/versi/36609c55b861f4dc.svg",
+   "hash": "36609c55b861f4dc"
   },
   "assets/images/kisi/MAT-034.svg": {
    "src": "assets/versi/c7275726f7021042.svg",
@@ -267,6 +279,10 @@ window.ASET_MANIFEST = {
   "assets/images/kisi/MAT-084.svg": {
    "src": "assets/versi/d5e06191814b8038.svg",
    "hash": "d5e06191814b8038"
+  },
+  "assets/images/kisi/MAT-085.svg": {
+   "src": "assets/versi/e6b268c62e028b42.svg",
+   "hash": "e6b268c62e028b42"
   },
   "assets/images/kisi/MAT-086.svg": {
    "src": "assets/versi/ac3ed13d39425154.svg",
@@ -545,8 +561,8 @@ window.ASET_MANIFEST = {
    "hash": "97ee73b00ade3e76"
   },
   "assets/images/penguatan/KMAT-085.svg": {
-   "src": "assets/versi/e9dcbfdf796c53c1.svg",
-   "hash": "e9dcbfdf796c53c1"
+   "src": "assets/versi/ecb195ce2c290f15.svg",
+   "hash": "ecb195ce2c290f15"
   },
   "assets/images/penguatan/KMAT-086.svg": {
    "src": "assets/versi/00d6ac23f608bf6c.svg",
@@ -557,8 +573,8 @@ window.ASET_MANIFEST = {
    "hash": "e3fe8f4579648b41"
   },
   "assets/images/penguatan/KMAT-088.svg": {
-   "src": "assets/versi/e9dcbfdf796c53c1.svg",
-   "hash": "e9dcbfdf796c53c1"
+   "src": "assets/versi/ecb195ce2c290f15.svg",
+   "hash": "ecb195ce2c290f15"
   },
   "assets/images/penguatan/KMAT-089.svg": {
    "src": "assets/versi/97ee73b00ade3e76.svg",
@@ -607,6 +623,54 @@ window.ASET_MANIFEST = {
   "assets/images/penguatan/KMAT-100.svg": {
    "src": "assets/versi/7ebe6147922602f5.svg",
    "hash": "7ebe6147922602f5"
+  },
+  "assets/images/penguatan/KMAT-112.svg": {
+   "src": "assets/versi/e39820f76e2b40d0.svg",
+   "hash": "e39820f76e2b40d0"
+  },
+  "assets/images/penguatan/KMAT-113.svg": {
+   "src": "assets/versi/753809afaa61dd92.svg",
+   "hash": "753809afaa61dd92"
+  },
+  "assets/images/penguatan/KMAT-114.svg": {
+   "src": "assets/versi/eb0b815a3a85e8c8.svg",
+   "hash": "eb0b815a3a85e8c8"
+  },
+  "assets/images/penguatan/KMAT-118.svg": {
+   "src": "assets/versi/50ddbcd5cdae577f.svg",
+   "hash": "50ddbcd5cdae577f"
+  },
+  "assets/images/penguatan/KMAT-119.svg": {
+   "src": "assets/versi/8dd9267b3916bbbb.svg",
+   "hash": "8dd9267b3916bbbb"
+  },
+  "assets/images/penguatan/KMAT-120.svg": {
+   "src": "assets/versi/3da8cdb017b7a8ff.svg",
+   "hash": "3da8cdb017b7a8ff"
+  },
+  "assets/images/penguatan/KMAT-121.svg": {
+   "src": "assets/versi/d4bbcc982d4f7dd2.svg",
+   "hash": "d4bbcc982d4f7dd2"
+  },
+  "assets/images/penguatan/KMAT-122.svg": {
+   "src": "assets/versi/caa9d5d4545df9cf.svg",
+   "hash": "caa9d5d4545df9cf"
+  },
+  "assets/images/penguatan/KMAT-123.svg": {
+   "src": "assets/versi/3da8cdb017b7a8ff.svg",
+   "hash": "3da8cdb017b7a8ff"
+  },
+  "assets/images/penguatan/KMAT-124.svg": {
+   "src": "assets/versi/65853627fa1d7170.svg",
+   "hash": "65853627fa1d7170"
+  },
+  "assets/images/penguatan/KMAT-125.svg": {
+   "src": "assets/versi/9608a7872732d31c.svg",
+   "hash": "9608a7872732d31c"
+  },
+  "assets/images/penguatan/KMAT-126.svg": {
+   "src": "assets/versi/65853627fa1d7170.svg",
+   "hash": "65853627fa1d7170"
   },
   "assets/images/tambahan/balok-tiga-kubus.svg": {
    "src": "assets/versi/41e431550fdc6ca1.svg",

@@ -121,6 +121,21 @@ document.addEventListener("DOMContentLoaded", function () {
             const daftarUl = document.createElement("ol");
             daftarUl.className = "prioritas-list";
 
+            // Status memakai aturan bersama kisiKisiTKA.statusPenguasaan(benar, total): < 3 soal = belum cukup
+            // data, lalu 75/50. Cadangan dengan aturan yang sama bila kisi-kisi.js lama masih di cache.
+            const kisi = window.kisiKisiTKA || {};
+            const minimalSoal = Number.isInteger(kisi.minimalSoal) ? kisi.minimalSoal : 3;
+            const labelStatus = {
+                "belum-cukup": "Belum cukup data", dikuasai: "Dikuasai", berkembang: "Berkembang", lemah: "Perlu penguatan",
+                ...(kisi.labelStatus || {})
+            };
+            const statusProgres = (benar, total) => {
+                if (typeof kisi.statusPenguasaan === "function") return kisi.statusPenguasaan(benar, total);
+                if (!Number.isInteger(benar) || !Number.isInteger(total) || benar < 0 || benar > total || total < minimalSoal) return "belum-cukup";
+                const persen = Math.round(benar / total * 100);
+                return persen >= (kisi.batasDikuasai ?? 75) ? "dikuasai" : persen >= (kisi.batasBerkembang ?? 50) ? "berkembang" : "lemah";
+            };
+
             daftarPrioritas.forEach(item => {
                 const key = subjek + "_" + item.kode;
                 const dataProgres = progres[key];
@@ -145,9 +160,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 kepala.append(judul, lencana);
 
-                const nilaiLatihan = dataProgres
-                    ? dataProgres.accuracy
-                    : null;
+                // Sampel = soal yang tercatat di tkaSkillProgress (correct/attempted, dibaca apa adanya).
+                // Sumber ini hanya mencatat soal yang dijawab; tidak dihitung ulang di sini.
+                const benar = dataProgres ? Number(dataProgres.correct) : NaN;
+                const total = dataProgres ? Number(dataProgres.attempted) : NaN;
+                const adaProgres = Number.isInteger(total) && total > 0 && Number.isInteger(benar);
 
                 // Bilah progres latihan (angka tetap ditulis sebagai teks)
                 const progresWadah = document.createElement("div");
@@ -157,25 +174,51 @@ document.addEventListener("DOMContentLoaded", function () {
                 bar.className = "progress-bar";
                 bar.setAttribute("aria-hidden", "true");
                 const isi = document.createElement("i");
-                isi.style.width = (nilaiLatihan !== null ? Math.max(0, Math.min(100, nilaiLatihan)) : 0) + "%";
                 bar.appendChild(isi);
 
-                const detail = document.createElement("span");
-                detail.className = "prioritas-angka";
-                detail.textContent = nilaiLatihan !== null
-                    ? "Progres latihan " + nilaiLatihan + "%"
-                    : "Belum ada progres latihan";
+                if (!adaProgres) {
+                    // Belum ada progres: tampilan seperti sebelumnya
+                    isi.style.width = "0%";
+                    const detail = document.createElement("span");
+                    detail.className = "prioritas-angka";
+                    detail.textContent = "Belum ada progres latihan";
+                    progresWadah.append(bar, detail);
+                    kartu.append(kepala, progresWadah);
+                } else {
+                    const status = statusProgres(benar, total);
+                    const persen = Math.max(0, Math.min(100, Math.round(benar / total * 100)));
+                    kartu.classList.add("status-" + status);
+                    // Kurang dari minimal soal: bilah netral (kosong) agar persen tidak menyesatkan
+                    if (status === "belum-cukup") bar.classList.add("is-netral");
+                    isi.style.width = (status === "belum-cukup" ? 0 : persen) + "%";
 
-                progresWadah.append(bar, detail);
+                    const chip = document.createElement("span");
+                    chip.className = "prioritas-status";
+                    chip.textContent = labelStatus[status] || status;
+
+                    const detail = document.createElement("p");
+                    detail.className = "prioritas-angka prioritas-detail";
+                    detail.textContent = status === "belum-cukup"
+                        ? `Baru ${total} soal dikerjakan (${benar} benar). Kerjakan minimal ${minimalSoal} soal agar progresnya terlihat.`
+                        : `Progres latihan ${persen}% · ${benar} dari ${total} soal benar`;
+
+                    progresWadah.append(bar, chip);
+                    kartu.append(kepala, progresWadah, detail);
+                }
 
                 const fokus = document.createElement("small");
                 fokus.textContent = item.fokus || "";
 
-                kartu.append(kepala, progresWadah, fokus);
+                kartu.appendChild(fokus);
                 daftarUl.appendChild(kartu);
             });
 
             daftar.appendChild(daftarUl);
+
+            const catatan = document.createElement("p");
+            catatan.className = "prioritas-catatan";
+            catatan.textContent = `Progres dihitung dari soal yang dijawab pada latihan di perangkat ini. Status baru ditentukan setelah minimal ${minimalSoal} soal.`;
+            daftar.appendChild(catatan);
         }
 
         // RIWAYAT LATIHAN

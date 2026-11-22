@@ -91,16 +91,19 @@
     }
 
     // ---------- Satu kartu mapel ----------
-    function daftarMateri(judul, kelas, daftar) {
+    // opsi.tanpaPersen: untuk "Belum cukup data" ditampilkan jumlah soal (b/t), bukan persen
+    function daftarMateri(judul, kelas, daftar, opsi = {}) {
       const blok = el("div", "laporan-materi " + kelas);
       const h = el("h5", null);
       h.append(document.createTextNode(judul + " "), el("span", "laporan-hitung", daftar.length));
       blok.appendChild(h);
+      if (opsi.keterangan) blok.appendChild(el("p", "laporan-keterangan", opsi.keterangan));
       if (!daftar.length) { blok.appendChild(el("p", "laporan-kosong", "Tidak ada.")); return blok; }
       const ul = el("ul");
       daftar.slice(0, 5).forEach((k) => {
         const li = el("li");
-        li.append(el("span", "laporan-materi-nama", k.nama), el("span", "laporan-materi-persen", k.persen + "%"));
+        li.append(el("span", "laporan-materi-nama", k.nama),
+          el("span", "laporan-materi-persen", opsi.tanpaPersen ? `${k.benar}/${k.total} soal` : k.persen + "%"));
         ul.appendChild(li);
       });
       if (daftar.length > 5) ul.appendChild(el("li", "laporan-lainnya", `dan ${daftar.length - 5} lainnya`));
@@ -151,18 +154,25 @@
           pk.appendChild(ul);
           if (berubah.length > 5) pk.appendChild(el("p", "laporan-kosong", `dan ${berubah.length - 5} perubahan lainnya`));
         } else {
+          const minimal = rekap.minimalSoal || 3;
           pk.appendChild(el("p", "laporan-kosong", rekap.perkembangan.tetap.length
             ? "Penguasaan sama dengan hari belajar sebelumnya."
-            : rekap.kompetensi.length ? "Materi hari ini baru pertama kali dilatih, belum ada pembanding." : "Belum ada data indikator."));
+            : (rekap.perkembangan.kurangData || []).length
+              ? `Belum ada perbandingan yang cukup data (minimal ${minimal} soal per materi pada hari ini dan hari pembanding).`
+              : rekap.kompetensi.length ? "Materi hari ini baru pertama kali dilatih, belum ada pembanding." : "Belum ada data indikator."));
         }
         art.appendChild(pk);
 
-        // Materi
+        // Materi: empat daftar status. "Belum cukup data" netral (bukan tanda gagal), tanpa persen.
         const materi = el("div", "laporan-materi-grid");
         materi.append(
           daftarMateri("Dikuasai", "is-dikuasai", rekap.dikuasai),
           daftarMateri("Berkembang", "is-berkembang", rekap.berkembang),
-          daftarMateri("Perlu penguatan", "is-lemah", rekap.perluPenguatan)
+          daftarMateri("Perlu penguatan", "is-lemah", rekap.perluPenguatan),
+          daftarMateri("Belum cukup data", "is-belum-cukup", rekap.belumCukup || [], {
+            tanpaPersen: true,
+            keterangan: `Diuji kurang dari ${rekap.minimalSoal || 3} soal hari ini; penguasaannya belum dapat disimpulkan.`
+          })
         );
         art.appendChild(materi);
       }

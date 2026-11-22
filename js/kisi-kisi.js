@@ -1,11 +1,22 @@
 // =====================================================================
 // KISI-KISI TKA SD/MI — "Indikator Materi Latihan TKA" (30 indikator per mapel)
+// Matematika punya indikator tambahan 31 (persen kontekstual) dan 32 (kecepatan),
+// keduanya disetujui 2026-11-15:
+// nomor baru selalu DITAMBAH DI AKHIR, jangan menggeser nomor lama (riwayat menyimpan nomor).
 // Dipakai untuk menyusun Peta Hasil Belajar setiap sesi latihan.
 // =====================================================================
 window.kisiKisiTKA = {
   // Batas penguasaan, sama dengan Peta Belajar sekolah
   batasDikuasai: 75,
   batasBerkembang: 50,
+  // Minimal banyak soal sebelum status penguasaan diberikan (lihat statusPenguasaan di akhir berkas)
+  minimalSoal: 3,
+  labelStatus: {
+    "belum-cukup": "Belum cukup data",
+    dikuasai: "Dikuasai",
+    berkembang: "Berkembang",
+    lemah: "Perlu penguatan"
+  },
 
   matematika: {
     indikator: {
@@ -38,11 +49,13 @@ window.kisiKisiTKA = {
       27: "Interpretasi diagram atau tabel",
       28: "Interpretasi data berdasarkan kategori",
       29: "Masalah penyajian data diagram batang/tabel",
-      30: "Interpretasi diagram batang atau tabel"
+      30: "Interpretasi diagram batang atau tabel",
+      31: "Masalah kontekstual persen dari suatu besaran",
+      32: "Hubungan jarak, waktu, dan kecepatan"
     },
     elemen: [
-      { nama: "Bilangan", nomor: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
-      { nama: "Geometri dan Pengukuran", nomor: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25] },
+      { nama: "Bilangan", nomor: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 31] },
+      { nama: "Geometri dan Pengukuran", nomor: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 32] },
       { nama: "Data", nomor: [26, 27, 28, 29, 30] }
     ]
   },
@@ -152,7 +165,46 @@ window.kisiKisiTKA = {
     MT25: 18, MT27: 29, MT28: 30, MT29: 12, MT30: 25, MT31: 29, MT32: 12, MT33: 7, MT36: 12,
     MT38: 5, MT39: 23, MT41: 18, MT42: 20, MT45: 27, MT46: 27, MT48: 3, MT49: 23, MT50: 7, MT51: 29,
     MT20: 22, MT23: 18, MT26: 15, MT43: 18, MT44: 15,
+    MT14: 31, MT34: 31,
     BI01: 4, BI02: 3, BI03: 16, BI05: 14,
     IP02: 16, IP03: 23, IP04: 12
   }
 };
+
+// =====================================================================
+// STATUS PENGUASAAN BERSAMA: satu aturan untuk peta sesi, hasil, laporan, dan dashboard.
+//   total < minimalSoal       -> "belum-cukup" (Belum cukup data)
+//   persen >= batasDikuasai   -> "dikuasai"
+//   persen >= batasBerkembang -> "berkembang"
+//   lainnya                   -> "lemah" (Perlu penguatan)
+// Persen dibulatkan dulu (Math.round), sama dengan perhitungan sebelumnya.
+// Masukan: benar & total untuk data SATU sesi yang sudah unik per ID soal; jawaban kosong
+// dihitung belum benar. Data kumulatif lintas sesi BELUM menjamin soal berbeda.
+// Masukan tidak sah (bukan bilangan bulat, negatif, benar > total) -> "belum-cukup".
+// Tidak memakai `this`, sehingga aman dipanggil lepas (mis. const f = kisi.statusPenguasaan).
+// =====================================================================
+(function (kisi) {
+  const MINIMAL = kisi.minimalSoal, DIKUASAI = kisi.batasDikuasai, BERKEMBANG = kisi.batasBerkembang;
+  kisi.statusPenguasaan = function (benar, total) {
+    const b = Number(benar), t = Number(total);
+    if (!Number.isInteger(b) || !Number.isInteger(t) || b < 0 || b > t || t < MINIMAL) return "belum-cukup";
+    const persen = Math.round((b / t) * 100);
+    return persen >= DIKUASAI ? "dikuasai" : persen >= BERKEMBANG ? "berkembang" : "lemah";
+  };
+  // Peta hasil SATU sesi ({ baris, elemen: [{ baris }] }, bentuk dari hitungPetaHasil di js/app.js):
+  // salinan dengan status setiap baris dihitung ulang dari benar/total memakai aturan di atas.
+  // Dipakai untuk sesi baru maupun riwayat lama (status yang tersimpan diabaikan, penyimpanan
+  // tidak diubah). elemen[].baris ikut dihitung karena riwayat menyimpannya sebagai salinan terpisah.
+  // Masukan tanpa daftar baris dikembalikan apa adanya.
+  kisi.hitungUlangPeta = function (peta) {
+    if (!peta || typeof peta !== "object" || !Array.isArray(peta.baris)) return peta;
+    const ulang = (b) => (b && typeof b === "object" ? { ...b, status: kisi.statusPenguasaan(b.benar, b.total) } : b);
+    return {
+      ...peta,
+      baris: peta.baris.map(ulang),
+      elemen: Array.isArray(peta.elemen)
+        ? peta.elemen.map((e) => (e && Array.isArray(e.baris) ? { ...e, baris: e.baris.map(ulang) } : e))
+        : peta.elemen
+    };
+  };
+})(window.kisiKisiTKA);
