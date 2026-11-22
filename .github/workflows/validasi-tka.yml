@@ -1,8 +1,8 @@
 name: Validasi Simulasi TKA SD
 
-# Menjalankan empat validator bank soal & aset pada setiap push ke branch fitur
-# dan setiap Pull Request menuju main. Validator hanya memakai modul bawaan Node.js
-# (fs, path, vm, crypto), jadi tidak ada dependency yang perlu dipasang.
+# Menjalankan empat validator bank soal & aset serta dua uji laporan orang tua pada
+# setiap push ke branch fitur dan setiap Pull Request menuju main. Semuanya hanya memakai
+# modul bawaan Node.js (fs, path, vm, crypto, assert), jadi tidak ada dependency yang perlu dipasang.
 on:
   push:
     branches:
@@ -47,3 +47,10 @@ jobs:
 
       - name: Periksa versi aset gambar
         run: node alat/versi-aset.js --periksa
+
+      # Uji fungsi murni laporan orang tua (rekap, status penguasaan, teks & tautan WhatsApp)
+      - name: Uji laporan orang tua
+        run: node alat/uji-laporan.js
+
+      - name: Uji profil laporan orang tua
+        run: node alat/uji-profil-laporan.js
