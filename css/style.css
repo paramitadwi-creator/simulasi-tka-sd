@@ -2081,6 +2081,10 @@ footer small { font-size: var(--text-sm); color: var(--color-on-dark-2); }
 .laporan-materi.is-dikuasai { border-left-color: var(--color-success); }
 .laporan-materi.is-berkembang { border-left-color: var(--color-accent); }
 .laporan-materi.is-lemah { border-left-color: var(--color-danger); }
+/* Belum cukup data (< 3 soal): netral, tanpa warna penilaian */
+.laporan-materi.is-belum-cukup { border-left-color: var(--color-line); border-left-style: dashed; }
+.laporan-materi.is-belum-cukup .laporan-materi-persen { font-weight: var(--weight-medium); color: var(--color-ink-2); }
+.laporan-keterangan { margin: 0 0 var(--space-1); font-size: var(--text-sm); color: var(--color-ink-2); line-height: var(--leading-normal); }
 
 .laporan-kosong-pesan { color: var(--color-ink); line-height: var(--leading-relaxed); }
 .laporan-terakhir { font-size: var(--text-sm); color: var(--color-ink-2); }

@@ -175,16 +175,19 @@ uji("Perkembangan dibandingkan dengan hari belajar sebelumnya yang punya indikat
   assert.strictEqual(k[17].sebelumnya.tanggal, "2026-11-07");
   assert.strictEqual(k[17].perubahan, "turun");
   assert.strictEqual(k[17].selisih, 25 - 67);
-  // Indikator 22 dilatih 8 Nov (1/2 = 50%) -> naik
-  assert.strictEqual(k[22].sebelumnya.tanggal, "2026-11-08");
-  assert.strictEqual(k[22].perubahan, "naik");
+  // Indikator 22: hari ini 3/4, tetapi 8 Nov & 7 Nov masing-masing hanya 1/2 soal -> tidak ada
+  // pembanding yang cukup data (A3: minimal 3 soal) -> "kurang-data" tanpa angka
+  assert.strictEqual(k[22].sebelumnya, null);
+  assert.strictEqual(k[22].perubahan, "kurang-data");
+  assert.strictEqual(k[22].selisih, null);
   // Indikator 8: 7 Nov 1/3 = 33% -> 75% naik
   assert.strictEqual(k[8].sebelumnya.persen, 33);
   // Indikator 12 & 13 belum pernah dilatih -> baru
   assert.strictEqual(k[12].perubahan, "baru");
   assert.strictEqual(k[13].sebelumnya, null);
-  assert.deepStrictEqual(mat.perkembangan.naik.map((x) => x.indikator), [8, 22]);
+  assert.deepStrictEqual(mat.perkembangan.naik.map((x) => x.indikator), [8]);
   assert.deepStrictEqual(mat.perkembangan.turun.map((x) => x.indikator), [17]);
+  assert.deepStrictEqual(mat.perkembangan.kurangData.map((x) => x.indikator), [22]);
 });
 
 uji("Dikuasai / berkembang / perlu penguatan + rekomendasi", () => {
@@ -209,9 +212,13 @@ uji("Bahasa Indonesia: 1 sesi, perbandingan dengan 8 Nov", () => {
   assert.strictEqual(bin.jumlahSesi, 1);
   assert.deepStrictEqual([bin.totalSoal, bin.soalDikerjakan, bin.jawabanBenar, bin.rataRataNilai], [30, 25, 15, 50]);
   const k = Object.fromEntries(bin.kompetensi.map((x) => [x.indikator, x]));
-  assert.strictEqual(k[5].perubahan, "turun");  // 100% -> 50%
-  assert.strictEqual(k[7].perubahan, "naik");   // 0% -> 100%
+  // A3: 5 (2/2 -> 1/2) dan 7 (0/1 -> 2/2) sampelnya < 3 soal -> belum cukup data & tanpa tren
+  assert.strictEqual(k[5].perubahan, "kurang-data");
+  assert.strictEqual(k[7].perubahan, "kurang-data");
+  assert.deepStrictEqual([k[5].status, k[7].status], ["belum-cukup", "belum-cukup"]);
+  assert.deepStrictEqual(bin.belumCukup.map((x) => x.indikator), [5, 7]);
   assert.strictEqual(k[9].perubahan, "baru");
+  assert.strictEqual(k[9].status, "berkembang"); // 2/4 = 50%
   assert.strictEqual(bin.rekomendasi.jenis, "pemantapan");
 });
 
@@ -406,6 +413,121 @@ uji("Berkas .ics: teks di-escape & UID aman", () => {
   assert.ok(!/DESCRIPTION:[^\r]*[^\\][,;]/.test(x.replace(/\r\n /g, "").replace(/\\[,;n]/g, "")), "koma/titik koma di teks harus di-escape");
 });
 
+// ---------- A3: aturan status bersama pada laporan orang tua & WhatsApp ----------
+const TGL_A3 = "2026-11-09";
+const sesiA3 = (tanggal, peta) => sesi(tanggal, "matematika", "practice", 15, 15, peta.reduce((t, p) => t + p[1], 0), peta);
+const rekapA3 = (riwayat, opsiTambahan = {}) => L.rekapMapel(riwayat, { tanggal: TGL_A3, mapel: "matematika", kisi, potongJam: false, ...opsiTambahan });
+const satuSesi = (peta) => rekapA3([sesiA3("2026-11-09T03:00:00Z", peta)]);
+
+uji("A3: status dari benar/total memakai aturan bersama (1/1, 2/2, 1/3, 2/3, 3/3, 3/4)", () => {
+  const kasus = [[1, 1, "belum-cukup"], [2, 2, "belum-cukup"], [1, 3, "lemah"], [2, 3, "berkembang"], [3, 3, "dikuasai"], [3, 4, "dikuasai"]];
+  kasus.forEach(([b, t, harap]) => {
+    const k = satuSesi([[12, b, t]]).kompetensi[0];
+    assert.strictEqual(k.status, harap, `${b}/${t}`);
+    assert.strictEqual(k.labelStatus, harap === "belum-cukup" ? "Belum cukup data" : L.LABEL_STATUS[harap]);
+  });
+  assert.strictEqual(satuSesi([[12, 1, 1]]).minimalSoal, 3);
+});
+
+uji("A3: data kosong tetap aman (tanpa aktivitas, daftar & tren kosong)", () => {
+  const r = rekapA3([]);
+  assert.strictEqual(r.adaAktivitas, false);
+  assert.deepStrictEqual([r.belumCukup, r.perkembangan.kurangData, r.rekomendasi.jenis], [[], [], "mulai"]);
+});
+
+uji("A3: status tersimpan yang keliru di riwayat lama diabaikan", () => {
+  const lama = sesiA3("2026-11-09T03:00:00Z", [[12, 1, 1], [13, 0, 4]]);
+  lama.petaIndikator[0].status = "dikuasai"; // aturan lama
+  lama.petaIndikator[1].status = "dikuasai"; // jelas keliru
+  const r = rekapA3([lama]);
+  assert.deepStrictEqual(r.kompetensi.map((k) => k.status), ["belum-cukup", "lemah"]);
+});
+
+uji("A3: tren hanya bila hari ini & pembanding masing-masing ≥ 3 soal; pembanding terakhir yang memenuhi", () => {
+  const tren = (riwayatSebelum, hariIni) => rekapA3([...riwayatSebelum, sesiA3("2026-11-09T03:00:00Z", [[12, ...hariIni]])]).kompetensi[0];
+  const pada = (tgl, b, t) => sesiA3(`${tgl}T03:00:00Z`, [[12, b, t]]);
+  // Keduanya memenuhi -> naik/turun/tetap dengan angka
+  let k = tren([pada("2026-11-08", 1, 3)], [3, 3]);
+  assert.deepStrictEqual([k.perubahan, k.selisih, k.sebelumnya.tanggal], ["naik", 67, "2026-11-08"]);
+  k = tren([pada("2026-11-08", 3, 3)], [1, 4]);
+  assert.deepStrictEqual([k.perubahan, k.selisih], ["turun", 25 - 100]);
+  k = tren([pada("2026-11-08", 2, 3)], [2, 3]);
+  assert.strictEqual(k.perubahan, "tetap");
+  // Hari ini < 3 soal -> kurang-data tanpa angka
+  k = tren([pada("2026-11-08", 0, 3)], [1, 1]);
+  assert.deepStrictEqual([k.perubahan, k.sebelumnya, k.selisih], ["kurang-data", null, null]);
+  // Pembanding terakhir < 3 soal -> lewati, pakai pembanding terakhir yang memenuhi (7 Nov)
+  k = tren([pada("2026-11-07", 1, 3), pada("2026-11-08", 1, 1)], [3, 3]);
+  assert.deepStrictEqual([k.perubahan, k.sebelumnya.tanggal, k.sebelumnya.total], ["naik", "2026-11-07", 3]);
+  // Tidak ada pembanding yang memenuhi sama sekali -> kurang-data
+  k = tren([pada("2026-11-08", 1, 2)], [3, 3]);
+  assert.deepStrictEqual([k.perubahan, k.sebelumnya], ["kurang-data", null]);
+  // Belum pernah dilatih -> baru
+  assert.strictEqual(tren([], [1, 1]).perubahan, "baru");
+});
+
+uji("A3: semua cabang rekomendasi", () => {
+  const jenis = (peta) => satuSesi(peta).rekomendasi;
+  assert.strictEqual(jenis([[12, 0, 3], [13, 1, 1]]).jenis, "penguatan");
+  assert.strictEqual(jenis([[12, 2, 3], [13, 1, 1]]).jenis, "pemantapan");
+  const campur = jenis([[12, 3, 3], [13, 1, 1]]);
+  assert.strictEqual(campur.jenis, "lengkapi");
+  assert.ok(!/Semua materi/.test(campur.teks) && /kurang dari 3 soal/.test(campur.teks));
+  assert.strictEqual(jenis([[12, 3, 3], [13, 3, 4]]).jenis, "uji-kesiapan");
+  const semuaKurang = jenis([[12, 1, 1], [13, 2, 2]]);
+  assert.strictEqual(semuaKurang.jenis, "lengkapi");
+  assert.ok(!/sudah dikuasai/.test(semuaKurang.teks));
+  assert.strictEqual(L.rekapHarian([{ tanggal: "2026-11-09T05:00:00Z", mataPelajaran: "ipas", mode: "practice", totalSoal: 15, terjawab: 12, benar: 9, nilai: 60 }], { tanggal: TGL_A3 }).mapel.ipas.rekomendasi.jenis, "lanjutkan");
+  assert.strictEqual(rekapA3([]).rekomendasi.jenis, "mulai");
+});
+
+uji("A3: pesan WA untuk 1/1 & 2/2 tidak menyebut dikuasai; memuat Belum cukup data & rekomendasi konsisten", () => {
+  const r = satuSesi([[12, 1, 1], [13, 2, 2]]);
+  const t = L.susunTeks(r, { namaAnak: "Ananda Uji", status: "final", hariIni: TGL_A3 });
+  assert.ok(!/Semua materi yang dilatih hari ini sudah dikuasai/.test(t));
+  assert.ok(!t.includes("*Sudah dikuasai:*"));
+  assert.ok(t.includes(`*Belum cukup data:* ${kisi.matematika.indikator[13]}; ${kisi.matematika.indikator[12]} (diuji kurang dari 3 soal)`));
+  assert.ok(t.includes(`*Rekomendasi:* ${r.rekomendasi.teks}`));
+  assert.ok(!/[\u{10000}-\u{10FFFF}]/u.test(t), "teks otomatis tidak boleh memuat emoji 4-byte");
+  // Tren kurang data: tanpa angka persen di bagian perkembangan
+  const tr = rekapA3([sesiA3("2026-11-08T03:00:00Z", [[12, 0, 1]]), sesiA3("2026-11-09T03:00:00Z", [[12, 1, 1]])]);
+  const tt = L.susunTeks(tr, { status: "final", hariIni: TGL_A3 });
+  assert.ok(tt.includes("• Belum ada perbandingan yang cukup data (minimal 3 soal per materi"));
+  assert.ok(!/↑|↓/.test(tt));
+});
+
+uji("A3: tautan WA bolak-balik (karakter Indonesia, tanda baca, emoji) & validasi nomor tetap", () => {
+  const contoh = "Laporan — Bahasa Indonesia ✓ 😊 \"kutip\" & 50% #1 ?x=y\nBaris: é ñ ü · → ↑ ↓";
+  const url = L.tautanWa(contoh, "");
+  assert.ok(url.startsWith("https://wa.me/?text="));
+  assert.strictEqual(new URL(url).searchParams.get("text"), contoh);
+  assert.ok(L.tautanWa("a", "08123").startsWith("https://wa.me/?text=")); // nomor tidak baku diabaikan
+  assert.ok(L.tautanWa("a", "6280000000000").startsWith("https://wa.me/6280000000000?text=")); // nomor fiktif, tidak dibuka
+  const t = L.susunTeks(satuSesi([[12, 1, 1], [13, 2, 2]]), { namaAnak: "Ananda Uji", status: "final", hariIni: TGL_A3 });
+  assert.strictEqual(new URL(L.tautanWa(t, "")).searchParams.get("text"), t);
+});
+
+uji("A3: fungsi murni — riwayat asli tidak berubah", () => {
+  const riwayat = [sesiA3("2026-11-08T03:00:00Z", [[12, 1, 3]]), sesiA3("2026-11-09T03:00:00Z", [[12, 3, 3], [13, 1, 1]])];
+  riwayat[1].petaIndikator[1].status = "dikuasai";
+  const salinan = JSON.stringify(riwayat);
+  rekapA3(riwayat);
+  L.rekapHarian(riwayat, { tanggal: TGL_A3, kisi, potongJam: false });
+  assert.strictEqual(JSON.stringify(riwayat), salinan);
+});
+
+uji("A3: cadangan Node (tanpa kisi) setara dengan kisiKisiTKA.statusPenguasaan", () => {
+  for (let t = 0; t <= 40; t++) {
+    for (let b = 0; b <= t; b++) assert.strictEqual(L.statusKompetensi(b, t), kisi.statusPenguasaan(b, t), `${b}/${t}`);
+  }
+  [[3, 2], [-1, 3], [1.5, 3], [NaN, 3], [null, null]].forEach(([b, t]) => assert.strictEqual(L.statusKompetensi(b, t), kisi.statusPenguasaan(b, t)));
+  // rekapMapel tanpa opsi.kisi (Node) memakai cadangan dan memberi hasil yang sama
+  const tanpaKisi = L.rekapMapel([sesiA3("2026-11-09T03:00:00Z", [[12, 1, 1], [13, 2, 3]])], { tanggal: TGL_A3, mapel: "matematika", potongJam: false });
+  assert.deepStrictEqual(tanpaKisi.kompetensi.map((k) => k.status), ["belum-cukup", "berkembang"]);
+  // API lama berbasis persen tetap ada
+  assert.strictEqual(L.statusPenguasaan(75), "dikuasai");
+});
+
 console.log(`\n✓ ${lolos} uji lolos.`);
 if (process.argv.includes("--teks")) {
   console.log("\n----- Contoh teks Matematika -----\n" + teksMat);
@@ -417,7 +539,7 @@ if (process.argv.includes("--contoh")) {
     mapel: r.namaMapel, tanggal: r.tanggal, adaAktivitas: r.adaAktivitas,
     jumlahSesi: r.jumlahSesi, perMode: r.perMode, totalSoal: r.totalSoal, soalDikerjakan: r.soalDikerjakan,
     jawabanBenar: r.jawabanBenar, rataRataNilai: r.rataRataNilai, ketepatan: r.ketepatan,
-    kompetensi: r.kompetensi.map((k) => `${k.indikator} ${k.nama}: ${k.benar}/${k.total} = ${k.persen}% ${k.labelStatus}` + (k.sebelumnya ? ` (${k.perubahan}, ${k.sebelumnya.tanggal}: ${k.sebelumnya.persen}%)` : " (baru)")),
+    kompetensi: r.kompetensi.map((k) => `${k.indikator} ${k.nama}: ${k.benar}/${k.total} = ${k.persen}% ${k.labelStatus}` + (k.sebelumnya ? ` (${k.perubahan}, ${k.sebelumnya.tanggal}: ${k.sebelumnya.persen}%)` : ` (${k.perubahan})`)),
     dikuasai: r.dikuasai.map((k) => k.nama), perluPenguatan: r.perluPenguatan.map((k) => k.nama), berkembang: r.berkembang.map((k) => k.nama),
     rekomendasi: r.rekomendasi.teks, hariBelajarSebelumnya: r.hariBelajarSebelumnya
   });

@@ -7,8 +7,11 @@
 // Satu-satunya pembaca penyimpanan adalah bacaRiwayatTersimpan() (hanya membaca).
 //
 // Tanggal belajar dikelompokkan menurut zona waktu Asia/Jakarta (WIB, UTC+7).
-// Status kompetensi: Dikuasai ≥75% · Berkembang 50–74% · Perlu penguatan <50%
-// (persen dibulatkan dulu, sama seperti Peta Hasil Belajar di app.js).
+// Status kompetensi memakai aturan bersama kisiKisiTKA.statusPenguasaan(benar, total) (js/kisi-kisi.js):
+// kurang dari 3 soal = Belum cukup data · Dikuasai ≥75% · Berkembang 50–74% · Perlu penguatan <50%
+// (persen dibulatkan dulu). Di Node tanpa kisi-kisi dipakai cadangan dengan aturan yang sama.
+// Status yang tersimpan di riwayat diabaikan; selalu dihitung ulang dari benar/total.
+// Tren naik/turun hanya bila hari ini dan pembanding masing-masing minimal 3 soal.
 //
 // Bisa dipakai di browser (window.Laporan) maupun Node (require) untuk pengujian.
 // =====================================================================
@@ -76,10 +79,31 @@
   }
 
   // ---------- Kompetensi ----------
+  const MINIMAL_SOAL = 3; // cadangan; sumber utama kisiKisiTKA.minimalSoal
+  // API lama (masukan persen, tanpa minimal soal). Dipertahankan agar pemanggil lama tetap berjalan.
   function statusPenguasaan(persen, batas) {
     return persen >= batas.dikuasai ? "dikuasai" : persen >= batas.berkembang ? "berkembang" : "lemah";
   }
-  const LABEL_STATUS = { dikuasai: "Dikuasai", berkembang: "Berkembang", lemah: "Perlu penguatan" };
+  // Cadangan aturan bersama untuk Node tanpa kisi-kisi atau bila opsi.batas khusus diberikan.
+  // Harus setara dengan kisiKisiTKA.statusPenguasaan (dijaga oleh uji kesetaraan di alat/uji-laporan.js).
+  function statusCadangan(benar, total, batas, minimal) {
+    const b = Number(benar), t = Number(total);
+    if (!Number.isInteger(b) || !Number.isInteger(t) || b < 0 || b > t || t < minimal) return "belum-cukup";
+    return statusPenguasaan(persenDari(b, t), batas);
+  }
+  // Pilih fungsi status: kisi-kisi dari opsi, lalu window.kisiKisiTKA, lalu cadangan.
+  // opsi.batas khusus selalu memakai cadangan agar batas tersebut tetap berlaku.
+  function pembuatStatus(kisi, batasKhusus) {
+    const k = kisi && typeof kisi.statusPenguasaan === "function" ? kisi
+      : akar && akar.kisiKisiTKA && typeof akar.kisiKisiTKA.statusPenguasaan === "function" ? akar.kisiKisiTKA : null;
+    const minimal = (k && Number.isInteger(k.minimalSoal) && k.minimalSoal) || MINIMAL_SOAL;
+    const batas = { ...BATAS, ...(batasKhusus || {}) };
+    const fungsi = k && !batasKhusus ? (b, t) => k.statusPenguasaan(b, t) : (b, t) => statusCadangan(b, t, batas, minimal);
+    return { fungsi, minimal };
+  }
+  // API baru: status dari benar/total memakai aturan bersama
+  function statusKompetensi(benar, total) { return pembuatStatus(null, null).fungsi(benar, total); }
+  const LABEL_STATUS = { "belum-cukup": "Belum cukup data", dikuasai: "Dikuasai", berkembang: "Berkembang", lemah: "Perlu penguatan" };
 
   // Gabungkan petaIndikator beberapa sesi: Map nomor -> { benar, total }
   function gabungIndikator(daftarSesi) {
@@ -102,7 +126,7 @@
     const { tanggal, mapel } = opsi || {};
     if (!polaTanggal.test(String(tanggal))) throw new Error("tanggal harus berbentuk YYYY-MM-DD");
     if (!MAPEL.includes(mapel)) throw new Error("mapel tidak dikenal: " + mapel);
-    const batas = { ...BATAS, ...(opsi.batas || {}) };
+    const { fungsi: statusDari, minimal } = pembuatStatus(opsi.kisi, opsi.batas);
     const namaIndikator = (nomor) => {
       const k = opsi.kisi && opsi.kisi[mapel] && opsi.kisi[mapel].indikator;
       return (k && k[nomor]) || "Indikator " + nomor;
@@ -137,7 +161,8 @@
       mapel, namaMapel: NAMA_MAPEL[mapel], tanggal,
       adaAktivitas: hariIni.length > 0,
       hariBelajarSebelumnya,
-      sesudahLaporan
+      sesudahLaporan,
+      minimalSoal: minimal
     };
 
     if (!hariIni.length) {
@@ -145,8 +170,8 @@
         ...dasar,
         jumlahSesi: 0, perMode: { practice: 0, exam: 0, adaptive: 0 },
         totalSoal: 0, soalDikerjakan: 0, jawabanBenar: 0, rataRataNilai: null, ketepatan: null,
-        sesi: [], kompetensi: [], dikuasai: [], berkembang: [], perluPenguatan: [],
-        perkembangan: { naik: [], turun: [], tetap: [], baru: [] },
+        sesi: [], kompetensi: [], dikuasai: [], berkembang: [], perluPenguatan: [], belumCukup: [],
+        perkembangan: { naik: [], turun: [], tetap: [], baru: [], kurangData: [] },
         diLuarKisi: { benar: 0, total: 0 }, sesiTanpaPeta: 0,
         rekomendasi: rekomendasi(mapel, null)
       };
@@ -158,7 +183,8 @@
     const jumlah = (k) => hariIni.reduce((t, s) => t + s[k], 0);
     const totalSoal = jumlah("totalSoal"), soalDikerjakan = jumlah("terjawab"), jawabanBenar = jumlah("benar");
 
-    // Kompetensi hari ini + perbandingan dengan hari belajar sebelumnya yang punya indikator sama
+    // Kompetensi hari ini + perbandingan dengan hari belajar sebelumnya yang punya indikator sama.
+    // Status dihitung dari benar/total (status tersimpan di riwayat tidak dipakai).
     const aggHariIni = gabungIndikator(hariIni);
     const aggPerTanggal = new Map(); // tanggal -> Map indikator
     tanggalSebelum.forEach((tgl) => aggPerTanggal.set(tgl, gabungIndikator(sebelum.filter((s) => s.tanggal === tgl))));
@@ -167,17 +193,24 @@
       .sort((a, b) => a[0] - b[0])
       .map(([nomor, d]) => {
         const persen = persenDari(d.benar, d.total);
-        const status = statusPenguasaan(persen, batas);
-        let pembanding = null;
+        const status = statusDari(d.benar, d.total);
+        // Pembanding = hari belajar TERAKHIR sebelumnya yang punya minimal `minimal` soal untuk indikator ini.
+        // Tren hanya sah bila hari ini juga minimal `minimal` soal; selain itu "kurang-data" (tanpa angka).
+        let pembanding = null, adaSebelumnya = false;
         for (let i = tanggalSebelum.length - 1; i >= 0; i--) {
           const p = aggPerTanggal.get(tanggalSebelum[i]).get(nomor);
-          if (p) {
+          if (!p) continue;
+          adaSebelumnya = true;
+          if (p.total >= minimal) {
             const ps = persenDari(p.benar, p.total);
-            pembanding = { tanggal: tanggalSebelum[i], benar: p.benar, total: p.total, persen: ps, status: statusPenguasaan(ps, batas) };
+            pembanding = { tanggal: tanggalSebelum[i], benar: p.benar, total: p.total, persen: ps, status: statusDari(p.benar, p.total) };
             break;
           }
         }
-        const perubahan = !pembanding ? "baru" : persen > pembanding.persen ? "naik" : persen < pembanding.persen ? "turun" : "tetap";
+        if (d.total < minimal) pembanding = null;
+        const perubahan = !adaSebelumnya ? "baru"
+          : !pembanding ? "kurang-data"
+          : persen > pembanding.persen ? "naik" : persen < pembanding.persen ? "turun" : "tetap";
         return {
           indikator: nomor, nama: namaIndikator(nomor), benar: d.benar, total: d.total, persen,
           status, labelStatus: LABEL_STATUS[status],
@@ -190,11 +223,13 @@
     const dikuasai = kompetensi.filter((k) => k.status === "dikuasai").sort(urutKuat);
     const berkembang = kompetensi.filter((k) => k.status === "berkembang").sort(urutLemah);
     const perluPenguatan = kompetensi.filter((k) => k.status === "lemah").sort(urutLemah);
+    const belumCukup = kompetensi.filter((k) => k.status === "belum-cukup").sort((a, b) => b.total - a.total || a.indikator - b.indikator);
     const perkembangan = {
       naik: kompetensi.filter((k) => k.perubahan === "naik").sort((a, b) => b.selisih - a.selisih),
       turun: kompetensi.filter((k) => k.perubahan === "turun").sort((a, b) => a.selisih - b.selisih),
       tetap: kompetensi.filter((k) => k.perubahan === "tetap"),
-      baru: kompetensi.filter((k) => k.perubahan === "baru")
+      baru: kompetensi.filter((k) => k.perubahan === "baru"),
+      kurangData: kompetensi.filter((k) => k.perubahan === "kurang-data")
     };
     const diLuarKisi = hariIni.reduce((t, s) => ({ benar: t.benar + s.luar.benar, total: t.total + s.luar.total }), { benar: 0, total: 0 });
 
@@ -207,9 +242,9 @@
       // Ketepatan = benar dari soal yang dikerjakan
       ketepatan: soalDikerjakan ? Math.round((jawabanBenar / soalDikerjakan) * 100) : null,
       sesi: hariIni.map((s) => ({ waktu: s.waktu, jam: s.jam, mode: s.mode, namaMode: NAMA_MODE[s.mode] || "Lainnya", nilai: s.nilai, benar: s.benar, terjawab: s.terjawab, totalSoal: s.totalSoal })),
-      kompetensi, dikuasai, berkembang, perluPenguatan, perkembangan,
+      kompetensi, dikuasai, berkembang, perluPenguatan, belumCukup, perkembangan,
       diLuarKisi, sesiTanpaPeta: hariIni.filter((s) => !s.peta).length,
-      rekomendasi: rekomendasi(mapel, { perluPenguatan, berkembang, dikuasai, kompetensi })
+      rekomendasi: rekomendasi(mapel, { perluPenguatan, berkembang, dikuasai, belumCukup, kompetensi, minimal })
     };
   }
 
@@ -226,7 +261,13 @@
       const f = fokus(k.berkembang);
       return { jenis: "pemantapan", mode: "practice", fokus: f, teks: `Latihan ${nama} lalu pelajari pembahasan untuk memantapkan ${f.map((x) => `"${x.nama}"`).join(" dan ")}.` };
     }
-    if (k.kompetensi.length) return { jenis: "uji-kesiapan", mode: "exam", fokus: [], teks: `Semua materi yang dilatih hari ini sudah dikuasai. Coba Simulasi Ujian ${nama} untuk menguji kesiapan.` };
+    const belumCukup = k.belumCukup || [];
+    const kurangDari = `kurang dari ${k.minimal || MINIMAL_SOAL} soal`;
+    // "Semua dikuasai" hanya bila tidak ada materi yang belum cukup data
+    if (k.dikuasai.length && belumCukup.length) return { jenis: "lengkapi", mode: "practice", fokus: [], teks: `Materi yang soalnya cukup sudah dikuasai. Lanjutkan Latihan ${nama} agar materi yang baru dicoba ${kurangDari} juga terlihat penguasaannya.` };
+    if (k.dikuasai.length) return { jenis: "uji-kesiapan", mode: "exam", fokus: [], teks: `Semua materi yang dilatih hari ini sudah dikuasai. Coba Simulasi Ujian ${nama} untuk menguji kesiapan.` };
+    // Semua materi baru dicoba kurang dari batas minimal soal
+    if (belumCukup.length) return { jenis: "lengkapi", mode: "practice", fokus: [], teks: `Lanjutkan Latihan ${nama} agar penguasaan setiap materi terlihat; materi hari ini baru dicoba ${kurangDari}.` };
     return { jenis: "lanjutkan", mode: "practice", fokus: [], teks: `Lanjutkan Latihan ${nama} dan pelajari pembahasan soal yang belum tepat.` };
   }
 
@@ -345,6 +386,8 @@
         if (berubah.length > maks) baris.push(`• dan ${berubah.length - maks} perubahan lainnya`);
       } else if (p.tetap.length) {
         baris.push("• Penguasaan materi sama dengan hari belajar sebelumnya.");
+      } else if ((p.kurangData || []).length) {
+        baris.push(`• Belum ada perbandingan yang cukup data (minimal ${rekap.minimalSoal || MINIMAL_SOAL} soal per materi pada hari ini dan hari pembanding).`);
       } else if (rekap.kompetensi.length) {
         baris.push("• Materi hari ini baru pertama kali dilatih, belum ada pembanding.");
       } else {
@@ -354,6 +397,7 @@
       if (rekap.dikuasai.length) baris.push(`*Sudah dikuasai:* ${daftarNama(rekap.dikuasai, maks)}`);
       if (rekap.berkembang.length) baris.push(`*Masih berkembang:* ${daftarNama(rekap.berkembang, maks)}`);
       if (rekap.perluPenguatan.length) baris.push(`*Perlu penguatan:* ${daftarNama(rekap.perluPenguatan, maks)}`);
+      if ((rekap.belumCukup || []).length) baris.push(`*Belum cukup data:* ${daftarNama(rekap.belumCukup, maks)} (diuji kurang dari ${rekap.minimalSoal || MINIMAL_SOAL} soal)`);
       baris.push("");
       baris.push(`*Rekomendasi:* ${rekap.rekomendasi.teks}`);
       if (opsi.motivasi && opsi.motivasi.judul) {
@@ -453,7 +497,8 @@
 
   const api = Object.freeze({
     ZONA, MAPEL, NAMA_MAPEL, NAMA_MODE, BATAS, JAM_LAPORAN,
-    tanggalWIB, jamWIB, statusLaporan, normalisasiSesi, statusPenguasaan: (p) => statusPenguasaan(p, BATAS),
+    MINIMAL_SOAL, LABEL_STATUS,
+    tanggalWIB, jamWIB, statusLaporan, normalisasiSesi, statusPenguasaan: (p) => statusPenguasaan(p, BATAS), statusKompetensi,
     rekapMapel, rekapHarian, dataMotivasi, bacaRiwayatTersimpan,
     formatTanggalPanjang, formatTanggalPendek, formatAngka, daftarTanggal, namaUntukTeks, susunTeks, tautanWa, buatIcs
   });
